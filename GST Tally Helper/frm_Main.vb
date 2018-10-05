@@ -16,14 +16,25 @@ Public Class frm_Main
                                    Using reader = ExcelReaderFactory.CreateReader(stream)
                                        Dim Index As Integer = -1
                                        While reader.Read()
-                                           If reader.CodeName = "Parties" Then
+                                           If reader.CodeName = "Parties" AndAlso Not reader.IsDBNull(0) Then
                                                Index += 1
                                                If Index > 0 Then
                                                    Dim Name As String = reader.GetString(0).Trim
                                                    If Name <> "" Then
                                                        Dim GSTIN As String = reader.GetString(1).Trim
-                                                       Dim Type As Enums.PartyType = If(reader.GetString(2) = "SundryCreditor", 1, 0)
-                                                       R.Add(New Objects.Party(Name, GSTIN, Type))
+                                                       Dim Type As Enums.PartyType = If(reader.GetString(3) = "SundryCreditor", 1, 0)
+                                                       Dim RegType As Enums.RegistrationType = Enums.RegistrationType.Unknown
+                                                       Dim RegType_ As String = reader.GetString(2)
+                                                       If RegType_ = "Consumer" Then
+                                                           RegType = Enums.RegistrationType.Consumer
+                                                       ElseIf RegType_ = "Unregistered" Then
+                                                           RegType = Enums.RegistrationType.Unregistered
+                                                       ElseIf RegType_ = "Regular" Then
+                                                           RegType = Enums.RegistrationType.Regular
+                                                       ElseIf RegType_ = "Composition" Then
+                                                           RegType = Enums.RegistrationType.Composition
+                                                       End If
+                                                       R.Add(New Objects.Party(Name, GSTIN, RegType, Type))
                                                    End If
                                                End If
                                            End If
@@ -36,7 +47,7 @@ Public Class frm_Main
                                       End Sub)
                            Catch ex As Exception
                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
-                               Return False
+                           Return False
                            End Try
                            Return True
                        End Function)

@@ -29,23 +29,36 @@ Public Class GSTINValidator
 
 #Region "Subs/Functions"
     ''' <summary>
-    ''' Method to check if a GSTIN Is valid. Checks the GSTIN format And thecheck digit Is valid for the passed input GSTIN
+    ''' Method to check if a GSTIN Is valid. Checks the GSTIN format And the check digit Is valid for the passed input GSTIN
     ''' </summary>
     ''' <param name="GSTIN">GSTIN to Validate</param>
     Public Shared Function IsValid(ByVal GSTIN As String) As Boolean
-        Dim isValidFormat As Boolean = False
+        Try
+            Validate(GSTIN)
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Method to check if a GSTIN Is valid. Throws if GSTIN is not valid with error in message.
+    ''' </summary>
+    ''' <param name="GSTIN">GSTIN to Validate</param>
+    Public Shared Sub Validate(ByVal GSTIN As String)
         GSTIN = GSTIN.Trim
         If String.IsNullOrEmpty(GSTIN) Then
             Throw New Exception("GSTIN is empty")
         Else
             If Regex.IsMatch(GSTIN, GSTIN_REGEX) Then
-                isValidFormat = GSTIN(GSTIN.Length - 1).Equals(GenerateCheckSum(GSTIN.Substring(0, GSTIN.Length() - 1)))
+                If Not GSTIN(GSTIN.Length - 1).Equals(GenerateCheckSum(GSTIN.Substring(0, GSTIN.Length() - 1))) Then
+                    Throw New Exception("GSTIN is invalid")
+                End If
             Else
                 Throw New Exception("GSTIN doesn't match the pattern")
             End If
         End If
-        Return isValidFormat
-    End Function
+    End Sub
 
     ''' <summary>Generates and returns checksum digit for given GSTIN (without checksum digit)</summary>
     ''' <param name="GSTIN">GSTIN without checksum digit to generate checksum digit</param>

@@ -27,7 +27,8 @@ Namespace Objects
 #Region "Properties/Fields"
         Property Name As String
         Property GSTIN As String
-        Property Type As Enums.PartyType
+        Property Group As Enums.PartyType
+        Property RegType As Enums.RegistrationType
         ReadOnly Property State As State
             Get
                 Dim StateCode As Integer = CInt(GSTIN.Substring(0, 2))
@@ -40,13 +41,15 @@ Namespace Objects
         Sub New()
             Me.Name = ""
             Me.GSTIN = ""
-            Me.Type = Enums.PartyType.SundryDebtor
+            Me.Group = Enums.PartyType.SundryDebtor
+            Me.RegType = Enums.RegistrationType.Unknown
         End Sub
 
-        Sub New(ByVal Name As String, ByVal GSTIN As String, ByVal Type As Enums.PartyType)
+        Sub New(ByVal Name As String, ByVal GSTIN As String, ByVal RegType As Enums.RegistrationType, ByVal Group As Enums.PartyType)
             Me.Name = Name
             Me.GSTIN = GSTIN
-            Me.Type = Type
+            Me.Group = Group
+            Me.RegType = RegType
         End Sub
 #End Region
 

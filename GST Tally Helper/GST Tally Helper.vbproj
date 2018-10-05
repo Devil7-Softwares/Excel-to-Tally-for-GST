@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Enums\PartyType.vb" />
+    <Compile Include="Classes\Enums\RegistrationType.vb" />
     <Compile Include="Classes\GSTINValidator.vb" />
     <Compile Include="Classes\Objects\Party.vb" />
     <Compile Include="Classes\Objects\State.vb" />

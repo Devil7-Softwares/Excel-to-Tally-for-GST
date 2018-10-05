@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Enums\PartyType.vb" />
+    <Compile Include="Classes\GSTINValidator.vb" />
     <Compile Include="Classes\Objects\Party.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

@@ -19,8 +19,10 @@
 '                                                                          '
 '=========================================================================='
 
+Imports DevExpress.XtraEditors.DXErrorProvider
+
 Namespace Objects
-    Public Class Party
+    Public Class Party : Implements IDXDataErrorInfo
 
 #Region "Properties/Fields"
         Property Name As String
@@ -39,6 +41,22 @@ Namespace Objects
             Me.Name = Name
             Me.GSTIN = GSTIN
             Me.Type = Type
+        End Sub
+#End Region
+
+#Region "Subs"
+        Public Sub GetPropertyError(propertyName As String, info As ErrorInfo) Implements IDXDataErrorInfo.GetPropertyError
+            If propertyName = "GSTIN" AndAlso GSTIN <> "" Then
+                Try
+                    GSTINValidator.Validate(GSTIN)
+                Catch ex As Exception
+                    info.ErrorText = ex.Message
+                    info.ErrorType = ErrorType.Warning
+                End Try
+            End If
+        End Sub
+
+        Public Sub GetError(info As ErrorInfo) Implements IDXDataErrorInfo.GetError
         End Sub
 #End Region
 

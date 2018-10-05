@@ -28,6 +28,12 @@ Namespace Objects
         Property Name As String
         Property GSTIN As String
         Property Type As Enums.PartyType
+        ReadOnly Property State As State
+            Get
+                Dim StateCode As Integer = CInt(GSTIN.Substring(0, 2))
+                Return State.GetStateByCode(StateCode)
+            End Get
+        End Property
 #End Region
 
 #Region "Constructors"

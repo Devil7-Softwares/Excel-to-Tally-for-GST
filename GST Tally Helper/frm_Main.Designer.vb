@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frm_Main
     Inherits DevExpress.XtraBars.Ribbon.RibbonForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,14 +17,14 @@ Partial Class frm_Main
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_Main))
         Me.RibbonControl = New DevExpress.XtraBars.Ribbon.RibbonControl()
-        Me.btn_LoadParties = New DevExpress.XtraBars.BarButtonItem()
+        Me.btn_LoadExcel = New DevExpress.XtraBars.BarButtonItem()
         Me.PopupMenu_Excel = New DevExpress.XtraBars.PopupMenu(Me.components)
-        Me.btn_SaveFormat_Parties = New DevExpress.XtraBars.BarButtonItem()
+        Me.btn_SaveFormat = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_XML_File_Parties = New DevExpress.XtraBars.BarButtonItem()
         Me.txt_TallyVersion = New DevExpress.XtraBars.BarEditItem()
         Me.txt_TallyVersion_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
@@ -42,6 +42,9 @@ Partial Class frm_Main
         Me.gv_Parties = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.container_Tabs = New DevExpress.XtraTab.XtraTabControl()
         Me.tp_PurchaseEntries = New DevExpress.XtraTab.XtraTabPage()
+        Me.ProgressPanel_PurchaseEntries = New DevExpress.XtraWaitForm.ProgressPanel()
+        Me.gc_PurchaseEntries = New DevExpress.XtraGrid.GridControl()
+        Me.gv_PurchaseEntries = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.tp_Parties = New DevExpress.XtraTab.XtraTabPage()
         Me.ProgressPanel_Parties = New DevExpress.XtraWaitForm.ProgressPanel()
         Me.OpenFileDialog_Excel = New System.Windows.Forms.OpenFileDialog()
@@ -55,41 +58,44 @@ Partial Class frm_Main
         CType(Me.gv_Parties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.container_Tabs, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.container_Tabs.SuspendLayout()
+        Me.tp_PurchaseEntries.SuspendLayout()
+        CType(Me.gc_PurchaseEntries, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.gv_PurchaseEntries, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tp_Parties.SuspendLayout()
         Me.SuspendLayout()
         '
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadParties, Me.btn_SaveFormat_Parties, Me.btn_XML_File_Parties, Me.txt_TallyVersion, Me.txt_CompanyName})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_SaveFormat, Me.btn_XML_File_Parties, Me.txt_TallyVersion, Me.txt_CompanyName})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 6
+        Me.RibbonControl.MaxItemId = 7
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_PurchaseEntries, Me.rp_Parties, Me.rp_Tally})
         Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit})
         Me.RibbonControl.Size = New System.Drawing.Size(442, 143)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
         '
-        'btn_LoadParties
+        'btn_LoadExcel
         '
-        Me.btn_LoadParties.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown
-        Me.btn_LoadParties.Caption = "Import Excel"
-        Me.btn_LoadParties.DropDownControl = Me.PopupMenu_Excel
-        Me.btn_LoadParties.Id = 1
-        Me.btn_LoadParties.ImageOptions.SvgImage = CType(resources.GetObject("btn_LoadParties.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
-        Me.btn_LoadParties.Name = "btn_LoadParties"
+        Me.btn_LoadExcel.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown
+        Me.btn_LoadExcel.Caption = "Import Excel"
+        Me.btn_LoadExcel.DropDownControl = Me.PopupMenu_Excel
+        Me.btn_LoadExcel.Id = 1
+        Me.btn_LoadExcel.ImageOptions.SvgImage = CType(resources.GetObject("btn_LoadExcel.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btn_LoadExcel.Name = "btn_LoadExcel"
         '
         'PopupMenu_Excel
         '
-        Me.PopupMenu_Excel.ItemLinks.Add(Me.btn_SaveFormat_Parties)
+        Me.PopupMenu_Excel.ItemLinks.Add(Me.btn_SaveFormat)
         Me.PopupMenu_Excel.Name = "PopupMenu_Excel"
         Me.PopupMenu_Excel.Ribbon = Me.RibbonControl
         '
-        'btn_SaveFormat_Parties
+        'btn_SaveFormat
         '
-        Me.btn_SaveFormat_Parties.Caption = "Save Empty Format"
-        Me.btn_SaveFormat_Parties.Id = 2
-        Me.btn_SaveFormat_Parties.Name = "btn_SaveFormat_Parties"
+        Me.btn_SaveFormat.Caption = "Save Empty Format"
+        Me.btn_SaveFormat.Id = 2
+        Me.btn_SaveFormat.Name = "btn_SaveFormat"
         '
         'btn_XML_File_Parties
         '
@@ -132,6 +138,7 @@ Partial Class frm_Main
         '
         'rpg_Items_Purchase
         '
+        Me.rpg_Items_Purchase.ItemLinks.Add(Me.btn_LoadExcel)
         Me.rpg_Items_Purchase.Name = "rpg_Items_Purchase"
         Me.rpg_Items_Purchase.ShowCaptionButton = False
         Me.rpg_Items_Purchase.Text = "Items"
@@ -144,7 +151,7 @@ Partial Class frm_Main
         '
         'rpg_Items_Parties
         '
-        Me.rpg_Items_Parties.ItemLinks.Add(Me.btn_LoadParties)
+        Me.rpg_Items_Parties.ItemLinks.Add(Me.btn_LoadExcel)
         Me.rpg_Items_Parties.Name = "rpg_Items_Parties"
         Me.rpg_Items_Parties.ShowCaptionButton = False
         Me.rpg_Items_Parties.Text = "Items"
@@ -205,9 +212,40 @@ Partial Class frm_Main
         '
         'tp_PurchaseEntries
         '
+        Me.tp_PurchaseEntries.Controls.Add(Me.ProgressPanel_PurchaseEntries)
+        Me.tp_PurchaseEntries.Controls.Add(Me.gc_PurchaseEntries)
         Me.tp_PurchaseEntries.Name = "tp_PurchaseEntries"
         Me.tp_PurchaseEntries.Size = New System.Drawing.Size(436, 247)
         Me.tp_PurchaseEntries.Text = "Purchase Entries"
+        '
+        'ProgressPanel_PurchaseEntries
+        '
+        Me.ProgressPanel_PurchaseEntries.Appearance.BackColor = System.Drawing.Color.Transparent
+        Me.ProgressPanel_PurchaseEntries.Appearance.Options.UseBackColor = True
+        Me.ProgressPanel_PurchaseEntries.BarAnimationElementThickness = 2
+        Me.ProgressPanel_PurchaseEntries.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ProgressPanel_PurchaseEntries.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ProgressPanel_PurchaseEntries.Location = New System.Drawing.Point(0, 0)
+        Me.ProgressPanel_PurchaseEntries.Name = "ProgressPanel_PurchaseEntries"
+        Me.ProgressPanel_PurchaseEntries.Size = New System.Drawing.Size(436, 247)
+        Me.ProgressPanel_PurchaseEntries.TabIndex = 4
+        Me.ProgressPanel_PurchaseEntries.Visible = False
+        '
+        'gc_PurchaseEntries
+        '
+        Me.gc_PurchaseEntries.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gc_PurchaseEntries.Location = New System.Drawing.Point(0, 0)
+        Me.gc_PurchaseEntries.MainView = Me.gv_PurchaseEntries
+        Me.gc_PurchaseEntries.MenuManager = Me.RibbonControl
+        Me.gc_PurchaseEntries.Name = "gc_PurchaseEntries"
+        Me.gc_PurchaseEntries.Size = New System.Drawing.Size(436, 247)
+        Me.gc_PurchaseEntries.TabIndex = 3
+        Me.gc_PurchaseEntries.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gv_PurchaseEntries})
+        '
+        'gv_PurchaseEntries
+        '
+        Me.gv_PurchaseEntries.GridControl = Me.gc_PurchaseEntries
+        Me.gv_PurchaseEntries.Name = "gv_PurchaseEntries"
         '
         'tp_Parties
         '
@@ -239,7 +277,7 @@ Partial Class frm_Main
         'SaveFileDialog_Excel
         '
         Me.SaveFileDialog_Excel.DefaultExt = "xlsx"
-        Me.SaveFileDialog_Excel.FileName = "Parties.xlsx"
+        Me.SaveFileDialog_Excel.FileName = "*.xlsx"
         Me.SaveFileDialog_Excel.Filter = "Excel 2007 Files|*.xlsx"
         '
         'SaveFileDialog_XML
@@ -268,6 +306,9 @@ Partial Class frm_Main
         CType(Me.gv_Parties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.container_Tabs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.container_Tabs.ResumeLayout(False)
+        Me.tp_PurchaseEntries.ResumeLayout(False)
+        CType(Me.gc_PurchaseEntries, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.gv_PurchaseEntries, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tp_Parties.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -285,11 +326,11 @@ Partial Class frm_Main
     Friend WithEvents container_Tabs As DevExpress.XtraTab.XtraTabControl
     Friend WithEvents tp_PurchaseEntries As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents tp_Parties As DevExpress.XtraTab.XtraTabPage
-    Friend WithEvents btn_LoadParties As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents btn_LoadExcel As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents OpenFileDialog_Excel As OpenFileDialog
     Friend WithEvents ProgressPanel_Parties As DevExpress.XtraWaitForm.ProgressPanel
     Friend WithEvents PopupMenu_Excel As DevExpress.XtraBars.PopupMenu
-    Friend WithEvents btn_SaveFormat_Parties As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents btn_SaveFormat As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents SaveFileDialog_Excel As SaveFileDialog
     Friend WithEvents RibbonPageGroup1 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents btn_XML_File_Parties As DevExpress.XtraBars.BarButtonItem
@@ -300,4 +341,7 @@ Partial Class frm_Main
     Friend WithEvents txt_CompanyName_Edit As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
     Friend WithEvents rp_Tally As DevExpress.XtraBars.Ribbon.RibbonPage
     Friend WithEvents RibbonPageGroup2 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents ProgressPanel_PurchaseEntries As DevExpress.XtraWaitForm.ProgressPanel
+    Friend WithEvents gc_PurchaseEntries As DevExpress.XtraGrid.GridControl
+    Friend WithEvents gv_PurchaseEntries As DevExpress.XtraGrid.Views.Grid.GridView
 End Class

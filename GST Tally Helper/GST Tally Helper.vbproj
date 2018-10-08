@@ -85,8 +85,10 @@
   <ItemGroup>
     <Compile Include="Classes\Enums\PartyType.vb" />
     <Compile Include="Classes\Enums\RegistrationType.vb" />
+    <Compile Include="Classes\Enums\VoucherType.vb" />
     <Compile Include="Classes\GSTINValidator.vb" />
     <Compile Include="Classes\Objects\Party.vb" />
+    <Compile Include="Classes\Objects\PurchaseEntry.vb" />
     <Compile Include="Classes\Objects\State.vb" />
     <Compile Include="Classes\Tally\XMLGenerator.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -136,6 +138,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Resources\Parties.xlsx" />
+    <None Include="Resources\PurchaseEntries.xlsx" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

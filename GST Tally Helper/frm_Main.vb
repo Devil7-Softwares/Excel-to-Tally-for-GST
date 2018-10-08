@@ -11,7 +11,7 @@ Public Class frm_Main
 
     Async Function LoadParties(ByVal FileName As String) As Task
         Invoke(Sub()
-                   btn_LoadParties.Enabled = False
+                   btn_LoadExcel.Enabled = False
                    ProgressPanel_Parties.Visible = True
                End Sub)
         Await Task.Run(Function()
@@ -57,8 +57,80 @@ Public Class frm_Main
                            Return True
                        End Function)
         Invoke(Sub()
-                   btn_LoadParties.Enabled = True
+                   btn_LoadExcel.Enabled = True
                    ProgressPanel_Parties.Visible = False
+               End Sub)
+    End Function
+
+    Async Function LoadPurchaseEntries(ByVal FileName As String) As Task
+        Invoke(Sub()
+                   btn_LoadExcel.Enabled = False
+                   ProgressPanel_PurchaseEntries.Visible = True
+               End Sub)
+        Await Task.Run(Function()
+                           Try
+                               Dim R As New List(Of Objects.PurchaseEntry)
+                               Using stream As IO.FileStream = IO.File.Open(FileName, IO.FileMode.Open, IO.FileAccess.Read)
+                                   Using reader = ExcelReaderFactory.CreateReader(stream)
+                                       Dim Index As Integer = -1
+                                       While reader.Read()
+                                           If reader.CodeName = "PurchaseEntries" AndAlso Not reader.IsDBNull(0) Then
+                                               Index += 1
+                                               If Index > 0 Then
+                                                   Dim GSTIN As String = reader.GetString(0).Trim
+                                                   If GSTIN <> "" Then
+                                                       Dim InvoiceNo As String = ""
+                                                       Try
+                                                           InvoiceNo = If(reader.IsDBNull(1), "", reader.GetDouble(1))
+                                                       Catch e1 As Exception
+                                                           Try
+                                                               InvoiceNo = reader.GetString(1)
+                                                           Catch e2 As Exception
+
+                                                           End Try
+                                                       End Try
+                                                       Dim InvoiceDate As Date = If(reader.IsDBNull(2), Now, reader.GetDateTime(2))
+                                                       Dim InvoiceValue As Double = If(reader.IsDBNull(3), 0, reader.GetDouble(3))
+                                                       Dim GSTRate As Integer = If(reader.IsDBNull(4), 0, reader.GetDouble(4))
+                                                       Dim TaxableValue As Double = If(reader.IsDBNull(5), 0, reader.GetDouble(5))
+                                                       Dim IGST As Double = If(reader.IsDBNull(6), 0, reader.GetDouble(6))
+                                                       Dim CGST As Double = If(reader.IsDBNull(7), 0, reader.GetDouble(7))
+                                                       Dim SGST As Double = If(reader.IsDBNull(8), 0, reader.GetDouble(8))
+                                                       Dim CESS As Double = If(reader.IsDBNull(9), 0, reader.GetDouble(9))
+                                                       Dim LedgerName As String = If(reader.IsDBNull(10), 0, reader.GetString(10))
+                                                       Dim VoucherType_ As String = If(reader.IsDBNull(11), 0, reader.GetString(11))
+                                                       Dim VoucherType As Enums.VoucherType = Enums.VoucherType.Purchase
+                                                       If VoucherType_ = "Payment" Then
+                                                           VoucherType = Enums.VoucherType.Payment
+                                                       ElseIf VoucherType_ = "Receipt" Then
+                                                           VoucherType = Enums.VoucherType.Receipt
+                                                       ElseIf VoucherType_ = "Purchase" Then
+                                                           VoucherType = Enums.VoucherType.Purchase
+                                                       ElseIf VoucherType_ = "Sales" Then
+                                                           VoucherType = Enums.VoucherType.Sales
+                                                       ElseIf VoucherType_ = "Journel" Then
+                                                           VoucherType = Enums.VoucherType.Journel
+                                                       End If
+                                                       R.Add(New Objects.PurchaseEntry(GSTIN, InvoiceNo, InvoiceDate, InvoiceValue, GSTRate, TaxableValue, IGST, CGST, SGST, CESS, LedgerName, VoucherType))
+                                                   End If
+                                               End If
+                                           End If
+                                       End While
+                                   End Using
+                               End Using
+                               Invoke(Sub()
+                                          gc_PurchaseEntries.DataSource = R
+                                          gc_PurchaseEntries.RefreshDataSource()
+                                      End Sub)
+                           Catch ex As Exception
+                               MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                           Return False
+                           End Try
+                           Return True
+                       End Function)
+        Invoke(Sub()
+                   btn_LoadExcel.Enabled = True
+                   ProgressPanel_PurchaseEntries.Visible = False
                End Sub)
     End Function
 #End Region
@@ -68,16 +140,28 @@ Public Class frm_Main
         LoadSettings()
     End Sub
 
-    Private Async Sub btn_LoadParties_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btn_LoadParties.ItemClick
+    Private Async Sub btn_LoadExcel_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btn_LoadExcel.ItemClick
         If OpenFileDialog_Excel.ShowDialog = DialogResult.OK Then
-            Await LoadParties(OpenFileDialog_Excel.FileName)
+            If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
+                Await LoadPurchaseEntries(OpenFileDialog_Excel.FileName)
+            ElseIf RibbonControl.SelectedPage Is rp_Parties Then
+                Await LoadParties(OpenFileDialog_Excel.FileName)
+            End If
         End If
     End Sub
 
-    Private Sub btn_SaveFormat_Parties_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_SaveFormat_Parties.ItemClick
+    Private Sub btn_SaveFormat_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_SaveFormat.ItemClick
+        Dim Data As Byte() = Nothing
+        If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
+            Data = My.Resources.PurchaseEntries
+            SaveFileDialog_Excel.FileName = "PurchaseEntries.xlsx"
+        ElseIf RibbonControl.SelectedPage Is rp_PurchaseEntries Then
+            Data = My.Resources.Parties
+            SaveFileDialog_Excel.FileName = "Parties.xlsx"
+        End If
         If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
             Try
-                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, My.Resources.Parties, False)
+                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, Data, False)
                 MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
             Catch ex As Exception
                 MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")

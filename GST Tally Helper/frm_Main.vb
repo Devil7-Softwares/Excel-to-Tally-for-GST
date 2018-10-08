@@ -1,4 +1,5 @@
 ﻿Imports DevExpress.XtraBars
+Imports DevExpress.XtraTab
 Imports ExcelDataReader
 
 Public Class frm_Main
@@ -51,7 +52,7 @@ Public Class frm_Main
                                       End Sub)
                            Catch ex As Exception
                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
-                           Return False
+                               Return False
                            End Try
                            Return True
                        End Function)
@@ -64,7 +65,7 @@ Public Class frm_Main
 
 #Region "Events"
     Private Sub frm_Main_Load(sender As Object, e As EventArgs) Handles Me.Load
-        LoadSettings
+        LoadSettings()
     End Sub
 
     Private Async Sub btn_LoadParties_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btn_LoadParties.ItemClick
@@ -96,6 +97,22 @@ Public Class frm_Main
     Private Sub txt_TallyVersion_EditValueChanged(sender As Object, e As EventArgs) Handles txt_TallyVersion.EditValueChanged
         My.Settings.TallyVersion = txt_TallyVersion.EditValue
         My.Settings.Save()
+    End Sub
+
+    Private Sub RibbonControl_SelectedPageChanged(sender As Object, e As EventArgs) Handles RibbonControl.SelectedPageChanged
+        If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
+            container_Tabs.SelectedTabPage = tp_PurchaseEntries
+        ElseIf RibbonControl.SelectedPage Is rp_Parties Then
+            container_Tabs.SelectedTabPage = tp_Parties
+        End If
+    End Sub
+
+    Private Sub container_Tabs_SelectedPageChanged(sender As Object, e As TabPageChangedEventArgs) Handles container_Tabs.SelectedPageChanged
+        If container_Tabs.SelectedTabPage Is tp_PurchaseEntries Then
+            RibbonControl.SelectedPage = rp_PurchaseEntries
+        ElseIf container_Tabs.SelectedTabPage Is tp_Parties Then
+            RibbonControl.SelectedPage = rp_Parties
+        End If
     End Sub
 #End Region
 

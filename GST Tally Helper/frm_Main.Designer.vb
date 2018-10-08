@@ -25,10 +25,18 @@ Partial Class frm_Main
         Me.btn_LoadParties = New DevExpress.XtraBars.BarButtonItem()
         Me.PopupMenu_Excel = New DevExpress.XtraBars.PopupMenu(Me.components)
         Me.btn_SaveFormat_Parties = New DevExpress.XtraBars.BarButtonItem()
+        Me.btn_XML_File_Parties = New DevExpress.XtraBars.BarButtonItem()
+        Me.txt_TallyVersion = New DevExpress.XtraBars.BarEditItem()
+        Me.txt_TallyVersion_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.txt_CompanyName = New DevExpress.XtraBars.BarEditItem()
+        Me.txt_CompanyName_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.rp_PurchaseEntries = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Items_Purchase = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rp_Parties = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Items_Parties = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.RibbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.rp_Tally = New DevExpress.XtraBars.Ribbon.RibbonPage()
+        Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
         Me.gc_Parties = New DevExpress.XtraGrid.GridControl()
         Me.gv_Parties = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -38,8 +46,11 @@ Partial Class frm_Main
         Me.ProgressPanel_Parties = New DevExpress.XtraWaitForm.ProgressPanel()
         Me.OpenFileDialog_Excel = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog_Excel = New System.Windows.Forms.SaveFileDialog()
+        Me.SaveFileDialog_XML = New System.Windows.Forms.SaveFileDialog()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PopupMenu_Excel, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txt_CompanyName_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gc_Parties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gv_Parties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.container_Tabs, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -50,11 +61,12 @@ Partial Class frm_Main
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadParties, Me.btn_SaveFormat_Parties})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadParties, Me.btn_SaveFormat_Parties, Me.btn_XML_File_Parties, Me.txt_TallyVersion, Me.txt_CompanyName})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 3
+        Me.RibbonControl.MaxItemId = 6
         Me.RibbonControl.Name = "RibbonControl"
-        Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_PurchaseEntries, Me.rp_Parties})
+        Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_PurchaseEntries, Me.rp_Parties, Me.rp_Tally})
+        Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit})
         Me.RibbonControl.Size = New System.Drawing.Size(442, 143)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
         '
@@ -79,6 +91,39 @@ Partial Class frm_Main
         Me.btn_SaveFormat_Parties.Id = 2
         Me.btn_SaveFormat_Parties.Name = "btn_SaveFormat_Parties"
         '
+        'btn_XML_File_Parties
+        '
+        Me.btn_XML_File_Parties.Caption = "To File"
+        Me.btn_XML_File_Parties.Id = 3
+        Me.btn_XML_File_Parties.ImageOptions.SvgImage = CType(resources.GetObject("btn_XML_File_Parties.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btn_XML_File_Parties.Name = "btn_XML_File_Parties"
+        '
+        'txt_TallyVersion
+        '
+        Me.txt_TallyVersion.Caption = "Tally Version     "
+        Me.txt_TallyVersion.Edit = Me.txt_TallyVersion_Edit
+        Me.txt_TallyVersion.EditWidth = 150
+        Me.txt_TallyVersion.Id = 4
+        Me.txt_TallyVersion.Name = "txt_TallyVersion"
+        '
+        'txt_TallyVersion_Edit
+        '
+        Me.txt_TallyVersion_Edit.AutoHeight = False
+        Me.txt_TallyVersion_Edit.Name = "txt_TallyVersion_Edit"
+        '
+        'txt_CompanyName
+        '
+        Me.txt_CompanyName.Caption = "Company Name"
+        Me.txt_CompanyName.Edit = Me.txt_CompanyName_Edit
+        Me.txt_CompanyName.EditWidth = 150
+        Me.txt_CompanyName.Id = 5
+        Me.txt_CompanyName.Name = "txt_CompanyName"
+        '
+        'txt_CompanyName_Edit
+        '
+        Me.txt_CompanyName_Edit.AutoHeight = False
+        Me.txt_CompanyName_Edit.Name = "txt_CompanyName_Edit"
+        '
         'rp_PurchaseEntries
         '
         Me.rp_PurchaseEntries.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Items_Purchase})
@@ -93,7 +138,7 @@ Partial Class frm_Main
         '
         'rp_Parties
         '
-        Me.rp_Parties.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Items_Parties})
+        Me.rp_Parties.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Items_Parties, Me.RibbonPageGroup1})
         Me.rp_Parties.Name = "rp_Parties"
         Me.rp_Parties.Text = "Parties"
         '
@@ -103,6 +148,26 @@ Partial Class frm_Main
         Me.rpg_Items_Parties.Name = "rpg_Items_Parties"
         Me.rpg_Items_Parties.ShowCaptionButton = False
         Me.rpg_Items_Parties.Text = "Items"
+        '
+        'RibbonPageGroup1
+        '
+        Me.RibbonPageGroup1.ItemLinks.Add(Me.btn_XML_File_Parties)
+        Me.RibbonPageGroup1.Name = "RibbonPageGroup1"
+        Me.RibbonPageGroup1.ShowCaptionButton = False
+        Me.RibbonPageGroup1.Text = "Export"
+        '
+        'rp_Tally
+        '
+        Me.rp_Tally.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup2})
+        Me.rp_Tally.Name = "rp_Tally"
+        Me.rp_Tally.Text = "Tally"
+        '
+        'RibbonPageGroup2
+        '
+        Me.RibbonPageGroup2.ItemLinks.Add(Me.txt_TallyVersion)
+        Me.RibbonPageGroup2.ItemLinks.Add(Me.txt_CompanyName)
+        Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
+        Me.RibbonPageGroup2.Text = "Variables"
         '
         'RibbonStatusBar
         '
@@ -177,6 +242,12 @@ Partial Class frm_Main
         Me.SaveFileDialog_Excel.FileName = "Parties.xlsx"
         Me.SaveFileDialog_Excel.Filter = "Excel 2007 Files|*.xlsx"
         '
+        'SaveFileDialog_XML
+        '
+        Me.SaveFileDialog_XML.DefaultExt = "xml"
+        Me.SaveFileDialog_XML.FileName = "Parties.xml"
+        Me.SaveFileDialog_XML.Filter = " Extensible Markup Language (XML) Files|*.xml"
+        '
         'frm_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -191,6 +262,8 @@ Partial Class frm_Main
         Me.Text = "RibbonForm1"
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PopupMenu_Excel, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txt_CompanyName_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gc_Parties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gv_Parties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.container_Tabs, System.ComponentModel.ISupportInitialize).EndInit()
@@ -218,4 +291,13 @@ Partial Class frm_Main
     Friend WithEvents PopupMenu_Excel As DevExpress.XtraBars.PopupMenu
     Friend WithEvents btn_SaveFormat_Parties As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents SaveFileDialog_Excel As SaveFileDialog
+    Friend WithEvents RibbonPageGroup1 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents btn_XML_File_Parties As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents SaveFileDialog_XML As SaveFileDialog
+    Friend WithEvents txt_TallyVersion As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents txt_TallyVersion_Edit As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents txt_CompanyName As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents txt_CompanyName_Edit As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents rp_Tally As DevExpress.XtraBars.Ribbon.RibbonPage
+    Friend WithEvents RibbonPageGroup2 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
 End Class

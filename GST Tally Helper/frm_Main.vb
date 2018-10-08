@@ -4,6 +4,10 @@ Imports ExcelDataReader
 Public Class frm_Main
 
 #Region "Subs"
+    Sub LoadSettings()
+        txt_TallyVersion.EditValue = My.Settings.TallyVersion
+    End Sub
+
     Async Function LoadParties(ByVal FileName As String) As Task
         Invoke(Sub()
                    btn_LoadParties.Enabled = False
@@ -59,6 +63,10 @@ Public Class frm_Main
 #End Region
 
 #Region "Events"
+    Private Sub frm_Main_Load(sender As Object, e As EventArgs) Handles Me.Load
+        LoadSettings
+    End Sub
+
     Private Async Sub btn_LoadParties_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btn_LoadParties.ItemClick
         If OpenFileDialog_Excel.ShowDialog = DialogResult.OK Then
             Await LoadParties(OpenFileDialog_Excel.FileName)
@@ -73,8 +81,21 @@ Public Class frm_Main
             Catch ex As Exception
                 MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
             End Try
-
         End If
+    End Sub
+
+    Private Sub btn_XML_File_Parties_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_XML_File_Parties.ItemClick
+        If SaveFileDialog_XML.ShowDialog = DialogResult.OK Then
+            Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
+            Dim XML As String = XMLGen.GenerateMasters(gc_Parties.DataSource)
+            My.Computer.FileSystem.WriteAllText(SaveFileDialog_XML.FileName, XML, False)
+            MsgBox("XML File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+        End If
+    End Sub
+
+    Private Sub txt_TallyVersion_EditValueChanged(sender As Object, e As EventArgs) Handles txt_TallyVersion.EditValueChanged
+        My.Settings.TallyVersion = txt_TallyVersion.EditValue
+        My.Settings.Save()
     End Sub
 #End Region
 

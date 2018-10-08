@@ -88,6 +88,7 @@
     <Compile Include="Classes\GSTINValidator.vb" />
     <Compile Include="Classes\Objects\Party.vb" />
     <Compile Include="Classes\Objects\State.vb" />
+    <Compile Include="Classes\Tally\XMLGenerator.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -136,9 +137,7 @@
     <None Include="packages.config" />
     <None Include="Resources\Parties.xlsx" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Classes\Tally\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PreBuildEvent>break &gt; "$(ProjectDir)My Project\licenses.licx"</PreBuildEvent>

@@ -93,6 +93,7 @@
     <Compile Include="Classes\Objects\State.vb" />
     <Compile Include="Classes\Objects\Voucher.vb" />
     <Compile Include="Classes\Objects\VoucherEntry.vb" />
+    <Compile Include="Classes\Tally\Converter.vb" />
     <Compile Include="Classes\Tally\XMLGenerator.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

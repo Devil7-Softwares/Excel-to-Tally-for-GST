@@ -25,6 +25,6 @@ Namespace Enums
         Receipt = 1
         Purchase = 2
         Sales = 3
-        Journel = 4
+        Journal = 4
     End Enum
 End Namespace

@@ -108,8 +108,8 @@ Public Class frm_Main
                                                            VoucherType = Enums.VoucherType.Purchase
                                                        ElseIf VoucherType_ = "Sales" Then
                                                            VoucherType = Enums.VoucherType.Sales
-                                                       ElseIf VoucherType_ = "Journel" Then
-                                                           VoucherType = Enums.VoucherType.Journel
+                                                       ElseIf VoucherType_ = "Journal" Then
+                                                           VoucherType = Enums.VoucherType.Journal
                                                        End If
                                                        R.Add(New Objects.PurchaseEntry(GSTIN, InvoiceNo, InvoiceDate, InvoiceValue, GSTRate, TaxableValue, IGST, CGST, SGST, CESS, LedgerName, VoucherType))
                                                    End If
@@ -124,7 +124,7 @@ Public Class frm_Main
                                       End Sub)
                            Catch ex As Exception
                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
-                           Return False
+                               Return False
                            End Try
                            Return True
                        End Function)

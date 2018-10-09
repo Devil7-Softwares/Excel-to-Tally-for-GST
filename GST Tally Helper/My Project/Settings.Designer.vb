@@ -65,6 +65,30 @@ Namespace My
                 Me("TallyVersion") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("33")>  _
+        Public Property GSTIN() As String
+            Get
+                Return CType(Me("GSTIN"),String)
+            End Get
+            Set
+                Me("GSTIN") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CalculateValues() As Boolean
+            Get
+                Return CType(Me("CalculateValues"),Boolean)
+            End Get
+            Set
+                Me("CalculateValues") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

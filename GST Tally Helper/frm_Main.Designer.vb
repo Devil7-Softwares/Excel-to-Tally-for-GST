@@ -25,16 +25,17 @@ Partial Class frm_Main
         Me.btn_LoadExcel = New DevExpress.XtraBars.BarButtonItem()
         Me.PopupMenu_Excel = New DevExpress.XtraBars.PopupMenu(Me.components)
         Me.btn_SaveFormat = New DevExpress.XtraBars.BarButtonItem()
-        Me.btn_XML_File_Parties = New DevExpress.XtraBars.BarButtonItem()
+        Me.btn_XML_File = New DevExpress.XtraBars.BarButtonItem()
         Me.txt_TallyVersion = New DevExpress.XtraBars.BarEditItem()
         Me.txt_TallyVersion_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.txt_CompanyName = New DevExpress.XtraBars.BarEditItem()
         Me.txt_CompanyName_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.rp_PurchaseEntries = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Items_Purchase = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.rpg_Export_Purchase = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rp_Parties = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Items_Parties = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
-        Me.RibbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.rpg_Export_Parties = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rp_Tally = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
@@ -67,7 +68,7 @@ Partial Class frm_Main
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_SaveFormat, Me.btn_XML_File_Parties, Me.txt_TallyVersion, Me.txt_CompanyName})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_SaveFormat, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
         Me.RibbonControl.MaxItemId = 7
         Me.RibbonControl.Name = "RibbonControl"
@@ -97,12 +98,12 @@ Partial Class frm_Main
         Me.btn_SaveFormat.Id = 2
         Me.btn_SaveFormat.Name = "btn_SaveFormat"
         '
-        'btn_XML_File_Parties
+        'btn_XML_File
         '
-        Me.btn_XML_File_Parties.Caption = "To File"
-        Me.btn_XML_File_Parties.Id = 3
-        Me.btn_XML_File_Parties.ImageOptions.SvgImage = CType(resources.GetObject("btn_XML_File_Parties.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
-        Me.btn_XML_File_Parties.Name = "btn_XML_File_Parties"
+        Me.btn_XML_File.Caption = "To File"
+        Me.btn_XML_File.Id = 3
+        Me.btn_XML_File.ImageOptions.SvgImage = CType(resources.GetObject("btn_XML_File.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btn_XML_File.Name = "btn_XML_File"
         '
         'txt_TallyVersion
         '
@@ -132,7 +133,7 @@ Partial Class frm_Main
         '
         'rp_PurchaseEntries
         '
-        Me.rp_PurchaseEntries.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Items_Purchase})
+        Me.rp_PurchaseEntries.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Items_Purchase, Me.rpg_Export_Purchase})
         Me.rp_PurchaseEntries.Name = "rp_PurchaseEntries"
         Me.rp_PurchaseEntries.Text = "Purchase Entries"
         '
@@ -143,9 +144,16 @@ Partial Class frm_Main
         Me.rpg_Items_Purchase.ShowCaptionButton = False
         Me.rpg_Items_Purchase.Text = "Items"
         '
+        'rpg_Export_Purchase
+        '
+        Me.rpg_Export_Purchase.ItemLinks.Add(Me.btn_XML_File)
+        Me.rpg_Export_Purchase.Name = "rpg_Export_Purchase"
+        Me.rpg_Export_Purchase.ShowCaptionButton = False
+        Me.rpg_Export_Purchase.Text = "Export"
+        '
         'rp_Parties
         '
-        Me.rp_Parties.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Items_Parties, Me.RibbonPageGroup1})
+        Me.rp_Parties.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Items_Parties, Me.rpg_Export_Parties})
         Me.rp_Parties.Name = "rp_Parties"
         Me.rp_Parties.Text = "Parties"
         '
@@ -156,12 +164,12 @@ Partial Class frm_Main
         Me.rpg_Items_Parties.ShowCaptionButton = False
         Me.rpg_Items_Parties.Text = "Items"
         '
-        'RibbonPageGroup1
+        'rpg_Export_Parties
         '
-        Me.RibbonPageGroup1.ItemLinks.Add(Me.btn_XML_File_Parties)
-        Me.RibbonPageGroup1.Name = "RibbonPageGroup1"
-        Me.RibbonPageGroup1.ShowCaptionButton = False
-        Me.RibbonPageGroup1.Text = "Export"
+        Me.rpg_Export_Parties.ItemLinks.Add(Me.btn_XML_File)
+        Me.rpg_Export_Parties.Name = "rpg_Export_Parties"
+        Me.rpg_Export_Parties.ShowCaptionButton = False
+        Me.rpg_Export_Parties.Text = "Export"
         '
         'rp_Tally
         '
@@ -332,8 +340,8 @@ Partial Class frm_Main
     Friend WithEvents PopupMenu_Excel As DevExpress.XtraBars.PopupMenu
     Friend WithEvents btn_SaveFormat As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents SaveFileDialog_Excel As SaveFileDialog
-    Friend WithEvents RibbonPageGroup1 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
-    Friend WithEvents btn_XML_File_Parties As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents rpg_Export_Parties As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents btn_XML_File As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents SaveFileDialog_XML As SaveFileDialog
     Friend WithEvents txt_TallyVersion As DevExpress.XtraBars.BarEditItem
     Friend WithEvents txt_TallyVersion_Edit As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
@@ -344,4 +352,5 @@ Partial Class frm_Main
     Friend WithEvents ProgressPanel_PurchaseEntries As DevExpress.XtraWaitForm.ProgressPanel
     Friend WithEvents gc_PurchaseEntries As DevExpress.XtraGrid.GridControl
     Friend WithEvents gv_PurchaseEntries As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents rpg_Export_Purchase As DevExpress.XtraBars.Ribbon.RibbonPageGroup
 End Class

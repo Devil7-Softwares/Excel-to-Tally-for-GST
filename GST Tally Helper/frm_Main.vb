@@ -133,6 +133,21 @@ Public Class frm_Main
                    ProgressPanel_PurchaseEntries.Visible = False
                End Sub)
     End Function
+
+    Sub ExportParties(ByVal FileName As String)
+        Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
+        Dim XML As String = XMLGen.GenerateMasters(gc_Parties.DataSource)
+        My.Computer.FileSystem.WriteAllText(FileName, XML, False)
+        MsgBox("XML File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+    End Sub
+
+    Sub ExportPurchase(ByVal Filename As String)
+        Dim Vouchers As List(Of Objects.Voucher) = Tally.Converter.Purchase2Vouchers(gc_PurchaseEntries.DataSource)
+        Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
+        Dim XML As String = XMLGen.GenerateVouchers(Vouchers)
+        My.Computer.FileSystem.WriteAllText(Filename, XML, False)
+        MsgBox("XML File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+    End Sub
 #End Region
 
 #Region "Events"
@@ -169,12 +184,13 @@ Public Class frm_Main
         End If
     End Sub
 
-    Private Sub btn_XML_File_Parties_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_XML_File_Parties.ItemClick
+    Private Sub btn_XML_File_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_XML_File.ItemClick
         If SaveFileDialog_XML.ShowDialog = DialogResult.OK Then
-            Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
-            Dim XML As String = XMLGen.GenerateMasters(gc_Parties.DataSource)
-            My.Computer.FileSystem.WriteAllText(SaveFileDialog_XML.FileName, XML, False)
-            MsgBox("XML File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+            If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
+                ExportPurchase(SaveFileDialog_XML.FileName)
+            ElseIf RibbonControl.SelectedPage Is rp_Parties Then
+                ExportParties(SaveFileDialog_XML.FileName)
+            End If
         End If
     End Sub
 

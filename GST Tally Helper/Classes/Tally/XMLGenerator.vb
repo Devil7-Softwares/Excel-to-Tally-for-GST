@@ -36,6 +36,7 @@ Namespace Tally
         End Sub
 #End Region
 
+#Region "Parties"
         Function GenerateMasters(ByVal Parties As List(Of Objects.Party))
             Dim enc As New UnicodeEncoding
             Dim MemStream As New IO.MemoryStream
@@ -149,6 +150,115 @@ Namespace Tally
             End With
             Return enc.GetString(MemStream.ToArray)
         End Function
+#End Region
+
+#Region "Vouchers"
+        Function GenerateVouchers(ByVal Vouchers As List(Of Objects.Voucher)) As String
+            Dim enc As New UnicodeEncoding
+            Dim MemStream As New IO.MemoryStream
+            ' Declare a XmlTextWriter-Object, with which we are going to write the config file
+            Dim XMLobj As XmlTextWriter = New XmlTextWriter(MemStream, enc)
+
+            With XMLobj
+                .Formatting = Formatting.Indented
+                .Indentation = 4
+                .WriteStartDocument()
+                .WriteStartElement("ENVELOPE") 'ENVELOPE
+                .WriteStartElement("HEADER") 'HEADER
+                .WriteStartElement("VERSION") 'VERSION
+                .WriteString(My.Settings.TallyVersion)
+                .WriteEndElement() 'VERSION
+                .WriteStartElement("TALLYREQUEST") 'TALLYREQUEST
+                .WriteString("Import")
+                .WriteEndElement() 'TALLYREQUEST
+                .WriteStartElement("TYPE") 'TYPE
+                .WriteString("Data")
+                .WriteEndElement() 'TYPE
+                .WriteStartElement("ID") 'ID
+                .WriteString("Vouchers")
+                .WriteEndElement() 'ID
+                .WriteEndElement() 'HEADER
+                .WriteStartElement("BODY") 'BODY
+                .WriteStartElement("DESC") 'DESC
+                .WriteStartElement("REPORTNAME") 'REPORTNAME
+                .WriteString("Vouchers")
+                .WriteEndElement() 'REPORTNAME
+                .WriteStartElement("STATICVARIABLES") 'STATICVARIABLES
+                .WriteStartElement("SVCURRENTCOMPANY") 'SVCURRENTCOMPANY
+                .WriteString(CompanyName)
+                .WriteEndElement() 'SVCURRENTCOMPANY
+                .WriteEndElement() 'STATICVARIABLES
+                .WriteEndElement() 'DESC
+                .WriteStartElement("IMPORTDATA") 'IMPORTDATA
+                .WriteStartElement("REQUESTDATA") 'REQUESTDATA
+                WriteVouchers(Vouchers, XMLobj)
+                .WriteEndElement() 'REQUESTDATA
+                .WriteEndElement() 'IMPORTDATA
+                .WriteEndElement() 'BODY
+                .WriteEndElement() 'ENVELOPE
+                .WriteEndDocument()
+                .Close()
+            End With
+            Return enc.GetString(MemStream.ToArray)
+        End Function
+
+        Private Sub WriteVouchers(ByVal Vouchers As List(Of Objects.Voucher), ByRef XMLWriter As XmlWriter)
+            For Each i As Objects.Voucher In Vouchers
+                With XMLWriter
+                    .WriteStartElement("TALLYMESSAGE") 'TALLYMESSAGE
+                    .WriteAttributeString("xmlns:UDF", "TallyUDF")
+                    .WriteStartElement("VOUCHER")
+                    .WriteAttributeString("VCHTYPE", i.VoucherType)
+                    .WriteAttributeString("ACTION", "CREATE")
+                    .WriteStartElement("VOUCHERTYPENAME") 'VOUCHERTYPENAME
+                    .WriteString(i.VoucherType)
+                    .WriteEndElement() 'VOUCHERTYPENAME
+                    .WriteStartElement("DATE") 'DATE
+                    .WriteString(i.VoucherDate)
+                    .WriteEndElement() 'DATE
+                    .WriteStartElement("EFFECTIVEDATE") 'EFFECTIVEDATE
+                    .WriteString(i.VoucherDate)
+                    .WriteEndElement() 'EFFECTIVEDATE
+                    .WriteStartElement("REFERENCE") 'REFERENCE
+                    .WriteString(i.VoucherRef)
+                    .WriteEndElement() 'REFERENCE
+                    .WriteStartElement("NARRATION") 'NARRATION
+                    .WriteString(i.Narration)
+                    .WriteEndElement() 'NARRATION
+
+                    For Each entry As Objects.VoucherEntry In i.Entries
+                        .WriteStartElement("ALLLEDGERENTRIES.LIST") 'ALLLEDGERENTRIES.LIST
+                        .WriteStartElement("REMOVEZEROENTRIES") 'REMOVEZEROENTRIES
+                        .WriteString("No")
+                        .WriteEndElement() 'REMOVEZEROENTRIES
+                        .WriteStartElement("ISDEEMEDPOSITIVE") 'ISDEEMEDPOSITIVE
+                        If entry.Effect = Enums.Effect.Cr Then
+                            .WriteString("No")
+                        Else
+                            .WriteString("Yes")
+                        End If
+                        .WriteEndElement() 'ISDEEMEDPOSITIVE
+                        .WriteStartElement("LEDGERNAME") 'LEDGERNAME
+                        .WriteString(entry.LedgerName)
+                        .WriteEndElement() 'LEDGERNAME
+                        .WriteStartElement("AMOUNT") 'AMOUNT
+                        Dim AMT As Double = entry.Amount
+                        If entry.Effect = Enums.Effect.Dr Then
+                            AMT = Math.Abs(entry.Amount) * -1
+                        Else
+                            AMT = Math.Abs(entry.Amount)
+                        End If
+                        .WriteString(AMT)
+                        .WriteEndElement() 'AMOUNT
+                        .WriteEndElement() 'ALLLEDGERENTRIES.LIST
+                    Next
+
+                    .WriteEndElement() 'VOUCHER
+                    .WriteEndElement() 'TALLYMESSAGE
+                End With
+            Next
+        End Sub
+#End Region
 
     End Class
 End Namespace

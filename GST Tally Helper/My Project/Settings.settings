@@ -5,5 +5,11 @@
     <Setting Name="TallyVersion" Type="System.String" Scope="User">
       <Value Profile="(Default)">1.0</Value>
     </Setting>
+    <Setting Name="GSTIN" Type="System.String" Scope="User">
+      <Value Profile="(Default)">33</Value>
+    </Setting>
+    <Setting Name="CalculateValues" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

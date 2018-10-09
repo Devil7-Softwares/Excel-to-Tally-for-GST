@@ -83,6 +83,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Enums\Effect.vb" />
     <Compile Include="Classes\Enums\PartyType.vb" />
     <Compile Include="Classes\Enums\RegistrationType.vb" />
     <Compile Include="Classes\Enums\VoucherType.vb" />

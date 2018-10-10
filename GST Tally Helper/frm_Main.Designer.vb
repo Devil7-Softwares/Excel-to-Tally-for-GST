@@ -51,6 +51,8 @@ Partial Class frm_Main
         Me.OpenFileDialog_Excel = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog_Excel = New System.Windows.Forms.SaveFileDialog()
         Me.SaveFileDialog_XML = New System.Windows.Forms.SaveFileDialog()
+        Me.chk_CalcValues = New DevExpress.XtraBars.BarEditItem()
+        Me.chk_CalcValues_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PopupMenu_Excel, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -63,17 +65,18 @@ Partial Class frm_Main
         CType(Me.gc_PurchaseEntries, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gv_PurchaseEntries, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tp_Parties.SuspendLayout()
+        CType(Me.chk_CalcValues_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_SaveFormat, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_SaveFormat, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.chk_CalcValues})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 7
+        Me.RibbonControl.MaxItemId = 8
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_PurchaseEntries, Me.rp_Parties, Me.rp_Tally})
-        Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit})
+        Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit, Me.chk_CalcValues_Edit})
         Me.RibbonControl.Size = New System.Drawing.Size(442, 143)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
         '
@@ -181,6 +184,7 @@ Partial Class frm_Main
         '
         Me.RibbonPageGroup2.ItemLinks.Add(Me.txt_TallyVersion)
         Me.RibbonPageGroup2.ItemLinks.Add(Me.txt_CompanyName)
+        Me.RibbonPageGroup2.ItemLinks.Add(Me.chk_CalcValues, True)
         Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
         Me.RibbonPageGroup2.Text = "Variables"
         '
@@ -294,6 +298,18 @@ Partial Class frm_Main
         Me.SaveFileDialog_XML.FileName = "Parties.xml"
         Me.SaveFileDialog_XML.Filter = " Extensible Markup Language (XML) Files|*.xml"
         '
+        'chk_CalcValues
+        '
+        Me.chk_CalcValues.Caption = "Use Calculated Values"
+        Me.chk_CalcValues.Edit = Me.chk_CalcValues_Edit
+        Me.chk_CalcValues.Id = 7
+        Me.chk_CalcValues.Name = "chk_CalcValues"
+        '
+        'chk_CalcValues_Edit
+        '
+        Me.chk_CalcValues_Edit.AutoHeight = False
+        Me.chk_CalcValues_Edit.Name = "chk_CalcValues_Edit"
+        '
         'frm_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -319,6 +335,7 @@ Partial Class frm_Main
         CType(Me.gc_PurchaseEntries, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gv_PurchaseEntries, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tp_Parties.ResumeLayout(False)
+        CType(Me.chk_CalcValues_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -354,4 +371,6 @@ Partial Class frm_Main
     Friend WithEvents gc_PurchaseEntries As DevExpress.XtraGrid.GridControl
     Friend WithEvents gv_PurchaseEntries As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents rpg_Export_Purchase As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents chk_CalcValues As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents chk_CalcValues_Edit As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
 End Class

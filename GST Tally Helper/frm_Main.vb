@@ -7,6 +7,7 @@ Public Class frm_Main
 #Region "Subs"
     Sub LoadSettings()
         txt_TallyVersion.EditValue = My.Settings.TallyVersion
+        chk_CalcValues.EditValue = My.Settings.CalculateValues
     End Sub
 
     Async Function LoadParties(ByVal FileName As String) As Task
@@ -213,6 +214,11 @@ Public Class frm_Main
         ElseIf container_Tabs.SelectedTabPage Is tp_Parties Then
             RibbonControl.SelectedPage = rp_Parties
         End If
+    End Sub
+
+    Private Sub chk_CalcValues_EditValueChanged(sender As Object, e As EventArgs) Handles chk_CalcValues.EditValueChanged
+        My.Settings.CalculateValues = chk_CalcValues.EditValue
+        My.Settings.Save()
     End Sub
 #End Region
 

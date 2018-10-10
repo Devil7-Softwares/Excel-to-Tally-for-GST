@@ -384,6 +384,7 @@ Partial Class frm_Main
         Me.ProgressPanel_Main.Name = "ProgressPanel_Main"
         Me.ProgressPanel_Main.Size = New System.Drawing.Size(840, 275)
         Me.ProgressPanel_Main.TabIndex = 6
+        Me.ProgressPanel_Main.Visible = False
         '
         'frm_Main
         '

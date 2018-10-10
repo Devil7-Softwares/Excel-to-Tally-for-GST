@@ -19,6 +19,7 @@
 '                                                                          '
 '=========================================================================='
 
+Imports System.IO
 Imports System.Text
 Imports System.Xml
 
@@ -39,7 +40,7 @@ Namespace Tally
 #Region "Parties"
         Function GenerateMasters(ByVal Parties As List(Of Objects.Party))
             Dim enc As New UnicodeEncoding
-            Dim MemStream As New IO.MemoryStream
+            Dim MemStream As New MemoryStream
             ' Declare a XmlTextWriter-Object, with which we are going to write the config file
             Dim XMLobj As XmlTextWriter = New XmlTextWriter(MemStream, enc)
 
@@ -155,7 +156,7 @@ Namespace Tally
 #Region "Vouchers"
         Function GenerateVouchers(ByVal Vouchers As List(Of Objects.Voucher)) As String
             Dim enc As New UnicodeEncoding
-            Dim MemStream As New IO.MemoryStream
+            Dim MemStream As New MemoryStream
             ' Declare a XmlTextWriter-Object, with which we are going to write the config file
             Dim XMLobj As XmlTextWriter = New XmlTextWriter(MemStream, enc)
 

@@ -4,6 +4,10 @@ Imports ExcelDataReader
 
 Public Class frm_Main
 
+#Region "Variables"
+    Dim TallyIO As New Tally.IO
+#End Region
+
 #Region "Subs"
     Sub LoadSettings()
         txt_TallyHost.EditValue = My.Settings.Host
@@ -240,6 +244,17 @@ Public Class frm_Main
             MsgBox("Only Numric Values are Allowed.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
         End Try
     End Sub
+
+    Private Async Sub btn_Sync_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Sync.ItemClick
+        Invoke(Sub() btn_Sync.Enabled = False)
+        If Not Await TallyIO.LoadAllMasters Then GoTo finish
+finish:
+            Invoke(Sub()
+                       txt_CompanyName.EditValue = TallyIO.CompanyName
+                       btn_Sync.Enabled = True
+                       ProgressPanel_Main.Visible = False
+                   End Sub)
+            End Sub
 #End Region
 
 End Class

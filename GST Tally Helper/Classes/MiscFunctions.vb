@@ -21,4 +21,16 @@
 
 Module MiscFunctions
 
+#Region "Functions"
+    Public Function GetTallyURL() As String
+        Return String.Format("http://{0}:{1}", My.Settings.Host, My.Settings.Port)
+    End Function
+
+    Public Function ProcessString(ByVal Text As String) As String
+        Dim R As String = Text
+        R = R.Replace("&amp;", "&")
+        Return R
+    End Function
+#End Region
+
 End Module

@@ -29,5 +29,8 @@
     <Setting Name="Port" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">9000</Value>
     </Setting>
+    <Setting Name="SalesLedger" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Sales @ {0}%</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

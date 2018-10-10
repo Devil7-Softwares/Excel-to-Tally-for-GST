@@ -161,6 +161,18 @@ Namespace My
                 Me("Port") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Sales @ {0}%")>  _
+        Public Property SalesLedger() As String
+            Get
+                Return CType(Me("SalesLedger"),String)
+            End Get
+            Set
+                Me("SalesLedger") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

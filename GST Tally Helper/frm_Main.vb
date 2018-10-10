@@ -213,6 +213,14 @@ Public Class frm_Main
         My.Computer.FileSystem.WriteAllText(Filename, XML, False)
         MsgBox("XML File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
     End Sub
+
+    Sub ExportSales(ByVal Filename As String)
+        Dim Vouchers As List(Of Objects.Voucher) = Tally.Converter.Sales2Vouchers(gc_SalesEntries.DataSource)
+        Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
+        Dim XML As String = XMLGen.GenerateVouchers(Vouchers)
+        My.Computer.FileSystem.WriteAllText(Filename, XML, False)
+        MsgBox("XML File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+    End Sub
 #End Region
 
 #Region "Events"
@@ -267,6 +275,8 @@ Public Class frm_Main
                 ExportPurchase(SaveFileDialog_XML.FileName)
             ElseIf RibbonControl.SelectedPage Is rp_Parties Then
                 ExportParties(SaveFileDialog_XML.FileName)
+            ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
+                ExportSales(SaveFileDialog_XML.FileName)
             End If
         End If
     End Sub

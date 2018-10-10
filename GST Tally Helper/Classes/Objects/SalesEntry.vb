@@ -32,6 +32,7 @@ Namespace Objects
         Property IGST As Double
         Property CGST As Double
         Property SGST As Double
+        Property CESS As Double
 #End Region
 
 #Region "Constructors"
@@ -45,10 +46,11 @@ Namespace Objects
             Me.IGST = 0
             Me.CGST = 0
             Me.SGST = 0
+            Me.CESS = 0
         End Sub
 
-        Sub New(ByVal GSTIN As String, ByVal InvoiceDate As Date, ByVal InvoiceNumber As String, ByVal InvoiceValue As Double,
-                ByVal Rate As Integer, ByVal TaxableValue As Double, ByVal IGST As Double, ByVal CGST As Double, ByVal SGST As Double)
+        Sub New(ByVal GSTIN As String, ByVal InvoiceDate As Date, ByVal InvoiceNumber As String, ByVal InvoiceValue As Double, ByVal Rate As Integer,
+                 ByVal TaxableValue As Double, ByVal IGST As Double, ByVal CGST As Double, ByVal SGST As Double, ByVal CESS As Double)
             Me.GSTIN = GSTIN
             Me.InvoiceDate = InvoiceDate
             Me.InvoiceNumber = InvoiceNumber
@@ -58,6 +60,7 @@ Namespace Objects
             Me.IGST = IGST
             Me.CGST = CGST
             Me.SGST = SGST
+            Me.CESS = CESS
         End Sub
 #End Region
 

@@ -90,6 +90,7 @@
     <Compile Include="Classes\GSTINValidator.vb" />
     <Compile Include="Classes\Objects\Party.vb" />
     <Compile Include="Classes\Objects\PurchaseEntry.vb" />
+    <Compile Include="Classes\Objects\Response.vb" />
     <Compile Include="Classes\Objects\State.vb" />
     <Compile Include="Classes\Objects\Voucher.vb" />
     <Compile Include="Classes\Objects\VoucherEntry.vb" />

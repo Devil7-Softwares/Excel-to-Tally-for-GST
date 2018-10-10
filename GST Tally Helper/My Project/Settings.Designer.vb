@@ -137,6 +137,30 @@ Namespace My
                 Me("TaxLedger") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("localhost")>  _
+        Public Property Host() As String
+            Get
+                Return CType(Me("Host"),String)
+            End Get
+            Set
+                Me("Host") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("9000")>  _
+        Public Property Port() As Integer
+            Get
+                Return CType(Me("Port"),Integer)
+            End Get
+            Set
+                Me("Port") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

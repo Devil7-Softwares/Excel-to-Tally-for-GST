@@ -6,6 +6,8 @@ Public Class frm_Main
 
 #Region "Subs"
     Sub LoadSettings()
+        txt_TallyHost.EditValue = My.Settings.Host
+        txt_TallyPort.EditValue = My.Settings.Port
         txt_TallyVersion.EditValue = My.Settings.TallyVersion
         chk_CalcValues.EditValue = My.Settings.CalculateValues
     End Sub
@@ -223,6 +225,20 @@ Public Class frm_Main
 
     Private Sub btn_LedgerNames_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_LedgerNames.ItemClick
         frm_TaxLedgersFormat.ShowDialog()
+    End Sub
+
+    Private Sub txt_TallyHost_EditValueChanged(sender As Object, e As EventArgs) Handles txt_TallyHost.EditValueChanged
+        My.Settings.Host = txt_TallyHost.EditValue.ToString
+        My.Settings.Save()
+    End Sub
+
+    Private Sub txt_TallyPort_EditValueChanged(sender As Object, e As EventArgs) Handles txt_TallyPort.EditValueChanged
+        Try
+            My.Settings.Port = CInt(txt_TallyPort.EditValue)
+            My.Settings.Save()
+        Catch ex As Exception
+            MsgBox("Only Numric Values are Allowed.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+        End Try
     End Sub
 #End Region
 

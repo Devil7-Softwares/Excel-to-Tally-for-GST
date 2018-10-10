@@ -23,5 +23,11 @@
     <Setting Name="TaxLedger" Type="System.String" Scope="User">
       <Value Profile="(Default)">{0} @ {1}%</Value>
     </Setting>
+    <Setting Name="Host" Type="System.String" Scope="User">
+      <Value Profile="(Default)">localhost</Value>
+    </Setting>
+    <Setting Name="Port" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">9000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

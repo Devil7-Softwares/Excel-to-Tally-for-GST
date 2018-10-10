@@ -32,6 +32,12 @@ Partial Class frm_Main
         Me.txt_CompanyName_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.chk_CalcValues = New DevExpress.XtraBars.BarEditItem()
         Me.chk_CalcValues_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.btn_LedgerNames = New DevExpress.XtraBars.BarButtonItem()
+        Me.txt_TallyHost = New DevExpress.XtraBars.BarEditItem()
+        Me.txt_TallyHost_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.txt_TallyPort = New DevExpress.XtraBars.BarEditItem()
+        Me.txt_TallyPort_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.btn_Sync = New DevExpress.XtraBars.BarButtonItem()
         Me.rp_PurchaseEntries = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Items_Purchase = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rpg_Export_Purchase = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -40,6 +46,7 @@ Partial Class frm_Main
         Me.rpg_Export_Parties = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rp_Tally = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.rpg_Sync = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
         Me.gc_Parties = New DevExpress.XtraGrid.GridControl()
         Me.gv_Parties = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -53,12 +60,14 @@ Partial Class frm_Main
         Me.OpenFileDialog_Excel = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog_Excel = New System.Windows.Forms.SaveFileDialog()
         Me.SaveFileDialog_XML = New System.Windows.Forms.SaveFileDialog()
-        Me.btn_LedgerNames = New DevExpress.XtraBars.BarButtonItem()
+        Me.ProgressPanel_Main = New DevExpress.XtraWaitForm.ProgressPanel()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PopupMenu_Excel, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_CompanyName_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chk_CalcValues_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txt_TallyHost_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txt_TallyPort_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gc_Parties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gv_Parties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.container_Tabs, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -72,13 +81,13 @@ Partial Class frm_Main
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_SaveFormat, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.chk_CalcValues, Me.btn_LedgerNames})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_SaveFormat, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.chk_CalcValues, Me.btn_LedgerNames, Me.txt_TallyHost, Me.txt_TallyPort, Me.btn_Sync})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 9
+        Me.RibbonControl.MaxItemId = 12
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_PurchaseEntries, Me.rp_Parties, Me.rp_Tally})
-        Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit, Me.chk_CalcValues_Edit})
-        Me.RibbonControl.Size = New System.Drawing.Size(442, 143)
+        Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit, Me.chk_CalcValues_Edit, Me.txt_TallyHost_Edit, Me.txt_TallyPort_Edit})
+        Me.RibbonControl.Size = New System.Drawing.Size(840, 143)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
         '
         'btn_LoadExcel
@@ -147,6 +156,47 @@ Partial Class frm_Main
         Me.chk_CalcValues_Edit.AutoHeight = False
         Me.chk_CalcValues_Edit.Name = "chk_CalcValues_Edit"
         '
+        'btn_LedgerNames
+        '
+        Me.btn_LedgerNames.Caption = "Edit Ledger Names"
+        Me.btn_LedgerNames.Id = 8
+        Me.btn_LedgerNames.ImageOptions.SvgImage = CType(resources.GetObject("btn_LedgerNames.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btn_LedgerNames.Name = "btn_LedgerNames"
+        Me.btn_LedgerNames.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText
+        '
+        'txt_TallyHost
+        '
+        Me.txt_TallyHost.Caption = "Tally Host Name"
+        Me.txt_TallyHost.Edit = Me.txt_TallyHost_Edit
+        Me.txt_TallyHost.EditWidth = 100
+        Me.txt_TallyHost.Id = 9
+        Me.txt_TallyHost.Name = "txt_TallyHost"
+        '
+        'txt_TallyHost_Edit
+        '
+        Me.txt_TallyHost_Edit.AutoHeight = False
+        Me.txt_TallyHost_Edit.Name = "txt_TallyHost_Edit"
+        '
+        'txt_TallyPort
+        '
+        Me.txt_TallyPort.Caption = "                   Port"
+        Me.txt_TallyPort.Edit = Me.txt_TallyPort_Edit
+        Me.txt_TallyPort.EditWidth = 100
+        Me.txt_TallyPort.Id = 10
+        Me.txt_TallyPort.Name = "txt_TallyPort"
+        '
+        'txt_TallyPort_Edit
+        '
+        Me.txt_TallyPort_Edit.AutoHeight = False
+        Me.txt_TallyPort_Edit.Name = "txt_TallyPort_Edit"
+        '
+        'btn_Sync
+        '
+        Me.btn_Sync.Caption = "Sync"
+        Me.btn_Sync.Id = 11
+        Me.btn_Sync.ImageOptions.SvgImage = CType(resources.GetObject("btn_Sync.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btn_Sync.Name = "btn_Sync"
+        '
         'rp_PurchaseEntries
         '
         Me.rp_PurchaseEntries.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Items_Purchase, Me.rpg_Export_Purchase})
@@ -189,7 +239,7 @@ Partial Class frm_Main
         '
         'rp_Tally
         '
-        Me.rp_Tally.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup2})
+        Me.rp_Tally.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup2, Me.rpg_Sync})
         Me.rp_Tally.Name = "rp_Tally"
         Me.rp_Tally.Text = "Tally"
         '
@@ -202,12 +252,21 @@ Partial Class frm_Main
         Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
         Me.RibbonPageGroup2.Text = "Variables"
         '
+        'rpg_Sync
+        '
+        Me.rpg_Sync.ItemLinks.Add(Me.txt_TallyHost)
+        Me.rpg_Sync.ItemLinks.Add(Me.txt_TallyPort)
+        Me.rpg_Sync.ItemLinks.Add(Me.btn_Sync, True)
+        Me.rpg_Sync.Name = "rpg_Sync"
+        Me.rpg_Sync.ShowCaptionButton = False
+        Me.rpg_Sync.Text = "Sync"
+        '
         'RibbonStatusBar
         '
         Me.RibbonStatusBar.Location = New System.Drawing.Point(0, 418)
         Me.RibbonStatusBar.Name = "RibbonStatusBar"
         Me.RibbonStatusBar.Ribbon = Me.RibbonControl
-        Me.RibbonStatusBar.Size = New System.Drawing.Size(442, 31)
+        Me.RibbonStatusBar.Size = New System.Drawing.Size(840, 31)
         '
         'gc_Parties
         '
@@ -216,7 +275,7 @@ Partial Class frm_Main
         Me.gc_Parties.MainView = Me.gv_Parties
         Me.gc_Parties.MenuManager = Me.RibbonControl
         Me.gc_Parties.Name = "gc_Parties"
-        Me.gc_Parties.Size = New System.Drawing.Size(436, 247)
+        Me.gc_Parties.Size = New System.Drawing.Size(834, 247)
         Me.gc_Parties.TabIndex = 2
         Me.gc_Parties.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gv_Parties})
         '
@@ -232,7 +291,7 @@ Partial Class frm_Main
         Me.container_Tabs.Location = New System.Drawing.Point(0, 143)
         Me.container_Tabs.Name = "container_Tabs"
         Me.container_Tabs.SelectedTabPage = Me.tp_PurchaseEntries
-        Me.container_Tabs.Size = New System.Drawing.Size(442, 275)
+        Me.container_Tabs.Size = New System.Drawing.Size(840, 275)
         Me.container_Tabs.TabIndex = 3
         Me.container_Tabs.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.tp_PurchaseEntries, Me.tp_Parties})
         '
@@ -241,7 +300,7 @@ Partial Class frm_Main
         Me.tp_PurchaseEntries.Controls.Add(Me.ProgressPanel_PurchaseEntries)
         Me.tp_PurchaseEntries.Controls.Add(Me.gc_PurchaseEntries)
         Me.tp_PurchaseEntries.Name = "tp_PurchaseEntries"
-        Me.tp_PurchaseEntries.Size = New System.Drawing.Size(436, 247)
+        Me.tp_PurchaseEntries.Size = New System.Drawing.Size(834, 247)
         Me.tp_PurchaseEntries.Text = "Purchase Entries"
         '
         'ProgressPanel_PurchaseEntries
@@ -253,7 +312,7 @@ Partial Class frm_Main
         Me.ProgressPanel_PurchaseEntries.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ProgressPanel_PurchaseEntries.Location = New System.Drawing.Point(0, 0)
         Me.ProgressPanel_PurchaseEntries.Name = "ProgressPanel_PurchaseEntries"
-        Me.ProgressPanel_PurchaseEntries.Size = New System.Drawing.Size(436, 247)
+        Me.ProgressPanel_PurchaseEntries.Size = New System.Drawing.Size(834, 247)
         Me.ProgressPanel_PurchaseEntries.TabIndex = 4
         Me.ProgressPanel_PurchaseEntries.Visible = False
         '
@@ -264,7 +323,7 @@ Partial Class frm_Main
         Me.gc_PurchaseEntries.MainView = Me.gv_PurchaseEntries
         Me.gc_PurchaseEntries.MenuManager = Me.RibbonControl
         Me.gc_PurchaseEntries.Name = "gc_PurchaseEntries"
-        Me.gc_PurchaseEntries.Size = New System.Drawing.Size(436, 247)
+        Me.gc_PurchaseEntries.Size = New System.Drawing.Size(834, 247)
         Me.gc_PurchaseEntries.TabIndex = 3
         Me.gc_PurchaseEntries.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gv_PurchaseEntries})
         '
@@ -278,7 +337,7 @@ Partial Class frm_Main
         Me.tp_Parties.Controls.Add(Me.ProgressPanel_Parties)
         Me.tp_Parties.Controls.Add(Me.gc_Parties)
         Me.tp_Parties.Name = "tp_Parties"
-        Me.tp_Parties.Size = New System.Drawing.Size(436, 247)
+        Me.tp_Parties.Size = New System.Drawing.Size(834, 247)
         Me.tp_Parties.Text = "Parties"
         '
         'ProgressPanel_Parties
@@ -290,7 +349,7 @@ Partial Class frm_Main
         Me.ProgressPanel_Parties.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ProgressPanel_Parties.Location = New System.Drawing.Point(0, 0)
         Me.ProgressPanel_Parties.Name = "ProgressPanel_Parties"
-        Me.ProgressPanel_Parties.Size = New System.Drawing.Size(436, 247)
+        Me.ProgressPanel_Parties.Size = New System.Drawing.Size(834, 247)
         Me.ProgressPanel_Parties.TabIndex = 3
         Me.ProgressPanel_Parties.Visible = False
         '
@@ -312,19 +371,26 @@ Partial Class frm_Main
         Me.SaveFileDialog_XML.FileName = "Parties.xml"
         Me.SaveFileDialog_XML.Filter = " Extensible Markup Language (XML) Files|*.xml"
         '
-        'btn_LedgerNames
+        'ProgressPanel_Main
         '
-        Me.btn_LedgerNames.Caption = "Edit Ledger Names"
-        Me.btn_LedgerNames.Id = 8
-        Me.btn_LedgerNames.ImageOptions.SvgImage = CType(resources.GetObject("btn_LedgerNames.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
-        Me.btn_LedgerNames.Name = "btn_LedgerNames"
-        Me.btn_LedgerNames.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText
+        Me.ProgressPanel_Main.Appearance.BackColor = System.Drawing.Color.Transparent
+        Me.ProgressPanel_Main.Appearance.Options.UseBackColor = True
+        Me.ProgressPanel_Main.BarAnimationElementThickness = 2
+        Me.ProgressPanel_Main.Caption = "Syncronizing with Tally..."
+        Me.ProgressPanel_Main.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ProgressPanel_Main.Description = "This may take some minutes. Please Wait..."
+        Me.ProgressPanel_Main.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ProgressPanel_Main.Location = New System.Drawing.Point(0, 143)
+        Me.ProgressPanel_Main.Name = "ProgressPanel_Main"
+        Me.ProgressPanel_Main.Size = New System.Drawing.Size(840, 275)
+        Me.ProgressPanel_Main.TabIndex = 6
         '
         'frm_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(442, 449)
+        Me.ClientSize = New System.Drawing.Size(840, 449)
+        Me.Controls.Add(Me.ProgressPanel_Main)
         Me.Controls.Add(Me.container_Tabs)
         Me.Controls.Add(Me.RibbonStatusBar)
         Me.Controls.Add(Me.RibbonControl)
@@ -338,6 +404,8 @@ Partial Class frm_Main
         CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_CompanyName_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chk_CalcValues_Edit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txt_TallyHost_Edit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txt_TallyPort_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gc_Parties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gv_Parties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.container_Tabs, System.ComponentModel.ISupportInitialize).EndInit()
@@ -384,4 +452,11 @@ Partial Class frm_Main
     Friend WithEvents chk_CalcValues As DevExpress.XtraBars.BarEditItem
     Friend WithEvents chk_CalcValues_Edit As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents btn_LedgerNames As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents rpg_Sync As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents txt_TallyHost As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents txt_TallyHost_Edit As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents txt_TallyPort As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents txt_TallyPort_Edit As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents btn_Sync As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents ProgressPanel_Main As DevExpress.XtraWaitForm.ProgressPanel
 End Class

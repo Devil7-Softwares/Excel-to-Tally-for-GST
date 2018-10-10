@@ -306,6 +306,7 @@ Partial Class frm_Main
         Me.Ribbon = Me.RibbonControl
         Me.StatusBar = Me.RibbonStatusBar
         Me.Text = "RibbonForm1"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PopupMenu_Excel, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).EndInit()

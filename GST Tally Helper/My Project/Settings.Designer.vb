@@ -101,6 +101,42 @@ Namespace My
                 Me("Skin") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("CESS")>  _
+        Public Property CESSLedger() As String
+            Get
+                Return CType(Me("CESSLedger"),String)
+            End Get
+            Set
+                Me("CESSLedger") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Rounding Off")>  _
+        Public Property RoundOffLedger() As String
+            Get
+                Return CType(Me("RoundOffLedger"),String)
+            End Get
+            Set
+                Me("RoundOffLedger") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("{0} @ {1}%")>  _
+        Public Property TaxLedger() As String
+            Get
+                Return CType(Me("TaxLedger"),String)
+            End Get
+            Set
+                Me("TaxLedger") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

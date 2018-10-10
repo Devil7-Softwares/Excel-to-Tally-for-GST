@@ -30,6 +30,8 @@ Partial Class frm_Main
         Me.txt_TallyVersion_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.txt_CompanyName = New DevExpress.XtraBars.BarEditItem()
         Me.txt_CompanyName_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.chk_CalcValues = New DevExpress.XtraBars.BarEditItem()
+        Me.chk_CalcValues_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.rp_PurchaseEntries = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Items_Purchase = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rpg_Export_Purchase = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -51,12 +53,12 @@ Partial Class frm_Main
         Me.OpenFileDialog_Excel = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog_Excel = New System.Windows.Forms.SaveFileDialog()
         Me.SaveFileDialog_XML = New System.Windows.Forms.SaveFileDialog()
-        Me.chk_CalcValues = New DevExpress.XtraBars.BarEditItem()
-        Me.chk_CalcValues_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.btn_LedgerNames = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PopupMenu_Excel, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_CompanyName_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.chk_CalcValues_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gc_Parties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gv_Parties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.container_Tabs, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -65,15 +67,14 @@ Partial Class frm_Main
         CType(Me.gc_PurchaseEntries, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gv_PurchaseEntries, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tp_Parties.SuspendLayout()
-        CType(Me.chk_CalcValues_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_SaveFormat, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.chk_CalcValues})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_SaveFormat, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.chk_CalcValues, Me.btn_LedgerNames})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 8
+        Me.RibbonControl.MaxItemId = 9
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_PurchaseEntries, Me.rp_Parties, Me.rp_Tally})
         Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit, Me.chk_CalcValues_Edit})
@@ -134,6 +135,18 @@ Partial Class frm_Main
         Me.txt_CompanyName_Edit.AutoHeight = False
         Me.txt_CompanyName_Edit.Name = "txt_CompanyName_Edit"
         '
+        'chk_CalcValues
+        '
+        Me.chk_CalcValues.Caption = "Calculate Values"
+        Me.chk_CalcValues.Edit = Me.chk_CalcValues_Edit
+        Me.chk_CalcValues.Id = 7
+        Me.chk_CalcValues.Name = "chk_CalcValues"
+        '
+        'chk_CalcValues_Edit
+        '
+        Me.chk_CalcValues_Edit.AutoHeight = False
+        Me.chk_CalcValues_Edit.Name = "chk_CalcValues_Edit"
+        '
         'rp_PurchaseEntries
         '
         Me.rp_PurchaseEntries.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Items_Purchase, Me.rpg_Export_Purchase})
@@ -185,6 +198,7 @@ Partial Class frm_Main
         Me.RibbonPageGroup2.ItemLinks.Add(Me.txt_TallyVersion)
         Me.RibbonPageGroup2.ItemLinks.Add(Me.txt_CompanyName)
         Me.RibbonPageGroup2.ItemLinks.Add(Me.chk_CalcValues, True)
+        Me.RibbonPageGroup2.ItemLinks.Add(Me.btn_LedgerNames)
         Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
         Me.RibbonPageGroup2.Text = "Variables"
         '
@@ -298,17 +312,13 @@ Partial Class frm_Main
         Me.SaveFileDialog_XML.FileName = "Parties.xml"
         Me.SaveFileDialog_XML.Filter = " Extensible Markup Language (XML) Files|*.xml"
         '
-        'chk_CalcValues
+        'btn_LedgerNames
         '
-        Me.chk_CalcValues.Caption = "Use Calculated Values"
-        Me.chk_CalcValues.Edit = Me.chk_CalcValues_Edit
-        Me.chk_CalcValues.Id = 7
-        Me.chk_CalcValues.Name = "chk_CalcValues"
-        '
-        'chk_CalcValues_Edit
-        '
-        Me.chk_CalcValues_Edit.AutoHeight = False
-        Me.chk_CalcValues_Edit.Name = "chk_CalcValues_Edit"
+        Me.btn_LedgerNames.Caption = "Edit Ledger Names"
+        Me.btn_LedgerNames.Id = 8
+        Me.btn_LedgerNames.ImageOptions.SvgImage = CType(resources.GetObject("btn_LedgerNames.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btn_LedgerNames.Name = "btn_LedgerNames"
+        Me.btn_LedgerNames.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText
         '
         'frm_Main
         '
@@ -327,6 +337,7 @@ Partial Class frm_Main
         CType(Me.PopupMenu_Excel, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_CompanyName_Edit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.chk_CalcValues_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gc_Parties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gv_Parties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.container_Tabs, System.ComponentModel.ISupportInitialize).EndInit()
@@ -335,7 +346,6 @@ Partial Class frm_Main
         CType(Me.gc_PurchaseEntries, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gv_PurchaseEntries, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tp_Parties.ResumeLayout(False)
-        CType(Me.chk_CalcValues_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -373,4 +383,5 @@ Partial Class frm_Main
     Friend WithEvents rpg_Export_Purchase As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents chk_CalcValues As DevExpress.XtraBars.BarEditItem
     Friend WithEvents chk_CalcValues_Edit As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents btn_LedgerNames As DevExpress.XtraBars.BarButtonItem
 End Class

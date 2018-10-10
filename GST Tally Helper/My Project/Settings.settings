@@ -14,5 +14,14 @@
     <Setting Name="Skin" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="CESSLedger" Type="System.String" Scope="User">
+      <Value Profile="(Default)">CESS</Value>
+    </Setting>
+    <Setting Name="RoundOffLedger" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Rounding Off</Value>
+    </Setting>
+    <Setting Name="TaxLedger" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{0} @ {1}%</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

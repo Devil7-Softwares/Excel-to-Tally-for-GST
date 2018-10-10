@@ -220,6 +220,10 @@ Public Class frm_Main
         My.Settings.CalculateValues = chk_CalcValues.EditValue
         My.Settings.Save()
     End Sub
+
+    Private Sub btn_LedgerNames_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_LedgerNames.ItemClick
+        frm_TaxLedgersFormat.ShowDialog()
+    End Sub
 #End Region
 
 End Class

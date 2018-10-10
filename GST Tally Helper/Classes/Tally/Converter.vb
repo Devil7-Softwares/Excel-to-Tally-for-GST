@@ -45,23 +45,23 @@ Namespace Tally
 
                 If PurchaseEntry.GSTRate > 0 Then
                     If PlaceOfSupply = ReceiverPlace Then
-                        Dim CGSTLedger As String = String.Format("CGST @ {0}%", PurchaseEntry.GSTRate / 2)
-                        Dim SGSTLedger As String = String.Format("SGST @ {0}%", PurchaseEntry.GSTRate / 2)
+                        Dim CGSTLedger As String = String.Format(My.Settings.TaxLedger, "CGST", PurchaseEntry.GSTRate / 2)
+                        Dim SGSTLedger As String = String.Format(My.Settings.TaxLedger, "SGST", PurchaseEntry.GSTRate / 2)
 
                         Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Cr, Math.Round(If(My.Settings.CalculateValues, CGST, PurchaseEntry.CGST), 2))) 'CGST
                         Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Cr, Math.Round(If(My.Settings.CalculateValues, SGST, PurchaseEntry.SGST), 2))) 'SGST
                     Else
-                        Dim IGSTLedger As String = String.Format("IGST @ {0}%", PurchaseEntry.GSTRate)
+                        Dim IGSTLedger As String = String.Format(My.Settings.TaxLedger, "IGST", PurchaseEntry.GSTRate)
                         Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Cr, If(My.Settings.CalculateValues, IGST, PurchaseEntry.IGST))) 'IGST
                     End If
                 End If
 
                 If PurchaseEntry.CESS > 0 Then
-                    Entries.Add(New Objects.VoucherEntry("CESS", Enums.Effect.Cr, PurchaseEntry.CESS)) 'CESS
+                    Entries.Add(New Objects.VoucherEntry(My.Settings.CESSLedger, Enums.Effect.Cr, PurchaseEntry.CESS)) 'CESS
                 End If
 
                 If RoundingOff <> 0 Then
-                    Entries.Add(New Objects.VoucherEntry("Rounding Off", If(RoundingOff > 0, Enums.Effect.Cr, Enums.Effect.Dr), RoundingOff))
+                    Entries.Add(New Objects.VoucherEntry(My.Settings.RoundOffLedger, If(RoundingOff > 0, Enums.Effect.Cr, Enums.Effect.Dr), RoundingOff))
                 End If
 
                 R.Add(New Objects.Voucher(VoucherType, PurchaseEntry.InvoiceDate, PurchaseEntry.InvoiceNo, Narration, Entries))

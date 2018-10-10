@@ -141,6 +141,64 @@ Public Class frm_Main
                End Sub)
     End Function
 
+    Async Function LoadSalesEntries(ByVal FileName As String) As Task
+        Invoke(Sub()
+                   btn_LoadExcel.Enabled = False
+                   ProgressPanel_SalesEntries.Visible = True
+               End Sub)
+        Await Task.Run(Function()
+                           Try
+                               Dim R As New List(Of Objects.SalesEntry)
+                               Using stream As IO.FileStream = IO.File.Open(FileName, IO.FileMode.Open, IO.FileAccess.Read)
+                                   Using reader = ExcelReaderFactory.CreateReader(stream)
+                                       Dim Index As Integer = -1
+                                       While reader.Read()
+                                           If reader.CodeName = "SalesEntries" AndAlso Not reader.IsDBNull(0) Then
+                                               Index += 1
+                                               If Index > 0 Then
+                                                   Dim GSTIN As String = reader.GetString(0).Trim
+                                                   Dim InvoiceDate As Date = If(reader.IsDBNull(1), Now, reader.GetDateTime(1))
+                                                   If GSTIN <> "" Then
+                                                       Dim InvoiceNo As String = ""
+                                                       Try
+                                                           InvoiceNo = If(reader.IsDBNull(2), "", reader.GetDouble(2))
+                                                       Catch e1 As Exception
+                                                           Try
+                                                               InvoiceNo = reader.GetString(2)
+                                                           Catch e2 As Exception
+
+                                                           End Try
+                                                       End Try
+                                                       Dim InvoiceValue As Double = If(reader.IsDBNull(3), 0, reader.GetDouble(3))
+                                                       Dim GSTRate As Integer = If(reader.IsDBNull(4), 0, reader.GetDouble(4))
+                                                       Dim TaxableValue As Double = If(reader.IsDBNull(5), 0, reader.GetDouble(5))
+                                                       Dim IGST As Double = If(reader.IsDBNull(6), 0, reader.GetDouble(6))
+                                                       Dim CGST As Double = If(reader.IsDBNull(7), 0, reader.GetDouble(7))
+                                                       Dim SGST As Double = If(reader.IsDBNull(8), 0, reader.GetDouble(8))
+                                                       Dim CESS As Double = If(reader.IsDBNull(9), 0, reader.GetDouble(9))
+                                                       R.Add(New Objects.SalesEntry(GSTIN, InvoiceDate, InvoiceNo, InvoiceValue, GSTRate, TaxableValue, IGST, CGST, SGST, CESS))
+                                                   End If
+                                               End If
+                                           End If
+                                       End While
+                                   End Using
+                               End Using
+                               Invoke(Sub()
+                                          gc_SalesEntries.DataSource = R
+                                          gc_SalesEntries.RefreshDataSource()
+                                      End Sub)
+                           Catch ex As Exception
+                               MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                               Return False
+                           End Try
+                           Return True
+                       End Function)
+        Invoke(Sub()
+                   btn_LoadExcel.Enabled = True
+                   ProgressPanel_SalesEntries.Visible = False
+               End Sub)
+    End Function
+
     Sub ExportParties(ByVal FileName As String)
         Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
         Dim XML As String = XMLGen.GenerateMasters(gc_Parties.DataSource)
@@ -168,6 +226,8 @@ Public Class frm_Main
                 Await LoadPurchaseEntries(OpenFileDialog_Excel.FileName)
             ElseIf RibbonControl.SelectedPage Is rp_Parties Then
                 Await LoadParties(OpenFileDialog_Excel.FileName)
+            ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
+                Await LoadSalesEntries(OpenFileDialog_Excel.FileName)
             End If
         End If
     End Sub
@@ -176,10 +236,13 @@ Public Class frm_Main
         Dim Data As Byte() = Nothing
         If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
             Data = My.Resources.PurchaseEntries
-            SaveFileDialog_Excel.FileName = "PurchaseEntries.xlsx"
+            SaveFileDialog_Excel.FileName = "Purchase Entries.xlsx"
         ElseIf RibbonControl.SelectedPage Is rp_Parties Then
             Data = My.Resources.Parties
             SaveFileDialog_Excel.FileName = "Parties.xlsx"
+        ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
+            Data = My.Resources.SalesEntries
+            SaveFileDialog_Excel.FileName = "Sales Entries.xlsx"
         End If
         If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
             Try
@@ -192,6 +255,13 @@ Public Class frm_Main
     End Sub
 
     Private Sub btn_XML_File_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_XML_File.ItemClick
+        If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
+            SaveFileDialog_XML.FileName = "Purchase Entries.xml"
+        ElseIf RibbonControl.SelectedPage Is rp_Parties Then
+            SaveFileDialog_XML.FileName = "Parties.xml"
+        ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
+            SaveFileDialog_XML.FileName = "Sales Entries.xml"
+        End If
         If SaveFileDialog_XML.ShowDialog = DialogResult.OK Then
             If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
                 ExportPurchase(SaveFileDialog_XML.FileName)
@@ -211,6 +281,8 @@ Public Class frm_Main
             container_Tabs.SelectedTabPage = tp_PurchaseEntries
         ElseIf RibbonControl.SelectedPage Is rp_Parties Then
             container_Tabs.SelectedTabPage = tp_Parties
+        ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
+            container_Tabs.SelectedTabPage = tp_SalesEntries
         End If
     End Sub
 
@@ -249,12 +321,12 @@ Public Class frm_Main
         Invoke(Sub() btn_Sync.Enabled = False)
         If Not Await TallyIO.LoadAllMasters Then GoTo finish
 finish:
-            Invoke(Sub()
-                       txt_CompanyName.EditValue = TallyIO.CompanyName
-                       btn_Sync.Enabled = True
-                       ProgressPanel_Main.Visible = False
-                   End Sub)
-            End Sub
+        Invoke(Sub()
+                   txt_CompanyName.EditValue = TallyIO.CompanyName
+                   btn_Sync.Enabled = True
+                   ProgressPanel_Main.Visible = False
+               End Sub)
+    End Sub
 #End Region
 
 End Class

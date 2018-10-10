@@ -160,6 +160,7 @@
     <None Include="packages.config" />
     <None Include="Resources\Parties.xlsx" />
     <None Include="Resources\PurchaseEntries.xlsx" />
+    <None Include="Resources\SalesEntries.xlsx" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

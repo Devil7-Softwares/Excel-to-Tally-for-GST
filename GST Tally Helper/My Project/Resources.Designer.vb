@@ -160,5 +160,15 @@ Namespace My.Resources
                 Return ResourceManager.GetString("ReportRequest", resourceCulture)
             End Get
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property SalesEntries() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("SalesEntries", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
     End Module
 End Namespace

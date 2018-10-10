@@ -61,6 +61,13 @@ Partial Class frm_Main
         Me.SaveFileDialog_Excel = New System.Windows.Forms.SaveFileDialog()
         Me.SaveFileDialog_XML = New System.Windows.Forms.SaveFileDialog()
         Me.ProgressPanel_Main = New DevExpress.XtraWaitForm.ProgressPanel()
+        Me.tp_SalesEntries = New DevExpress.XtraTab.XtraTabPage()
+        Me.gc_SalesEntries = New DevExpress.XtraGrid.GridControl()
+        Me.gv_SalesEntries = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.ProgressPanel_SalesEntries = New DevExpress.XtraWaitForm.ProgressPanel()
+        Me.rp_SalesEntries = New DevExpress.XtraBars.Ribbon.RibbonPage()
+        Me.rpg_Items_Sales = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.rpg_Export_Sales = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PopupMenu_Excel, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -76,6 +83,9 @@ Partial Class frm_Main
         CType(Me.gc_PurchaseEntries, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gv_PurchaseEntries, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tp_Parties.SuspendLayout()
+        Me.tp_SalesEntries.SuspendLayout()
+        CType(Me.gc_SalesEntries, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.gv_SalesEntries, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl
@@ -85,7 +95,7 @@ Partial Class frm_Main
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
         Me.RibbonControl.MaxItemId = 12
         Me.RibbonControl.Name = "RibbonControl"
-        Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_PurchaseEntries, Me.rp_Parties, Me.rp_Tally})
+        Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_PurchaseEntries, Me.rp_SalesEntries, Me.rp_Parties, Me.rp_Tally})
         Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit, Me.chk_CalcValues_Edit, Me.txt_TallyHost_Edit, Me.txt_TallyPort_Edit})
         Me.RibbonControl.Size = New System.Drawing.Size(840, 143)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
@@ -293,7 +303,7 @@ Partial Class frm_Main
         Me.container_Tabs.SelectedTabPage = Me.tp_PurchaseEntries
         Me.container_Tabs.Size = New System.Drawing.Size(840, 275)
         Me.container_Tabs.TabIndex = 3
-        Me.container_Tabs.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.tp_PurchaseEntries, Me.tp_Parties})
+        Me.container_Tabs.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.tp_PurchaseEntries, Me.tp_SalesEntries, Me.tp_Parties})
         '
         'tp_PurchaseEntries
         '
@@ -368,7 +378,7 @@ Partial Class frm_Main
         'SaveFileDialog_XML
         '
         Me.SaveFileDialog_XML.DefaultExt = "xml"
-        Me.SaveFileDialog_XML.FileName = "Parties.xml"
+        Me.SaveFileDialog_XML.FileName = "*.xml"
         Me.SaveFileDialog_XML.Filter = " Extensible Markup Language (XML) Files|*.xml"
         '
         'ProgressPanel_Main
@@ -382,18 +392,75 @@ Partial Class frm_Main
         Me.ProgressPanel_Main.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ProgressPanel_Main.Location = New System.Drawing.Point(0, 143)
         Me.ProgressPanel_Main.Name = "ProgressPanel_Main"
-        Me.ProgressPanel_Main.Size = New System.Drawing.Size(840, 275)
+        Me.ProgressPanel_Main.Size = New System.Drawing.Size(840, 306)
         Me.ProgressPanel_Main.TabIndex = 6
         Me.ProgressPanel_Main.Visible = False
+        '
+        'tp_SalesEntries
+        '
+        Me.tp_SalesEntries.Controls.Add(Me.ProgressPanel_SalesEntries)
+        Me.tp_SalesEntries.Controls.Add(Me.gc_SalesEntries)
+        Me.tp_SalesEntries.Name = "tp_SalesEntries"
+        Me.tp_SalesEntries.Size = New System.Drawing.Size(834, 247)
+        Me.tp_SalesEntries.Text = "Sales Entries"
+        '
+        'gc_SalesEntries
+        '
+        Me.gc_SalesEntries.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gc_SalesEntries.Location = New System.Drawing.Point(0, 0)
+        Me.gc_SalesEntries.MainView = Me.gv_SalesEntries
+        Me.gc_SalesEntries.MenuManager = Me.RibbonControl
+        Me.gc_SalesEntries.Name = "gc_SalesEntries"
+        Me.gc_SalesEntries.Size = New System.Drawing.Size(834, 247)
+        Me.gc_SalesEntries.TabIndex = 4
+        Me.gc_SalesEntries.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gv_SalesEntries})
+        '
+        'gv_SalesEntries
+        '
+        Me.gv_SalesEntries.GridControl = Me.gc_SalesEntries
+        Me.gv_SalesEntries.Name = "gv_SalesEntries"
+        '
+        'ProgressPanel_SalesEntries
+        '
+        Me.ProgressPanel_SalesEntries.Appearance.BackColor = System.Drawing.Color.Transparent
+        Me.ProgressPanel_SalesEntries.Appearance.Options.UseBackColor = True
+        Me.ProgressPanel_SalesEntries.BarAnimationElementThickness = 2
+        Me.ProgressPanel_SalesEntries.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ProgressPanel_SalesEntries.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ProgressPanel_SalesEntries.Location = New System.Drawing.Point(0, 0)
+        Me.ProgressPanel_SalesEntries.Name = "ProgressPanel_SalesEntries"
+        Me.ProgressPanel_SalesEntries.Size = New System.Drawing.Size(834, 247)
+        Me.ProgressPanel_SalesEntries.TabIndex = 5
+        Me.ProgressPanel_SalesEntries.Visible = False
+        '
+        'rp_SalesEntries
+        '
+        Me.rp_SalesEntries.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Items_Sales, Me.rpg_Export_Sales})
+        Me.rp_SalesEntries.Name = "rp_SalesEntries"
+        Me.rp_SalesEntries.Text = "Sales Entries"
+        '
+        'rpg_Items_Sales
+        '
+        Me.rpg_Items_Sales.ItemLinks.Add(Me.btn_LoadExcel)
+        Me.rpg_Items_Sales.Name = "rpg_Items_Sales"
+        Me.rpg_Items_Sales.ShowCaptionButton = False
+        Me.rpg_Items_Sales.Text = "Items"
+        '
+        'rpg_Export_Sales
+        '
+        Me.rpg_Export_Sales.ItemLinks.Add(Me.btn_XML_File)
+        Me.rpg_Export_Sales.Name = "rpg_Export_Sales"
+        Me.rpg_Export_Sales.ShowCaptionButton = False
+        Me.rpg_Export_Sales.Text = "Export"
         '
         'frm_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(840, 449)
-        Me.Controls.Add(Me.ProgressPanel_Main)
         Me.Controls.Add(Me.container_Tabs)
         Me.Controls.Add(Me.RibbonStatusBar)
+        Me.Controls.Add(Me.ProgressPanel_Main)
         Me.Controls.Add(Me.RibbonControl)
         Me.Name = "frm_Main"
         Me.Ribbon = Me.RibbonControl
@@ -415,6 +482,9 @@ Partial Class frm_Main
         CType(Me.gc_PurchaseEntries, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gv_PurchaseEntries, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tp_Parties.ResumeLayout(False)
+        Me.tp_SalesEntries.ResumeLayout(False)
+        CType(Me.gc_SalesEntries, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.gv_SalesEntries, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -460,4 +530,11 @@ Partial Class frm_Main
     Friend WithEvents txt_TallyPort_Edit As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
     Friend WithEvents btn_Sync As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents ProgressPanel_Main As DevExpress.XtraWaitForm.ProgressPanel
+    Friend WithEvents tp_SalesEntries As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents ProgressPanel_SalesEntries As DevExpress.XtraWaitForm.ProgressPanel
+    Friend WithEvents gc_SalesEntries As DevExpress.XtraGrid.GridControl
+    Friend WithEvents gv_SalesEntries As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents rp_SalesEntries As DevExpress.XtraBars.Ribbon.RibbonPage
+    Friend WithEvents rpg_Items_Sales As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents rpg_Export_Sales As DevExpress.XtraBars.Ribbon.RibbonPageGroup
 End Class

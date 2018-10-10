@@ -95,6 +95,9 @@
     <Compile Include="Classes\Objects\VoucherEntry.vb" />
     <Compile Include="Classes\Tally\Converter.vb" />
     <Compile Include="Classes\Tally\XMLGenerator.vb" />
+    <Compile Include="Classes\XtraFormTemp.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

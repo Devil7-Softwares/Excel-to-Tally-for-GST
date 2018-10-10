@@ -170,7 +170,7 @@ Public Class frm_Main
         If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
             Data = My.Resources.PurchaseEntries
             SaveFileDialog_Excel.FileName = "PurchaseEntries.xlsx"
-        ElseIf RibbonControl.SelectedPage Is rp_PurchaseEntries Then
+        ElseIf RibbonControl.SelectedPage Is rp_Parties Then
             Data = My.Resources.Parties
             SaveFileDialog_Excel.FileName = "Parties.xlsx"
         End If

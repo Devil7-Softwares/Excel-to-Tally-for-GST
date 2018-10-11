@@ -166,10 +166,6 @@ Namespace Tally
                 If Response1.Status = True Then
                     ReadXML(Response1.Data)
                 End If
-                Dim Response2 As Objects.Response = Await SendRequestToTally(Requests.GetAllMasters)
-                If Response2.Status = True Then
-                    ReadXML(Response2.Data)
-                End If
             Catch ex As Exception
                 MsgBox("Error on loading masters." & vbNewLine & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
                 Return False

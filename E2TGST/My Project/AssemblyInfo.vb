@@ -11,7 +11,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("Excel to Tally for GST Entries")>
 <Assembly: AssemblyDescription("Simple tool to Export GST Purchase, Expense, Sales Entries to Tally Given in Excel")>
 <Assembly: AssemblyCompany("Devil7 Softwares")>
-<Assembly: AssemblyProduct("GST Tally Helper")>
+<Assembly: AssemblyProduct("Devil7 - Automation Tools")>
 <Assembly: AssemblyCopyright("Copyright © Devil7 Softwares 2018")>
 <Assembly: AssemblyTrademark("")>
 

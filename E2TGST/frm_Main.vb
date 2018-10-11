@@ -15,6 +15,7 @@ Public Class frm_Main
         txt_TallyPort.EditValue = My.Settings.Port
         txt_TallyVersion.EditValue = My.Settings.TallyVersion
         chk_CalcValues.EditValue = My.Settings.CalculateValues
+        txt_StateCode.EditValue = My.Settings.StateCode
     End Sub
 
     Function CheckDependencies(ByVal Vouchers As List(Of Objects.Voucher)) As Boolean
@@ -497,6 +498,15 @@ finish:
             My.Settings.Save()
             frm_About.ShowDialog()
         End If
+    End Sub
+
+    Private Sub txt_StateCode_ItemClick(sender As Object, e As ItemClickEventArgs) Handles txt_StateCode.ItemClick
+
+    End Sub
+
+    Private Sub txt_StateCode_EditValueChanged(sender As Object, e As EventArgs) Handles txt_StateCode.EditValueChanged
+        My.Settings.StateCode = txt_StateCode.EditValue
+        My.Settings.Save()
     End Sub
 #End Region
 

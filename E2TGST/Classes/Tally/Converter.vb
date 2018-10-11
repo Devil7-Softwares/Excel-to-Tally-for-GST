@@ -33,7 +33,7 @@ Namespace Tally
                 Catch ex As Exception
 
                 End Try
-                Dim ReceiverPlace As Integer = My.Settings.GSTIN.Substring(0, 2)
+                Dim ReceiverPlace As Integer = My.Settings.StateCode.Substring(0, 2)
 
                 Dim VoucherType As String = [Enum].GetName(GetType(Enums.VoucherType), PurchaseEntry.VoucherType)
                 Dim Narration As String = String.Format("AS PER BILL NO.: {0}", PurchaseEntry.InvoiceNo)
@@ -87,7 +87,7 @@ Namespace Tally
                 Catch ex As Exception
 
                 End Try
-                Dim ReceiverPlace As Integer = My.Settings.GSTIN.Substring(0, 2)
+                Dim ReceiverPlace As Integer = My.Settings.StateCode.Substring(0, 2)
 
                 Dim VoucherType As String = [Enum].GetName(GetType(Enums.VoucherType), Enums.VoucherType.Sales)
                 Dim Narration As String = String.Format("AS PER BILL NO.: {0}", SalesEntry.InvoiceNumber)

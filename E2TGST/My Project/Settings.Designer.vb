@@ -69,12 +69,12 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("33")>  _
-        Public Property GSTIN() As String
+        Public Property StateCode() As String
             Get
-                Return CType(Me("GSTIN"),String)
+                Return CType(Me("StateCode"),String)
             End Get
             Set
-                Me("GSTIN") = value
+                Me("StateCode") = value
             End Set
         End Property
         

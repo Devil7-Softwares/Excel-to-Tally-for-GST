@@ -6,9 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FF0F10D2-973B-4800-AC77-929AADBB200A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>GST_Tally_Helper.My.MyApplication</StartupObject>
-    <RootNamespace>GST_Tally_Helper</RootNamespace>
-    <AssemblyName>GST Tally Helper</AssemblyName>
+    <StartupObject>D7.Automation.E2TGST.My.MyApplication</StartupObject>
+    <RootNamespace>D7.Automation.E2TGST</RootNamespace>
+    <AssemblyName>Excel to Tally for GST Entries</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -20,7 +20,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>GST Tally Helper.xml</DocumentationFile>
+    <DocumentationFile>Excel to Tally for GST Entries.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -30,7 +30,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>GST Tally Helper.xml</DocumentationFile>
+    <DocumentationFile>Excel to Tally for GST Entries.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -44,6 +44,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v18.1, Version=18.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -167,6 +170,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\devil7_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

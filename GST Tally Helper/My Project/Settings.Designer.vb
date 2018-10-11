@@ -184,9 +184,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.GST_Tally_Helper.My.MySettings
+        Friend ReadOnly Property Settings() As Global.D7.Automation.E2TGST.My.MySettings
             Get
-                Return Global.GST_Tally_Helper.My.MySettings.Default
+                Return Global.D7.Automation.E2TGST.My.MySettings.Default
             End Get
         End Property
     End Module

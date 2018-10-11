@@ -105,7 +105,7 @@ Partial Class frm_Main
         Me.RibbonControl.ShowCategoryInCaption = False
         Me.RibbonControl.ShowExpandCollapseButton = DevExpress.Utils.DefaultBoolean.[False]
         Me.RibbonControl.ShowToolbarCustomizeItem = False
-        Me.RibbonControl.Size = New System.Drawing.Size(1041, 143)
+        Me.RibbonControl.Size = New System.Drawing.Size(810, 143)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
         Me.RibbonControl.Toolbar.ShowCustomizeItem = False
         '
@@ -344,7 +344,7 @@ Partial Class frm_Main
         Me.RibbonStatusBar.Location = New System.Drawing.Point(0, 418)
         Me.RibbonStatusBar.Name = "RibbonStatusBar"
         Me.RibbonStatusBar.Ribbon = Me.RibbonControl
-        Me.RibbonStatusBar.Size = New System.Drawing.Size(1041, 31)
+        Me.RibbonStatusBar.Size = New System.Drawing.Size(810, 31)
         '
         'gc_Parties
         '
@@ -369,7 +369,7 @@ Partial Class frm_Main
         Me.container_Tabs.Location = New System.Drawing.Point(0, 143)
         Me.container_Tabs.Name = "container_Tabs"
         Me.container_Tabs.SelectedTabPage = Me.tp_PurchaseEntries
-        Me.container_Tabs.Size = New System.Drawing.Size(1041, 306)
+        Me.container_Tabs.Size = New System.Drawing.Size(810, 306)
         Me.container_Tabs.TabIndex = 3
         Me.container_Tabs.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.tp_PurchaseEntries, Me.tp_SalesEntries, Me.tp_Parties})
         '
@@ -378,7 +378,7 @@ Partial Class frm_Main
         Me.tp_PurchaseEntries.Controls.Add(Me.ProgressPanel_PurchaseEntries)
         Me.tp_PurchaseEntries.Controls.Add(Me.gc_PurchaseEntries)
         Me.tp_PurchaseEntries.Name = "tp_PurchaseEntries"
-        Me.tp_PurchaseEntries.Size = New System.Drawing.Size(1035, 278)
+        Me.tp_PurchaseEntries.Size = New System.Drawing.Size(804, 278)
         Me.tp_PurchaseEntries.Text = "Purchase Entries"
         '
         'ProgressPanel_PurchaseEntries
@@ -390,7 +390,7 @@ Partial Class frm_Main
         Me.ProgressPanel_PurchaseEntries.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ProgressPanel_PurchaseEntries.Location = New System.Drawing.Point(0, 0)
         Me.ProgressPanel_PurchaseEntries.Name = "ProgressPanel_PurchaseEntries"
-        Me.ProgressPanel_PurchaseEntries.Size = New System.Drawing.Size(1035, 278)
+        Me.ProgressPanel_PurchaseEntries.Size = New System.Drawing.Size(804, 278)
         Me.ProgressPanel_PurchaseEntries.TabIndex = 4
         Me.ProgressPanel_PurchaseEntries.Visible = False
         '
@@ -401,7 +401,7 @@ Partial Class frm_Main
         Me.gc_PurchaseEntries.MainView = Me.gv_PurchaseEntries
         Me.gc_PurchaseEntries.MenuManager = Me.RibbonControl
         Me.gc_PurchaseEntries.Name = "gc_PurchaseEntries"
-        Me.gc_PurchaseEntries.Size = New System.Drawing.Size(1035, 278)
+        Me.gc_PurchaseEntries.Size = New System.Drawing.Size(804, 278)
         Me.gc_PurchaseEntries.TabIndex = 3
         Me.gc_PurchaseEntries.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gv_PurchaseEntries})
         '
@@ -497,17 +497,17 @@ Partial Class frm_Main
         Me.ProgressPanel_Main.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ProgressPanel_Main.Location = New System.Drawing.Point(0, 143)
         Me.ProgressPanel_Main.Name = "ProgressPanel_Main"
-        Me.ProgressPanel_Main.Size = New System.Drawing.Size(1041, 306)
+        Me.ProgressPanel_Main.Size = New System.Drawing.Size(810, 306)
         Me.ProgressPanel_Main.TabIndex = 6
         Me.ProgressPanel_Main.Visible = False
         '
         'PictureBox_Logo
         '
         Me.PictureBox_Logo.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PictureBox_Logo.Image = Global.GST_Tally_Helper.My.Resources.Resources.devil7_logo
+        Me.PictureBox_Logo.Image = Global.D7.Automation.E2TGST.My.Resources.Resources.devil7_logo
         Me.PictureBox_Logo.Location = New System.Drawing.Point(0, 143)
         Me.PictureBox_Logo.Name = "PictureBox_Logo"
-        Me.PictureBox_Logo.Size = New System.Drawing.Size(1041, 306)
+        Me.PictureBox_Logo.Size = New System.Drawing.Size(810, 306)
         Me.PictureBox_Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox_Logo.TabIndex = 5
         Me.PictureBox_Logo.TabStop = False
@@ -516,16 +516,18 @@ Partial Class frm_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1041, 449)
+        Me.ClientSize = New System.Drawing.Size(810, 449)
         Me.Controls.Add(Me.RibbonStatusBar)
         Me.Controls.Add(Me.ProgressPanel_Main)
         Me.Controls.Add(Me.PictureBox_Logo)
         Me.Controls.Add(Me.container_Tabs)
         Me.Controls.Add(Me.RibbonControl)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MinimumSize = New System.Drawing.Size(820, 450)
         Me.Name = "frm_Main"
         Me.Ribbon = Me.RibbonControl
         Me.StatusBar = Me.RibbonStatusBar
-        Me.Text = "RibbonForm1"
+        Me.Text = "Excel to Tally for GST Entries"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).EndInit()

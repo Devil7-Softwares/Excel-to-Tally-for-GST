@@ -307,28 +307,6 @@ Public Class frm_Main
         End If
     End Sub
 
-    Private Sub btn_SaveFormat_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_SaveFormat.ItemClick
-        Dim Data As Byte() = Nothing
-        If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
-            Data = My.Resources.PurchaseEntries
-            SaveFileDialog_Excel.FileName = "Purchase Entries.xlsx"
-        ElseIf RibbonControl.SelectedPage Is rp_Parties Then
-            Data = My.Resources.Parties
-            SaveFileDialog_Excel.FileName = "Parties.xlsx"
-        ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
-            Data = My.Resources.SalesEntries
-            SaveFileDialog_Excel.FileName = "Sales Entries.xlsx"
-        End If
-        If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
-            Try
-                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, Data, False)
-                MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
-            Catch ex As Exception
-                MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
-            End Try
-        End If
-    End Sub
-
     Private Sub btn_XML_File_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_XML_File.ItemClick
         If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
             SaveFileDialog_XML.FileName = "Purchase Entries.xml"
@@ -470,6 +448,42 @@ finish:
             ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
                 ExportSales()
             End If
+        End If
+    End Sub
+
+    Private Sub btn_Template_Parties_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Template_Parties.ItemClick
+        SaveFileDialog_Excel.FileName = "Parties.xlsx"
+        If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
+            Try
+                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, My.Resources.Parties, False)
+                MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+            Catch ex As Exception
+                MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+            End Try
+        End If
+    End Sub
+
+    Private Sub btn_Template_PurchaseEntries_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Template_PurchaseEntries.ItemClick
+        SaveFileDialog_Excel.FileName = "Purchase Entries.xlsx"
+        If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
+            Try
+                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, My.Resources.PurchaseEntries, False)
+                MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+            Catch ex As Exception
+                MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+            End Try
+        End If
+    End Sub
+
+    Private Sub btn_Template_SalesEntries_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Template_SalesEntries.ItemClick
+        SaveFileDialog_Excel.FileName = "Sales Entries.xlsx"
+        If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
+            Try
+                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, My.Resources.SalesEntries, False)
+                MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+            Catch ex As Exception
+                MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+            End Try
         End If
     End Sub
 #End Region

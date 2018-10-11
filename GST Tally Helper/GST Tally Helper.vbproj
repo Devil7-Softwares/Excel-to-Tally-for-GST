@@ -103,10 +103,10 @@
     <Compile Include="Classes\XtraFormTemp.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\frm_TaxLedgersFormat.Designer.vb">
-      <DependentUpon>frm_TaxLedgersFormat.vb</DependentUpon>
+    <Compile Include="Dialogs\frm_LedgersFormat.Designer.vb">
+      <DependentUpon>frm_LedgersFormat.vb</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\frm_TaxLedgersFormat.vb">
+    <Compile Include="Dialogs\frm_LedgersFormat.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -132,8 +132,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Dialogs\frm_TaxLedgersFormat.resx">
-      <DependentUpon>frm_TaxLedgersFormat.vb</DependentUpon>
+    <EmbeddedResource Include="Dialogs\frm_LedgersFormat.resx">
+      <DependentUpon>frm_LedgersFormat.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Main.resx">
       <DependentUpon>frm_Main.vb</DependentUpon>

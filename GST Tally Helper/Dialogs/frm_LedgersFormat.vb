@@ -19,24 +19,26 @@
 '                                                                          '
 '=========================================================================='
 
-Public Class frm_TaxLedgersFormat
+Public Class frm_LedgersFormat
 
 #Region "Subs"
     Sub LoadSettings()
         txt_CessLedger.Text = My.Settings.CESSLedger
         txt_RoundOffLedger.Text = My.Settings.RoundOffLedger
         txt_TaxLedgers.Text = My.Settings.TaxLedger
+        txt_SalesLedger.Text = My.Settings.SalesLedger
     End Sub
 
     Sub SaveSettings()
         My.Settings.CESSLedger = txt_CessLedger.Text
         Try
-            txt_Preview.Text = String.Format(txt_TaxLedgers.Text, "IGST", 5)
+            txt_Preview_TaxLedger.Text = String.Format(txt_TaxLedgers.Text, "IGST", 5)
             My.Settings.RoundOffLedger = txt_RoundOffLedger.Text
         Catch ex As Exception
 
         End Try
         My.Settings.TaxLedger = txt_TaxLedgers.Text
+        My.Settings.SalesLedger = txt_SalesLedger.Text
         My.Settings.Save()
     End Sub
 #End Region
@@ -44,9 +46,9 @@ Public Class frm_TaxLedgersFormat
 #Region "Events"
     Private Sub txt_TaxLedgers_EditValueChanged(sender As Object, e As EventArgs) Handles txt_TaxLedgers.EditValueChanged
         Try
-            txt_Preview.Text = String.Format(txt_TaxLedgers.Text, "IGST", 5)
+            txt_Preview_TaxLedger.Text = String.Format(txt_TaxLedgers.Text, "IGST", 5)
         Catch ex As Exception
-            txt_Preview.Text = "Invalid Format!"
+            txt_Preview_TaxLedger.Text = "Invalid Format!"
         End Try
     End Sub
 
@@ -62,6 +64,14 @@ Public Class frm_TaxLedgersFormat
     Private Sub btn_Save_Click(sender As Object, e As EventArgs) Handles btn_Save.Click
         Me.DialogResult = DialogResult.OK
         Me.Close()
+    End Sub
+
+    Private Sub txt_SalesLedger_EditValueChanged(sender As Object, e As EventArgs) Handles txt_SalesLedger.EditValueChanged
+        Try
+            txt_Preview_SalesLedger.Text = String.Format(txt_SalesLedger.Text, 5)
+        Catch ex As Exception
+            txt_Preview_SalesLedger.Text = "Invalid Format!"
+        End Try
     End Sub
 #End Region
 

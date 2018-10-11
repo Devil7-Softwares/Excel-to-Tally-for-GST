@@ -96,7 +96,7 @@ Namespace Tally
             Dim Groups As New List(Of String)
             Dim Units As New List(Of String)
             Dim StockItems As New List(Of String)
-            Dim m_xmlr As New XmlTextReader(New MemoryStream(System.Text.Encoding.ASCII.GetBytes(RequestData)))
+            Dim m_xmlr As New XmlTextReader(New MemoryStream(System.Text.Encoding.ASCII.GetBytes(RequestData))) With {.Namespaces = False}
             m_xmlr.WhitespaceHandling = WhitespaceHandling.None
             m_xmlr.Read()
             While Not m_xmlr.EOF
@@ -137,7 +137,9 @@ Namespace Tally
             LedgerData = "<ROOT>" & LedgerData & "</ROOT>"
             Dim Names As New List(Of String)
             Dim doc As New XmlDocument()
-            doc.LoadXml(LedgerData)
+            Using xtr = New XmlTextReader(New MemoryStream(System.Text.Encoding.ASCII.GetBytes(LedgerData))) With {.Namespaces = False}
+                doc.Load(xtr)
+            End Using
             Dim root As XmlElement = doc.DocumentElement
             Dim elements As XmlNodeList = root.ChildNodes
             For i As Integer = 0 To elements.Count - 1

@@ -38,7 +38,7 @@ Namespace Tally
 #End Region
 
 #Region "Parties"
-        Function GenerateMasters(ByVal Parties As List(Of Objects.Party))
+        Function GenerateMasters(ByVal Parties As List(Of Objects.Party), Optional ByVal Ledgers As List(Of String) = Nothing)
             Dim enc As New UnicodeEncoding
             Dim MemStream As New MemoryStream
             ' Declare a XmlTextWriter-Object, with which we are going to write the config file
@@ -82,6 +82,10 @@ Namespace Tally
                 .WriteStartElement("REQUESTDATA") 'REQUESTDATA
 
                 For Each Party As Objects.Party In Parties
+                    If Ledgers IsNot Nothing AndAlso (Ledgers.Contains(Party.GSTIN) Or Ledgers.Contains(Party.Name)) Then
+                        Continue For
+                    End If
+
                     .WriteStartElement("TALLYMESSAGE") 'TALLYMESSAGE
                     .WriteAttributeString("xmlns:UDF", "TallyUDF")
                     .WriteStartElement("LEDGER") 'LEDGER

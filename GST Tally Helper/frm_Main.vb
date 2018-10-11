@@ -202,7 +202,7 @@ Public Class frm_Main
 
     Sub ExportParties(ByVal FileName As String)
         Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
-        Dim XML As String = XMLGen.GenerateMasters(gc_Parties.DataSource)
+        Dim XML As String = XMLGen.GenerateMasters(gc_Parties.DataSource, TallyIO.Ledgers)
         My.Computer.FileSystem.WriteAllText(FileName, XML, False)
         MsgBox("XML File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
     End Sub

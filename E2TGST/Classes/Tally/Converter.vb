@@ -27,7 +27,12 @@ Namespace Tally
             Dim R As New List(Of Objects.Voucher)
 
             For Each PurchaseEntry As Objects.PurchaseEntry In PurchaseEntries
-                Dim PlaceOfSupply As Integer = 33 ' Should be removed
+                Dim PlaceOfSupply As Integer = 33
+                Try
+                    PlaceOfSupply = CInt(PurchaseEntry.GSTIN.Substring(0, 2))
+                Catch ex As Exception
+
+                End Try
                 Dim ReceiverPlace As Integer = My.Settings.GSTIN.Substring(0, 2)
 
                 Dim VoucherType As String = [Enum].GetName(GetType(Enums.VoucherType), PurchaseEntry.VoucherType)
@@ -76,7 +81,12 @@ Namespace Tally
             Dim R As New List(Of Objects.Voucher)
 
             For Each SalesEntry As Objects.SalesEntry In SalesEntries
-                Dim PlaceOfSupply As Integer = 33 ' Should be removed
+                Dim PlaceOfSupply As Integer = 33
+                Try
+                    PlaceOfSupply = CInt(SalesEntry.GSTIN.Substring(0, 2))
+                Catch ex As Exception
+
+                End Try
                 Dim ReceiverPlace As Integer = My.Settings.GSTIN.Substring(0, 2)
 
                 Dim VoucherType As String = [Enum].GetName(GetType(Enums.VoucherType), Enums.VoucherType.Sales)

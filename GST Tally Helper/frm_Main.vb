@@ -17,6 +17,24 @@ Public Class frm_Main
         chk_CalcValues.EditValue = My.Settings.CalculateValues
     End Sub
 
+    Function CheckDependencies(ByVal Vouchers As List(Of Objects.Voucher)) As Boolean
+        Dim MissingLedgers As New List(Of String)
+        For Each voucher As Objects.Voucher In Vouchers
+            For Each entry As Objects.VoucherEntry In voucher.Entries
+                If Not TallyIO.Ledgers.Contains(entry.LedgerName) Then
+                    If Not MissingLedgers.Contains(entry.LedgerName) Then MissingLedgers.Add(entry.LedgerName)
+                End If
+            Next
+        Next
+
+        If MissingLedgers.Count > 0 Then
+            MsgBox(String.Format("The following ledgers are missing in tally:{0}{0}{0}{1}{0}{0}Create them and Sync again to continue.", vbNewLine, String.Join(vbNewLine, MissingLedgers)), MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Aborting...")
+            Return False
+        Else
+            Return True
+        End If
+    End Function
+
     Async Function LoadParties(ByVal FileName As String) As Task
         Dim Skipped As Integer = 0
         Dim Loaded As Integer = 0
@@ -243,16 +261,20 @@ Public Class frm_Main
 
     Sub ExportPurchase(ByVal Filename As String)
         Dim Vouchers As List(Of Objects.Voucher) = Tally.Converter.Purchase2Vouchers(gc_PurchaseEntries.DataSource)
-        Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
-        Dim XML As String = XMLGen.GenerateVouchers(Vouchers)
-        Export(XML, Filename)
+        If CheckDependencies(Vouchers) Then
+            Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
+            Dim XML As String = XMLGen.GenerateVouchers(Vouchers)
+            Export(XML, Filename)
+        End If
     End Sub
 
     Sub ExportSales(ByVal Filename As String)
         Dim Vouchers As List(Of Objects.Voucher) = Tally.Converter.Sales2Vouchers(gc_SalesEntries.DataSource)
-        Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
-        Dim XML As String = XMLGen.GenerateVouchers(Vouchers)
-        Export(XML, Filename)
+        If CheckDependencies(Vouchers) Then
+            Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
+            Dim XML As String = XMLGen.GenerateVouchers(Vouchers)
+            Export(XML, Filename)
+        End If
     End Sub
 
     Sub ExportParties()
@@ -388,6 +410,11 @@ finish:
                    txt_CompanyName.EditValue = TallyIO.CompanyName
                    btn_Sync.Enabled = True
                    ProgressPanel_Main.Visible = False
+                   If TallyIO.CompanyName <> "" Then
+                       rp_PurchaseEntries.Visible = True
+                       rp_SalesEntries.Visible = True
+                       rp_Parties.Visible = True
+                   End If
                End Sub)
     End Sub
 

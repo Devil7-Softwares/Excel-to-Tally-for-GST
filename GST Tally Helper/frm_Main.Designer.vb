@@ -254,6 +254,7 @@ Partial Class frm_Main
         Me.rp_PurchaseEntries.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Items_Purchase, Me.rpg_Export_Purchase})
         Me.rp_PurchaseEntries.Name = "rp_PurchaseEntries"
         Me.rp_PurchaseEntries.Text = "Purchase Entries"
+        Me.rp_PurchaseEntries.Visible = False
         '
         'rpg_Items_Purchase
         '
@@ -276,6 +277,7 @@ Partial Class frm_Main
         Me.rp_SalesEntries.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Items_Sales, Me.rpg_Export_Sales})
         Me.rp_SalesEntries.Name = "rp_SalesEntries"
         Me.rp_SalesEntries.Text = "Sales Entries"
+        Me.rp_SalesEntries.Visible = False
         '
         'rpg_Items_Sales
         '
@@ -298,6 +300,7 @@ Partial Class frm_Main
         Me.rp_Parties.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Items_Parties, Me.rpg_Export_Parties})
         Me.rp_Parties.Name = "rp_Parties"
         Me.rp_Parties.Text = "Parties"
+        Me.rp_Parties.Visible = False
         '
         'rpg_Items_Parties
         '

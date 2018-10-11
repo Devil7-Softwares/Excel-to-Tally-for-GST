@@ -69,6 +69,7 @@ Partial Class frm_Main
         Me.SaveFileDialog_XML = New System.Windows.Forms.SaveFileDialog()
         Me.ProgressPanel_Main = New DevExpress.XtraWaitForm.ProgressPanel()
         Me.btn_Refresh = New DevExpress.XtraBars.BarButtonItem()
+        Me.btn_XML_Tally = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PopupMenu_Excel, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -92,9 +93,9 @@ Partial Class frm_Main
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_SaveFormat, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.chk_CalcValues, Me.btn_LedgerNames, Me.txt_TallyHost, Me.txt_TallyPort, Me.btn_Sync, Me.btn_Refresh})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_SaveFormat, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.chk_CalcValues, Me.btn_LedgerNames, Me.txt_TallyHost, Me.txt_TallyPort, Me.btn_Sync, Me.btn_Refresh, Me.btn_XML_Tally})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 13
+        Me.RibbonControl.MaxItemId = 14
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_PurchaseEntries, Me.rp_SalesEntries, Me.rp_Parties, Me.rp_Tally})
         Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit, Me.chk_CalcValues_Edit, Me.txt_TallyHost_Edit, Me.txt_TallyPort_Edit})
@@ -225,6 +226,7 @@ Partial Class frm_Main
         'rpg_Export_Purchase
         '
         Me.rpg_Export_Purchase.ItemLinks.Add(Me.btn_XML_File)
+        Me.rpg_Export_Purchase.ItemLinks.Add(Me.btn_XML_Tally)
         Me.rpg_Export_Purchase.Name = "rpg_Export_Purchase"
         Me.rpg_Export_Purchase.ShowCaptionButton = False
         Me.rpg_Export_Purchase.Text = "Export"
@@ -246,6 +248,7 @@ Partial Class frm_Main
         'rpg_Export_Sales
         '
         Me.rpg_Export_Sales.ItemLinks.Add(Me.btn_XML_File)
+        Me.rpg_Export_Sales.ItemLinks.Add(Me.btn_XML_Tally)
         Me.rpg_Export_Sales.Name = "rpg_Export_Sales"
         Me.rpg_Export_Sales.ShowCaptionButton = False
         Me.rpg_Export_Sales.Text = "Export"
@@ -267,6 +270,7 @@ Partial Class frm_Main
         'rpg_Export_Parties
         '
         Me.rpg_Export_Parties.ItemLinks.Add(Me.btn_XML_File)
+        Me.rpg_Export_Parties.ItemLinks.Add(Me.btn_XML_Tally)
         Me.rpg_Export_Parties.Name = "rpg_Export_Parties"
         Me.rpg_Export_Parties.ShowCaptionButton = False
         Me.rpg_Export_Parties.Text = "Export"
@@ -464,6 +468,13 @@ Partial Class frm_Main
         Me.btn_Refresh.ImageOptions.SvgImage = CType(resources.GetObject("btn_Refresh.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.btn_Refresh.Name = "btn_Refresh"
         '
+        'btn_XML_Tally
+        '
+        Me.btn_XML_Tally.Caption = "To Tally"
+        Me.btn_XML_Tally.Id = 13
+        Me.btn_XML_Tally.ImageOptions.SvgImage = CType(resources.GetObject("btn_XML_Tally.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btn_XML_Tally.Name = "btn_XML_Tally"
+        '
         'frm_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -549,4 +560,5 @@ Partial Class frm_Main
     Friend WithEvents rpg_Items_Sales As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents rpg_Export_Sales As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents btn_Refresh As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents btn_XML_Tally As DevExpress.XtraBars.BarButtonItem
 End Class

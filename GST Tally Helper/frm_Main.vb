@@ -200,27 +200,52 @@ Public Class frm_Main
                End Sub)
     End Function
 
+    Private Async Sub Export(ByVal XML As String, ByVal Filename As String)
+        If Filename <> "" Then
+            My.Computer.FileSystem.WriteAllText(Filename, XML, False)
+            MsgBox("XML File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+        Else
+            Dim Response As Objects.Response = Await TallyIO.SendRequestToTally(XML)
+            If Response.Status Then
+                MsgBox("Successfully Exported XML to Tally.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+            Else
+                Dim XMLRes As String = IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.Desktop, String.Format("TallyExport_{0}.xml", Now.ToString("ddMMyyyy_hhmmss")))
+                My.Computer.FileSystem.WriteAllText(XMLRes, XML, False)
+                MsgBox("Errors on Exporting XML to Tally..! XML Respose Saved to Desktop.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+            End If
+        End If
+    End Sub
+
     Sub ExportParties(ByVal FileName As String)
         Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
         Dim XML As String = XMLGen.GenerateMasters(gc_Parties.DataSource, TallyIO.Ledgers)
-        My.Computer.FileSystem.WriteAllText(FileName, XML, False)
-        MsgBox("XML File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+        Export(XML, FileName)
     End Sub
 
     Sub ExportPurchase(ByVal Filename As String)
         Dim Vouchers As List(Of Objects.Voucher) = Tally.Converter.Purchase2Vouchers(gc_PurchaseEntries.DataSource)
         Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
         Dim XML As String = XMLGen.GenerateVouchers(Vouchers)
-        My.Computer.FileSystem.WriteAllText(Filename, XML, False)
-        MsgBox("XML File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+        Export(XML, Filename)
     End Sub
 
     Sub ExportSales(ByVal Filename As String)
         Dim Vouchers As List(Of Objects.Voucher) = Tally.Converter.Sales2Vouchers(gc_SalesEntries.DataSource)
         Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
         Dim XML As String = XMLGen.GenerateVouchers(Vouchers)
-        My.Computer.FileSystem.WriteAllText(Filename, XML, False)
-        MsgBox("XML File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+        Export(XML, Filename)
+    End Sub
+
+    Sub ExportParties()
+        ExportParties("")
+    End Sub
+
+    Sub ExportPurchase()
+        ExportPurchase("")
+    End Sub
+
+    Sub ExportSales()
+        ExportSales("")
     End Sub
 #End Region
 
@@ -379,6 +404,18 @@ finish:
             gc_PurchaseEntries.RefreshDataSource()
         ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
             gc_SalesEntries.RefreshDataSource()
+        End If
+    End Sub
+
+    Private Sub btn_XML_Tally_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_XML_Tally.ItemClick
+        If MsgBox("Are You Sure to Export XML to Tally...?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+            If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
+                ExportPurchase()
+            ElseIf RibbonControl.SelectedPage Is rp_Parties Then
+                ExportParties()
+            ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
+                ExportSales()
+            End If
         End If
     End Sub
 #End Region

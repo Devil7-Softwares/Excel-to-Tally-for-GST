@@ -345,9 +345,28 @@ finish:
             Dim row As Objects.Party = gv_Parties.GetRow(e.RowHandle)
 
             If cellInfo IsNot Nothing Then
-                If TallyIO IsNot Nothing AndAlso TallyIO.Ledgers IsNot Nothing AndAlso (TallyIO.Ledgers.Contains(row.GSTIN) Or TallyIO.Ledgers.Contains(row.Name)) Then
+                If TallyIO IsNot Nothing AndAlso TallyIO.Ledgers IsNot Nothing AndAlso TallyIO.Ledgers.Count > 0 AndAlso (TallyIO.Ledgers.Contains(row.GSTIN) Or TallyIO.Ledgers.Contains(row.Name)) Then
                     cellInfo.ViewInfo.ErrorIconText = "Ledger Already Exists. Will be Ignored."
                     cellInfo.ViewInfo.ShowErrorIcon = True
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub gv_PurchaseEntries_CustomDrawCell(sender As Object, e As RowCellCustomDrawEventArgs) Handles gv_PurchaseEntries.CustomDrawCell
+        If e.Column.FieldName = "GSTIN" Or e.Column.FieldName = "LedgerName" Then
+            Dim cellInfo As DevExpress.XtraGrid.Views.Grid.ViewInfo.GridCellInfo = TryCast(e.Cell, DevExpress.XtraGrid.Views.Grid.ViewInfo.GridCellInfo)
+            Dim row As Objects.PurchaseEntry = gv_PurchaseEntries.GetRow(e.RowHandle)
+
+            If cellInfo IsNot Nothing Then
+                If TallyIO IsNot Nothing AndAlso TallyIO.Ledgers IsNot Nothing AndAlso TallyIO.Ledgers.Count > 0 Then
+                    If e.Column.FieldName = "GSTIN" AndAlso Not TallyIO.Ledgers.Contains(row.GSTIN) Then
+                        cellInfo.ViewInfo.ErrorIconText = "Party Doesn't Exist in Tally Ledgers!"
+                        cellInfo.ViewInfo.ShowErrorIcon = True
+                    ElseIf e.Column.FieldName = "LedgerName" AndAlso Not TallyIO.Ledgers.Contains(row.LedgerName) Then
+                        cellInfo.ViewInfo.ErrorIconText = "Ledger Doesn't Exist in Tally Ledgers!"
+                        cellInfo.ViewInfo.ShowErrorIcon = True
+                    End If
                 End If
             End If
         End If

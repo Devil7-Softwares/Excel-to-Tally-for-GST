@@ -18,6 +18,8 @@ Public Class frm_Main
     End Sub
 
     Async Function LoadParties(ByVal FileName As String) As Task
+        Dim Skipped As Integer = 0
+        Dim Loaded As Integer = 0
         Invoke(Sub()
                    btn_LoadExcel.Enabled = False
                    ProgressPanel_Parties.Visible = True
@@ -47,7 +49,12 @@ Public Class frm_Main
                                                        ElseIf RegType_ = "Composition" Then
                                                            RegType = Enums.RegistrationType.Composition
                                                        End If
-                                                       R.Add(New Objects.Party(Name, GSTIN, RegType, Type))
+                                                       If R.Find(Function(c) c.GSTIN = GSTIN) Is Nothing AndAlso R.Find(Function(c) c.Name = Name) Is Nothing Then
+                                                           R.Add(New Objects.Party(Name, GSTIN, RegType, Type))
+                                                           Loaded += 1
+                                                       Else
+                                                           Skipped += 1
+                                                       End If
                                                    End If
                                                End If
                                            End If
@@ -57,6 +64,18 @@ Public Class frm_Main
                                Invoke(Sub()
                                           gc_Parties.DataSource = R
                                           gc_Parties.RefreshDataSource()
+                                          Dim msg As String = ""
+                                          If Loaded = 0 Then
+                                              msg = "No Entries Loaded"
+                                          Else
+                                              msg = "{0} Entries Loaded"
+                                          End If
+                                          If Skipped = 0 Then
+                                              msg &= "."
+                                          Else
+                                              msg &= " And {1} Duplicate Entries Skipped."
+                                          End If
+                                          MsgBox(String.Format(msg, Loaded, Skipped), MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
                                       End Sub)
                            Catch ex As Exception
                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")

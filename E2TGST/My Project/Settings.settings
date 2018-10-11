@@ -32,5 +32,8 @@
     <Setting Name="SalesLedger" Type="System.String" Scope="User">
       <Value Profile="(Default)">Sales @ {0}%</Value>
     </Setting>
+    <Setting Name="FirstRun" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

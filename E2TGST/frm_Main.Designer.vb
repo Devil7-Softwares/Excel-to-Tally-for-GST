@@ -72,6 +72,7 @@ Partial Class frm_Main
         Me.SaveFileDialog_XML = New System.Windows.Forms.SaveFileDialog()
         Me.ProgressPanel_Main = New DevExpress.XtraWaitForm.ProgressPanel()
         Me.PictureBox_Logo = New System.Windows.Forms.PictureBox()
+        Me.btn_About = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_CompanyName_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -95,11 +96,12 @@ Partial Class frm_Main
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.chk_CalcValues, Me.btn_LedgerNames, Me.txt_TallyHost, Me.txt_TallyPort, Me.btn_Sync, Me.btn_Refresh, Me.btn_XML_Tally, Me.btn_Template_Parties, Me.btn_Template_PurchaseEntries, Me.btn_Template_SalesEntries})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.chk_CalcValues, Me.btn_LedgerNames, Me.txt_TallyHost, Me.txt_TallyPort, Me.btn_Sync, Me.btn_Refresh, Me.btn_XML_Tally, Me.btn_Template_Parties, Me.btn_Template_PurchaseEntries, Me.btn_Template_SalesEntries, Me.btn_About})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 17
+        Me.RibbonControl.MaxItemId = 18
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_Tally, Me.rp_PurchaseEntries, Me.rp_SalesEntries, Me.rp_Parties})
+        Me.RibbonControl.QuickToolbarItemLinks.Add(Me.btn_About, "ABOUT")
         Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit, Me.chk_CalcValues_Edit, Me.txt_TallyHost_Edit, Me.txt_TallyPort_Edit})
         Me.RibbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.[False]
         Me.RibbonControl.ShowCategoryInCaption = False
@@ -353,7 +355,7 @@ Partial Class frm_Main
         Me.gc_Parties.MainView = Me.gv_Parties
         Me.gc_Parties.MenuManager = Me.RibbonControl
         Me.gc_Parties.Name = "gc_Parties"
-        Me.gc_Parties.Size = New System.Drawing.Size(1035, 278)
+        Me.gc_Parties.Size = New System.Drawing.Size(804, 278)
         Me.gc_Parties.TabIndex = 2
         Me.gc_Parties.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gv_Parties})
         '
@@ -415,7 +417,7 @@ Partial Class frm_Main
         Me.tp_SalesEntries.Controls.Add(Me.ProgressPanel_SalesEntries)
         Me.tp_SalesEntries.Controls.Add(Me.gc_SalesEntries)
         Me.tp_SalesEntries.Name = "tp_SalesEntries"
-        Me.tp_SalesEntries.Size = New System.Drawing.Size(1035, 278)
+        Me.tp_SalesEntries.Size = New System.Drawing.Size(804, 278)
         Me.tp_SalesEntries.Text = "Sales Entries"
         '
         'ProgressPanel_SalesEntries
@@ -427,7 +429,7 @@ Partial Class frm_Main
         Me.ProgressPanel_SalesEntries.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ProgressPanel_SalesEntries.Location = New System.Drawing.Point(0, 0)
         Me.ProgressPanel_SalesEntries.Name = "ProgressPanel_SalesEntries"
-        Me.ProgressPanel_SalesEntries.Size = New System.Drawing.Size(1035, 278)
+        Me.ProgressPanel_SalesEntries.Size = New System.Drawing.Size(804, 278)
         Me.ProgressPanel_SalesEntries.TabIndex = 5
         Me.ProgressPanel_SalesEntries.Visible = False
         '
@@ -438,7 +440,7 @@ Partial Class frm_Main
         Me.gc_SalesEntries.MainView = Me.gv_SalesEntries
         Me.gc_SalesEntries.MenuManager = Me.RibbonControl
         Me.gc_SalesEntries.Name = "gc_SalesEntries"
-        Me.gc_SalesEntries.Size = New System.Drawing.Size(1035, 278)
+        Me.gc_SalesEntries.Size = New System.Drawing.Size(804, 278)
         Me.gc_SalesEntries.TabIndex = 4
         Me.gc_SalesEntries.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gv_SalesEntries})
         '
@@ -452,7 +454,7 @@ Partial Class frm_Main
         Me.tp_Parties.Controls.Add(Me.ProgressPanel_Parties)
         Me.tp_Parties.Controls.Add(Me.gc_Parties)
         Me.tp_Parties.Name = "tp_Parties"
-        Me.tp_Parties.Size = New System.Drawing.Size(1035, 278)
+        Me.tp_Parties.Size = New System.Drawing.Size(804, 278)
         Me.tp_Parties.Text = "Parties"
         '
         'ProgressPanel_Parties
@@ -464,7 +466,7 @@ Partial Class frm_Main
         Me.ProgressPanel_Parties.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ProgressPanel_Parties.Location = New System.Drawing.Point(0, 0)
         Me.ProgressPanel_Parties.Name = "ProgressPanel_Parties"
-        Me.ProgressPanel_Parties.Size = New System.Drawing.Size(1035, 278)
+        Me.ProgressPanel_Parties.Size = New System.Drawing.Size(804, 278)
         Me.ProgressPanel_Parties.TabIndex = 3
         Me.ProgressPanel_Parties.Visible = False
         '
@@ -511,6 +513,13 @@ Partial Class frm_Main
         Me.PictureBox_Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox_Logo.TabIndex = 5
         Me.PictureBox_Logo.TabStop = False
+        '
+        'btn_About
+        '
+        Me.btn_About.Caption = "About"
+        Me.btn_About.Id = 17
+        Me.btn_About.ImageOptions.SvgImage = CType(resources.GetObject("BarButtonItem1.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btn_About.Name = "btn_About"
         '
         'frm_Main
         '
@@ -604,4 +613,5 @@ Partial Class frm_Main
     Friend WithEvents btn_Template_Parties As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents btn_Template_PurchaseEntries As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents btn_Template_SalesEntries As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents btn_About As DevExpress.XtraBars.BarButtonItem
 End Class

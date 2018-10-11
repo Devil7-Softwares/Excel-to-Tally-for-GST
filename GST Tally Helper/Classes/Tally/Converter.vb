@@ -45,13 +45,13 @@ Namespace Tally
 
                 If PurchaseEntry.GSTRate > 0 Then
                     If PlaceOfSupply = ReceiverPlace Then
-                        Dim CGSTLedger As String = String.Format(My.Settings.TaxLedger, "CGST", PurchaseEntry.GSTRate / 2)
-                        Dim SGSTLedger As String = String.Format(My.Settings.TaxLedger, "SGST", PurchaseEntry.GSTRate / 2)
+                        Dim CGSTLedger As String = String.Format(My.Settings.TaxLedger, "Input", "CGST", PurchaseEntry.GSTRate / 2)
+                        Dim SGSTLedger As String = String.Format(My.Settings.TaxLedger, "Input", "SGST", PurchaseEntry.GSTRate / 2)
 
                         Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Dr, Math.Round(If(My.Settings.CalculateValues, CGST, PurchaseEntry.CGST), 2))) 'CGST
                         Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Dr, Math.Round(If(My.Settings.CalculateValues, SGST, PurchaseEntry.SGST), 2))) 'SGST
                     Else
-                        Dim IGSTLedger As String = String.Format(My.Settings.TaxLedger, "IGST", PurchaseEntry.GSTRate)
+                        Dim IGSTLedger As String = String.Format(My.Settings.TaxLedger, "Input", "IGST", PurchaseEntry.GSTRate)
                         Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Dr, If(My.Settings.CalculateValues, IGST, PurchaseEntry.IGST))) 'IGST
                     End If
                 End If
@@ -95,13 +95,13 @@ Namespace Tally
 
                 If SalesEntry.Rate > 0 Then
                     If PlaceOfSupply = ReceiverPlace Then
-                        Dim CGSTLedger As String = String.Format(My.Settings.TaxLedger, "CGST", SalesEntry.Rate / 2)
-                        Dim SGSTLedger As String = String.Format(My.Settings.TaxLedger, "SGST", SalesEntry.Rate / 2)
+                        Dim CGSTLedger As String = String.Format(My.Settings.TaxLedger, "Output", "CGST", SalesEntry.Rate / 2)
+                        Dim SGSTLedger As String = String.Format(My.Settings.TaxLedger, "Output", "SGST", SalesEntry.Rate / 2)
 
                         Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Cr, Math.Round(If(My.Settings.CalculateValues, CGST, SalesEntry.CGST), 2))) 'CGST
                         Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Cr, Math.Round(If(My.Settings.CalculateValues, SGST, SalesEntry.SGST), 2))) 'SGST
                     Else
-                        Dim IGSTLedger As String = String.Format(My.Settings.TaxLedger, "IGST", SalesEntry.Rate)
+                        Dim IGSTLedger As String = String.Format(My.Settings.TaxLedger, "Output", "IGST", SalesEntry.Rate)
                         Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Cr, If(My.Settings.CalculateValues, IGST, SalesEntry.IGST))) 'IGST
                     End If
                 End If

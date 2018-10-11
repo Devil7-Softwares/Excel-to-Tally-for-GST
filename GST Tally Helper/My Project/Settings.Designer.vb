@@ -128,7 +128,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("{0} @ {1}%")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("{0} {1} @ {2}%")>  _
         Public Property TaxLedger() As String
             Get
                 Return CType(Me("TaxLedger"),String)

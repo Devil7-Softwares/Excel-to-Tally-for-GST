@@ -101,8 +101,13 @@ Partial Class frm_Main
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_Tally, Me.rp_PurchaseEntries, Me.rp_SalesEntries, Me.rp_Parties})
         Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit, Me.chk_CalcValues_Edit, Me.txt_TallyHost_Edit, Me.txt_TallyPort_Edit})
+        Me.RibbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.[False]
+        Me.RibbonControl.ShowCategoryInCaption = False
+        Me.RibbonControl.ShowExpandCollapseButton = DevExpress.Utils.DefaultBoolean.[False]
+        Me.RibbonControl.ShowToolbarCustomizeItem = False
         Me.RibbonControl.Size = New System.Drawing.Size(1041, 143)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
+        Me.RibbonControl.Toolbar.ShowCustomizeItem = False
         '
         'btn_LoadExcel
         '

@@ -332,7 +332,10 @@ Public Class frm_Main
     End Sub
 
     Private Sub RibbonControl_SelectedPageChanged(sender As Object, e As EventArgs) Handles RibbonControl.SelectedPageChanged
-        If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
+        PictureBox_Logo.Visible = False
+        If RibbonControl.SelectedPage Is rp_Tally Then
+            PictureBox_Logo.Visible = True
+        ElseIf RibbonControl.SelectedPage Is rp_PurchaseEntries Then
             container_Tabs.SelectedTabPage = tp_PurchaseEntries
         ElseIf RibbonControl.SelectedPage Is rp_Parties Then
             container_Tabs.SelectedTabPage = tp_Parties
@@ -346,6 +349,8 @@ Public Class frm_Main
             RibbonControl.SelectedPage = rp_PurchaseEntries
         ElseIf container_Tabs.SelectedTabPage Is tp_Parties Then
             RibbonControl.SelectedPage = rp_Parties
+        ElseIf container_Tabs.SelectedTabPage Is tp_SalesEntries Then
+            RibbonControl.SelectedPage = rp_SalesEntries
         End If
     End Sub
 
@@ -373,7 +378,10 @@ Public Class frm_Main
     End Sub
 
     Private Async Sub btn_Sync_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Sync.ItemClick
-        Invoke(Sub() btn_Sync.Enabled = False)
+        Invoke(Sub()
+                   btn_Sync.Enabled = False
+                   ProgressPanel_Main.Visible = True
+               End Sub)
         If Not Await TallyIO.LoadAllMasters Then GoTo finish
 finish:
         Invoke(Sub()

@@ -162,7 +162,12 @@
     <None Include="Resources\PurchaseEntries.xlsx" />
     <None Include="Resources\SalesEntries.xlsx" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Devil7 Softwares - Logo Original.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\devil7_logo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PreBuildEvent>break &gt; "$(ProjectDir)My Project\licenses.licx"</PreBuildEvent>

@@ -41,28 +41,28 @@ Namespace Tally
                 Dim TotalValue_AR As Double = Math.Round(TotalValue_BR)
                 Dim RoundingOff As Double = Math.Round(TotalValue_AR - TotalValue_BR, 2)
 
-                Entries.Add(New Objects.VoucherEntry(PurchaseEntry.LedgerName, Enums.Effect.Dr, TotalValue_AR)) ' Head - Eg. Purchase A/c or Expense A/c
-                Entries.Add(New Objects.VoucherEntry(PurchaseEntry.GSTIN, Enums.Effect.Cr, PurchaseEntry.TaxableValue)) ' Purchase Party
+                Entries.Add(New Objects.VoucherEntry(PurchaseEntry.LedgerName, Enums.Effect.Dr, PurchaseEntry.TaxableValue)) ' Head - Eg. Purchase A/c or Expense A/c
+                Entries.Add(New Objects.VoucherEntry(PurchaseEntry.GSTIN, Enums.Effect.Cr, TotalValue_AR)) ' Purchase Party
 
                 If PurchaseEntry.GSTRate > 0 Then
                     If PlaceOfSupply = ReceiverPlace Then
                         Dim CGSTLedger As String = String.Format(My.Settings.TaxLedger, "CGST", PurchaseEntry.GSTRate / 2)
                         Dim SGSTLedger As String = String.Format(My.Settings.TaxLedger, "SGST", PurchaseEntry.GSTRate / 2)
 
-                        Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Cr, Math.Round(If(My.Settings.CalculateValues, CGST, PurchaseEntry.CGST), 2))) 'CGST
-                        Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Cr, Math.Round(If(My.Settings.CalculateValues, SGST, PurchaseEntry.SGST), 2))) 'SGST
+                        Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Dr, Math.Round(If(My.Settings.CalculateValues, CGST, PurchaseEntry.CGST), 2))) 'CGST
+                        Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Dr, Math.Round(If(My.Settings.CalculateValues, SGST, PurchaseEntry.SGST), 2))) 'SGST
                     Else
                         Dim IGSTLedger As String = String.Format(My.Settings.TaxLedger, "IGST", PurchaseEntry.GSTRate)
-                        Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Cr, If(My.Settings.CalculateValues, IGST, PurchaseEntry.IGST))) 'IGST
+                        Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Dr, If(My.Settings.CalculateValues, IGST, PurchaseEntry.IGST))) 'IGST
                     End If
                 End If
 
                 If PurchaseEntry.CESS > 0 Then
-                    Entries.Add(New Objects.VoucherEntry(My.Settings.CESSLedger, Enums.Effect.Cr, PurchaseEntry.CESS)) 'CESS
+                    Entries.Add(New Objects.VoucherEntry(My.Settings.CESSLedger, Enums.Effect.Dr, PurchaseEntry.CESS)) 'CESS
                 End If
 
                 If RoundingOff <> 0 Then
-                    Entries.Add(New Objects.VoucherEntry(My.Settings.RoundOffLedger, If(RoundingOff > 0, Enums.Effect.Cr, Enums.Effect.Dr), RoundingOff))
+                    Entries.Add(New Objects.VoucherEntry(My.Settings.RoundOffLedger, If(RoundingOff > 0, Enums.Effect.Dr, Enums.Effect.Cr), RoundingOff))
                 End If
 
                 R.Add(New Objects.Voucher(VoucherType, PurchaseEntry.InvoiceDate, PurchaseEntry.InvoiceNo, Narration, Entries))
@@ -89,28 +89,28 @@ Namespace Tally
                 Dim TotalValue_AR As Double = Math.Round(TotalValue_BR)
                 Dim RoundingOff As Double = Math.Round(TotalValue_AR - TotalValue_BR, 2)
 
-                Entries.Add(New Objects.VoucherEntry(SalesEntry.GSTIN, Enums.Effect.Dr, SalesEntry.TaxableValue)) ' Sales Party
-                Entries.Add(New Objects.VoucherEntry(String.Format(My.Settings.SalesLedger, SalesEntry.Rate), Enums.Effect.Cr, TotalValue_AR)) ' Head - Eg. Sales A/c
+                Entries.Add(New Objects.VoucherEntry(SalesEntry.GSTIN, Enums.Effect.Dr, TotalValue_AR)) ' Sales Party
+                Entries.Add(New Objects.VoucherEntry(String.Format(My.Settings.SalesLedger, SalesEntry.Rate), Enums.Effect.Cr, SalesEntry.TaxableValue)) ' Head - Eg. Sales A/c
 
                 If SalesEntry.Rate > 0 Then
                     If PlaceOfSupply = ReceiverPlace Then
                         Dim CGSTLedger As String = String.Format(My.Settings.TaxLedger, "CGST", SalesEntry.Rate / 2)
                         Dim SGSTLedger As String = String.Format(My.Settings.TaxLedger, "SGST", SalesEntry.Rate / 2)
 
-                        Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Dr, Math.Round(If(My.Settings.CalculateValues, CGST, SalesEntry.CGST), 2))) 'CGST
-                        Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Dr, Math.Round(If(My.Settings.CalculateValues, SGST, SalesEntry.SGST), 2))) 'SGST
+                        Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Cr, Math.Round(If(My.Settings.CalculateValues, CGST, SalesEntry.CGST), 2))) 'CGST
+                        Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Cr, Math.Round(If(My.Settings.CalculateValues, SGST, SalesEntry.SGST), 2))) 'SGST
                     Else
                         Dim IGSTLedger As String = String.Format(My.Settings.TaxLedger, "IGST", SalesEntry.Rate)
-                        Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Dr, If(My.Settings.CalculateValues, IGST, SalesEntry.IGST))) 'IGST
+                        Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Cr, If(My.Settings.CalculateValues, IGST, SalesEntry.IGST))) 'IGST
                     End If
                 End If
 
                 If SalesEntry.CESS > 0 Then
-                    Entries.Add(New Objects.VoucherEntry(My.Settings.CESSLedger, Enums.Effect.Dr, SalesEntry.CESS)) 'CESS
+                    Entries.Add(New Objects.VoucherEntry(My.Settings.CESSLedger, Enums.Effect.Cr, SalesEntry.CESS)) 'CESS
                 End If
 
                 If RoundingOff <> 0 Then
-                    Entries.Add(New Objects.VoucherEntry(My.Settings.RoundOffLedger, If(RoundingOff > 0, Enums.Effect.Dr, Enums.Effect.Dr), RoundingOff))
+                    Entries.Add(New Objects.VoucherEntry(My.Settings.RoundOffLedger, If(RoundingOff > 0, Enums.Effect.Cr, Enums.Effect.Dr), RoundingOff))
                 End If
 
                 R.Add(New Objects.Voucher(VoucherType, SalesEntry.InvoiceDate, SalesEntry.InvoiceNumber, Narration, Entries))

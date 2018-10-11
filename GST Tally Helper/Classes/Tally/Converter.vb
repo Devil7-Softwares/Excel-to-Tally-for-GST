@@ -42,7 +42,6 @@ Namespace Tally
                 Dim RoundingOff As Double = Math.Round(TotalValue_AR - TotalValue_BR, 2)
 
                 Entries.Add(New Objects.VoucherEntry(PurchaseEntry.LedgerName, Enums.Effect.Dr, PurchaseEntry.TaxableValue)) ' Head - Eg. Purchase A/c or Expense A/c
-                Entries.Add(New Objects.VoucherEntry(PurchaseEntry.GSTIN, Enums.Effect.Cr, TotalValue_AR)) ' Purchase Party
 
                 If PurchaseEntry.GSTRate > 0 Then
                     If PlaceOfSupply = ReceiverPlace Then
@@ -64,6 +63,8 @@ Namespace Tally
                 If RoundingOff <> 0 Then
                     Entries.Add(New Objects.VoucherEntry(My.Settings.RoundOffLedger, If(RoundingOff > 0, Enums.Effect.Dr, Enums.Effect.Cr), RoundingOff))
                 End If
+
+                Entries.Add(New Objects.VoucherEntry(PurchaseEntry.GSTIN, Enums.Effect.Cr, TotalValue_AR)) ' Purchase Party
 
                 R.Add(New Objects.Voucher(VoucherType, PurchaseEntry.InvoiceDate, PurchaseEntry.InvoiceNo, Narration, Entries))
             Next

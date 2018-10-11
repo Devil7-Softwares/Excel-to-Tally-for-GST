@@ -161,8 +161,8 @@ Namespace Tally
 #End Region
 
         Friend Async Function LoadAllMasters() As Threading.Tasks.Task(Of Boolean)
-            'Try
-            Dim Response1 As Objects.Response = Await SendRequestToTally(Requests.GetReport("List of Accounts"))
+            Try
+                Dim Response1 As Objects.Response = Await SendRequestToTally(Requests.GetReport("List of Accounts"))
                 If Response1.Status = True Then
                     ReadXML(Response1.Data)
                 End If
@@ -170,10 +170,10 @@ Namespace Tally
                 If Response2.Status = True Then
                     ReadXML(Response2.Data)
                 End If
-            'Catch ex As Exception
-            '    MsgBox("Error on loading masters." & vbNewLine & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
-            '    Return False
-            'End Try
+            Catch ex As Exception
+                MsgBox("Error on loading masters." & vbNewLine & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                Return False
+            End Try
             Return True
         End Function
 

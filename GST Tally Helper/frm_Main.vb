@@ -1,4 +1,5 @@
 ﻿Imports DevExpress.XtraBars
+Imports DevExpress.XtraGrid.Views.Base
 Imports DevExpress.XtraTab
 Imports ExcelDataReader
 
@@ -336,6 +337,20 @@ finish:
                    btn_Sync.Enabled = True
                    ProgressPanel_Main.Visible = False
                End Sub)
+    End Sub
+
+    Private Sub gv_Parties_CustomDrawCell(sender As Object, e As RowCellCustomDrawEventArgs) Handles gv_Parties.CustomDrawCell
+        If e.Column.FieldName = "Name" Then
+            Dim cellInfo As DevExpress.XtraGrid.Views.Grid.ViewInfo.GridCellInfo = TryCast(e.Cell, DevExpress.XtraGrid.Views.Grid.ViewInfo.GridCellInfo)
+            Dim row As Objects.Party = gv_Parties.GetRow(e.RowHandle)
+
+            If cellInfo IsNot Nothing Then
+                If TallyIO IsNot Nothing AndAlso TallyIO.Ledgers IsNot Nothing AndAlso (TallyIO.Ledgers.Contains(row.GSTIN) Or TallyIO.Ledgers.Contains(row.Name)) Then
+                    cellInfo.ViewInfo.ErrorIconText = "Ledger Already Exists. Will be Ignored."
+                    cellInfo.ViewInfo.ShowErrorIcon = True
+                End If
+            End If
+        End If
     End Sub
 #End Region
 

@@ -1840,6 +1840,26 @@
         b2RkIiAvPg0KICA8L2c+DQo8L3N2Zz4L
 </value>
   </data>
+  <data name="btn_Refresh.ImageOptions.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v18.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjE4LjEsIFZlcnNpb249MTguMS40
+        LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURl
+        dkV4cHJlc3MuVXRpbHMuU3ZnLlN2Z0ltYWdlAQAAAAREYXRhBwICAAAACQMAAAAPAwAAAPoCAAAC77u/
+        PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgd2lkdGg9IjQ4cHgiIGhl
+        aWdodD0iNDhweCIgdmlld0JveD0iMCAwIDQ4IDQ4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAw
+        MC9zdmciIGlkPSJyZWZyZXNoIj4NCiAgPGRlZnMgLz4NCiAgPHBhdGggZD0iTTE1LjUxOCwyMy45MzZB
+        OC41NzYsOC41NzYsMCwwLDAsMjQsMzIuNjA2VjM0Ljk0bC0wLjk0NCw0LjI4NkExNS4xODYsMTUuMTg2
+        LDAsMCwxLDksMjMuOTM2LDE0Ljk1MywxNC45NTMsMCwwLDEsMjEsOWgybDAuMDQ4LDYuMzIzQTguNiw4
+        LjYsMCwwLDAsMTUuNTE4LDIzLjkzNloiIGZpbGw9IiMwQzAwNTgiIGNsYXNzPSJ2aS1hY2NlbnQiIC8+
+        DQogIDxwYXRoIGQ9Ik0yNCwzOS4yNzVjLTAuMzE5LDAtLjYzLTAuMDI5LTAuOTQ0LTAuMDQ5TDI0LDM0
+        Ljk0VjMyLjYwNmE4LjY3Miw4LjY3MiwwLDAsMCwwLTE3LjM0LDguMzQ2LDguMzQ2LDAsMCwwLS45NDku
+        MDU4TDIzLDEzcy0wLjY1OC00LjQsMS00LjRBMTUuMTcyLDE1LjE3MiwwLDAsMSwzOSwyMy45MzYsMTUu
+        MTcyLDE1LjE3MiwwLDAsMSwyNCwzOS4yNzVaIiBmaWxsPSIjRkY2RTZFIiBjbGFzcz0idmktcHJpbWFy
+        eSIgLz4NCiAgPHBhdGggZD0iTTI2LjAwNSw0MlYyOEwxOSwzNVoiIGZpbGw9IiNGRjZFNkUiIGNsYXNz
+        PSJ2aS1wcmltYXJ5IiAvPg0KICA8cGF0aCBkPSJNMjEuOTg5LDZWMTlsNi4wMjQtNi40OTRaIiBmaWxs
+        PSIjMEMwMDU4IiBjbGFzcz0idmktYWNjZW50IiAvPg0KPC9zdmc+Cw==
+</value>
+  </data>
   <metadata name="OpenFileDialog_Excel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

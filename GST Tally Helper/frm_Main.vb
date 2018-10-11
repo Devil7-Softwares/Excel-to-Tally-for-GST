@@ -371,6 +371,16 @@ finish:
             End If
         End If
     End Sub
+
+    Private Sub btn_Refresh_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Refresh.ItemClick
+        If RibbonControl.SelectedPage Is rp_Parties Then
+            gc_Parties.RefreshDataSource()
+        ElseIf RibbonControl.SelectedPage Is rp_PurchaseEntries Then
+            gc_PurchaseEntries.RefreshDataSource()
+        ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
+            gc_SalesEntries.RefreshDataSource()
+        End If
+    End Sub
 #End Region
 
 End Class

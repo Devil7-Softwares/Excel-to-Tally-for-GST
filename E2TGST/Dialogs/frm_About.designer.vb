@@ -393,7 +393,7 @@ Partial Class frm_About
         Me.lbl_License.Size = New System.Drawing.Size(373, 25)
         Me.lbl_License.TabIndex = 18
         Me.lbl_License.TabStop = True
-        Me.lbl_License.Text = "The GNU General Public License v3.0"
+        Me.lbl_License.Text = "Apache License 2.0"
         Me.lbl_License.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label6

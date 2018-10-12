@@ -22,8 +22,8 @@ Public Class frm_Main
         Dim MissingLedgers As New List(Of String)
         For Each voucher As Objects.Voucher In Vouchers
             For Each entry As Objects.VoucherEntry In voucher.Entries
-                If Not TallyIO.Ledgers.Contains(entry.LedgerName) Then
-                    If Not MissingLedgers.Contains(entry.LedgerName) Then MissingLedgers.Add(entry.LedgerName)
+                If Not TallyIO.Ledgers.Contains(entry.LedgerName, StringComparer.OrdinalIgnoreCase) Then
+                    If Not MissingLedgers.Contains(entry.LedgerName, StringComparer.OrdinalIgnoreCase) Then MissingLedgers.Add(entry.LedgerName)
                 End If
             Next
         Next
@@ -403,7 +403,7 @@ finish:
             Dim row As Objects.Party = gv_Parties.GetRow(e.RowHandle)
 
             If cellInfo IsNot Nothing Then
-                If TallyIO IsNot Nothing AndAlso TallyIO.Ledgers IsNot Nothing AndAlso TallyIO.Ledgers.Count > 0 AndAlso (TallyIO.Ledgers.Contains(row.GSTIN) Or TallyIO.Ledgers.Contains(row.Name)) Then
+                If TallyIO IsNot Nothing AndAlso TallyIO.Ledgers IsNot Nothing AndAlso TallyIO.Ledgers.Count > 0 AndAlso (TallyIO.Ledgers.Contains(row.GSTIN, StringComparer.OrdinalIgnoreCase) Or TallyIO.Ledgers.Contains(row.Name, StringComparer.OrdinalIgnoreCase)) Then
                     cellInfo.ViewInfo.ErrorIconText = "Ledger Already Exists. Will be Ignored."
                     cellInfo.ViewInfo.ShowErrorIcon = True
                 End If
@@ -418,10 +418,10 @@ finish:
 
             If cellInfo IsNot Nothing Then
                 If TallyIO IsNot Nothing AndAlso TallyIO.Ledgers IsNot Nothing AndAlso TallyIO.Ledgers.Count > 0 Then
-                    If e.Column.FieldName = "GSTIN" AndAlso Not TallyIO.Ledgers.Contains(row.GSTIN) Then
+                    If e.Column.FieldName = "GSTIN" AndAlso Not TallyIO.Ledgers.Contains(row.GSTIN, StringComparer.OrdinalIgnoreCase) Then
                         cellInfo.ViewInfo.ErrorIconText = "Party Doesn't Exist in Tally Ledgers!"
                         cellInfo.ViewInfo.ShowErrorIcon = True
-                    ElseIf e.Column.FieldName = "LedgerName" AndAlso Not TallyIO.Ledgers.Contains(row.LedgerName) Then
+                    ElseIf e.Column.FieldName = "LedgerName" AndAlso Not TallyIO.Ledgers.Contains(row.LedgerName, StringComparer.OrdinalIgnoreCase) Then
                         cellInfo.ViewInfo.ErrorIconText = "Ledger Doesn't Exist in Tally Ledgers!"
                         cellInfo.ViewInfo.ShowErrorIcon = True
                     End If

@@ -101,7 +101,7 @@ Namespace Tally
                 Dim RoundingOff As Double = Math.Round(TotalValue_AR - TotalValue_BR, 2)
 
                 Entries.Add(New Objects.VoucherEntry(SalesEntry.GSTIN, Enums.Effect.Dr, TotalValue_AR)) ' Sales Party
-                Entries.Add(New Objects.VoucherEntry(String.Format(My.Settings.SalesLedger, SalesEntry.Rate), Enums.Effect.Cr, SalesEntry.TaxableValue)) ' Head - Eg. Sales A/c
+                Entries.Add(New Objects.VoucherEntry(If(SalesEntry.Rate = 0, "Sales Exempted", String.Format(My.Settings.SalesLedger, SalesEntry.Rate)), Enums.Effect.Cr, SalesEntry.TaxableValue)) ' Head - Eg. Sales A/c
 
                 If SalesEntry.Rate > 0 Then
                     If PlaceOfSupply = ReceiverPlace Then

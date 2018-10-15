@@ -35,5 +35,11 @@
     <Setting Name="FirstRun" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="IncludeDesc" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="BankLedgerName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Bank A/c</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

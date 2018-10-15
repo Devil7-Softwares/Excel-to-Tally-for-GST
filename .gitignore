@@ -260,3 +260,6 @@ paket-files/
 __pycache__/
 *.pyc
 /GST Tally Helper/My Project/licenses.licx
+
+# Installer
+*Installer-cache*

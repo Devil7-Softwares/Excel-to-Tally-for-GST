@@ -41,6 +41,13 @@ Partial Class frm_Main
         Me.btn_Template_PurchaseEntries = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_Template_SalesEntries = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_About = New DevExpress.XtraBars.BarButtonItem()
+        Me.txt_StateCode = New DevExpress.XtraBars.BarEditItem()
+        Me.txt_StateCode_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.btn_Template_BankEntries = New DevExpress.XtraBars.BarButtonItem()
+        Me.chk_IncludeDesc = New DevExpress.XtraBars.BarEditItem()
+        Me.chk_IncludeDesc_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.txt_BankLedgerName = New DevExpress.XtraBars.BarEditItem()
+        Me.txt_BankLedgerName_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.rp_Tally = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rpg_Sync = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -51,6 +58,10 @@ Partial Class frm_Main
         Me.rp_SalesEntries = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Items_Sales = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rpg_Export_Sales = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.rp_BankEntries = New DevExpress.XtraBars.Ribbon.RibbonPage()
+        Me.rpg_Items_Bank = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.rpg_Export_Bank = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.rpg_BankEntry = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rp_Parties = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Items_Parties = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rpg_Export_Parties = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -66,6 +77,10 @@ Partial Class frm_Main
         Me.ProgressPanel_SalesEntries = New DevExpress.XtraWaitForm.ProgressPanel()
         Me.gc_SalesEntries = New DevExpress.XtraGrid.GridControl()
         Me.gv_SalesEntries = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.tp_BankEntries = New DevExpress.XtraTab.XtraTabPage()
+        Me.ProgressPanel_BankEntries = New DevExpress.XtraWaitForm.ProgressPanel()
+        Me.gc_BankEntries = New DevExpress.XtraGrid.GridControl()
+        Me.gv_BankEntries = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.tp_Parties = New DevExpress.XtraTab.XtraTabPage()
         Me.ProgressPanel_Parties = New DevExpress.XtraWaitForm.ProgressPanel()
         Me.OpenFileDialog_Excel = New System.Windows.Forms.OpenFileDialog()
@@ -73,14 +88,15 @@ Partial Class frm_Main
         Me.SaveFileDialog_XML = New System.Windows.Forms.SaveFileDialog()
         Me.ProgressPanel_Main = New DevExpress.XtraWaitForm.ProgressPanel()
         Me.PictureBox_Logo = New System.Windows.Forms.PictureBox()
-        Me.txt_StateCode = New DevExpress.XtraBars.BarEditItem()
-        Me.txt_StateCode_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_CompanyName_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chk_CalcValues_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_TallyHost_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_TallyPort_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txt_StateCode_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.chk_IncludeDesc_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txt_BankLedgerName_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gc_Parties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gv_Parties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.container_Tabs, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -91,21 +107,23 @@ Partial Class frm_Main
         Me.tp_SalesEntries.SuspendLayout()
         CType(Me.gc_SalesEntries, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gv_SalesEntries, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tp_BankEntries.SuspendLayout()
+        CType(Me.gc_BankEntries, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.gv_BankEntries, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tp_Parties.SuspendLayout()
         CType(Me.PictureBox_Logo, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txt_StateCode_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.chk_CalcValues, Me.btn_LedgerNames, Me.txt_TallyHost, Me.txt_TallyPort, Me.btn_Sync, Me.btn_Refresh, Me.btn_XML_Tally, Me.btn_Template_Parties, Me.btn_Template_PurchaseEntries, Me.btn_Template_SalesEntries, Me.btn_About, Me.txt_StateCode})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.chk_CalcValues, Me.btn_LedgerNames, Me.txt_TallyHost, Me.txt_TallyPort, Me.btn_Sync, Me.btn_Refresh, Me.btn_XML_Tally, Me.btn_Template_Parties, Me.btn_Template_PurchaseEntries, Me.btn_Template_SalesEntries, Me.btn_About, Me.txt_StateCode, Me.btn_Template_BankEntries, Me.chk_IncludeDesc, Me.txt_BankLedgerName})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 19
+        Me.RibbonControl.MaxItemId = 22
         Me.RibbonControl.Name = "RibbonControl"
-        Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_Tally, Me.rp_PurchaseEntries, Me.rp_SalesEntries, Me.rp_Parties})
+        Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_Tally, Me.rp_PurchaseEntries, Me.rp_SalesEntries, Me.rp_BankEntries, Me.rp_Parties})
         Me.RibbonControl.QuickToolbarItemLinks.Add(Me.btn_About, "ABOUT")
-        Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit, Me.chk_CalcValues_Edit, Me.txt_TallyHost_Edit, Me.txt_TallyPort_Edit, Me.txt_StateCode_Edit})
+        Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit, Me.chk_CalcValues_Edit, Me.txt_TallyHost_Edit, Me.txt_TallyPort_Edit, Me.txt_StateCode_Edit, Me.chk_IncludeDesc_Edit, Me.txt_BankLedgerName_Edit})
         Me.RibbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.[False]
         Me.RibbonControl.ShowCategoryInCaption = False
         Me.RibbonControl.ShowExpandCollapseButton = DevExpress.Utils.DefaultBoolean.[False]
@@ -249,6 +267,51 @@ Partial Class frm_Main
         Me.btn_About.ImageOptions.SvgImage = CType(resources.GetObject("btn_About.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.btn_About.Name = "btn_About"
         '
+        'txt_StateCode
+        '
+        Me.txt_StateCode.Caption = "State Code       "
+        Me.txt_StateCode.Edit = Me.txt_StateCode_Edit
+        Me.txt_StateCode.EditWidth = 150
+        Me.txt_StateCode.Id = 18
+        Me.txt_StateCode.Name = "txt_StateCode"
+        '
+        'txt_StateCode_Edit
+        '
+        Me.txt_StateCode_Edit.AutoHeight = False
+        Me.txt_StateCode_Edit.Name = "txt_StateCode_Edit"
+        '
+        'btn_Template_BankEntries
+        '
+        Me.btn_Template_BankEntries.Caption = "Bank Entries"
+        Me.btn_Template_BankEntries.Id = 19
+        Me.btn_Template_BankEntries.ImageOptions.LargeImage = CType(resources.GetObject("btn_Template_BankEntries.ImageOptions.LargeImage"), System.Drawing.Image)
+        Me.btn_Template_BankEntries.Name = "btn_Template_BankEntries"
+        '
+        'chk_IncludeDesc
+        '
+        Me.chk_IncludeDesc.Caption = "Include Description in Narration"
+        Me.chk_IncludeDesc.Edit = Me.chk_IncludeDesc_Edit
+        Me.chk_IncludeDesc.Id = 20
+        Me.chk_IncludeDesc.Name = "chk_IncludeDesc"
+        '
+        'chk_IncludeDesc_Edit
+        '
+        Me.chk_IncludeDesc_Edit.AutoHeight = False
+        Me.chk_IncludeDesc_Edit.Name = "chk_IncludeDesc_Edit"
+        '
+        'txt_BankLedgerName
+        '
+        Me.txt_BankLedgerName.Caption = "Bank Ledger Name"
+        Me.txt_BankLedgerName.Edit = Me.txt_BankLedgerName_Edit
+        Me.txt_BankLedgerName.EditWidth = 110
+        Me.txt_BankLedgerName.Id = 21
+        Me.txt_BankLedgerName.Name = "txt_BankLedgerName"
+        '
+        'txt_BankLedgerName_Edit
+        '
+        Me.txt_BankLedgerName_Edit.AutoHeight = False
+        Me.txt_BankLedgerName_Edit.Name = "txt_BankLedgerName_Edit"
+        '
         'rp_Tally
         '
         Me.rp_Tally.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup2, Me.rpg_Sync, Me.rpg_Templates})
@@ -279,6 +342,7 @@ Partial Class frm_Main
         Me.rpg_Templates.ItemLinks.Add(Me.btn_Template_Parties)
         Me.rpg_Templates.ItemLinks.Add(Me.btn_Template_PurchaseEntries)
         Me.rpg_Templates.ItemLinks.Add(Me.btn_Template_SalesEntries)
+        Me.rpg_Templates.ItemLinks.Add(Me.btn_Template_BankEntries)
         Me.rpg_Templates.Name = "rpg_Templates"
         Me.rpg_Templates.ShowCaptionButton = False
         Me.rpg_Templates.Text = "Templates"
@@ -328,6 +392,37 @@ Partial Class frm_Main
         Me.rpg_Export_Sales.Name = "rpg_Export_Sales"
         Me.rpg_Export_Sales.ShowCaptionButton = False
         Me.rpg_Export_Sales.Text = "Export"
+        '
+        'rp_BankEntries
+        '
+        Me.rp_BankEntries.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Items_Bank, Me.rpg_Export_Bank, Me.rpg_BankEntry})
+        Me.rp_BankEntries.Name = "rp_BankEntries"
+        Me.rp_BankEntries.Text = "Bank Entries"
+        Me.rp_BankEntries.Visible = False
+        '
+        'rpg_Items_Bank
+        '
+        Me.rpg_Items_Bank.ItemLinks.Add(Me.btn_LoadExcel)
+        Me.rpg_Items_Bank.ItemLinks.Add(Me.btn_Refresh, True)
+        Me.rpg_Items_Bank.Name = "rpg_Items_Bank"
+        Me.rpg_Items_Bank.ShowCaptionButton = False
+        Me.rpg_Items_Bank.Text = "Items"
+        '
+        'rpg_Export_Bank
+        '
+        Me.rpg_Export_Bank.ItemLinks.Add(Me.btn_XML_File)
+        Me.rpg_Export_Bank.ItemLinks.Add(Me.btn_XML_Tally)
+        Me.rpg_Export_Bank.Name = "rpg_Export_Bank"
+        Me.rpg_Export_Bank.ShowCaptionButton = False
+        Me.rpg_Export_Bank.Text = "Export"
+        '
+        'rpg_BankEntry
+        '
+        Me.rpg_BankEntry.ItemLinks.Add(Me.txt_BankLedgerName)
+        Me.rpg_BankEntry.ItemLinks.Add(Me.chk_IncludeDesc)
+        Me.rpg_BankEntry.Name = "rpg_BankEntry"
+        Me.rpg_BankEntry.ShowCaptionButton = False
+        Me.rpg_BankEntry.Text = "Bank Entry"
         '
         'rp_Parties
         '
@@ -384,7 +479,7 @@ Partial Class frm_Main
         Me.container_Tabs.SelectedTabPage = Me.tp_PurchaseEntries
         Me.container_Tabs.Size = New System.Drawing.Size(810, 306)
         Me.container_Tabs.TabIndex = 3
-        Me.container_Tabs.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.tp_PurchaseEntries, Me.tp_SalesEntries, Me.tp_Parties})
+        Me.container_Tabs.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.tp_PurchaseEntries, Me.tp_SalesEntries, Me.tp_BankEntries, Me.tp_Parties})
         '
         'tp_PurchaseEntries
         '
@@ -460,6 +555,43 @@ Partial Class frm_Main
         Me.gv_SalesEntries.GridControl = Me.gc_SalesEntries
         Me.gv_SalesEntries.Name = "gv_SalesEntries"
         '
+        'tp_BankEntries
+        '
+        Me.tp_BankEntries.Controls.Add(Me.ProgressPanel_BankEntries)
+        Me.tp_BankEntries.Controls.Add(Me.gc_BankEntries)
+        Me.tp_BankEntries.Name = "tp_BankEntries"
+        Me.tp_BankEntries.Size = New System.Drawing.Size(804, 278)
+        Me.tp_BankEntries.Text = "Bank Entries"
+        '
+        'ProgressPanel_BankEntries
+        '
+        Me.ProgressPanel_BankEntries.Appearance.BackColor = System.Drawing.Color.Transparent
+        Me.ProgressPanel_BankEntries.Appearance.Options.UseBackColor = True
+        Me.ProgressPanel_BankEntries.BarAnimationElementThickness = 2
+        Me.ProgressPanel_BankEntries.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ProgressPanel_BankEntries.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ProgressPanel_BankEntries.Location = New System.Drawing.Point(0, 0)
+        Me.ProgressPanel_BankEntries.Name = "ProgressPanel_BankEntries"
+        Me.ProgressPanel_BankEntries.Size = New System.Drawing.Size(804, 278)
+        Me.ProgressPanel_BankEntries.TabIndex = 5
+        Me.ProgressPanel_BankEntries.Visible = False
+        '
+        'gc_BankEntries
+        '
+        Me.gc_BankEntries.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gc_BankEntries.Location = New System.Drawing.Point(0, 0)
+        Me.gc_BankEntries.MainView = Me.gv_BankEntries
+        Me.gc_BankEntries.MenuManager = Me.RibbonControl
+        Me.gc_BankEntries.Name = "gc_BankEntries"
+        Me.gc_BankEntries.Size = New System.Drawing.Size(804, 278)
+        Me.gc_BankEntries.TabIndex = 4
+        Me.gc_BankEntries.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gv_BankEntries})
+        '
+        'gv_BankEntries
+        '
+        Me.gv_BankEntries.GridControl = Me.gc_BankEntries
+        Me.gv_BankEntries.Name = "gv_BankEntries"
+        '
         'tp_Parties
         '
         Me.tp_Parties.Controls.Add(Me.ProgressPanel_Parties)
@@ -525,19 +657,6 @@ Partial Class frm_Main
         Me.PictureBox_Logo.TabIndex = 5
         Me.PictureBox_Logo.TabStop = False
         '
-        'txt_StateCode
-        '
-        Me.txt_StateCode.Caption = "State Code       "
-        Me.txt_StateCode.Edit = Me.txt_StateCode_Edit
-        Me.txt_StateCode.EditWidth = 150
-        Me.txt_StateCode.Id = 18
-        Me.txt_StateCode.Name = "txt_StateCode"
-        '
-        'txt_StateCode_Edit
-        '
-        Me.txt_StateCode_Edit.AutoHeight = False
-        Me.txt_StateCode_Edit.Name = "txt_StateCode_Edit"
-        '
         'frm_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -561,6 +680,9 @@ Partial Class frm_Main
         CType(Me.chk_CalcValues_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_TallyHost_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_TallyPort_Edit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txt_StateCode_Edit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.chk_IncludeDesc_Edit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txt_BankLedgerName_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gc_Parties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gv_Parties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.container_Tabs, System.ComponentModel.ISupportInitialize).EndInit()
@@ -571,9 +693,11 @@ Partial Class frm_Main
         Me.tp_SalesEntries.ResumeLayout(False)
         CType(Me.gc_SalesEntries, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gv_SalesEntries, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tp_BankEntries.ResumeLayout(False)
+        CType(Me.gc_BankEntries, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.gv_BankEntries, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tp_Parties.ResumeLayout(False)
         CType(Me.PictureBox_Logo, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txt_StateCode_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -634,4 +758,17 @@ Partial Class frm_Main
     Friend WithEvents btn_About As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents txt_StateCode As DevExpress.XtraBars.BarEditItem
     Friend WithEvents txt_StateCode_Edit As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents rp_BankEntries As DevExpress.XtraBars.Ribbon.RibbonPage
+    Friend WithEvents rpg_Items_Bank As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents tp_BankEntries As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents rpg_Export_Bank As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents btn_Template_BankEntries As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents ProgressPanel_BankEntries As DevExpress.XtraWaitForm.ProgressPanel
+    Friend WithEvents gc_BankEntries As DevExpress.XtraGrid.GridControl
+    Friend WithEvents gv_BankEntries As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents chk_IncludeDesc As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents chk_IncludeDesc_Edit As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents txt_BankLedgerName As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents txt_BankLedgerName_Edit As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents rpg_BankEntry As DevExpress.XtraBars.Ribbon.RibbonPageGroup
 End Class

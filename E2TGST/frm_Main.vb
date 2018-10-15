@@ -16,6 +16,8 @@ Public Class frm_Main
         txt_TallyVersion.EditValue = My.Settings.TallyVersion
         chk_CalcValues.EditValue = My.Settings.CalculateValues
         txt_StateCode.EditValue = My.Settings.StateCode
+        txt_BankLedgerName.EditValue = My.Settings.BankLedgerName
+        chk_IncludeDesc.EditValue = My.Settings.IncludeDesc
     End Sub
 
     Function CheckDependencies(ByVal Vouchers As List(Of Objects.Voucher)) As Boolean
@@ -238,6 +240,60 @@ Public Class frm_Main
                End Sub)
     End Function
 
+    Async Function LoadBankEntries(ByVal FileName As String) As Task
+        Invoke(Sub()
+                   btn_LoadExcel.Enabled = False
+                   ProgressPanel_BankEntries.Visible = True
+               End Sub)
+        Await Task.Run(Function()
+                           Try
+                               Dim R As New List(Of Objects.BankEntry)
+                               Using stream As IO.FileStream = IO.File.Open(FileName, IO.FileMode.Open, IO.FileAccess.Read)
+                                   Using reader = ExcelReaderFactory.CreateReader(stream)
+                                       Dim Index As Integer = -1
+                                       While reader.Read()
+                                           If reader.CodeName = "BankEntries" AndAlso Not reader.IsDBNull(0) Then
+                                               Index += 1
+                                               If Index > 0 Then
+                                                   Dim ValueDate As Date = If(reader.IsDBNull(0), Nothing, reader.GetDateTime(0))
+                                                   If ValueDate <> Nothing Then
+                                                       Dim Description As String = If(reader.IsDBNull(1), "", reader.GetString(1))
+                                                       Dim Ref As String = ""
+                                                       Try
+                                                           Ref = If(reader.IsDBNull(2), "", reader.GetString(2))
+                                                       Catch ex1 As Exception
+                                                           Try
+                                                               Ref = If(reader.IsDBNull(2), "", reader.GetDouble(2))
+                                                           Catch ex2 As Exception
+
+                                                           End Try
+                                                       End Try
+                                                       Dim Withdrawal As Double = If(reader.IsDBNull(3), 0, reader.GetDouble(3))
+                                                       Dim Deposit As Double = If(reader.IsDBNull(4), 0, reader.GetDouble(4))
+                                                       Dim LedgerName As String = If(reader.IsDBNull(5), "", reader.GetString(5))
+                                                       R.Add(New Objects.BankEntry(ValueDate, Description, Ref, Withdrawal, Deposit, LedgerName))
+                                                   End If
+                                               End If
+                                           End If
+                                       End While
+                                   End Using
+                               End Using
+                               Invoke(Sub()
+                                          gc_BankEntries.DataSource = R
+                                          gc_BankEntries.RefreshDataSource()
+                                      End Sub)
+                           Catch ex As Exception
+                               MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                           Return False
+                           End Try
+                           Return True
+                       End Function)
+        Invoke(Sub()
+                   btn_LoadExcel.Enabled = True
+                   ProgressPanel_BankEntries.Visible = False
+               End Sub)
+    End Function
+
     Private Async Sub Export(ByVal XML As String, ByVal Filename As String)
         If Filename <> "" Then
             My.Computer.FileSystem.WriteAllText(Filename, XML, False)
@@ -278,6 +334,15 @@ Public Class frm_Main
         End If
     End Sub
 
+    Sub ExportBank(ByVal Filename As String)
+        Dim Vouchers As List(Of Objects.Voucher) = Tally.Converter.Bank2Vouchers(gc_BankEntries.DataSource)
+        If CheckDependencies(Vouchers) Then
+            Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
+            Dim XML As String = XMLGen.GenerateVouchers(Vouchers)
+            Export(XML, Filename)
+        End If
+    End Sub
+
     Sub ExportParties()
         ExportParties("")
     End Sub
@@ -288,6 +353,10 @@ Public Class frm_Main
 
     Sub ExportSales()
         ExportSales("")
+    End Sub
+
+    Sub ExportBank()
+        ExportBank("")
     End Sub
 #End Region
 
@@ -304,6 +373,8 @@ Public Class frm_Main
                 Await LoadParties(OpenFileDialog_Excel.FileName)
             ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
                 Await LoadSalesEntries(OpenFileDialog_Excel.FileName)
+            ElseIf RibbonControl.SelectedPage Is rp_BankEntries Then
+                Await LoadBankEntries(OpenFileDialog_Excel.FileName)
             End If
         End If
     End Sub
@@ -315,6 +386,8 @@ Public Class frm_Main
             SaveFileDialog_XML.FileName = "Parties.xml"
         ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
             SaveFileDialog_XML.FileName = "Sales Entries.xml"
+        ElseIf RibbonControl.SelectedPage Is rp_BankEntries Then
+            SaveFileDialog_XML.FileName = "Bank Entries.xml"
         End If
         If SaveFileDialog_XML.ShowDialog = DialogResult.OK Then
             If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
@@ -323,6 +396,8 @@ Public Class frm_Main
                 ExportParties(SaveFileDialog_XML.FileName)
             ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
                 ExportSales(SaveFileDialog_XML.FileName)
+            ElseIf RibbonControl.SelectedPage Is rp_BankEntries Then
+                ExportBank(SaveFileDialog_XML.FileName)
             End If
         End If
     End Sub
@@ -342,6 +417,8 @@ Public Class frm_Main
             container_Tabs.SelectedTabPage = tp_Parties
         ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
             container_Tabs.SelectedTabPage = tp_SalesEntries
+        ElseIf RibbonControl.SelectedPage Is rp_BankEntries Then
+            container_Tabs.SelectedTabPage = tp_BankEntries
         End If
     End Sub
 
@@ -352,6 +429,8 @@ Public Class frm_Main
             RibbonControl.SelectedPage = rp_Parties
         ElseIf container_Tabs.SelectedTabPage Is tp_SalesEntries Then
             RibbonControl.SelectedPage = rp_SalesEntries
+        ElseIf container_Tabs.SelectedTabPage Is tp_BankEntries Then
+            RibbonControl.SelectedPage = rp_BankEntries
         End If
     End Sub
 
@@ -392,6 +471,7 @@ finish:
                    If TallyIO.CompanyName <> "" Then
                        rp_PurchaseEntries.Visible = True
                        rp_SalesEntries.Visible = True
+                       rp_BankEntries.Visible = True
                        rp_Parties.Visible = True
                    End If
                End Sub)
@@ -437,6 +517,8 @@ finish:
             gc_PurchaseEntries.RefreshDataSource()
         ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
             gc_SalesEntries.RefreshDataSource()
+        ElseIf RibbonControl.SelectedPage Is rp_BankEntries Then
+            gc_BankEntries.RefreshDataSource()
         End If
     End Sub
 
@@ -448,6 +530,8 @@ finish:
                 ExportParties()
             ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
                 ExportSales()
+            ElseIf RibbonControl.SelectedPage Is rp_BankEntries Then
+                ExportBank
             End If
         End If
     End Sub
@@ -500,12 +584,30 @@ finish:
         End If
     End Sub
 
-    Private Sub txt_StateCode_ItemClick(sender As Object, e As ItemClickEventArgs) Handles txt_StateCode.ItemClick
-
-    End Sub
-
     Private Sub txt_StateCode_EditValueChanged(sender As Object, e As EventArgs) Handles txt_StateCode.EditValueChanged
         My.Settings.StateCode = txt_StateCode.EditValue
+        My.Settings.Save()
+    End Sub
+
+    Private Sub btn_Template_BankEntries_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Template_BankEntries.ItemClick
+        SaveFileDialog_Excel.FileName = "Bank Entries.xlsx"
+        If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
+            Try
+                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, My.Resources.BankEntries, False)
+                MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+            Catch ex As Exception
+                MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+            End Try
+        End If
+    End Sub
+
+    Private Sub txt_BankLedgerName_EditValueChanged(sender As Object, e As EventArgs) Handles txt_BankLedgerName.EditValueChanged
+        My.Settings.BankLedgerName = txt_BankLedgerName.EditValue
+        My.Settings.Save()
+    End Sub
+
+    Private Sub chk_IncludeDesc_EditValueChanged(sender As Object, e As EventArgs) Handles chk_IncludeDesc.EditValueChanged
+        My.Settings.IncludeDesc = chk_IncludeDesc.EditValue
         My.Settings.Save()
     End Sub
 #End Region

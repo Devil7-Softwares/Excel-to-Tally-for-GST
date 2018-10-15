@@ -129,6 +129,44 @@ Namespace Tally
 
             Return R
         End Function
+
+        Public Shared Function Bank2Vouchers(ByVal BankEntries As List(Of Objects.BankEntry)) As List(Of Objects.Voucher)
+            Dim R As New List(Of Objects.Voucher)
+
+            For Each BankEntry As Objects.BankEntry In BankEntries
+                Dim VoucherType As Enums.VoucherType = Enums.VoucherType.Contra
+                Dim BankEffect As Enums.Effect = If(BankEntry.Withdrawals <> 0, Enums.Effect.Cr, Enums.Effect.Dr)
+                Dim Amount As Double = If(BankEntry.Withdrawals = 0, BankEntry.Deposits, BankEntry.Withdrawals)
+                If BankEntry.LedgerName = "Cash" Or BankEntry.LedgerName.ToUpper.Contains("CASH") Then
+                    VoucherType = Enums.VoucherType.Contra
+                Else
+                    If BankEntry.Withdrawals = 0 Then
+                        VoucherType = Enums.VoucherType.Receipt
+                    Else
+                        VoucherType = Enums.VoucherType.Payment
+                    End If
+                End If
+                Dim Narration As String = ""
+                If BankEntry.Ref <> "" Then
+                    Narration = "Cheque/Ref. No.: " & BankEntry.Ref
+                End If
+                If BankEntry.Description <> "" AndAlso My.Settings.IncludeDesc Then
+                    Narration &= If(Narration = "", "", vbNewLine & vbNewLine) & BankEntry.Description
+                End If
+
+                Dim BankVoucherEntry As New Objects.VoucherEntry(My.Settings.BankLedgerName, BankEffect, Amount)
+                Dim LedgerVoucherEntry As New Objects.VoucherEntry(BankEntry.LedgerName, If(BankEffect = Enums.Effect.Dr, Enums.Effect.Cr, Enums.Effect.Dr), Amount)
+                Dim Entries As New List(Of Objects.VoucherEntry)
+                If BankEffect = Enums.Effect.Dr Then
+                    Entries.AddRange({BankVoucherEntry, LedgerVoucherEntry})
+                Else
+                    Entries.AddRange({LedgerVoucherEntry, BankVoucherEntry})
+                End If
+                R.Add(New Objects.Voucher([Enum].GetName(GetType(Enums.VoucherType), VoucherType), BankEntry.ValueDate, "", Narration.Trim, Entries))
+            Next
+
+            Return R
+        End Function
 #End Region
 
     End Class

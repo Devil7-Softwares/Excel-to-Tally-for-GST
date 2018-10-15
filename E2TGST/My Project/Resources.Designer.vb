@@ -88,6 +88,16 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property BankEntries() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("BankEntries", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to &lt;ENVELOPE&gt;
         '''&lt;HEADER&gt;
         '''&lt;TALLYREQUEST&gt;Import Data&lt;/TALLYREQUEST&gt;

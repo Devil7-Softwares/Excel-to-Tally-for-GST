@@ -101,6 +101,7 @@
     <Compile Include="Classes\Objects\Party.vb" />
     <Compile Include="Classes\Objects\PurchaseEntry.vb" />
     <Compile Include="Classes\Objects\Response.vb" />
+    <Compile Include="Classes\Objects\BankEntry.vb" />
     <Compile Include="Classes\Objects\SalesEntry.vb" />
     <Compile Include="Classes\Objects\State.vb" />
     <Compile Include="Classes\Objects\Voucher.vb" />
@@ -186,6 +187,7 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Resources\Bank Entries.xlsx" />
     <None Include="Resources\Parties.xlsx" />
     <None Include="Resources\PurchaseEntries.xlsx" />
     <None Include="Resources\SalesEntries.xlsx" />

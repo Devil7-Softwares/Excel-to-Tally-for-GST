@@ -19,13 +19,37 @@
 '                                                                          '
 '=========================================================================='
 
-Namespace Enums
-    Public Enum VoucherType As Integer
-        Payment = 0
-        Receipt = 1
-        Purchase = 2
-        Sales = 3
-        Journal = 4
-        Contra = 5
-    End Enum
+Namespace Objects
+    Public Class BankEntry
+
+#Region "Properties/Fields"
+        Property ValueDate As Date
+        Property Description As String
+        Property Ref As String
+        Property Withdrawals As Double
+        Property Deposits As Double
+        Property LedgerName As String
+#End Region
+
+#Region "Constructors"
+        Sub New()
+            Me.ValueDate = Now
+            Me.Description = ""
+            Me.Ref = ""
+            Me.Withdrawals = 0
+            Me.Deposits = 0
+            Me.LedgerName = ""
+        End Sub
+
+        Sub New(ByVal ValueDate As Date, ByVal Description As String, ByVal Ref As String, ByVal Withdrawals As Double, ByVal Deposits As Double, ByVal LedgerName As String)
+            Me.ValueDate = ValueDate
+            Me.Description = Description
+            Me.Ref = Ref
+            Me.Withdrawals = Withdrawals
+            Me.Deposits = Deposits
+            Me.LedgerName = LedgerName
+        End Sub
+#End Region
+
+    End Class
 End Namespace

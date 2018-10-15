@@ -185,6 +185,30 @@ Namespace My
                 Me("FirstRun") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property IncludeDesc() As Boolean
+            Get
+                Return CType(Me("IncludeDesc"),Boolean)
+            End Get
+            Set
+                Me("IncludeDesc") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Bank A/c")>  _
+        Public Property BankLedgerName() As String
+            Get
+                Return CType(Me("BankLedgerName"),String)
+            End Get
+            Set
+                Me("BankLedgerName") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

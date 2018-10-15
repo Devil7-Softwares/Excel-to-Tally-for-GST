@@ -9,6 +9,37 @@ Public Class frm_Main
     Dim TallyIO As New Tally.IO
 #End Region
 
+#Region "Excel Reader Functions"
+    Function GetString(ByVal Reader As IExcelDataReader, ByVal Index As Integer) As String
+        If Not Reader.IsDBNull(Index) Then
+            Try
+                Return Reader.GetValue(Index).ToString.Trim
+            Catch ex As Exception
+
+            End Try
+        End If
+        Return ""
+    End Function
+
+    Function GetDouble(ByVal Reader As IExcelDataReader, ByVal Index As Integer) As Double
+        Dim R As Double = 0
+        If Not Reader.IsDBNull(Index) Then
+            Dim Val As String = GetString(Reader, Index)
+            If Val <> "" Then Double.TryParse(Val, R)
+        End If
+        Return R
+    End Function
+
+    Function GetDate(ByVal Reader As IExcelDataReader, ByVal Index As Integer) As Date
+        Dim R As Date = Nothing
+        If Not Reader.IsDBNull(Index) Then
+            Dim Val As String = GetString(Reader, Index)
+            If Val <> "" Then Date.TryParse(Val, R)
+        End If
+        Return R
+    End Function
+#End Region
+
 #Region "Subs"
     Sub LoadSettings()
         txt_TallyHost.EditValue = My.Settings.Host
@@ -56,12 +87,12 @@ Public Class frm_Main
                                            If reader.CodeName = "Parties" AndAlso Not reader.IsDBNull(0) Then
                                                Index += 1
                                                If Index > 0 Then
-                                                   Dim Name As String = reader.GetString(0).Trim
+                                                   Dim Name As String = GetString(reader, 0)
                                                    If Name <> "" Then
-                                                       Dim GSTIN As String = reader.GetString(1).Trim
-                                                       Dim Type As Enums.PartyType = If(reader.GetString(3) = "SundryCreditor", 1, 0)
+                                                       Dim GSTIN As String = GetString(reader, 1)
+                                                       Dim Type As Enums.PartyType = If(GetString(reader, 3) = "SundryCreditor", 1, 0)
                                                        Dim RegType As Enums.RegistrationType = Enums.RegistrationType.Unknown
-                                                       Dim RegType_ As String = reader.GetString(2)
+                                                       Dim RegType_ As String = GetString(reader, 2)
                                                        If RegType_ = "Consumer" Then
                                                            RegType = Enums.RegistrationType.Consumer
                                                        ElseIf RegType_ = "Unregistered" Then
@@ -127,28 +158,19 @@ Public Class frm_Main
                                            If reader.CodeName = "PurchaseEntries" AndAlso Not reader.IsDBNull(0) Then
                                                Index += 1
                                                If Index > 0 Then
-                                                   Dim GSTIN As String = reader.GetString(0).Trim
+                                                   Dim GSTIN As String = GetString(reader, 0)
                                                    If GSTIN <> "" Then
-                                                       Dim InvoiceNo As String = ""
-                                                       Try
-                                                           InvoiceNo = If(reader.IsDBNull(1), "", reader.GetDouble(1))
-                                                       Catch e1 As Exception
-                                                           Try
-                                                               InvoiceNo = reader.GetString(1)
-                                                           Catch e2 As Exception
-
-                                                           End Try
-                                                       End Try
-                                                       Dim InvoiceDate As Date = If(reader.IsDBNull(2), Now, reader.GetDateTime(2))
-                                                       Dim InvoiceValue As Double = If(reader.IsDBNull(3), 0, reader.GetDouble(3))
-                                                       Dim GSTRate As Integer = If(reader.IsDBNull(4), 0, reader.GetDouble(4))
-                                                       Dim TaxableValue As Double = If(reader.IsDBNull(5), 0, reader.GetDouble(5))
-                                                       Dim IGST As Double = If(reader.IsDBNull(6), 0, reader.GetDouble(6))
-                                                       Dim CGST As Double = If(reader.IsDBNull(7), 0, reader.GetDouble(7))
-                                                       Dim SGST As Double = If(reader.IsDBNull(8), 0, reader.GetDouble(8))
-                                                       Dim CESS As Double = If(reader.IsDBNull(9), 0, reader.GetDouble(9))
-                                                       Dim LedgerName As String = If(reader.IsDBNull(10), 0, reader.GetString(10))
-                                                       Dim VoucherType_ As String = If(reader.IsDBNull(11), 0, reader.GetString(11))
+                                                       Dim InvoiceNo As String = GetString(reader, 1)
+                                                       Dim InvoiceDate As Date = GetDate(reader, 2)
+                                                       Dim InvoiceValue As Double = GetDouble(reader, 3)
+                                                       Dim GSTRate As Integer = GetDouble(reader, 4)
+                                                       Dim TaxableValue As Double = GetDouble(reader, 5)
+                                                       Dim IGST As Double = GetDouble(reader, 6)
+                                                       Dim CGST As Double = GetDouble(reader, 7)
+                                                       Dim SGST As Double = GetDouble(reader, 8)
+                                                       Dim CESS As Double = GetDouble(reader, 9)
+                                                       Dim LedgerName As String = GetString(reader, 10)
+                                                       Dim VoucherType_ As String = GetString(reader, 11)
                                                        Dim VoucherType As Enums.VoucherType = Enums.VoucherType.Purchase
                                                        If VoucherType_ = "Payment" Then
                                                            VoucherType = Enums.VoucherType.Payment
@@ -200,26 +222,17 @@ Public Class frm_Main
                                            If reader.CodeName = "SalesEntries" AndAlso Not reader.IsDBNull(0) Then
                                                Index += 1
                                                If Index > 0 Then
-                                                   Dim GSTIN As String = reader.GetString(0).Trim
-                                                   Dim InvoiceDate As Date = If(reader.IsDBNull(1), Now, reader.GetDateTime(1))
+                                                   Dim GSTIN As String = GetString(reader, 0)
+                                                   Dim InvoiceDate As Date = GetDate(reader, 1)
                                                    If GSTIN <> "" Then
-                                                       Dim InvoiceNo As String = ""
-                                                       Try
-                                                           InvoiceNo = If(reader.IsDBNull(2), "", reader.GetDouble(2))
-                                                       Catch e1 As Exception
-                                                           Try
-                                                               InvoiceNo = reader.GetString(2)
-                                                           Catch e2 As Exception
-
-                                                           End Try
-                                                       End Try
-                                                       Dim InvoiceValue As Double = If(reader.IsDBNull(3), 0, reader.GetDouble(3))
-                                                       Dim GSTRate As Integer = If(reader.IsDBNull(4), 0, reader.GetDouble(4))
-                                                       Dim TaxableValue As Double = If(reader.IsDBNull(5), 0, reader.GetDouble(5))
-                                                       Dim IGST As Double = If(reader.IsDBNull(6), 0, reader.GetDouble(6))
-                                                       Dim CGST As Double = If(reader.IsDBNull(7), 0, reader.GetDouble(7))
-                                                       Dim SGST As Double = If(reader.IsDBNull(8), 0, reader.GetDouble(8))
-                                                       Dim CESS As Double = If(reader.IsDBNull(9), 0, reader.GetDouble(9))
+                                                       Dim InvoiceNo As String = GetString(reader, 2)
+                                                       Dim InvoiceValue As Double = GetDouble(reader, 3)
+                                                       Dim GSTRate As Integer = GetDouble(reader, 4)
+                                                       Dim TaxableValue As Double = GetDouble(reader, 5)
+                                                       Dim IGST As Double = GetDouble(reader, 6)
+                                                       Dim CGST As Double = GetDouble(reader, 7)
+                                                       Dim SGST As Double = GetDouble(reader, 8)
+                                                       Dim CESS As Double = GetDouble(reader, 9)
                                                        R.Add(New Objects.SalesEntry(GSTIN, InvoiceDate, InvoiceNo, InvoiceValue, GSTRate, TaxableValue, IGST, CGST, SGST, CESS))
                                                    End If
                                                End If
@@ -259,22 +272,13 @@ Public Class frm_Main
                                            If reader.CodeName = "BankEntries" AndAlso Not reader.IsDBNull(0) Then
                                                Index += 1
                                                If Index > 0 Then
-                                                   Dim ValueDate As Date = If(reader.IsDBNull(0), Nothing, reader.GetDateTime(0))
+                                                   Dim ValueDate As Date = GetDate(reader, 0)
                                                    If ValueDate <> Nothing Then
-                                                       Dim Description As String = If(reader.IsDBNull(1), "", reader.GetString(1))
-                                                       Dim Ref As String = ""
-                                                       Try
-                                                           Ref = If(reader.IsDBNull(2), "", reader.GetString(2))
-                                                       Catch ex1 As Exception
-                                                           Try
-                                                               Ref = If(reader.IsDBNull(2), "", reader.GetDouble(2))
-                                                           Catch ex2 As Exception
-
-                                                           End Try
-                                                       End Try
-                                                       Dim Withdrawal As Double = If(reader.IsDBNull(3), 0, reader.GetDouble(3))
-                                                       Dim Deposit As Double = If(reader.IsDBNull(4), 0, reader.GetDouble(4))
-                                                       Dim LedgerName As String = If(reader.IsDBNull(5), "", reader.GetString(5))
+                                                       Dim Description As String = GetString(reader, 1)
+                                                       Dim Ref As String = GetString(reader, 2)
+                                                       Dim Withdrawal As Double = GetDouble(reader, 3)
+                                                       Dim Deposit As Double = GetDouble(reader, 4)
+                                                       Dim LedgerName As String = GetString(reader, 5)
                                                        R.Add(New Objects.BankEntry(ValueDate, Description, Ref, Withdrawal, Deposit, LedgerName))
                                                    End If
                                                End If

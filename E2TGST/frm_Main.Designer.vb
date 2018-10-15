@@ -495,6 +495,7 @@ Partial Class frm_Main
         Me.ProgressPanel_PurchaseEntries.Appearance.Options.UseBackColor = True
         Me.ProgressPanel_PurchaseEntries.BarAnimationElementThickness = 2
         Me.ProgressPanel_PurchaseEntries.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ProgressPanel_PurchaseEntries.Description = "This may take some minutes. Please Wait..."
         Me.ProgressPanel_PurchaseEntries.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ProgressPanel_PurchaseEntries.Location = New System.Drawing.Point(0, 0)
         Me.ProgressPanel_PurchaseEntries.Name = "ProgressPanel_PurchaseEntries"
@@ -532,6 +533,7 @@ Partial Class frm_Main
         Me.ProgressPanel_SalesEntries.Appearance.Options.UseBackColor = True
         Me.ProgressPanel_SalesEntries.BarAnimationElementThickness = 2
         Me.ProgressPanel_SalesEntries.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ProgressPanel_SalesEntries.Description = "This may take some minutes. Please Wait..."
         Me.ProgressPanel_SalesEntries.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ProgressPanel_SalesEntries.Location = New System.Drawing.Point(0, 0)
         Me.ProgressPanel_SalesEntries.Name = "ProgressPanel_SalesEntries"
@@ -569,6 +571,7 @@ Partial Class frm_Main
         Me.ProgressPanel_BankEntries.Appearance.Options.UseBackColor = True
         Me.ProgressPanel_BankEntries.BarAnimationElementThickness = 2
         Me.ProgressPanel_BankEntries.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ProgressPanel_BankEntries.Description = "This may take some minutes. Please Wait..."
         Me.ProgressPanel_BankEntries.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ProgressPanel_BankEntries.Location = New System.Drawing.Point(0, 0)
         Me.ProgressPanel_BankEntries.Name = "ProgressPanel_BankEntries"
@@ -606,6 +609,7 @@ Partial Class frm_Main
         Me.ProgressPanel_Parties.Appearance.Options.UseBackColor = True
         Me.ProgressPanel_Parties.BarAnimationElementThickness = 2
         Me.ProgressPanel_Parties.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ProgressPanel_Parties.Description = "This may take some minutes. Please Wait..."
         Me.ProgressPanel_Parties.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ProgressPanel_Parties.Location = New System.Drawing.Point(0, 0)
         Me.ProgressPanel_Parties.Name = "ProgressPanel_Parties"

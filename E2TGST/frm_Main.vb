@@ -43,6 +43,7 @@ Public Class frm_Main
         Dim Loaded As Integer = 0
         Invoke(Sub()
                    btn_LoadExcel.Enabled = False
+                   ProgressPanel_Parties.Caption = "Loading Entries from Excel..."
                    ProgressPanel_Parties.Visible = True
                End Sub)
         Await Task.Run(Function()
@@ -113,6 +114,7 @@ Public Class frm_Main
     Async Function LoadPurchaseEntries(ByVal FileName As String) As Task
         Invoke(Sub()
                    btn_LoadExcel.Enabled = False
+                   ProgressPanel_PurchaseEntries.Caption = "Loading Entries from Excel..."
                    ProgressPanel_PurchaseEntries.Visible = True
                End Sub)
         Await Task.Run(Function()
@@ -185,6 +187,7 @@ Public Class frm_Main
     Async Function LoadSalesEntries(ByVal FileName As String) As Task
         Invoke(Sub()
                    btn_LoadExcel.Enabled = False
+                   ProgressPanel_SalesEntries.Caption = "Loading Entries from Excel..."
                    ProgressPanel_SalesEntries.Visible = True
                End Sub)
         Await Task.Run(Function()
@@ -243,6 +246,7 @@ Public Class frm_Main
     Async Function LoadBankEntries(ByVal FileName As String) As Task
         Invoke(Sub()
                    btn_LoadExcel.Enabled = False
+                   ProgressPanel_BankEntries.Caption = "Loading Entries from Excel..."
                    ProgressPanel_BankEntries.Visible = True
                End Sub)
         Await Task.Run(Function()
@@ -294,7 +298,7 @@ Public Class frm_Main
                End Sub)
     End Function
 
-    Private Async Sub Export(ByVal XML As String, ByVal Filename As String)
+    Private Async Function Export(ByVal XML As String, ByVal Filename As String) As Task
         If Filename <> "" Then
             My.Computer.FileSystem.WriteAllText(Filename, XML, False)
             MsgBox("XML File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
@@ -308,55 +312,91 @@ Public Class frm_Main
                 MsgBox("Errors on Exporting XML to Tally..! XML Respose Saved to Desktop.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
             End If
         End If
-    End Sub
+    End Function
 
-    Sub ExportParties(ByVal FileName As String)
+    Async Function ExportParties(ByVal FileName As String) As Task
+        Invoke(Sub()
+                   RibbonControl.Enabled = False
+                   ProgressPanel_Parties.Caption = String.Format("Exporting Entries to {0}...", If(FileName = "", "Tally", "File"))
+                   ProgressPanel_Parties.Visible = True
+               End Sub)
         Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
         Dim XML As String = XMLGen.GenerateMasters(gc_Parties.DataSource, TallyIO.Ledgers)
-        Export(XML, FileName)
-    End Sub
+        Await Export(XML, FileName)
+        Invoke(Sub()
+                   RibbonControl.Enabled = True
+                   ProgressPanel_Parties.Visible = False
+               End Sub)
+    End Function
 
-    Sub ExportPurchase(ByVal Filename As String)
+    Async Function ExportPurchase(ByVal Filename As String) As Task
+        Invoke(Sub()
+                   RibbonControl.Enabled = False
+                   ProgressPanel_PurchaseEntries.Caption = String.Format("Exporting Entries to {0}...", If(Filename = "", "Tally", "File"))
+                   ProgressPanel_PurchaseEntries.Visible = True
+               End Sub)
         Dim Vouchers As List(Of Objects.Voucher) = Tally.Converter.Purchase2Vouchers(gc_PurchaseEntries.DataSource)
         If CheckDependencies(Vouchers) Then
             Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
             Dim XML As String = XMLGen.GenerateVouchers(Vouchers)
-            Export(XML, Filename)
+            Await Export(XML, Filename)
         End If
-    End Sub
+        Invoke(Sub()
+                   RibbonControl.Enabled = True
+                   ProgressPanel_PurchaseEntries.Visible = False
+               End Sub)
+    End Function
 
-    Sub ExportSales(ByVal Filename As String)
+    Async Function ExportSales(ByVal Filename As String) As Task
+        Invoke(Sub()
+                   RibbonControl.Enabled = False
+                   ProgressPanel_SalesEntries.Caption = String.Format("Exporting Entries to {0}...", If(Filename = "", "Tally", "File"))
+                   ProgressPanel_SalesEntries.Visible = True
+               End Sub)
         Dim Vouchers As List(Of Objects.Voucher) = Tally.Converter.Sales2Vouchers(gc_SalesEntries.DataSource)
         If CheckDependencies(Vouchers) Then
             Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
             Dim XML As String = XMLGen.GenerateVouchers(Vouchers)
-            Export(XML, Filename)
+            Await Export(XML, Filename)
         End If
-    End Sub
+        Invoke(Sub()
+                   RibbonControl.Enabled = True
+                   ProgressPanel_SalesEntries.Visible = False
+               End Sub)
+    End Function
 
-    Sub ExportBank(ByVal Filename As String)
+    Async Function ExportBank(ByVal Filename As String) As Task
+        Invoke(Sub()
+                   RibbonControl.Enabled = False
+                   ProgressPanel_BankEntries.Caption = String.Format("Exporting Entries to {0}...", If(Filename = "", "Tally", "File"))
+                   ProgressPanel_BankEntries.Visible = True
+               End Sub)
         Dim Vouchers As List(Of Objects.Voucher) = Tally.Converter.Bank2Vouchers(gc_BankEntries.DataSource)
         If CheckDependencies(Vouchers) Then
             Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
             Dim XML As String = XMLGen.GenerateVouchers(Vouchers)
-            Export(XML, Filename)
+            Await Export(XML, Filename)
         End If
+        Invoke(Sub()
+                   RibbonControl.Enabled = True
+                   ProgressPanel_BankEntries.Visible = False
+               End Sub)
+    End Function
+
+    Async Sub ExportParties()
+        Await ExportParties("")
     End Sub
 
-    Sub ExportParties()
-        ExportParties("")
+    Async Sub ExportPurchase()
+        Await ExportPurchase("")
     End Sub
 
-    Sub ExportPurchase()
-        ExportPurchase("")
+    Async Sub ExportSales()
+        Await ExportSales("")
     End Sub
 
-    Sub ExportSales()
-        ExportSales("")
-    End Sub
-
-    Sub ExportBank()
-        ExportBank("")
+    Async Sub ExportBank()
+        Await ExportBank("")
     End Sub
 #End Region
 
@@ -379,7 +419,7 @@ Public Class frm_Main
         End If
     End Sub
 
-    Private Sub btn_XML_File_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_XML_File.ItemClick
+    Private Async Sub btn_XML_File_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_XML_File.ItemClick
         If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
             SaveFileDialog_XML.FileName = "Purchase Entries.xml"
         ElseIf RibbonControl.SelectedPage Is rp_Parties Then
@@ -391,13 +431,13 @@ Public Class frm_Main
         End If
         If SaveFileDialog_XML.ShowDialog = DialogResult.OK Then
             If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
-                ExportPurchase(SaveFileDialog_XML.FileName)
+                Await ExportPurchase(SaveFileDialog_XML.FileName)
             ElseIf RibbonControl.SelectedPage Is rp_Parties Then
-                ExportParties(SaveFileDialog_XML.FileName)
+                Await ExportParties(SaveFileDialog_XML.FileName)
             ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
-                ExportSales(SaveFileDialog_XML.FileName)
+                Await ExportSales(SaveFileDialog_XML.FileName)
             ElseIf RibbonControl.SelectedPage Is rp_BankEntries Then
-                ExportBank(SaveFileDialog_XML.FileName)
+                Await ExportBank(SaveFileDialog_XML.FileName)
             End If
         End If
     End Sub

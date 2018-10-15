@@ -32,11 +32,14 @@ Public Class GSTINValidator
     ''' Method to check if a GSTIN Is valid. Checks the GSTIN format And the check digit Is valid for the passed input GSTIN
     ''' </summary>
     ''' <param name="GSTIN">GSTIN to Validate</param>
-    Public Shared Function IsValid(ByVal GSTIN As String) As Boolean
+    Public Shared Function IsValid(ByVal GSTIN As String, Optional ByRef ErrorStr As String = Nothing) As Boolean
         Try
             Validate(GSTIN)
             Return True
         Catch ex As Exception
+            If ErrorStr IsNot Nothing Then
+                ErrorStr = ex.Message
+            End If
             Return False
         End Try
     End Function

@@ -542,9 +542,16 @@ finish:
 
             If cellInfo IsNot Nothing Then
                 If TallyIO IsNot Nothing AndAlso TallyIO.Ledgers IsNot Nothing AndAlso TallyIO.Ledgers.Count > 0 Then
-                    If e.Column.FieldName = "GSTIN" AndAlso Not TallyIO.Ledgers.Contains(row.GSTIN, StringComparer.OrdinalIgnoreCase) Then
-                        cellInfo.ViewInfo.ErrorIconText = "Party Doesn't Exist in Tally Ledgers!"
-                        cellInfo.ViewInfo.ShowErrorIcon = True
+                    If e.Column.FieldName = "GSTIN" Then
+                        Dim Error_ As String = "-"
+                        If Not GSTINValidator.IsValid(row.GSTIN, Error_) Then
+                        ElseIf Not TallyIO.Ledgers.Contains(row.GSTIN, StringComparer.OrdinalIgnoreCase) Then
+                            Error_ = "Party Doesn't Exist in Tally Ledgers!"
+                        End If
+                        If Error_ <> "-" Then
+                            cellInfo.ViewInfo.ErrorIconText = Error_
+                            cellInfo.ViewInfo.ShowErrorIcon = True
+                        End If
                     ElseIf e.Column.FieldName = "LedgerName" AndAlso Not TallyIO.Ledgers.Contains(row.LedgerName, StringComparer.OrdinalIgnoreCase) Then
                         cellInfo.ViewInfo.ErrorIconText = "Ledger Doesn't Exist in Tally Ledgers!"
                         cellInfo.ViewInfo.ShowErrorIcon = True
@@ -653,6 +660,20 @@ finish:
     Private Sub chk_IncludeDesc_EditValueChanged(sender As Object, e As EventArgs) Handles chk_IncludeDesc.EditValueChanged
         My.Settings.IncludeDesc = chk_IncludeDesc.EditValue
         My.Settings.Save()
+    End Sub
+
+    Private Sub gv_BankEntries_CustomDrawCell(sender As Object, e As RowCellCustomDrawEventArgs) Handles gv_BankEntries.CustomDrawCell
+        If e.Column.FieldName = "LedgerName" Then
+            Dim cellInfo As DevExpress.XtraGrid.Views.Grid.ViewInfo.GridCellInfo = TryCast(e.Cell, DevExpress.XtraGrid.Views.Grid.ViewInfo.GridCellInfo)
+            Dim row As Objects.BankEntry = gv_BankEntries.GetRow(e.RowHandle)
+
+            If cellInfo IsNot Nothing Then
+                If Not TallyIO.Ledgers.Contains(row.LedgerName, StringComparer.OrdinalIgnoreCase) Then
+                    cellInfo.ViewInfo.ErrorIconText = "Ledger Doesn't Exist in Tally Ledgers!"
+                    cellInfo.ViewInfo.ShowErrorIcon = True
+                End If
+            End If
+        End If
     End Sub
 #End Region
 

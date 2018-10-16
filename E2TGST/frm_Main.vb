@@ -505,6 +505,7 @@ Public Class frm_Main
     Private Async Sub btn_Sync_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Sync.ItemClick
         Invoke(Sub()
                    btn_Sync.Enabled = False
+                   ProgressPanel_Main.Caption = "Syncronizing with Tally..."
                    ProgressPanel_Main.Visible = True
                End Sub)
         If Not Await TallyIO.LoadAllMasters Then GoTo finish
@@ -677,22 +678,33 @@ finish:
         End If
     End Sub
 
-    Private Sub btn_Template_Parties_WithData_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Template_Parties_WithData.ItemClick
+    Private Async Sub btn_Template_Parties_WithData_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Template_Parties_WithData.ItemClick
+        Invoke(Sub()
+                   Ribbon.Enabled = False
+                   ProgressPanel_Main.Caption = "Saving Template with Data..."
+                   ProgressPanel_Main.Visible = True
+               End Sub)
         If TallyIO Is Nothing OrElse TallyIO.Parties Is Nothing Then
-            MsgBox("Please Sync With Tally to Use this Function.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+            Invoke(Sub() MsgBox("Please Sync With Tally to Use this Function.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error"))
         ElseIf TallyIO.Parties.Count < 0 Then
-            MsgBox("No Parites Available to Export/Save to Excel Template.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+            Invoke(Sub() MsgBox("No Parites Available to Export/Save to Excel Template.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error"))
         Else
             SaveFileDialog_Excel.FileName = "Parties.xlsx"
             If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
                 Try
-                    MiscFunctions.WriteParties2Excel(TallyIO.Parties, SaveFileDialog_Excel.FileName)
-                    MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+                    Await Task.Run(Sub()
+                                       MiscFunctions.WriteParties2Excel(TallyIO.Parties, SaveFileDialog_Excel.FileName)
+                                   End Sub)
+                    Invoke(Sub() MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done"))
                 Catch ex As Exception
-                    MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                    Invoke(Sub() MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error"))
                 End Try
             End If
         End If
+        Invoke(Sub()
+                   Ribbon.Enabled = True
+                   ProgressPanel_Main.Visible = False
+               End Sub)
     End Sub
 
     Private Sub chk_IgnoreDupParties_EditValueChanged(sender As Object, e As EventArgs) Handles chk_IgnoreDupParties.EditValueChanged

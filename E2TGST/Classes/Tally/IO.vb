@@ -30,6 +30,7 @@ Namespace Tally
         Dim Units_ As New List(Of String)
         Dim Groups_ As New List(Of String)
         Dim Ledgers_ As New List(Of String)
+        Dim Parties_ As New List(Of Objects.Party)
         Dim CompanyName_ As String = ""
 #End Region
 
@@ -55,6 +56,12 @@ Namespace Tally
         ReadOnly Property Ledgers As List(Of String)
             Get
                 Return Ledgers_
+            End Get
+        End Property
+
+        ReadOnly Property Parties As List(Of Objects.Party)
+            Get
+                Return Parties_
             End Get
         End Property
 
@@ -93,6 +100,7 @@ Namespace Tally
 
         Private Sub ReadXML(ByVal RequestData As String)
             Dim Ledgers As New List(Of String)
+            Dim Parites As New List(Of Objects.Party)
             Dim Groups As New List(Of String)
             Dim Units As New List(Of String)
             Dim StockItems As New List(Of String)
@@ -109,7 +117,7 @@ Namespace Tally
                     Me.CompanyName_ = m_xmlr.ReadInnerXml
                 End If
                 If m_xmlr.Name = "LEDGER" Then
-                    Dim Names As String() = ReadLedger(m_xmlr.ReadInnerXml)
+                    Dim Names As String() = ReadLedger(m_xmlr.ReadOuterXml, Parties)
                     For Each i As String In Names
                         Ledgers.Add(ProcessString(i))
                     Next
@@ -128,13 +136,14 @@ Namespace Tally
             End While
             m_xmlr.Close()
             Me.Ledgers_ = Ledgers
+            Me.Parties_ = Parties
             Me.Groups_ = Groups
             Me.StockItems_ = StockItems
             Me.Units_ = Units
         End Sub
 
-        Private Function ReadLedger(ByVal LedgerData As String) As String()
-            LedgerData = "<ROOT>" & LedgerData & "</ROOT>"
+        Private Function ReadLedger(ByVal LedgerData As String, ByRef Parties As List(Of Objects.Party)) As String()
+            LedgerData = LedgerData
             Dim Names As New List(Of String)
             Dim doc As New XmlDocument()
             Using xtr = New XmlTextReader(New MemoryStream(System.Text.Encoding.ASCII.GetBytes(LedgerData))) With {.Namespaces = False}
@@ -142,19 +151,51 @@ Namespace Tally
             End Using
             Dim root As XmlElement = doc.DocumentElement
             Dim elements As XmlNodeList = root.ChildNodes
+            Dim PartyName As String = root.Attributes("NAME").Value
+            Dim PartyGSTIN As String = ""
+            Dim PartyType As String = ""
+            Dim PartyGroup As String = ""
             For i As Integer = 0 To elements.Count - 1
-                If elements(i).Name = "LANGUAGENAME.LIST" Then
+                If elements(i).Name = "PARENT" Then
+                    PartyGroup = elements(i).InnerXml.Replace(" ", "")
+                ElseIf elements(i).Name = "GSTREGISTRATIONTYPE" Then
+                    PartyType = elements(i).InnerXml
+                ElseIf elements(i).Name = "PARTYGSTIN" Then
+                    PartyGSTIN = elements(i).InnerXml
+                ElseIf elements(i).Name = "LANGUAGENAME.LIST" Then
                     For Each e As XmlNode In elements(i).ChildNodes
                         If e.Name = "NAME.LIST" Then
                             For Each n As XmlNode In e.ChildNodes
                                 If n.Name = "NAME" Then
                                     Names.Add(n.InnerXml)
+                                    If n.InnerXml <> PartyName AndAlso GSTINValidator.IsValid(n.InnerXml) Then
+                                        PartyGSTIN = n.InnerXml
+                                    End If
                                 End If
                             Next
                         End If
                     Next
                 End If
             Next
+            If PartyName <> "" AndAlso Parties IsNot Nothing AndAlso (PartyGroup = "SundryDebtors" Or PartyGroup = "SundryCreditors") Then
+                Dim G As Enums.PartyType = Enums.PartyType.SundryDebtor
+                Dim R As Enums.RegistrationType = Enums.RegistrationType.Unknown
+                If PartyGroup = "SundryDebtors" Then
+                    G = Enums.PartyType.SundryDebtor
+                Else
+                    G = Enums.PartyType.SundryCreditor
+                End If
+                If PartyType = "Regular" Then
+                    R = Enums.RegistrationType.Regular
+                ElseIf PartyType = "Composition" Then
+                    R = Enums.RegistrationType.Composition
+                ElseIf PartyType = "Consumer" Then
+                    R = Enums.RegistrationType.Consumer
+                ElseIf PartyType = "Unregistered" Then
+                    R = Enums.RegistrationType.Unregistered
+                End If
+                Parties.Add(New Objects.Party(PartyName, PartyGSTIN, R, G))
+            End If
             Return Names.ToArray
         End Function
 

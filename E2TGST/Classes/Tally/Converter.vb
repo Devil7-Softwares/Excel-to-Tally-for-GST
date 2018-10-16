@@ -27,7 +27,7 @@ Namespace Tally
             Dim R As New List(Of Objects.Voucher)
 
             For Each PurchaseEntry As Objects.PurchaseEntry In PurchaseEntries
-                Dim PlaceOfSupply As Integer = 33
+                Dim PlaceOfSupply As Integer = My.Settings.StateCode
                 Try
                     PlaceOfSupply = CInt(PurchaseEntry.GSTIN.Substring(0, 2))
                 Catch ex As Exception
@@ -81,7 +81,7 @@ Namespace Tally
             Dim R As New List(Of Objects.Voucher)
 
             For Each SalesEntry As Objects.SalesEntry In SalesEntries
-                Dim PlaceOfSupply As Integer = 33
+                Dim PlaceOfSupply As Integer = My.Settings.StateCode
                 Try
                     PlaceOfSupply = CInt(SalesEntry.GSTIN.Substring(0, 2))
                 Catch ex As Exception

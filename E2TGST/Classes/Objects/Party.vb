@@ -31,8 +31,12 @@ Namespace Objects
         Property RegType As Enums.RegistrationType
         ReadOnly Property State As State
             Get
-                Dim StateCode As Integer = CInt(GSTIN.Substring(0, 2))
-                Return State.GetStateByCode(StateCode)
+                Try
+                    Dim StateCode As Integer = CInt(GSTIN.Substring(0, 2))
+                    Return State.GetStateByCode(StateCode)
+                Catch ex As Exception
+                    Return State.GetStateByCode(My.Settings.StateCode)
+                End Try
             End Get
         End Property
 #End Region

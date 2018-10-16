@@ -103,11 +103,11 @@ Public Class frm_Main
                                                        ElseIf RegType_ = "Composition" Then
                                                            RegType = Enums.RegistrationType.Composition
                                                        End If
-                                                       If R.Find(Function(c) c.GSTIN = GSTIN) Is Nothing AndAlso R.Find(Function(c) c.Name = Name) Is Nothing Then
+                                                       If R.Find(Function(c) c.Name = Name) IsNot Nothing Or (GSTIN.Trim <> "" AndAlso R.Find(Function(c) c.GSTIN = GSTIN) IsNot Nothing) Then
+                                                           Skipped += 1
+                                                       Else
                                                            R.Add(New Objects.Party(Name, GSTIN, RegType, Type))
                                                            Loaded += 1
-                                                       Else
-                                                           Skipped += 1
                                                        End If
                                                    End If
                                                End If

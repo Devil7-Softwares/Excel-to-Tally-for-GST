@@ -49,6 +49,7 @@ Public Class frm_Main
         txt_StateCode.EditValue = My.Settings.StateCode
         txt_BankLedgerName.EditValue = My.Settings.BankLedgerName
         chk_IncludeDesc.EditValue = My.Settings.IncludeDesc
+        chk_IgnoreDupParties.EditValue = My.Settings.IgnoreDuplicateParties
     End Sub
 
     Function CheckDependencies(ByVal Vouchers As List(Of Objects.Voucher)) As Boolean
@@ -528,7 +529,7 @@ finish:
 
             If cellInfo IsNot Nothing Then
                 If TallyIO IsNot Nothing AndAlso TallyIO.Ledgers IsNot Nothing AndAlso TallyIO.Ledgers.Count > 0 AndAlso (TallyIO.Ledgers.Contains(row.GSTIN, StringComparer.OrdinalIgnoreCase) Or TallyIO.Ledgers.Contains(row.Name, StringComparer.OrdinalIgnoreCase)) Then
-                    cellInfo.ViewInfo.ErrorIconText = "Ledger Already Exists. Will be Ignored."
+                    cellInfo.ViewInfo.ErrorIconText = "Ledger Already Exists." & If(My.Settings.IgnoreDuplicateParties = True, " Will be Ignored.", "")
                     cellInfo.ViewInfo.ShowErrorIcon = True
                 End If
             End If
@@ -674,6 +675,29 @@ finish:
                 End If
             End If
         End If
+    End Sub
+
+    Private Sub btn_Template_Parties_WithData_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Template_Parties_WithData.ItemClick
+        If TallyIO Is Nothing OrElse TallyIO.Parties Is Nothing Then
+            MsgBox("Please Sync With Tally to Use this Function.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+        ElseIf TallyIO.Parties.Count < 0 Then
+            MsgBox("No Parites Available to Export/Save to Excel Template.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+        Else
+            SaveFileDialog_Excel.FileName = "Parties.xlsx"
+            If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
+                Try
+                    MiscFunctions.WriteParties2Excel(TallyIO.Parties, SaveFileDialog_Excel.FileName)
+                    MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+                Catch ex As Exception
+                    MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                End Try
+            End If
+        End If
+    End Sub
+
+    Private Sub chk_IgnoreDupParties_EditValueChanged(sender As Object, e As EventArgs) Handles chk_IgnoreDupParties.EditValueChanged
+        My.Settings.IgnoreDuplicateParties = chk_IgnoreDupParties.EditValue
+        My.Settings.Save()
     End Sub
 #End Region
 

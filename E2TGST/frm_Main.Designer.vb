@@ -19,6 +19,7 @@ Partial Class frm_Main
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_Main))
         Me.RibbonControl = New DevExpress.XtraBars.Ribbon.RibbonControl()
         Me.btn_LoadExcel = New DevExpress.XtraBars.BarButtonItem()
@@ -38,6 +39,8 @@ Partial Class frm_Main
         Me.btn_Refresh = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_XML_Tally = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_Template_Parties = New DevExpress.XtraBars.BarButtonItem()
+        Me.PopupMenu_Parties = New DevExpress.XtraBars.PopupMenu(Me.components)
+        Me.btn_Template_Parties_WithData = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_Template_PurchaseEntries = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_Template_SalesEntries = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_About = New DevExpress.XtraBars.BarButtonItem()
@@ -88,12 +91,15 @@ Partial Class frm_Main
         Me.SaveFileDialog_XML = New System.Windows.Forms.SaveFileDialog()
         Me.ProgressPanel_Main = New DevExpress.XtraWaitForm.ProgressPanel()
         Me.PictureBox_Logo = New System.Windows.Forms.PictureBox()
+        Me.chk_IgnoreDupParties = New DevExpress.XtraBars.BarEditItem()
+        Me.chk_IgnoreDupParties_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_CompanyName_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chk_CalcValues_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_TallyHost_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_TallyPort_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PopupMenu_Parties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_StateCode_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chk_IncludeDesc_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_BankLedgerName_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -112,18 +118,19 @@ Partial Class frm_Main
         CType(Me.gv_BankEntries, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tp_Parties.SuspendLayout()
         CType(Me.PictureBox_Logo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.chk_IgnoreDupParties_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.chk_CalcValues, Me.btn_LedgerNames, Me.txt_TallyHost, Me.txt_TallyPort, Me.btn_Sync, Me.btn_Refresh, Me.btn_XML_Tally, Me.btn_Template_Parties, Me.btn_Template_PurchaseEntries, Me.btn_Template_SalesEntries, Me.btn_About, Me.txt_StateCode, Me.btn_Template_BankEntries, Me.chk_IncludeDesc, Me.txt_BankLedgerName})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.chk_CalcValues, Me.btn_LedgerNames, Me.txt_TallyHost, Me.txt_TallyPort, Me.btn_Sync, Me.btn_Refresh, Me.btn_XML_Tally, Me.btn_Template_Parties, Me.btn_Template_PurchaseEntries, Me.btn_Template_SalesEntries, Me.btn_About, Me.txt_StateCode, Me.btn_Template_BankEntries, Me.chk_IncludeDesc, Me.txt_BankLedgerName, Me.btn_Template_Parties_WithData, Me.chk_IgnoreDupParties})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 22
+        Me.RibbonControl.MaxItemId = 25
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_Tally, Me.rp_PurchaseEntries, Me.rp_SalesEntries, Me.rp_BankEntries, Me.rp_Parties})
         Me.RibbonControl.QuickToolbarItemLinks.Add(Me.btn_About, "ABOUT")
-        Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit, Me.chk_CalcValues_Edit, Me.txt_TallyHost_Edit, Me.txt_TallyPort_Edit, Me.txt_StateCode_Edit, Me.chk_IncludeDesc_Edit, Me.txt_BankLedgerName_Edit})
+        Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit, Me.chk_CalcValues_Edit, Me.txt_TallyHost_Edit, Me.txt_TallyPort_Edit, Me.txt_StateCode_Edit, Me.chk_IncludeDesc_Edit, Me.txt_BankLedgerName_Edit, Me.chk_IgnoreDupParties_Edit})
         Me.RibbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.[False]
         Me.RibbonControl.ShowCategoryInCaption = False
         Me.RibbonControl.ShowExpandCollapseButton = DevExpress.Utils.DefaultBoolean.[False]
@@ -241,10 +248,24 @@ Partial Class frm_Main
         '
         'btn_Template_Parties
         '
+        Me.btn_Template_Parties.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown
         Me.btn_Template_Parties.Caption = "Parties"
+        Me.btn_Template_Parties.DropDownControl = Me.PopupMenu_Parties
         Me.btn_Template_Parties.Id = 14
         Me.btn_Template_Parties.ImageOptions.SvgImage = CType(resources.GetObject("btn_Template_Parties.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.btn_Template_Parties.Name = "btn_Template_Parties"
+        '
+        'PopupMenu_Parties
+        '
+        Me.PopupMenu_Parties.ItemLinks.Add(Me.btn_Template_Parties_WithData)
+        Me.PopupMenu_Parties.Name = "PopupMenu_Parties"
+        Me.PopupMenu_Parties.Ribbon = Me.RibbonControl
+        '
+        'btn_Template_Parties_WithData
+        '
+        Me.btn_Template_Parties_WithData.Caption = "Save Template with Existing Data"
+        Me.btn_Template_Parties_WithData.Id = 22
+        Me.btn_Template_Parties_WithData.Name = "btn_Template_Parties_WithData"
         '
         'btn_Template_PurchaseEntries
         '
@@ -443,6 +464,7 @@ Partial Class frm_Main
         '
         Me.rpg_Export_Parties.ItemLinks.Add(Me.btn_XML_File)
         Me.rpg_Export_Parties.ItemLinks.Add(Me.btn_XML_Tally)
+        Me.rpg_Export_Parties.ItemLinks.Add(Me.chk_IgnoreDupParties, True)
         Me.rpg_Export_Parties.Name = "rpg_Export_Parties"
         Me.rpg_Export_Parties.ShowCaptionButton = False
         Me.rpg_Export_Parties.Text = "Export"
@@ -661,6 +683,18 @@ Partial Class frm_Main
         Me.PictureBox_Logo.TabIndex = 5
         Me.PictureBox_Logo.TabStop = False
         '
+        'chk_IgnoreDupParties
+        '
+        Me.chk_IgnoreDupParties.Caption = "Ignore Existing Parties"
+        Me.chk_IgnoreDupParties.Edit = Me.chk_IgnoreDupParties_Edit
+        Me.chk_IgnoreDupParties.Id = 24
+        Me.chk_IgnoreDupParties.Name = "chk_IgnoreDupParties"
+        '
+        'chk_IgnoreDupParties_Edit
+        '
+        Me.chk_IgnoreDupParties_Edit.AutoHeight = False
+        Me.chk_IgnoreDupParties_Edit.Name = "chk_IgnoreDupParties_Edit"
+        '
         'frm_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -684,6 +718,7 @@ Partial Class frm_Main
         CType(Me.chk_CalcValues_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_TallyHost_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_TallyPort_Edit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PopupMenu_Parties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_StateCode_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chk_IncludeDesc_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_BankLedgerName_Edit, System.ComponentModel.ISupportInitialize).EndInit()
@@ -702,6 +737,7 @@ Partial Class frm_Main
         CType(Me.gv_BankEntries, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tp_Parties.ResumeLayout(False)
         CType(Me.PictureBox_Logo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.chk_IgnoreDupParties_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -775,4 +811,8 @@ Partial Class frm_Main
     Friend WithEvents txt_BankLedgerName As DevExpress.XtraBars.BarEditItem
     Friend WithEvents txt_BankLedgerName_Edit As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
     Friend WithEvents rpg_BankEntry As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents PopupMenu_Parties As DevExpress.XtraBars.PopupMenu
+    Friend WithEvents btn_Template_Parties_WithData As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents chk_IgnoreDupParties As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents chk_IgnoreDupParties_Edit As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
 End Class

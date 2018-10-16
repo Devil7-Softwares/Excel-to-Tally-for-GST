@@ -82,7 +82,7 @@ Namespace Tally
                 .WriteStartElement("REQUESTDATA") 'REQUESTDATA
 
                 For Each Party As Objects.Party In Parties
-                    If Ledgers IsNot Nothing AndAlso (Ledgers.Contains(Party.GSTIN) Or Ledgers.Contains(Party.Name)) Then
+                    If My.Settings.IgnoreDuplicateParties AndAlso Ledgers IsNot Nothing AndAlso (Ledgers.Contains(Party.GSTIN) Or Ledgers.Contains(Party.Name)) Then
                         Continue For
                     End If
 

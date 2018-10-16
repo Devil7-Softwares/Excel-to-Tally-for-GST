@@ -41,5 +41,8 @@
     <Setting Name="BankLedgerName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Bank A/c</Value>
     </Setting>
+    <Setting Name="IgnoreDuplicateParties" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

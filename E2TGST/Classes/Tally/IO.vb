@@ -100,7 +100,7 @@ Namespace Tally
 
         Private Sub ReadXML(ByVal RequestData As String)
             Dim Ledgers As New List(Of String)
-            Dim Parites As New List(Of Objects.Party)
+            Dim Parties As New List(Of Objects.Party)
             Dim Groups As New List(Of String)
             Dim Units As New List(Of String)
             Dim StockItems As New List(Of String)
@@ -168,7 +168,7 @@ Namespace Tally
                             For Each n As XmlNode In e.ChildNodes
                                 If n.Name = "NAME" Then
                                     Names.Add(n.InnerXml)
-                                    If n.InnerXml <> PartyName AndAlso GSTINValidator.IsValid(n.InnerXml) Then
+                                    If MiscFunctions.ProcessString(n.InnerXml) <> PartyName AndAlso PartyGSTIN = "" Then
                                         PartyGSTIN = n.InnerXml
                                     End If
                                 End If

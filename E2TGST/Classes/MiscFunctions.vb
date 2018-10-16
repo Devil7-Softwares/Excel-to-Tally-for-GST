@@ -19,6 +19,8 @@
 '                                                                          '
 '=========================================================================='
 
+Imports DevExpress.Spreadsheet
+
 Module MiscFunctions
 
 #Region "Functions"
@@ -31,6 +33,23 @@ Module MiscFunctions
         R = R.Replace("&amp;", "&")
         Return R
     End Function
+#End Region
+
+#Region "Export Parties to Excel"
+    Sub WriteParties2Excel(ByVal Parties As List(Of Objects.Party), ByVal Filename As String)
+        Dim WB As New Workbook
+        WB.LoadDocument(My.Resources.Parties)
+        Dim PartiesSheet As Worksheet = WB.Worksheets("Parties")
+        For i As Integer = 1 To Parties.Count
+            Dim Party As Objects.Party = Parties(i - 1)
+            Dim Row As Row = PartiesSheet.Rows(i)
+            Row.Item(0).SetValue(Party.Name)
+            Row.Item(1).SetValue(Party.GSTIN)
+            Row.Item(2).SetValue([Enum].GetName(GetType(Enums.RegistrationType), Party.RegType))
+            Row.Item(3).SetValue([Enum].GetName(GetType(Enums.PartyType), Party.Group))
+        Next
+        WB.SaveDocument(Filename)
+    End Sub
 #End Region
 
 End Module

@@ -59,15 +59,10 @@ Namespace Tally
                 Dim Narration As String = String.Format("AS PER BILL NO.: {0}", Entry1.InvoiceNo)
                 Dim Entries As New List(Of Objects.VoucherEntry)
 
-                Dim TotalValue_BR As Double = 0
-
-
                 For Each PurchaseEntry As Objects.PurchaseEntry In TmpPurchaseEntries
                     Dim IGST As Double = Math.Round(If(My.Settings.CalculateValues, PurchaseEntry.TaxableValue * PurchaseEntry.GSTRate / 100, PurchaseEntry.IGST), 2)
                     Dim CGST As Double = Math.Round(If(My.Settings.CalculateValues, PurchaseEntry.TaxableValue * (PurchaseEntry.GSTRate / 2) / 100, PurchaseEntry.CGST), 2)
                     Dim SGST As Double = Math.Round(If(My.Settings.CalculateValues, PurchaseEntry.TaxableValue * (PurchaseEntry.GSTRate / 2) / 100, PurchaseEntry.SGST), 2)
-
-                    TotalValue_BR = Math.Round(TotalValue_BR + PurchaseEntry.TaxableValue + If(PlaceOfSupply = ReceiverPlace, CGST + SGST, IGST) + PurchaseEntry.CESS, 2)
 
                     Entries.Add(New Objects.VoucherEntry(PurchaseEntry.LedgerName, Enums.Effect.Dr, PurchaseEntry.TaxableValue)) ' Head - Eg. Purchase A/c or Expense A/c
 
@@ -110,6 +105,10 @@ Namespace Tally
                     End If
                 Next
 
+                Dim TotalValue_BR As Double = 0
+                For Each i As Objects.VoucherEntry In Entries
+                    TotalValue_BR += i.Amount
+                Next
                 Dim TotalValue_AR As Double = Math.Round(TotalValue_BR)
                 Dim RoundingOff As Double = Math.Round(TotalValue_AR - TotalValue_BR, 2)
                 If RoundingOff <> 0 Then
@@ -159,15 +158,10 @@ Namespace Tally
                 Dim Narration As String = String.Format("AS PER BILL NO.: {0}", Entry1.InvoiceNo)
                 Dim Entries As New List(Of Objects.VoucherEntry)
 
-                Dim TotalValue_BR As Double = 0
-
-
                 For Each SalesEntry As Objects.SalesEntry In TmpSalesEntries
                     Dim IGST As Double = Math.Round(If(My.Settings.CalculateValues, SalesEntry.TaxableValue * SalesEntry.GSTRate / 100, SalesEntry.IGST), 2)
                     Dim CGST As Double = Math.Round(If(My.Settings.CalculateValues, SalesEntry.TaxableValue * (SalesEntry.GSTRate / 2) / 100, SalesEntry.CGST), 2)
                     Dim SGST As Double = Math.Round(If(My.Settings.CalculateValues, SalesEntry.TaxableValue * (SalesEntry.GSTRate / 2) / 100, SalesEntry.SGST), 2)
-
-                    TotalValue_BR = Math.Round(TotalValue_BR + SalesEntry.TaxableValue + If(PlaceOfSupply = ReceiverPlace, CGST + SGST, IGST) + SalesEntry.CESS, 2)
 
                     Dim SalesEntryLedgerName As String = If(SalesEntry.GSTRate = 0, "Sales Exempted", String.Format(My.Settings.SalesLedger, SalesEntry.GSTRate))
                     Dim ExistingSalesEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SalesEntryLedgerName)
@@ -216,6 +210,10 @@ Namespace Tally
                     End If
                 Next
 
+                Dim TotalValue_BR As Double = 0
+                For Each i As Objects.VoucherEntry In Entries
+                    TotalValue_BR += i.Amount
+                Next
                 Dim TotalValue_AR As Double = Math.Round(TotalValue_BR)
                 Dim RoundingOff As Double = Math.Round(TotalValue_AR - TotalValue_BR, 2)
                 If RoundingOff <> 0 Then

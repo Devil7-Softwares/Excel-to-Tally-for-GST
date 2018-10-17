@@ -26,7 +26,7 @@ Namespace Objects
 
         ReadOnly Property Effect As Enums.Effect
 
-        ReadOnly Property Amount As Double
+        Property Amount As Double
 #End Region
 
 #Region "Constructors"

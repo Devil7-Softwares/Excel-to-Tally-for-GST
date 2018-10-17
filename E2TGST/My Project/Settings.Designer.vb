@@ -69,9 +69,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("33")>  _
-        Public Property StateCode() As String
+        Public Property StateCode() As Integer
             Get
-                Return CType(Me("StateCode"),String)
+                Return CType(Me("StateCode"),Integer)
             End Get
             Set
                 Me("StateCode") = value

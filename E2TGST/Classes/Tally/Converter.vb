@@ -47,14 +47,6 @@ Namespace Tally
                     TmpPurchaseEntries.AddRange(MatchingEntries)
                 End If
 
-                Dim PlaceOfSupply As Integer = My.Settings.StateCode
-                Try
-                    PlaceOfSupply = CInt(Entry1.GSTIN.Substring(0, 2))
-                Catch ex As Exception
-
-                End Try
-                Dim ReceiverPlace As Integer = My.Settings.StateCode.Substring(0, 2)
-
                 Dim VoucherType As String = [Enum].GetName(GetType(Enums.VoucherType), Entry1.VoucherType)
                 Dim Narration As String = String.Format("AS PER BILL NO.: {0}", Entry1.InvoiceNo)
                 Dim Entries As New List(Of Objects.VoucherEntry)
@@ -67,7 +59,7 @@ Namespace Tally
                     Entries.Add(New Objects.VoucherEntry(PurchaseEntry.LedgerName, Enums.Effect.Dr, PurchaseEntry.TaxableValue)) ' Head - Eg. Purchase A/c or Expense A/c
 
                     If PurchaseEntry.GSTRate > 0 Then
-                        If PlaceOfSupply = ReceiverPlace Then
+                        If PurchaseEntry.PlaceOfSupply.Code = My.Settings.StateCode Then
                             Dim CGSTLedger As String = String.Format(My.Settings.TaxLedger, "Input", "CGST", PurchaseEntry.GSTRate / 2)
                             Dim SGSTLedger As String = String.Format(My.Settings.TaxLedger, "Input", "SGST", PurchaseEntry.GSTRate / 2)
 
@@ -146,14 +138,6 @@ Namespace Tally
                     TmpSalesEntries.AddRange(MatchingEntries)
                 End If
 
-                Dim PlaceOfSupply As Integer = My.Settings.StateCode
-                Try
-                    PlaceOfSupply = CInt(Entry1.GSTIN.Substring(0, 2))
-                Catch ex As Exception
-
-                End Try
-                Dim ReceiverPlace As Integer = My.Settings.StateCode.Substring(0, 2)
-
                 Dim VoucherType As String = [Enum].GetName(GetType(Enums.VoucherType), Enums.VoucherType.Sales)
                 Dim Narration As String = String.Format("AS PER BILL NO.: {0}", Entry1.InvoiceNo)
                 Dim Entries As New List(Of Objects.VoucherEntry)
@@ -172,7 +156,7 @@ Namespace Tally
                     End If
 
                     If SalesEntry.GSTRate > 0 Then
-                        If PlaceOfSupply = ReceiverPlace Then
+                        If SalesEntry.PlaceOfSupply.Code = My.Settings.StateCode Then
                             Dim CGSTLedger As String = String.Format(My.Settings.TaxLedger, "Output", "CGST", SalesEntry.GSTRate / 2)
                             Dim SGSTLedger As String = String.Format(My.Settings.TaxLedger, "Output", "SGST", SalesEntry.GSTRate / 2)
 

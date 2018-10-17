@@ -33,6 +33,7 @@ Namespace Objects
         Property CGST As Double
         Property SGST As Double
         Property CESS As Double
+        Property PlaceOfSupply As State
 #End Region
 
 #Region "Constructors"
@@ -47,10 +48,12 @@ Namespace Objects
             Me.CGST = 0
             Me.SGST = 0
             Me.CESS = 0
+            Me.PlaceOfSupply = State.GetStateByCode(My.Settings.StateCode)
         End Sub
 
-        Sub New(ByVal GSTIN As String, ByVal InvoiceDate As Date, ByVal InvoiceNo As String, ByVal InvoiceValue As Double, ByVal Rate As Integer,
-                 ByVal TaxableValue As Double, ByVal IGST As Double, ByVal CGST As Double, ByVal SGST As Double, ByVal CESS As Double)
+        Sub New(ByVal GSTIN As String, ByVal InvoiceDate As Date, ByVal InvoiceNo As String, ByVal InvoiceValue As Double,
+                ByVal Rate As Integer, ByVal TaxableValue As Double, ByVal IGST As Double, ByVal CGST As Double,
+                ByVal SGST As Double, ByVal CESS As Double, ByVal PlaceOfSupply As State)
             Me.GSTIN = GSTIN
             Me.InvoiceDate = InvoiceDate
             Me.InvoiceNo = InvoiceNo
@@ -61,6 +64,7 @@ Namespace Objects
             Me.CGST = CGST
             Me.SGST = SGST
             Me.CESS = CESS
+            Me.PlaceOfSupply = PlaceOfSupply
         End Sub
 #End Region
 

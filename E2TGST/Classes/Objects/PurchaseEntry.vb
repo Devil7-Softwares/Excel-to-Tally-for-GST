@@ -35,6 +35,7 @@ Namespace Objects
         Property CESS As Double = 0
         Property LedgerName As String
         Property VoucherType As Enums.VoucherType
+        Property PlaceOfSupply As State
 #End Region
 
 #Region "Constructors"
@@ -51,11 +52,13 @@ Namespace Objects
             Me.CESS = 0
             Me.LedgerName = ""
             Me.VoucherType = Enums.VoucherType.Purchase
+            Me.PlaceOfSupply = State.GetStateByCode(My.Settings.StateCode)
         End Sub
 
         Sub New(ByVal GSTIN As String, ByVal InvoiceNo As String, ByVal InvoiceDate As Date, ByVal InvoiceValue As Double,
                 ByVal GSTRate As Integer, ByVal TaxableValue As Double, ByVal IGST As Double, ByVal CGST As Double,
-                ByVal SGST As Double, ByVal CESS As Double, ByVal LedgerName As String, ByVal VoucherType As Enums.VoucherType)
+                ByVal SGST As Double, ByVal CESS As Double, ByVal LedgerName As String, ByVal VoucherType As Enums.VoucherType,
+                ByVal PlaceOfSupply As State)
             Me.GSTIN = GSTIN
             Me.InvoiceNo = InvoiceNo
             Me.InvoiceDate = InvoiceDate
@@ -68,6 +71,7 @@ Namespace Objects
             Me.CESS = CESS
             Me.LedgerName = LedgerName
             Me.VoucherType = VoucherType
+            Me.PlaceOfSupply = PlaceOfSupply
         End Sub
 #End Region
 

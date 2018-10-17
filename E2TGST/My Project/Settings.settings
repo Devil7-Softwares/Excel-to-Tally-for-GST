@@ -5,7 +5,7 @@
     <Setting Name="TallyVersion" Type="System.String" Scope="User">
       <Value Profile="(Default)">1.0</Value>
     </Setting>
-    <Setting Name="StateCode" Type="System.String" Scope="User">
+    <Setting Name="StateCode" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">33</Value>
     </Setting>
     <Setting Name="CalculateValues" Type="System.Boolean" Scope="User">

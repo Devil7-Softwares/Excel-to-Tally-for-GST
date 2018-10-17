@@ -189,7 +189,18 @@ Public Class frm_Main
                                                        ElseIf VoucherType_ = "Journal" Then
                                                            VoucherType = Enums.VoucherType.Journal
                                                        End If
-                                                       R.Add(New Objects.PurchaseEntry(GSTIN, InvoiceNo, InvoiceDate, InvoiceValue, GSTRate, TaxableValue, IGST, CGST, SGST, CESS, LedgerName, VoucherType))
+                                                       Dim StateCode As Integer = My.Settings.StateCode
+                                                       Try
+                                                           Dim TmpSC_ As String = GetString(reader, 12)
+                                                           If TmpSC_.Contains("-") Then
+                                                               StateCode = CInt(TmpSC_.Split("-")(0).Trim)
+                                                           Else
+                                                               StateCode = CInt(TmpSC_)
+                                                           End If
+                                                       Catch ex As Exception
+
+                                                       End Try
+                                                       R.Add(New Objects.PurchaseEntry(GSTIN, InvoiceNo, InvoiceDate, InvoiceValue, GSTRate, TaxableValue, IGST, CGST, SGST, CESS, LedgerName, VoucherType, Objects.State.GetStateByCode(StateCode)))
                                                    End If
                                                End If
                                            End If
@@ -239,7 +250,24 @@ Public Class frm_Main
                                                        Dim CGST As Double = GetDouble(reader, 7)
                                                        Dim SGST As Double = GetDouble(reader, 8)
                                                        Dim CESS As Double = GetDouble(reader, 9)
-                                                       R.Add(New Objects.SalesEntry(GSTIN, InvoiceDate, InvoiceNo, InvoiceValue, GSTRate, TaxableValue, IGST, CGST, SGST, CESS))
+                                                       Dim StateCode As Integer = My.Settings.StateCode
+                                                       Try
+                                                           Dim TmpSC_ As String = GetString(reader, 12)
+                                                           If TmpSC_.Contains("-") Then
+                                                               StateCode = CInt(TmpSC_.Split("-")(0).Trim)
+                                                           Else
+                                                               StateCode = CInt(TmpSC_)
+                                                           End If
+                                                       Catch ex1 As Exception
+                                                           Try
+                                                               If GSTIN <> "" Then
+                                                                   StateCode = CInt(GSTIN.Substring(0, 2))
+                                                               End If
+                                                           Catch ex2 As Exception
+
+                                                           End Try
+                                                       End Try
+                                                       R.Add(New Objects.SalesEntry(GSTIN, InvoiceDate, InvoiceNo, InvoiceValue, GSTRate, TaxableValue, IGST, CGST, SGST, CESS, Objects.State.GetStateByCode(StateCode)))
                                                    End If
                                                End If
                                            End If

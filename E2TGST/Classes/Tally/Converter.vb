@@ -234,7 +234,7 @@ Namespace Tally
             For Each BankEntry As Objects.BankEntry In BankEntries
                 Dim VoucherType As Enums.VoucherType = Enums.VoucherType.Contra
                 Dim BankEffect As Enums.Effect = If(BankEntry.Withdrawals <> 0, Enums.Effect.Cr, Enums.Effect.Dr)
-                Dim Amount As Double = If(BankEntry.Withdrawals = 0, BankEntry.Deposits, BankEntry.Withdrawals)
+                Dim TotalAmount As Double = If(BankEntry.Withdrawals = 0, BankEntry.Deposits, BankEntry.Withdrawals)
                 If BankEntry.LedgerName = "Cash" Or BankEntry.LedgerName.ToUpper.Contains("CASH") Then
                     VoucherType = Enums.VoucherType.Contra
                 Else
@@ -252,13 +252,38 @@ Namespace Tally
                     Narration &= If(Narration = "", "", vbNewLine & vbNewLine) & BankEntry.Description
                 End If
 
-                Dim BankVoucherEntry As New Objects.VoucherEntry(My.Settings.BankLedgerName, BankEffect, Amount)
-                Dim LedgerVoucherEntry As New Objects.VoucherEntry(BankEntry.LedgerName, If(BankEffect = Enums.Effect.Dr, Enums.Effect.Cr, Enums.Effect.Dr), Amount)
+                Dim BankVoucherEntry As New Objects.VoucherEntry(My.Settings.BankLedgerName, BankEffect, TotalAmount)
                 Dim Entries As New List(Of Objects.VoucherEntry)
-                If BankEffect = Enums.Effect.Dr Then
-                    Entries.AddRange({BankVoucherEntry, LedgerVoucherEntry})
+                If BankEntry.LedgerName.Contains(";") AndAlso BankEntry.LedgerName.Contains("=") Then
+                    For Each TmpLedgerName As String In BankEntry.LedgerName.Split(";")
+                        Dim LedgerName As String = TmpLedgerName.Split("=")(0).Trim
+                        Dim Amount As Double = 0
+                        Try
+                            Amount = Double.Parse(TmpLedgerName.Split("=")(1).Trim)
+                        Catch ex As Exception
+
+                        End Try
+                        Entries.Add(New Objects.VoucherEntry(LedgerName, If(BankEffect = Enums.Effect.Dr, Enums.Effect.Cr, Enums.Effect.Dr), Amount))
+                    Next
                 Else
-                    Entries.AddRange({LedgerVoucherEntry, BankVoucherEntry})
+                    Entries.Add(New Objects.VoucherEntry(BankEntry.LedgerName, If(BankEffect = Enums.Effect.Dr, Enums.Effect.Cr, Enums.Effect.Dr), TotalAmount))
+                End If
+                If BankEffect = Enums.Effect.Dr Then
+                    Entries.Insert(0, BankVoucherEntry)
+                Else
+                    Entries.Add(BankVoucherEntry)
+                End If
+                Dim Cr As Double = 0
+                Dim Dr As Double = 0
+                For Each i As Objects.VoucherEntry In Entries
+                    If i.Effect = Enums.Effect.Dr Then
+                        Dr += i.Amount
+                    Else
+                        Cr += i.Amount
+                    End If
+                Next
+                If Not Dr.Equals(Cr) Then
+                    Throw New Exception(String.Format("Debit & Credit Amount Not Matching in Entry Dated {0} and Rs.{1} {2}.", BankEntry.ValueDate.ToString("dd-MM-yyyy"), TotalAmount.ToString, If(BankEffect = Enums.Effect.Dr, "Deposited", "Withdrawn")))
                 End If
                 R.Add(New Objects.Voucher([Enum].GetName(GetType(Enums.VoucherType), VoucherType), BankEntry.ValueDate, "", Narration.Trim, Entries))
             Next

@@ -56,8 +56,13 @@ Public Class frm_Main
         Dim MissingLedgers As New List(Of String)
         For Each voucher As Objects.Voucher In Vouchers
             For Each entry As Objects.VoucherEntry In voucher.Entries
-                If Not TallyIO.Ledgers.Contains(entry.LedgerName, StringComparer.OrdinalIgnoreCase) Then
-                    If Not MissingLedgers.Contains(entry.LedgerName, StringComparer.OrdinalIgnoreCase) Then MissingLedgers.Add(entry.LedgerName)
+                If entry.LedgerName.Contains(";") Then
+                    Dim LedgerNames As String() = entry.LedgerName.Split(";")
+                    For Each i As String In LedgerNames
+                        If Not TallyIO.Ledgers.Contains(i.Split("=")(0).Trim, StringComparer.OrdinalIgnoreCase) Then MissingLedgers.Add(i.Split("=")(0).Trim)
+                    Next
+                Else
+                    If Not TallyIO.Ledgers.Contains(entry.LedgerName, StringComparer.OrdinalIgnoreCase) Then MissingLedgers.Add(entry.LedgerName)
                 End If
             Next
         Next
@@ -371,21 +376,27 @@ Public Class frm_Main
     End Function
 
     Async Function ExportBank(ByVal Filename As String) As Task
+
         Invoke(Sub()
                    RibbonControl.Enabled = False
                    ProgressPanel_BankEntries.Caption = String.Format("Exporting Entries to {0}...", If(Filename = "", "Tally", "File"))
                    ProgressPanel_BankEntries.Visible = True
                End Sub)
-        Dim Vouchers As List(Of Objects.Voucher) = Tally.Converter.Bank2Vouchers(gc_BankEntries.DataSource)
-        If CheckDependencies(Vouchers) Then
-            Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
-            Dim XML As String = XMLGen.GenerateVouchers(Vouchers)
-            Await Export(XML, Filename)
-        End If
+        Try
+            Dim Vouchers As List(Of Objects.Voucher) = Tally.Converter.Bank2Vouchers(gc_BankEntries.DataSource)
+            If CheckDependencies(Vouchers) Then
+                Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
+                Dim XML As String = XMLGen.GenerateVouchers(Vouchers)
+                Await Export(XML, Filename)
+            End If
+        Catch ex As Exception
+            Invoke(Sub() MsgBox(ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error"))
+        End Try
         Invoke(Sub()
-                   RibbonControl.Enabled = True
-                   ProgressPanel_BankEntries.Visible = False
-               End Sub)
+                       RibbonControl.Enabled = True
+                       ProgressPanel_BankEntries.Visible = False
+                   End Sub)
+
     End Function
 
     Async Sub ExportParties()
@@ -670,9 +681,28 @@ finish:
             Dim row As Objects.BankEntry = gv_BankEntries.GetRow(e.RowHandle)
 
             If cellInfo IsNot Nothing Then
-                If Not TallyIO.Ledgers.Contains(row.LedgerName, StringComparer.OrdinalIgnoreCase) Then
-                    cellInfo.ViewInfo.ErrorIconText = "Ledger Doesn't Exist in Tally Ledgers!"
-                    cellInfo.ViewInfo.ShowErrorIcon = True
+                If row.LedgerName.Contains(";") Then
+                    Dim LedgerNames As String() = row.LedgerName.Split(";")
+                    Dim MissingLedger As String = ""
+                    For Each i As String In LedgerNames
+                        Dim LedgerName As String = i.Split("=")(0).Trim
+                        If Not TallyIO.Ledgers.Contains(LedgerName, StringComparer.OrdinalIgnoreCase) Then
+                            If MissingLedger = "" Then
+                                MissingLedger = LedgerName
+                            Else
+                                MissingLedger &= " And " & LedgerName
+                            End If
+                        End If
+                    Next
+                    If MissingLedger <> "" Then
+                        cellInfo.ViewInfo.ErrorIconText = MissingLedger & " Ledger(s) Doesn't Exist in Tally Ledgers!"
+                        cellInfo.ViewInfo.ShowErrorIcon = True
+                    End If
+                Else
+                    If Not TallyIO.Ledgers.Contains(row.LedgerName, StringComparer.OrdinalIgnoreCase) Then
+                        cellInfo.ViewInfo.ErrorIconText = "Ledger Doesn't Exist in Tally Ledgers!"
+                        cellInfo.ViewInfo.ShowErrorIcon = True
+                    End If
                 End If
             End If
         End If

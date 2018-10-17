@@ -782,6 +782,17 @@ finish:
             e.RepositoryItem = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit With {.DataSource = TallyIO.Ledgers}
         End If
     End Sub
+
+    Private Sub gv_SalesEntries_CustomRowCellEditForEditing(sender As Object, e As CustomRowCellEditEventArgs) Handles gv_SalesEntries.CustomRowCellEditForEditing
+        If e.Column.FieldName = "GSTIN" Then
+            e.RepositoryItem = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit With {
+                .DataSource = TallyIO.Parties,
+                .ValueMember = "GSTIN",
+                .DisplayMember = "GSTIN",
+                .PopupWidth = 800
+            }
+        End If
+    End Sub
 #End Region
 
 End Class

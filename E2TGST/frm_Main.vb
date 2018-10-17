@@ -776,6 +776,12 @@ finish:
             e.RepositoryItem = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit With {.DataSource = TallyIO.Ledgers}
         End If
     End Sub
+
+    Private Sub gv_BankEntries_CustomRowCellEditForEditing(sender As Object, e As CustomRowCellEditEventArgs) Handles gv_BankEntries.CustomRowCellEditForEditing
+        If e.Column.FieldName = "LedgerName" AndAlso Not (e.CellValue.ToString.Contains("=") Or e.CellValue.ToString.Contains(";")) Then
+            e.RepositoryItem = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit With {.DataSource = TallyIO.Ledgers}
+        End If
+    End Sub
 #End Region
 
 End Class

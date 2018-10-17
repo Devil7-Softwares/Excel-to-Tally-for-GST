@@ -26,7 +26,19 @@ Namespace Objects
 
 #Region "Properties/Fields"
         Property Name As String
+        Dim GSTIN_ As String
         Property GSTIN As String
+            Get
+                If GSTIN_ = "" Then
+                    Return Name
+                Else
+                    Return GSTIN_
+                End If
+            End Get
+            Set(value As String)
+                GSTIN_ = value
+            End Set
+        End Property
         Property Group As Enums.PartyType
         Property RegType As Enums.RegistrationType
         ReadOnly Property State As State

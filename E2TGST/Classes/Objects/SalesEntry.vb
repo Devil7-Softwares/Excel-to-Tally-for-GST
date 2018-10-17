@@ -25,9 +25,9 @@ Namespace Objects
 #Region "Properties/Fields"
         Property GSTIN As String
         Property InvoiceDate As Date
-        Property InvoiceNumber As String
+        Property InvoiceNo As String
         Property InvoiceValue As Double
-        Property Rate As Integer
+        Property GSTRate As Integer
         Property TaxableValue As Double
         Property IGST As Double
         Property CGST As Double
@@ -39,9 +39,9 @@ Namespace Objects
         Sub New()
             Me.GSTIN = ""
             Me.InvoiceDate = Now
-            Me.InvoiceNumber = ""
+            Me.InvoiceNo = ""
             Me.InvoiceValue = 0
-            Me.Rate = 0
+            Me.GSTRate = 0
             Me.TaxableValue = 0
             Me.IGST = 0
             Me.CGST = 0
@@ -49,13 +49,13 @@ Namespace Objects
             Me.CESS = 0
         End Sub
 
-        Sub New(ByVal GSTIN As String, ByVal InvoiceDate As Date, ByVal InvoiceNumber As String, ByVal InvoiceValue As Double, ByVal Rate As Integer,
+        Sub New(ByVal GSTIN As String, ByVal InvoiceDate As Date, ByVal InvoiceNo As String, ByVal InvoiceValue As Double, ByVal Rate As Integer,
                  ByVal TaxableValue As Double, ByVal IGST As Double, ByVal CGST As Double, ByVal SGST As Double, ByVal CESS As Double)
             Me.GSTIN = GSTIN
             Me.InvoiceDate = InvoiceDate
-            Me.InvoiceNumber = InvoiceNumber
+            Me.InvoiceNo = InvoiceNo
             Me.InvoiceValue = InvoiceValue
-            Me.Rate = Rate
+            Me.GSTRate = Rate
             Me.TaxableValue = TaxableValue
             Me.IGST = IGST
             Me.CGST = CGST

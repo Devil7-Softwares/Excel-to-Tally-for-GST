@@ -1,5 +1,6 @@
 ﻿Imports DevExpress.XtraBars
 Imports DevExpress.XtraGrid.Views.Base
+Imports DevExpress.XtraGrid.Views.Grid
 Imports DevExpress.XtraTab
 Imports ExcelDataReader
 
@@ -326,7 +327,7 @@ Public Class frm_Main
                                       End Sub)
                            Catch ex As Exception
                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
-                           Return False
+                               Return False
                            End Try
                            Return True
                        End Function)
@@ -421,9 +422,9 @@ Public Class frm_Main
             Invoke(Sub() MsgBox(ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error"))
         End Try
         Invoke(Sub()
-                       RibbonControl.Enabled = True
-                       ProgressPanel_BankEntries.Visible = False
-                   End Sub)
+                   RibbonControl.Enabled = True
+                   ProgressPanel_BankEntries.Visible = False
+               End Sub)
 
     End Function
 
@@ -623,7 +624,7 @@ finish:
             ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
                 ExportSales()
             ElseIf RibbonControl.SelectedPage Is rp_BankEntries Then
-                ExportBank
+                ExportBank()
             End If
         End If
     End Sub
@@ -768,6 +769,12 @@ finish:
     Private Sub chk_IgnoreDupParties_EditValueChanged(sender As Object, e As EventArgs) Handles chk_IgnoreDupParties.EditValueChanged
         My.Settings.IgnoreDuplicateParties = chk_IgnoreDupParties.EditValue
         My.Settings.Save()
+    End Sub
+
+    Private Sub gv_PurchaseEntries_CustomRowCellEditForEditing(sender As Object, e As CustomRowCellEditEventArgs) Handles gv_PurchaseEntries.CustomRowCellEditForEditing
+        If e.Column.FieldName = "LedgerName" Then
+            e.RepositoryItem = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit With {.DataSource = TallyIO.Ledgers}
+        End If
     End Sub
 #End Region
 

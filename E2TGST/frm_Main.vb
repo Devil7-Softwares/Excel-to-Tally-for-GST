@@ -51,6 +51,8 @@ Public Class frm_Main
         txt_BankLedgerName.EditValue = My.Settings.BankLedgerName
         chk_IncludeDesc.EditValue = My.Settings.IncludeDesc
         chk_IgnoreDupParties.EditValue = My.Settings.IgnoreDuplicateParties
+        chk_UseInvoicePurchase.EditValue = My.Settings.UseInvoicePurchase
+        chk_UseInvoiceSales.EditValue = My.Settings.UseInvoiceSales
     End Sub
 
     Function CheckDependencies(ByVal Vouchers As List(Of Objects.Voucher)) As Boolean
@@ -792,6 +794,16 @@ finish:
                 .PopupWidth = 800
             }
         End If
+    End Sub
+
+    Private Sub chk_UseInvoiceSales_EditValueChanged(sender As Object, e As EventArgs) Handles chk_UseInvoiceSales.EditValueChanged
+        My.Settings.UseInvoiceSales = chk_UseInvoiceSales.EditValue
+        My.Settings.Save()
+    End Sub
+
+    Private Sub chk_UseInvoicePurchase_EditValueChanged(sender As Object, e As EventArgs) Handles chk_UseInvoicePurchase.EditValueChanged
+        My.Settings.UseInvoicePurchase = chk_UseInvoicePurchase.EditValue
+        My.Settings.Save()
     End Sub
 #End Region
 

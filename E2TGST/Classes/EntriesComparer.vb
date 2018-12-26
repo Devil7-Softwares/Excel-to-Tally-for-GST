@@ -43,14 +43,14 @@ Public Class EntriesComparer : Implements IComparer(Of VoucherEntry)
 #End Region
 
 #Region "Private Functions"
-    Private Function Compare_DrFirst(x As VoucherEntry, y As VoucherEntry)
+    Private Function Compare_DrFirst(x As VoucherEntry, y As VoucherEntry) As Integer
+        If String.Compare(Voucher.VoucherType, "Sales", True) = 0 AndAlso My.Settings.UseInvoiceSales Then
+            Return isRounding(x, y)
+        End If
+
         If x.Effect = y.Effect Then
             ' RoundingOff Ledger Should be Placed in Last
-            If String.Compare(x.LedgerName, My.Settings.RoundOffLedger, True) = 0 Then
-                Return 1
-            ElseIf String.Compare(y.LedgerName, My.Settings.RoundOffLedger, True) = 0 Then
-                Return -1
-            End If
+            Return isRounding(x, y)
         ElseIf x.Effect < y.Effect Then
             Return -1
         ElseIf x.Effect > y.Effect Then
@@ -59,17 +59,26 @@ Public Class EntriesComparer : Implements IComparer(Of VoucherEntry)
         Return 0
     End Function
 
-    Private Function Compare_CrFirst(x As VoucherEntry, y As VoucherEntry)
+    Private Function Compare_CrFirst(x As VoucherEntry, y As VoucherEntry) As Integer
+        If String.Compare(Voucher.VoucherType, "Purchase", True) = 0 AndAlso My.Settings.UseInvoicePurchase Then
+            Return isRounding(x, y)
+        End If
+
         If x.Effect = y.Effect Then
             ' RoundingOff Ledger Should be Placed in Last
-            If String.Compare(x.LedgerName, My.Settings.RoundOffLedger, True) = 0 Then
-                Return 1
-            ElseIf String.Compare(y.LedgerName, My.Settings.RoundOffLedger, True) = 0 Then
-                Return -1
-            End If
+            Return isRounding(x, y)
         ElseIf x.Effect < y.Effect Then
             Return 1
         ElseIf x.Effect > y.Effect Then
+            Return -1
+        End If
+        Return 0
+    End Function
+
+    Private Function isRounding(x As VoucherEntry, y As VoucherEntry) As Integer
+        If String.Compare(x.LedgerName, My.Settings.RoundOffLedger, True) = 0 Then
+            Return 1
+        ElseIf String.Compare(y.LedgerName, My.Settings.RoundOffLedger, True) = 0 Then
             Return -1
         End If
         Return 0

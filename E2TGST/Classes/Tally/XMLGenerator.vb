@@ -219,6 +219,9 @@ Namespace Tally
                     .WriteStartElement("VOUCHER")
                     .WriteAttributeString("VCHTYPE", i.VoucherType)
                     .WriteAttributeString("ACTION", "CREATE")
+                    If (String.Compare(i.VoucherType, "Purchase", True) = 0 AndAlso My.Settings.UseInvoicePurchase) Or (String.Compare(i.VoucherType, "Sales", True) = 0 AndAlso My.Settings.UseInvoiceSales) Then
+                        .WriteAttributeString("OBJVIEW", "Invoice Voucher View")
+                    End If
                     .WriteStartElement("VOUCHERTYPENAME") 'VOUCHERTYPENAME
                     .WriteString(i.VoucherType)
                     .WriteEndElement() 'VOUCHERTYPENAME
@@ -228,6 +231,14 @@ Namespace Tally
                     .WriteStartElement("EFFECTIVEDATE") 'EFFECTIVEDATE
                     .WriteString(i.VoucherDate)
                     .WriteEndElement() 'EFFECTIVEDATE
+                    If (String.Compare(i.VoucherType, "Purchase", True) = 0 AndAlso My.Settings.UseInvoicePurchase) Or (String.Compare(i.VoucherType, "Sales", True) = 0 AndAlso My.Settings.UseInvoiceSales) Then
+                        .WriteStartElement("PERSISTEDVIEW") 'PERSISTEDVIEW
+                        .WriteString("Invoice Voucher View")
+                        .WriteEndElement() 'PERSISTEDVIEW
+                        .WriteStartElement("ISINVOICE") 'ISINVOICE
+                        .WriteString("Yes")
+                        .WriteEndElement() 'ISINVOICE
+                    End If
                     .WriteStartElement("REFERENCE") 'REFERENCE
                     .WriteString(i.VoucherRef)
                     .WriteEndElement() 'REFERENCE

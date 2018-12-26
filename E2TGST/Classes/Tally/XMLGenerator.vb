@@ -164,6 +164,10 @@ Namespace Tally
             ' Declare a XmlTextWriter-Object, with which we are going to write the config file
             Dim XMLobj As XmlTextWriter = New XmlTextWriter(MemStream, enc)
 
+            For Each Voucher As Objects.Voucher In Vouchers
+                Voucher.Entries.Sort(New EntriesComparer(Voucher))
+            Next
+
             With XMLobj
                 .Formatting = Formatting.Indented
                 .Indentation = 4

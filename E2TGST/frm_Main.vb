@@ -467,12 +467,28 @@ Public Class frm_Main
 
     Private Async Sub btn_XML_File_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_XML_File.ItemClick
         If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
+            If gc_PurchaseEntries.DataSource Is Nothing Then
+                MsgBox("Import purchase entires from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                Exit Sub
+            End If
             SaveFileDialog_XML.FileName = "Purchase Entries.xml"
         ElseIf RibbonControl.SelectedPage Is rp_Parties Then
+            If gc_Parties.DataSource Is Nothing Then
+                MsgBox("Import parties list from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                Exit Sub
+            End If
             SaveFileDialog_XML.FileName = "Parties.xml"
         ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
+            If gc_SalesEntries.DataSource Is Nothing Then
+                MsgBox("Import sales entires from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                Exit Sub
+            End If
             SaveFileDialog_XML.FileName = "Sales Entries.xml"
         ElseIf RibbonControl.SelectedPage Is rp_BankEntries Then
+            If gc_BankEntries.DataSource Is Nothing Then
+                MsgBox("Import bank entires from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                Exit Sub
+            End If
             SaveFileDialog_XML.FileName = "Bank Entries.xml"
         End If
         If SaveFileDialog_XML.ShowDialog = DialogResult.OK Then
@@ -619,6 +635,27 @@ finish:
     End Sub
 
     Private Sub btn_XML_Tally_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_XML_Tally.ItemClick
+        If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
+            If gc_PurchaseEntries.DataSource Is Nothing Then
+                MsgBox("Import purchase entires from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                Exit Sub
+            End If
+        ElseIf RibbonControl.SelectedPage Is rp_Parties Then
+            If gc_Parties.DataSource Is Nothing Then
+                MsgBox("Import parties list from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                Exit Sub
+            End If
+        ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
+            If gc_SalesEntries.DataSource Is Nothing Then
+                MsgBox("Import sales entires from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                Exit Sub
+            End If
+        ElseIf RibbonControl.SelectedPage Is rp_BankEntries Then
+            If gc_BankEntries.DataSource Is Nothing Then
+                MsgBox("Import bank entires from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                Exit Sub
+            End If
+        End If
         If MsgBox("Are You Sure to Export XML to Tally...?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
             If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
                 ExportPurchase()

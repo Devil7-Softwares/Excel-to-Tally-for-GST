@@ -51,8 +51,6 @@ Public Class frm_Main
         txt_BankLedgerName.EditValue = My.Settings.BankLedgerName
         chk_IncludeDesc.EditValue = My.Settings.IncludeDesc
         chk_IgnoreDupParties.EditValue = My.Settings.IgnoreDuplicateParties
-        chk_UseInvoicePurchase.EditValue = My.Settings.UseInvoicePurchase
-        chk_UseInvoiceSales.EditValue = My.Settings.UseInvoiceSales
         chk_UseInvoiceNoTag.EditValue = My.Settings.UseInvoiceNumberTag
     End Sub
 
@@ -501,10 +499,12 @@ Public Class frm_Main
             PictureBox_Logo.Visible = True
         ElseIf RibbonControl.SelectedPage Is rp_PurchaseEntries Then
             container_Tabs.SelectedTabPage = tp_PurchaseEntries
+            chk_UseInvoice.EditValue = My.Settings.UseInvoicePurchase
         ElseIf RibbonControl.SelectedPage Is rp_Parties Then
             container_Tabs.SelectedTabPage = tp_Parties
         ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
             container_Tabs.SelectedTabPage = tp_SalesEntries
+            chk_UseInvoice.EditValue = My.Settings.UseInvoiceSales
         ElseIf RibbonControl.SelectedPage Is rp_BankEntries Then
             container_Tabs.SelectedTabPage = tp_BankEntries
         End If
@@ -797,14 +797,14 @@ finish:
         End If
     End Sub
 
-    Private Sub chk_UseInvoiceSales_EditValueChanged(sender As Object, e As EventArgs) Handles chk_UseInvoiceSales.EditValueChanged
-        My.Settings.UseInvoiceSales = chk_UseInvoiceSales.EditValue
-        My.Settings.Save()
-    End Sub
-
-    Private Sub chk_UseInvoicePurchase_EditValueChanged(sender As Object, e As EventArgs) Handles chk_UseInvoicePurchase.EditValueChanged
-        My.Settings.UseInvoicePurchase = chk_UseInvoicePurchase.EditValue
-        My.Settings.Save()
+    Private Sub chk_UseInvoice_EditValueChanged(sender As Object, e As EventArgs) Handles chk_UseInvoice.EditValueChanged
+        If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
+            My.Settings.UseInvoicePurchase = chk_UseInvoice.EditValue
+            My.Settings.Save()
+        ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
+            My.Settings.UseInvoiceSales = chk_UseInvoice.EditValue
+            My.Settings.Save()
+        End If
     End Sub
 
     Private Sub chk_UseInvoiceNoTag_EditValueChanged(sender As Object, e As EventArgs) Handles chk_UseInvoiceNoTag.EditValueChanged

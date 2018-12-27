@@ -21,25 +21,21 @@ Partial Class frm_Main
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_Main))
-        Dim SuperToolTip15 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
-        Dim ToolTipTitleItem19 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
-        Dim ToolTipItem15 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
-        Dim SuperToolTip16 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
-        Dim ToolTipTitleItem20 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
-        Dim ToolTipItem16 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
-        Dim SuperToolTip17 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
-        Dim ToolTipTitleItem21 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
-        Dim ToolTipItem17 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
+        Dim SuperToolTip1 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
+        Dim ToolTipTitleItem1 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
+        Dim ToolTipItem1 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
+        Dim SuperToolTip2 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
+        Dim ToolTipTitleItem2 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
+        Dim ToolTipItem2 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
         Dim SuperToolTip3 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
         Dim ToolTipTitleItem3 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
         Dim ToolTipItem3 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
         Dim SuperToolTip4 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
         Dim ToolTipTitleItem4 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
         Dim ToolTipItem4 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
-        Dim SuperToolTip18 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
-        Dim ToolTipTitleItem22 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
-        Dim ToolTipItem18 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
-        Dim ToolTipTitleItem23 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
+        Dim SuperToolTip5 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
+        Dim ToolTipTitleItem5 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
+        Dim ToolTipItem5 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
         Dim SuperToolTip6 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
         Dim ToolTipTitleItem6 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
         Dim ToolTipItem6 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
@@ -48,28 +44,32 @@ Partial Class frm_Main
         Dim ToolTipTitleItem8 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
         Dim ToolTipItem7 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
         Dim ToolTipTitleItem9 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
-        Dim SuperToolTip19 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
-        Dim ToolTipTitleItem24 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
-        Dim ToolTipItem19 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
-        Dim SuperToolTip20 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
-        Dim ToolTipTitleItem25 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
-        Dim ToolTipItem20 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
-        Dim SuperToolTip21 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
-        Dim ToolTipTitleItem26 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
-        Dim ToolTipItem21 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
+        Dim SuperToolTip8 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
+        Dim ToolTipTitleItem10 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
+        Dim ToolTipItem8 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
+        Dim ToolTipTitleItem11 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
+        Dim SuperToolTip9 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
+        Dim ToolTipTitleItem12 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
+        Dim ToolTipItem9 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
+        Dim SuperToolTip10 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
+        Dim ToolTipTitleItem13 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
+        Dim ToolTipItem10 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
         Dim SuperToolTip11 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
         Dim ToolTipTitleItem14 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
         Dim ToolTipItem11 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
-        Dim SuperToolTip22 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
-        Dim ToolTipTitleItem27 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
-        Dim ToolTipItem22 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
         Dim SuperToolTip12 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
         Dim ToolTipTitleItem15 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
         Dim ToolTipItem12 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
-        Dim ToolTipTitleItem28 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
         Dim SuperToolTip13 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
         Dim ToolTipTitleItem16 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
         Dim ToolTipItem13 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
+        Dim SuperToolTip14 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
+        Dim ToolTipTitleItem17 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
+        Dim ToolTipItem14 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
+        Dim ToolTipTitleItem18 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
+        Dim SuperToolTip15 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
+        Dim ToolTipTitleItem19 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
+        Dim ToolTipItem15 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
         Me.RibbonControl = New DevExpress.XtraBars.Ribbon.RibbonControl()
         Me.btn_LoadExcel = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_XML_File = New DevExpress.XtraBars.BarButtonItem()
@@ -102,10 +102,8 @@ Partial Class frm_Main
         Me.txt_BankLedgerName_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.chk_IgnoreDupParties = New DevExpress.XtraBars.BarEditItem()
         Me.chk_IgnoreDupParties_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
-        Me.chk_UseInvoicePurchase = New DevExpress.XtraBars.BarEditItem()
+        Me.chk_UseInvoice = New DevExpress.XtraBars.BarEditItem()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
-        Me.chk_UseInvoiceSales = New DevExpress.XtraBars.BarEditItem()
-        Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.chk_UseInvoiceNoTag = New DevExpress.XtraBars.BarEditItem()
         Me.RepositoryItemCheckEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.rp_Tally = New DevExpress.XtraBars.Ribbon.RibbonPage()
@@ -125,6 +123,7 @@ Partial Class frm_Main
         Me.rp_Parties = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Items_Parties = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rpg_Export_Parties = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
         Me.gc_Parties = New DevExpress.XtraGrid.GridControl()
         Me.gv_Parties = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -160,8 +159,8 @@ Partial Class frm_Main
         CType(Me.txt_BankLedgerName_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chk_IgnoreDupParties_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gc_Parties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gv_Parties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.container_Tabs, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -182,7 +181,7 @@ Partial Class frm_Main
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.chk_CalcValues, Me.btn_LedgerNames, Me.txt_TallyHost, Me.txt_TallyPort, Me.btn_Sync, Me.btn_Refresh, Me.btn_XML_Tally, Me.btn_Template_Parties, Me.btn_Template_PurchaseEntries, Me.btn_Template_SalesEntries, Me.btn_About, Me.txt_StateCode, Me.btn_Template_BankEntries, Me.chk_IncludeDesc, Me.txt_BankLedgerName, Me.btn_Template_Parties_WithData, Me.chk_IgnoreDupParties, Me.chk_UseInvoicePurchase, Me.chk_UseInvoiceSales, Me.chk_UseInvoiceNoTag})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.chk_CalcValues, Me.btn_LedgerNames, Me.txt_TallyHost, Me.txt_TallyPort, Me.btn_Sync, Me.btn_Refresh, Me.btn_XML_Tally, Me.btn_Template_Parties, Me.btn_Template_PurchaseEntries, Me.btn_Template_SalesEntries, Me.btn_About, Me.txt_StateCode, Me.btn_Template_BankEntries, Me.chk_IncludeDesc, Me.txt_BankLedgerName, Me.btn_Template_Parties_WithData, Me.chk_IgnoreDupParties, Me.chk_UseInvoice, Me.chk_UseInvoiceNoTag})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
         Me.RibbonControl.MaxItemId = 30
         Me.RibbonControl.Name = "RibbonControl"
@@ -203,12 +202,12 @@ Partial Class frm_Main
         Me.btn_LoadExcel.Id = 1
         Me.btn_LoadExcel.ImageOptions.SvgImage = CType(resources.GetObject("btn_LoadExcel.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.btn_LoadExcel.Name = "btn_LoadExcel"
-        ToolTipTitleItem19.Text = "Import Excel"
-        ToolTipItem15.LeftIndent = 6
-        ToolTipItem15.Text = "Import entries from excel file"
-        SuperToolTip15.Items.Add(ToolTipTitleItem19)
-        SuperToolTip15.Items.Add(ToolTipItem15)
-        Me.btn_LoadExcel.SuperTip = SuperToolTip15
+        ToolTipTitleItem1.Text = "Import Excel"
+        ToolTipItem1.LeftIndent = 6
+        ToolTipItem1.Text = "Import entries from excel file"
+        SuperToolTip1.Items.Add(ToolTipTitleItem1)
+        SuperToolTip1.Items.Add(ToolTipItem1)
+        Me.btn_LoadExcel.SuperTip = SuperToolTip1
         '
         'btn_XML_File
         '
@@ -216,12 +215,12 @@ Partial Class frm_Main
         Me.btn_XML_File.Id = 3
         Me.btn_XML_File.ImageOptions.SvgImage = CType(resources.GetObject("btn_XML_File.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.btn_XML_File.Name = "btn_XML_File"
-        ToolTipTitleItem20.Text = "To File"
-        ToolTipItem16.LeftIndent = 6
-        ToolTipItem16.Text = "Export voucher entries to XML file"
-        SuperToolTip16.Items.Add(ToolTipTitleItem20)
-        SuperToolTip16.Items.Add(ToolTipItem16)
-        Me.btn_XML_File.SuperTip = SuperToolTip16
+        ToolTipTitleItem2.Text = "To File"
+        ToolTipItem2.LeftIndent = 6
+        ToolTipItem2.Text = "Export voucher entries to XML file"
+        SuperToolTip2.Items.Add(ToolTipTitleItem2)
+        SuperToolTip2.Items.Add(ToolTipItem2)
+        Me.btn_XML_File.SuperTip = SuperToolTip2
         '
         'txt_TallyVersion
         '
@@ -230,12 +229,12 @@ Partial Class frm_Main
         Me.txt_TallyVersion.EditWidth = 150
         Me.txt_TallyVersion.Id = 4
         Me.txt_TallyVersion.Name = "txt_TallyVersion"
-        ToolTipTitleItem21.Text = "Tally Version"
-        ToolTipItem17.LeftIndent = 6
-        ToolTipItem17.Text = "The version of the messaging format. "
-        SuperToolTip17.Items.Add(ToolTipTitleItem21)
-        SuperToolTip17.Items.Add(ToolTipItem17)
-        Me.txt_TallyVersion.SuperTip = SuperToolTip17
+        ToolTipTitleItem3.Text = "Tally Version"
+        ToolTipItem3.LeftIndent = 6
+        ToolTipItem3.Text = "The version of the messaging format. "
+        SuperToolTip3.Items.Add(ToolTipTitleItem3)
+        SuperToolTip3.Items.Add(ToolTipItem3)
+        Me.txt_TallyVersion.SuperTip = SuperToolTip3
         '
         'txt_TallyVersion_Edit
         '
@@ -262,13 +261,13 @@ Partial Class frm_Main
         Me.chk_CalcValues.EditWidth = 57
         Me.chk_CalcValues.Id = 7
         Me.chk_CalcValues.Name = "chk_CalcValues"
-        ToolTipTitleItem3.Text = "Calculate Values"
-        ToolTipItem3.LeftIndent = 6
-        ToolTipItem3.Text = "If enabled, Tax values will be automatically calculated even when its already giv" &
+        ToolTipTitleItem4.Text = "Calculate Values"
+        ToolTipItem4.LeftIndent = 6
+        ToolTipItem4.Text = "If enabled, Tax values will be automatically calculated even when its already giv" &
     "en in Excel. Otherwise, values from given Excel data will be used"
-        SuperToolTip3.Items.Add(ToolTipTitleItem3)
-        SuperToolTip3.Items.Add(ToolTipItem3)
-        Me.chk_CalcValues.SuperTip = SuperToolTip3
+        SuperToolTip4.Items.Add(ToolTipTitleItem4)
+        SuperToolTip4.Items.Add(ToolTipItem4)
+        Me.chk_CalcValues.SuperTip = SuperToolTip4
         '
         'chk_CalcValues_Edit
         '
@@ -282,12 +281,12 @@ Partial Class frm_Main
         Me.btn_LedgerNames.ImageOptions.SvgImage = CType(resources.GetObject("btn_LedgerNames.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.btn_LedgerNames.Name = "btn_LedgerNames"
         Me.btn_LedgerNames.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText
-        ToolTipTitleItem4.Text = "Edit Ledger Names"
-        ToolTipItem4.LeftIndent = 6
-        ToolTipItem4.Text = "Edit default / auto generated ledger names"
-        SuperToolTip4.Items.Add(ToolTipTitleItem4)
-        SuperToolTip4.Items.Add(ToolTipItem4)
-        Me.btn_LedgerNames.SuperTip = SuperToolTip4
+        ToolTipTitleItem5.Text = "Edit Ledger Names"
+        ToolTipItem5.LeftIndent = 6
+        ToolTipItem5.Text = "Edit default / auto generated ledger names"
+        SuperToolTip5.Items.Add(ToolTipTitleItem5)
+        SuperToolTip5.Items.Add(ToolTipItem5)
+        Me.btn_LedgerNames.SuperTip = SuperToolTip5
         '
         'txt_TallyHost
         '
@@ -296,18 +295,18 @@ Partial Class frm_Main
         Me.txt_TallyHost.EditWidth = 100
         Me.txt_TallyHost.Id = 9
         Me.txt_TallyHost.Name = "txt_TallyHost"
-        SuperToolTip18.AllowHtmlText = DevExpress.Utils.DefaultBoolean.[True]
-        ToolTipTitleItem22.Text = "Tally Host Name"
-        ToolTipItem18.LeftIndent = 6
-        ToolTipItem18.Text = "Host name/address of Tally ODBC Server"
-        ToolTipTitleItem23.LeftIndent = 6
-        ToolTipTitleItem23.Text = "Refer ""<href=""https://help.tallysolutions.com/article/Tally.ERP9/Maintaining_Comp" &
+        SuperToolTip6.AllowHtmlText = DevExpress.Utils.DefaultBoolean.[True]
+        ToolTipTitleItem6.Text = "Tally Host Name"
+        ToolTipItem6.LeftIndent = 6
+        ToolTipItem6.Text = "Host name/address of Tally ODBC Server"
+        ToolTipTitleItem7.LeftIndent = 6
+        ToolTipTitleItem7.Text = "Refer ""<href=""https://help.tallysolutions.com/article/Tally.ERP9/Maintaining_Comp" &
     "any_Data/F12_Config/advanced_configuration.htm"">Tally Help</href>"" for more info" &
     "rmation"
-        SuperToolTip18.Items.Add(ToolTipTitleItem22)
-        SuperToolTip18.Items.Add(ToolTipItem18)
-        SuperToolTip18.Items.Add(ToolTipTitleItem23)
-        Me.txt_TallyHost.SuperTip = SuperToolTip18
+        SuperToolTip6.Items.Add(ToolTipTitleItem6)
+        SuperToolTip6.Items.Add(ToolTipItem6)
+        SuperToolTip6.Items.Add(ToolTipTitleItem7)
+        Me.txt_TallyHost.SuperTip = SuperToolTip6
         '
         'txt_TallyHost_Edit
         '
@@ -321,18 +320,18 @@ Partial Class frm_Main
         Me.txt_TallyPort.EditWidth = 100
         Me.txt_TallyPort.Id = 10
         Me.txt_TallyPort.Name = "txt_TallyPort"
-        SuperToolTip6.AllowHtmlText = DevExpress.Utils.DefaultBoolean.[True]
-        ToolTipTitleItem6.Text = "Port"
-        ToolTipItem6.LeftIndent = 6
-        ToolTipItem6.Text = "Port number of Tally ODBC Server"
-        ToolTipTitleItem7.LeftIndent = 6
-        ToolTipTitleItem7.Text = "Refer ""<href=""https://help.tallysolutions.com/article/Tally.ERP9/Maintaining_Comp" &
+        SuperToolTip7.AllowHtmlText = DevExpress.Utils.DefaultBoolean.[True]
+        ToolTipTitleItem8.Text = "Port"
+        ToolTipItem7.LeftIndent = 6
+        ToolTipItem7.Text = "Port number of Tally ODBC Server"
+        ToolTipTitleItem9.LeftIndent = 6
+        ToolTipTitleItem9.Text = "Refer ""<href=""https://help.tallysolutions.com/article/Tally.ERP9/Maintaining_Comp" &
     "any_Data/F12_Config/advanced_configuration.htm"">Tally Help</href>"" for more info" &
     "rmation"
-        SuperToolTip6.Items.Add(ToolTipTitleItem6)
-        SuperToolTip6.Items.Add(ToolTipItem6)
-        SuperToolTip6.Items.Add(ToolTipTitleItem7)
-        Me.txt_TallyPort.SuperTip = SuperToolTip6
+        SuperToolTip7.Items.Add(ToolTipTitleItem8)
+        SuperToolTip7.Items.Add(ToolTipItem7)
+        SuperToolTip7.Items.Add(ToolTipTitleItem9)
+        Me.txt_TallyPort.SuperTip = SuperToolTip7
         '
         'txt_TallyPort_Edit
         '
@@ -345,18 +344,18 @@ Partial Class frm_Main
         Me.btn_Sync.Id = 11
         Me.btn_Sync.ImageOptions.SvgImage = CType(resources.GetObject("btn_Sync.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.btn_Sync.Name = "btn_Sync"
-        SuperToolTip7.AllowHtmlText = DevExpress.Utils.DefaultBoolean.[True]
-        ToolTipTitleItem8.Text = "Sync"
-        ToolTipItem7.LeftIndent = 6
-        ToolTipItem7.Text = resources.GetString("ToolTipItem7.Text")
-        ToolTipTitleItem9.LeftIndent = 6
-        ToolTipTitleItem9.Text = "Refer ""<href=""https://help.tallysolutions.com/article/Tally.ERP9/Maintaining_Comp" &
+        SuperToolTip8.AllowHtmlText = DevExpress.Utils.DefaultBoolean.[True]
+        ToolTipTitleItem10.Text = "Sync"
+        ToolTipItem8.LeftIndent = 6
+        ToolTipItem8.Text = resources.GetString("ToolTipItem8.Text")
+        ToolTipTitleItem11.LeftIndent = 6
+        ToolTipTitleItem11.Text = "Refer ""<href=""https://help.tallysolutions.com/article/Tally.ERP9/Maintaining_Comp" &
     "any_Data/F12_Config/advanced_configuration.htm"">Tally Help</href>"" for more info" &
     "rmation"
-        SuperToolTip7.Items.Add(ToolTipTitleItem8)
-        SuperToolTip7.Items.Add(ToolTipItem7)
-        SuperToolTip7.Items.Add(ToolTipTitleItem9)
-        Me.btn_Sync.SuperTip = SuperToolTip7
+        SuperToolTip8.Items.Add(ToolTipTitleItem10)
+        SuperToolTip8.Items.Add(ToolTipItem8)
+        SuperToolTip8.Items.Add(ToolTipTitleItem11)
+        Me.btn_Sync.SuperTip = SuperToolTip8
         '
         'btn_Refresh
         '
@@ -364,13 +363,13 @@ Partial Class frm_Main
         Me.btn_Refresh.Id = 12
         Me.btn_Refresh.ImageOptions.SvgImage = CType(resources.GetObject("btn_Refresh.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.btn_Refresh.Name = "btn_Refresh"
-        ToolTipTitleItem24.Text = "Refresh"
-        ToolTipItem19.LeftIndent = 6
-        ToolTipItem19.Text = "Refresh imported data." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Use this if you sync data from Tally after the excel fi" &
+        ToolTipTitleItem12.Text = "Refresh"
+        ToolTipItem9.LeftIndent = 6
+        ToolTipItem9.Text = "Refresh imported data." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Use this if you sync data from Tally after the excel fi" &
     "le is imported"
-        SuperToolTip19.Items.Add(ToolTipTitleItem24)
-        SuperToolTip19.Items.Add(ToolTipItem19)
-        Me.btn_Refresh.SuperTip = SuperToolTip19
+        SuperToolTip9.Items.Add(ToolTipTitleItem12)
+        SuperToolTip9.Items.Add(ToolTipItem9)
+        Me.btn_Refresh.SuperTip = SuperToolTip9
         '
         'btn_XML_Tally
         '
@@ -378,12 +377,12 @@ Partial Class frm_Main
         Me.btn_XML_Tally.Id = 13
         Me.btn_XML_Tally.ImageOptions.SvgImage = CType(resources.GetObject("btn_XML_Tally.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.btn_XML_Tally.Name = "btn_XML_Tally"
-        ToolTipTitleItem25.Text = "To Tally"
-        ToolTipItem20.LeftIndent = 6
-        ToolTipItem20.Text = "Export voucher entries directly to running tally instance"
-        SuperToolTip20.Items.Add(ToolTipTitleItem25)
-        SuperToolTip20.Items.Add(ToolTipItem20)
-        Me.btn_XML_Tally.SuperTip = SuperToolTip20
+        ToolTipTitleItem13.Text = "To Tally"
+        ToolTipItem10.LeftIndent = 6
+        ToolTipItem10.Text = "Export voucher entries directly to running tally instance"
+        SuperToolTip10.Items.Add(ToolTipTitleItem13)
+        SuperToolTip10.Items.Add(ToolTipItem10)
+        Me.btn_XML_Tally.SuperTip = SuperToolTip10
         '
         'btn_Template_Parties
         '
@@ -434,12 +433,12 @@ Partial Class frm_Main
         Me.txt_StateCode.EditWidth = 150
         Me.txt_StateCode.Id = 18
         Me.txt_StateCode.Name = "txt_StateCode"
-        ToolTipTitleItem26.Text = "State Code"
-        ToolTipItem21.LeftIndent = 6
-        ToolTipItem21.Text = "State Code of current party whose data is selected in tally"
-        SuperToolTip21.Items.Add(ToolTipTitleItem26)
-        SuperToolTip21.Items.Add(ToolTipItem21)
-        Me.txt_StateCode.SuperTip = SuperToolTip21
+        ToolTipTitleItem14.Text = "State Code"
+        ToolTipItem11.LeftIndent = 6
+        ToolTipItem11.Text = "State Code of current party whose data is selected in tally"
+        SuperToolTip11.Items.Add(ToolTipTitleItem14)
+        SuperToolTip11.Items.Add(ToolTipItem11)
+        Me.txt_StateCode.SuperTip = SuperToolTip11
         '
         'txt_StateCode_Edit
         '
@@ -472,12 +471,12 @@ Partial Class frm_Main
         Me.txt_BankLedgerName.EditWidth = 110
         Me.txt_BankLedgerName.Id = 21
         Me.txt_BankLedgerName.Name = "txt_BankLedgerName"
-        ToolTipTitleItem14.Text = "Bank Ledger Name"
-        ToolTipItem11.LeftIndent = 6
-        ToolTipItem11.Text = "Ledger name of Bank Account in Tally to which current entries should be posted"
-        SuperToolTip11.Items.Add(ToolTipTitleItem14)
-        SuperToolTip11.Items.Add(ToolTipItem11)
-        Me.txt_BankLedgerName.SuperTip = SuperToolTip11
+        ToolTipTitleItem15.Text = "Bank Ledger Name"
+        ToolTipItem12.LeftIndent = 6
+        ToolTipItem12.Text = "Ledger name of Bank Account in Tally to which current entries should be posted"
+        SuperToolTip12.Items.Add(ToolTipTitleItem15)
+        SuperToolTip12.Items.Add(ToolTipItem12)
+        Me.txt_BankLedgerName.SuperTip = SuperToolTip12
         '
         'txt_BankLedgerName_Edit
         '
@@ -496,39 +495,25 @@ Partial Class frm_Main
         Me.chk_IgnoreDupParties_Edit.AutoHeight = False
         Me.chk_IgnoreDupParties_Edit.Name = "chk_IgnoreDupParties_Edit"
         '
-        'chk_UseInvoicePurchase
+        'chk_UseInvoice
         '
-        Me.chk_UseInvoicePurchase.Caption = "Use Invoice Mode"
-        Me.chk_UseInvoicePurchase.Edit = Me.RepositoryItemCheckEdit1
-        Me.chk_UseInvoicePurchase.EditValue = False
-        Me.chk_UseInvoicePurchase.EditWidth = 10
-        Me.chk_UseInvoicePurchase.Id = 25
-        Me.chk_UseInvoicePurchase.Name = "chk_UseInvoicePurchase"
-        ToolTipTitleItem27.Text = "Use Invoice Mode"
-        ToolTipItem22.LeftIndent = 6
-        ToolTipItem22.Text = "Use this to export purchase/sales vouchers in ""Invoice Mode"""
-        SuperToolTip22.Items.Add(ToolTipTitleItem27)
-        SuperToolTip22.Items.Add(ToolTipItem22)
-        Me.chk_UseInvoicePurchase.SuperTip = SuperToolTip22
+        Me.chk_UseInvoice.Caption = "Use Invoice Mode"
+        Me.chk_UseInvoice.Edit = Me.RepositoryItemCheckEdit1
+        Me.chk_UseInvoice.EditValue = False
+        Me.chk_UseInvoice.EditWidth = 10
+        Me.chk_UseInvoice.Id = 25
+        Me.chk_UseInvoice.Name = "chk_UseInvoice"
+        ToolTipTitleItem16.Text = "Use Invoice Mode"
+        ToolTipItem13.LeftIndent = 6
+        ToolTipItem13.Text = "Use this to export purchase/sales vouchers in ""Invoice Mode"""
+        SuperToolTip13.Items.Add(ToolTipTitleItem16)
+        SuperToolTip13.Items.Add(ToolTipItem13)
+        Me.chk_UseInvoice.SuperTip = SuperToolTip13
         '
         'RepositoryItemCheckEdit1
         '
         Me.RepositoryItemCheckEdit1.AutoHeight = False
         Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
-        '
-        'chk_UseInvoiceSales
-        '
-        Me.chk_UseInvoiceSales.Caption = "Use Invoice Mode"
-        Me.chk_UseInvoiceSales.Edit = Me.RepositoryItemCheckEdit2
-        Me.chk_UseInvoiceSales.EditValue = False
-        Me.chk_UseInvoiceSales.EditWidth = 10
-        Me.chk_UseInvoiceSales.Id = 28
-        Me.chk_UseInvoiceSales.Name = "chk_UseInvoiceSales"
-        '
-        'RepositoryItemCheckEdit2
-        '
-        Me.RepositoryItemCheckEdit2.AutoHeight = False
-        Me.RepositoryItemCheckEdit2.Name = "RepositoryItemCheckEdit2"
         '
         'chk_UseInvoiceNoTag
         '
@@ -537,18 +522,18 @@ Partial Class frm_Main
         Me.chk_UseInvoiceNoTag.EditWidth = 20
         Me.chk_UseInvoiceNoTag.Id = 29
         Me.chk_UseInvoiceNoTag.Name = "chk_UseInvoiceNoTag"
-        SuperToolTip12.AllowHtmlText = DevExpress.Utils.DefaultBoolean.[True]
-        ToolTipTitleItem15.Text = "Use 'Invoice No' Tag"
-        ToolTipItem12.LeftIndent = 6
-        ToolTipItem12.Text = "Enable this if you are facing issues when exporting xml to tally, to use ""INVOICE" &
+        SuperToolTip14.AllowHtmlText = DevExpress.Utils.DefaultBoolean.[True]
+        ToolTipTitleItem17.Text = "Use 'Invoice No' Tag"
+        ToolTipItem14.LeftIndent = 6
+        ToolTipItem14.Text = "Enable this if you are facing issues when exporting xml to tally, to use ""INVOICE" &
     "NUMBER"" tag instead of ""REFERENCE"" tag for reference number."
-        ToolTipTitleItem28.LeftIndent = 6
-        ToolTipTitleItem28.Text = "Refer ""<href=""https://github.com/Devil7-Softwares/Excel-to-Tally-for-GST/issues/1" &
+        ToolTipTitleItem18.LeftIndent = 6
+        ToolTipTitleItem18.Text = "Refer ""<href=""https://github.com/Devil7-Softwares/Excel-to-Tally-for-GST/issues/1" &
     """>Issue #1</href>"" for more information"
-        SuperToolTip12.Items.Add(ToolTipTitleItem15)
-        SuperToolTip12.Items.Add(ToolTipItem12)
-        SuperToolTip12.Items.Add(ToolTipTitleItem28)
-        Me.chk_UseInvoiceNoTag.SuperTip = SuperToolTip12
+        SuperToolTip14.Items.Add(ToolTipTitleItem17)
+        SuperToolTip14.Items.Add(ToolTipItem14)
+        SuperToolTip14.Items.Add(ToolTipTitleItem18)
+        Me.chk_UseInvoiceNoTag.SuperTip = SuperToolTip14
         '
         'RepositoryItemCheckEdit3
         '
@@ -589,13 +574,13 @@ Partial Class frm_Main
         Me.rpg_Templates.ItemLinks.Add(Me.btn_Template_BankEntries)
         Me.rpg_Templates.Name = "rpg_Templates"
         Me.rpg_Templates.ShowCaptionButton = False
-        ToolTipTitleItem16.Text = "Templates"
-        ToolTipItem13.LeftIndent = 6
-        ToolTipItem13.Text = "Empty Excel templates to use with this application. Datas must be filled in given" &
+        ToolTipTitleItem19.Text = "Templates"
+        ToolTipItem15.LeftIndent = 6
+        ToolTipItem15.Text = "Empty Excel templates to use with this application. Datas must be filled in given" &
     " formats only"
-        SuperToolTip13.Items.Add(ToolTipTitleItem16)
-        SuperToolTip13.Items.Add(ToolTipItem13)
-        Me.rpg_Templates.SuperTip = SuperToolTip13
+        SuperToolTip15.Items.Add(ToolTipTitleItem19)
+        SuperToolTip15.Items.Add(ToolTipItem15)
+        Me.rpg_Templates.SuperTip = SuperToolTip15
         Me.rpg_Templates.Text = "Templates"
         '
         'rp_PurchaseEntries
@@ -617,7 +602,7 @@ Partial Class frm_Main
         '
         Me.rpg_Export_Purchase.ItemLinks.Add(Me.btn_XML_File)
         Me.rpg_Export_Purchase.ItemLinks.Add(Me.btn_XML_Tally)
-        Me.rpg_Export_Purchase.ItemLinks.Add(Me.chk_UseInvoicePurchase, True)
+        Me.rpg_Export_Purchase.ItemLinks.Add(Me.chk_UseInvoice, True)
         Me.rpg_Export_Purchase.Name = "rpg_Export_Purchase"
         Me.rpg_Export_Purchase.ShowCaptionButton = False
         Me.rpg_Export_Purchase.Text = "Export"
@@ -641,7 +626,7 @@ Partial Class frm_Main
         '
         Me.rpg_Export_Sales.ItemLinks.Add(Me.btn_XML_File)
         Me.rpg_Export_Sales.ItemLinks.Add(Me.btn_XML_Tally)
-        Me.rpg_Export_Sales.ItemLinks.Add(Me.chk_UseInvoiceSales, True)
+        Me.rpg_Export_Sales.ItemLinks.Add(Me.chk_UseInvoice)
         Me.rpg_Export_Sales.Name = "rpg_Export_Sales"
         Me.rpg_Export_Sales.ShowCaptionButton = False
         Me.rpg_Export_Sales.Text = "Export"
@@ -700,6 +685,11 @@ Partial Class frm_Main
         Me.rpg_Export_Parties.Name = "rpg_Export_Parties"
         Me.rpg_Export_Parties.ShowCaptionButton = False
         Me.rpg_Export_Parties.Text = "Export"
+        '
+        'RepositoryItemCheckEdit2
+        '
+        Me.RepositoryItemCheckEdit2.AutoHeight = False
+        Me.RepositoryItemCheckEdit2.Name = "RepositoryItemCheckEdit2"
         '
         'RibbonStatusBar
         '
@@ -944,8 +934,8 @@ Partial Class frm_Main
         CType(Me.txt_BankLedgerName_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chk_IgnoreDupParties_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gc_Parties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gv_Parties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.container_Tabs, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1038,9 +1028,8 @@ Partial Class frm_Main
     Friend WithEvents btn_Template_Parties_WithData As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents chk_IgnoreDupParties As DevExpress.XtraBars.BarEditItem
     Friend WithEvents chk_IgnoreDupParties_Edit As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
-    Friend WithEvents chk_UseInvoicePurchase As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents chk_UseInvoice As DevExpress.XtraBars.BarEditItem
     Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
-    Friend WithEvents chk_UseInvoiceSales As DevExpress.XtraBars.BarEditItem
     Friend WithEvents RepositoryItemCheckEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents chk_UseInvoiceNoTag As DevExpress.XtraBars.BarEditItem
     Friend WithEvents RepositoryItemCheckEdit3 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit

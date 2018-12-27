@@ -239,7 +239,7 @@ Namespace Tally
                         .WriteString("Yes")
                         .WriteEndElement() 'ISINVOICE
                     End If
-                    .WriteStartElement("REFERENCE") 'REFERENCE
+                    .WriteStartElement(If(My.Settings.UseInvoiceNumberTag, "INVOICENUMBER", "REFERENCE")) 'REFERENCE
                     .WriteString(i.VoucherRef)
                     .WriteEndElement() 'REFERENCE
                     .WriteStartElement("NARRATION") 'NARRATION

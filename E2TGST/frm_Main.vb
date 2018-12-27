@@ -53,6 +53,7 @@ Public Class frm_Main
         chk_IgnoreDupParties.EditValue = My.Settings.IgnoreDuplicateParties
         chk_UseInvoicePurchase.EditValue = My.Settings.UseInvoicePurchase
         chk_UseInvoiceSales.EditValue = My.Settings.UseInvoiceSales
+        chk_UseInvoiceNoTag.EditValue = My.Settings.UseInvoiceNumberTag
     End Sub
 
     Function CheckDependencies(ByVal Vouchers As List(Of Objects.Voucher)) As Boolean
@@ -803,6 +804,11 @@ finish:
 
     Private Sub chk_UseInvoicePurchase_EditValueChanged(sender As Object, e As EventArgs) Handles chk_UseInvoicePurchase.EditValueChanged
         My.Settings.UseInvoicePurchase = chk_UseInvoicePurchase.EditValue
+        My.Settings.Save()
+    End Sub
+
+    Private Sub chk_UseInvoiceNoTag_EditValueChanged(sender As Object, e As EventArgs) Handles chk_UseInvoiceNoTag.EditValueChanged
+        My.Settings.UseInvoiceNumberTag = chk_UseInvoiceNoTag.EditValue
         My.Settings.Save()
     End Sub
 #End Region

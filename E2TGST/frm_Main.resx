@@ -1837,6 +1837,13 @@
         b2RkIiAvPg0KICA8L2c+DQo8L3N2Zz4L
 </value>
   </data>
+  <data name="ToolTipItem7.Text" xml:space="preserve">
+    <value>Fetch/Update datas from Tally ODBC Server i.e. Selected Company Name, Ledger Names &amp; Entries
+
+&lt;i&gt;Note: Make sure you enabled Tally ODBC Server &amp; "Both Client and Server".
+
+If more than one tally instances are running, data from first instance will be used&lt;/i&gt;</value>
+  </data>
   <data name="btn_Refresh.ImageOptions.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v18.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjE4LjEsIFZlcnNpb249MTguMS40
@@ -5103,6 +5110,9 @@
         SlIAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="PopupMenu_Parties.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>659, 17</value>
+  </metadata>
   <metadata name="OpenFileDialog_Excel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

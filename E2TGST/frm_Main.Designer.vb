@@ -626,7 +626,7 @@ Partial Class frm_Main
         '
         Me.rpg_Export_Sales.ItemLinks.Add(Me.btn_XML_File)
         Me.rpg_Export_Sales.ItemLinks.Add(Me.btn_XML_Tally)
-        Me.rpg_Export_Sales.ItemLinks.Add(Me.chk_UseInvoice)
+        Me.rpg_Export_Sales.ItemLinks.Add(Me.chk_UseInvoice, True)
         Me.rpg_Export_Sales.Name = "rpg_Export_Sales"
         Me.rpg_Export_Sales.ShowCaptionButton = False
         Me.rpg_Export_Sales.Text = "Export"

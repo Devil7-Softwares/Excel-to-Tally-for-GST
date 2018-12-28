@@ -1,4 +1,5 @@
-﻿Imports DevExpress.XtraBars
+﻿Imports DevExpress.Utils
+Imports DevExpress.XtraBars
 Imports DevExpress.XtraGrid.Views.Base
 Imports DevExpress.XtraGrid.Views.Grid
 Imports DevExpress.XtraTab
@@ -847,6 +848,14 @@ finish:
     Private Sub chk_UseInvoiceNoTag_EditValueChanged(sender As Object, e As EventArgs) Handles chk_UseInvoiceNoTag.EditValueChanged
         My.Settings.UseInvoiceNumberTag = chk_UseInvoiceNoTag.EditValue
         My.Settings.Save()
+    End Sub
+
+    Private Sub RibbonToolTipController_HyperlinkClick(sender As Object, e As HyperlinkClickEventArgs) Handles RibbonToolTipController.HyperlinkClick
+        Try
+            Process.Start(e.Link)
+        Catch ex As Exception
+
+        End Try
     End Sub
 #End Region
 

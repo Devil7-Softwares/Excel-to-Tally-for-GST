@@ -147,6 +147,7 @@ Partial Class frm_Main
         Me.SaveFileDialog_XML = New System.Windows.Forms.SaveFileDialog()
         Me.ProgressPanel_Main = New DevExpress.XtraWaitForm.ProgressPanel()
         Me.PictureBox_Logo = New System.Windows.Forms.PictureBox()
+        Me.RibbonToolTipController = New DevExpress.Utils.ToolTipController(Me.components)
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_CompanyName_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -195,6 +196,7 @@ Partial Class frm_Main
         Me.RibbonControl.Size = New System.Drawing.Size(810, 143)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
         Me.RibbonControl.Toolbar.ShowCustomizeItem = False
+        Me.RibbonControl.ToolTipController = Me.RibbonToolTipController
         '
         'btn_LoadExcel
         '
@@ -905,6 +907,10 @@ Partial Class frm_Main
         Me.PictureBox_Logo.TabIndex = 5
         Me.PictureBox_Logo.TabStop = False
         '
+        'RibbonToolTipController
+        '
+        Me.RibbonToolTipController.KeepWhileHovered = True
+        '
         'frm_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1033,4 +1039,5 @@ Partial Class frm_Main
     Friend WithEvents RepositoryItemCheckEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents chk_UseInvoiceNoTag As DevExpress.XtraBars.BarEditItem
     Friend WithEvents RepositoryItemCheckEdit3 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents RibbonToolTipController As DevExpress.Utils.ToolTipController
 End Class

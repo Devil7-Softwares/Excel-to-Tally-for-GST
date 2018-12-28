@@ -21,10 +21,10 @@
     <ROW Property="ARPSYSTEMCOMPONENT" Value="1"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="Devil7 Softwares"/>
-    <ROW Property="ProductCode" Value="1033:{FEE4EE27-72DB-4CF4-AF24-E1D05C430F91} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{DE9E7AD9-FEA9-4D5C-8D39-1F87360F62E1} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Excel to Tally for GST Entries"/>
-    <ROW Property="ProductVersion" Value="2.1.0" Type="32"/>
+    <ROW Property="ProductVersion" Value="2.2.0" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND;AI_SETUPEXEPATH;SETUPEXEDIR"/>
     <ROW Property="UpgradeCode" Value="{AE0C6578-36E4-43E3-A4B6-552E830B4A5C}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -43,7 +43,7 @@
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
-    <ROW Component="AI_CustomARPName" ComponentId="{F745EBDB-AC9F-4744-9B55-21954C4640FF}" Directory_="APPDIR" Attributes="4" KeyPath="DisplayName" Options="1"/>
+    <ROW Component="AI_CustomARPName" ComponentId="{FE6DF722-FE64-4ED4-B4AC-EABCF8465661}" Directory_="APPDIR" Attributes="4" KeyPath="DisplayName" Options="1"/>
     <ROW Component="AI_DisableModify" ComponentId="{DA23B37A-B397-4B89-B051-8D214FA496DC}" Directory_="APPDIR" Attributes="4" KeyPath="NoModify" Options="1"/>
     <ROW Component="AI_ExePath" ComponentId="{353A89A0-7994-4FD2-AFE2-7365033F023E}" Directory_="APPDIR" Attributes="4" KeyPath="AI_ExePath"/>
     <ROW Component="DevExpress.BonusSkins.v18.1.dll" ComponentId="{52EFE2E9-81B5-4D3A-95BA-B2F27935F586}" Directory_="APPDIR" Attributes="0" KeyPath="DevExpress.BonusSkins.v18.1.dll"/>

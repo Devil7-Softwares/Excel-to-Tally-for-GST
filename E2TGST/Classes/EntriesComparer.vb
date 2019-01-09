@@ -44,7 +44,7 @@ Public Class EntriesComparer : Implements IComparer(Of VoucherEntry)
 
 #Region "Private Functions"
     Private Function Compare_DrFirst(x As VoucherEntry, y As VoucherEntry) As Integer
-        If String.Compare(Voucher.VoucherType, "Sales", True) = 0 AndAlso My.Settings.UseInvoiceSales Then
+        If String.Compare(Voucher.VoucherType, "Sales", True) = 0 AndAlso My.Settings.UseInvoiceSales AndAlso (String.Compare(x.LedgerName, My.Settings.RoundOffLedger, True) = 0 Or String.Compare(y.LedgerName, My.Settings.RoundOffLedger, True) = 0) Then
             Return isRounding(x, y)
         End If
 
@@ -60,7 +60,7 @@ Public Class EntriesComparer : Implements IComparer(Of VoucherEntry)
     End Function
 
     Private Function Compare_CrFirst(x As VoucherEntry, y As VoucherEntry) As Integer
-        If String.Compare(Voucher.VoucherType, "Purchase", True) = 0 AndAlso My.Settings.UseInvoicePurchase Then
+        If String.Compare(Voucher.VoucherType, "Purchase", True) = 0 AndAlso My.Settings.UseInvoicePurchase AndAlso (String.Compare(x.LedgerName, My.Settings.RoundOffLedger, True) = 0 Or String.Compare(y.LedgerName, My.Settings.RoundOffLedger, True) = 0) Then
             Return isRounding(x, y)
         End If
 

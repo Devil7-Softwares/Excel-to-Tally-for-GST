@@ -565,7 +565,7 @@ Public Class frm_Main
     Private Async Sub btn_Sync_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Sync.ItemClick
         Invoke(Sub()
                    btn_Sync.Enabled = False
-                   ProgressPanel_Main.Caption = "Syncronizing with Tally..."
+                   ProgressPanel_Main.Caption = "Synchronizing with Tally..."
                    ProgressPanel_Main.Visible = True
                End Sub)
         If Not Await TallyIO.LoadAllMasters Then GoTo finish
@@ -787,7 +787,7 @@ finish:
         If TallyIO Is Nothing OrElse TallyIO.Parties Is Nothing Then
             Invoke(Sub() MsgBox("Please Sync With Tally to Use this Function.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error"))
         ElseIf TallyIO.Parties.Count < 0 Then
-            Invoke(Sub() MsgBox("No Parites Available to Export/Save to Excel Template.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error"))
+            Invoke(Sub() MsgBox("No Parties Available to Export/Save to Excel Template.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error"))
         Else
             SaveFileDialog_Excel.FileName = "Parties.xlsx"
             If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
@@ -856,6 +856,11 @@ finish:
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub btn_CustomRequest_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_CustomRequest.ItemClick
+        Dim D As New frm_CustomRequest(TallyIO)
+        D.ShowDialog()
     End Sub
 #End Region
 

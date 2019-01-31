@@ -287,7 +287,6 @@ Partial Class frm_Main
         Me.btn_LedgerNames.Id = 8
         Me.btn_LedgerNames.ImageOptions.SvgImage = CType(resources.GetObject("btn_LedgerNames.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.btn_LedgerNames.Name = "btn_LedgerNames"
-        Me.btn_LedgerNames.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText
         ToolTipTitleItem5.Text = "Edit Ledger Names"
         ToolTipItem5.LeftIndent = 6
         ToolTipItem5.Text = "Edit default / auto generated ledger names"
@@ -573,7 +572,6 @@ Partial Class frm_Main
         Me.RibbonPageGroup2.ItemLinks.Add(Me.txt_StateCode)
         Me.RibbonPageGroup2.ItemLinks.Add(Me.chk_CalcValues, True)
         Me.RibbonPageGroup2.ItemLinks.Add(Me.chk_UseInvoiceNoTag)
-        Me.RibbonPageGroup2.ItemLinks.Add(Me.btn_LedgerNames)
         Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
         Me.RibbonPageGroup2.ShowCaptionButton = False
         Me.RibbonPageGroup2.Text = "Variables"
@@ -607,6 +605,7 @@ Partial Class frm_Main
         'rpg_Tools
         '
         Me.rpg_Tools.ItemLinks.Add(Me.btn_CustomRequest)
+        Me.rpg_Tools.ItemLinks.Add(Me.btn_LedgerNames)
         Me.rpg_Tools.Name = "rpg_Tools"
         Me.rpg_Tools.ShowCaptionButton = False
         Me.rpg_Tools.Text = "Tools"

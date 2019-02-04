@@ -104,6 +104,12 @@ Namespace Tally
             Dim Groups As New List(Of String)
             Dim Units As New List(Of String)
             Dim StockItems As New List(Of String)
+
+            Dim isInsideLedger As Boolean = False
+            Dim CurrentLedgerName As String = ""
+            Dim CurrentLedgerGroup As String = ""
+            Dim CurrentLedgerGSTIN As String = ""
+
             Dim m_xmlr As New XmlTextReader(New MemoryStream(System.Text.Encoding.ASCII.GetBytes(RequestData))) With {.Namespaces = False}
             m_xmlr.WhitespaceHandling = WhitespaceHandling.None
             m_xmlr.Read()
@@ -161,6 +167,8 @@ Namespace Tally
                 ElseIf elements(i).Name = "GSTREGISTRATIONTYPE" Then
                     PartyType = elements(i).InnerXml
                 ElseIf elements(i).Name = "PARTYGSTIN" Then
+                    PartyGSTIN = elements(i).InnerXml
+                ElseIf elements(i).Name = "SALESTAXNUMBER" AndAlso My.Settings.TallyOldVersion Then
                     PartyGSTIN = elements(i).InnerXml
                 ElseIf elements(i).Name = "LANGUAGENAME.LIST" Then
                     For Each e As XmlNode In elements(i).ChildNodes

@@ -34,7 +34,7 @@ Namespace Tally
                 Tmp.RemoveAt(0)
                 TmpPurchaseEntries.Add(Entry1)
                 Dim MatchingEntries As List(Of Objects.PurchaseEntry) = Tmp.FindAll(Function(c)
-                                                                                        Return c.GSTIN.Equals(Entry1.GSTIN, StringComparison.OrdinalIgnoreCase) _
+                                                                                        Return (c.PartyReference.Replace(" ", "").Equals(Entry1.PartyReference.Replace(" ", ""), StringComparison.OrdinalIgnoreCase) Or (c.Party IsNot Nothing AndAlso Entry1.Party IsNot Nothing AndAlso c.Party.Name.Equals(Entry1.Party.Name))) _
                                                                                 And c.InvoiceDate.Equals(Entry1.InvoiceDate) _
                                                                                 And c.InvoiceNo.Equals(Entry1.InvoiceNo, StringComparison.OrdinalIgnoreCase) _
                                                                                 And c.InvoiceValue.Equals(Entry1.InvoiceValue) _
@@ -107,7 +107,7 @@ Namespace Tally
                     Entries.Add(New Objects.VoucherEntry(My.Settings.RoundOffLedger, If(RoundingOff > 0, Enums.Effect.Dr, Enums.Effect.Cr), RoundingOff))
                 End If
 
-                Entries.Add(New Objects.VoucherEntry(Entry1.GSTIN, Enums.Effect.Cr, TotalValue_AR)) ' Purchase Party
+                Entries.Add(New Objects.VoucherEntry(If(Entry1.Party IsNot Nothing, Entry1.Party.Name, Entry1.PartyReference), Enums.Effect.Cr, TotalValue_AR)) ' Purchase Party
 
                 R.Add(New Objects.Voucher(VoucherType, Entry1.InvoiceDate, Entry1.InvoiceNo, Narration, Entries))
             Loop
@@ -126,7 +126,7 @@ Namespace Tally
                 Tmp.RemoveAt(0)
                 TmpSalesEntries.Add(Entry1)
                 Dim MatchingEntries As List(Of Objects.SalesEntry) = Tmp.FindAll(Function(c)
-                                                                                     Return c.GSTIN.Equals(Entry1.GSTIN, StringComparison.OrdinalIgnoreCase) _
+                                                                                     Return (c.PartyReference.Replace(" ", "").Equals(Entry1.PartyReference.Replace(" ", ""), StringComparison.OrdinalIgnoreCase) Or (c.Party IsNot Nothing AndAlso Entry1.Party IsNot Nothing AndAlso c.Party.Name.Equals(Entry1.Party.Name))) _
                                                                                 And c.InvoiceDate.Equals(Entry1.InvoiceDate) _
                                                                                 And c.InvoiceNo.Equals(Entry1.InvoiceNo, StringComparison.OrdinalIgnoreCase) _
                                                                                 And c.InvoiceValue.Equals(Entry1.InvoiceValue)
@@ -204,7 +204,7 @@ Namespace Tally
                     Entries.Add(New Objects.VoucherEntry(My.Settings.RoundOffLedger, If(RoundingOff > 0, Enums.Effect.Cr, Enums.Effect.Dr), RoundingOff))
                 End If
 
-                Entries.Insert(0, New Objects.VoucherEntry(Entry1.GSTIN, Enums.Effect.Dr, TotalValue_AR)) ' Sales Party
+                Entries.Insert(0, New Objects.VoucherEntry(If(Entry1.Party IsNot Nothing, Entry1.Party.Name, Entry1.PartyReference), Enums.Effect.Dr, TotalValue_AR)) ' Sales Party
 
                 R.Add(New Objects.Voucher(VoucherType, Entry1.InvoiceDate, Entry1.InvoiceNo, Narration, Entries))
             Loop

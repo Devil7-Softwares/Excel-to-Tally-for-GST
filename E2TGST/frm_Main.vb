@@ -53,6 +53,7 @@ Public Class frm_Main
         chk_IncludeDesc.EditValue = My.Settings.IncludeDesc
         chk_IgnoreDupParties.EditValue = My.Settings.IgnoreDuplicateParties
         chk_UseInvoiceNoTag.EditValue = My.Settings.UseInvoiceNumberTag
+        chk_TallyOldVersion.EditValue = My.Settings.TallyOldVersion
     End Sub
 
     Function CheckDependencies(ByVal Vouchers As List(Of Objects.Voucher)) As Boolean
@@ -76,6 +77,16 @@ Public Class frm_Main
         Else
             Return True
         End If
+    End Function
+
+    Function FindParty(ByVal Key As String) As Objects.Party
+        Dim R As Objects.Party = Nothing
+
+        If TallyIO IsNot Nothing AndAlso TallyIO.Parties IsNot Nothing Then
+            R = TallyIO.Parties.Find(Function(c) c.Name.Replace(" ", "").Equals(Key.Replace(" ", ""), StringComparison.OrdinalIgnoreCase) Or c.GSTIN.Trim.Equals(Key.Trim, StringComparison.OrdinalIgnoreCase))
+        End If
+
+        Return R
     End Function
 
     Async Function LoadParties(ByVal FileName As String) As Task
@@ -167,8 +178,9 @@ Public Class frm_Main
                                            If reader.CodeName = "PurchaseEntries" AndAlso Not reader.IsDBNull(0) Then
                                                Index += 1
                                                If Index > 0 Then
-                                                   Dim GSTIN As String = GetString(reader, 0)
-                                                   If GSTIN <> "" Then
+                                                   Dim PartyRef As String = GetString(reader, 0)
+                                                   If PartyRef <> "" Then
+                                                       Dim Party As Objects.Party = FindParty(PartyRef)
                                                        Dim InvoiceNo As String = GetString(reader, 1)
                                                        Dim InvoiceDate As Date = GetDate(reader, 2)
                                                        Dim InvoiceValue As Double = GetDouble(reader, 3)
@@ -203,7 +215,7 @@ Public Class frm_Main
                                                        Catch ex As Exception
 
                                                        End Try
-                                                       R.Add(New Objects.PurchaseEntry(GSTIN, InvoiceNo, InvoiceDate, InvoiceValue, GSTRate, TaxableValue, IGST, CGST, SGST, CESS, LedgerName, VoucherType, Objects.State.GetStateByCode(StateCode)))
+                                                       R.Add(New Objects.PurchaseEntry(Party, PartyRef, InvoiceNo, InvoiceDate, InvoiceValue, GSTRate, TaxableValue, IGST, CGST, SGST, CESS, LedgerName, VoucherType, Objects.State.GetStateByCode(StateCode)))
                                                    End If
                                                End If
                                            End If
@@ -242,9 +254,10 @@ Public Class frm_Main
                                            If reader.CodeName = "SalesEntries" AndAlso Not reader.IsDBNull(0) Then
                                                Index += 1
                                                If Index > 0 Then
-                                                   Dim GSTIN As String = GetString(reader, 0)
+                                                   Dim PartyRef As String = GetString(reader, 0)
                                                    Dim InvoiceDate As Date = GetDate(reader, 1)
-                                                   If GSTIN <> "" Then
+                                                   If PartyRef <> "" Then
+                                                       Dim Party As Objects.Party = FindParty(PartyRef)
                                                        Dim InvoiceNo As String = GetString(reader, 2)
                                                        Dim InvoiceValue As Double = GetDouble(reader, 3)
                                                        Dim GSTRate As Integer = GetDouble(reader, 4)
@@ -263,14 +276,14 @@ Public Class frm_Main
                                                            End If
                                                        Catch ex1 As Exception
                                                            Try
-                                                               If GSTIN <> "" Then
-                                                                   StateCode = CInt(GSTIN.Substring(0, 2))
+                                                               If PartyRef <> "" Then
+                                                                   StateCode = CInt(PartyRef.Substring(0, 2))
                                                                End If
                                                            Catch ex2 As Exception
 
                                                            End Try
                                                        End Try
-                                                       R.Add(New Objects.SalesEntry(GSTIN, InvoiceDate, InvoiceNo, InvoiceValue, GSTRate, TaxableValue, IGST, CGST, SGST, CESS, Objects.State.GetStateByCode(StateCode)))
+                                                       R.Add(New Objects.SalesEntry(Party, PartyRef, InvoiceDate, InvoiceNo, InvoiceValue, GSTRate, TaxableValue, IGST, CGST, SGST, CESS, If(Party Is Nothing, Objects.State.GetStateByCode(StateCode), Party.State)))
                                                    End If
                                                End If
                                            End If
@@ -597,18 +610,22 @@ finish:
         End If
     End Sub
 
-    Private Sub gv_PurchaseEntries_CustomDrawCell(sender As Object, e As RowCellCustomDrawEventArgs) Handles gv_PurchaseEntries.CustomDrawCell
-        If e.Column.FieldName = "GSTIN" Or e.Column.FieldName = "LedgerName" Then
+    Private Sub gv_Entries_CustomDrawCell(sender As Object, e As RowCellCustomDrawEventArgs) Handles gv_PurchaseEntries.CustomDrawCell, gv_SalesEntries.CustomDrawCell
+        If e.Column.FieldName = "PartyReference" Or e.Column.FieldName = "LedgerName" Then
             Dim cellInfo As DevExpress.XtraGrid.Views.Grid.ViewInfo.GridCellInfo = TryCast(e.Cell, DevExpress.XtraGrid.Views.Grid.ViewInfo.GridCellInfo)
-            Dim row As Objects.PurchaseEntry = gv_PurchaseEntries.GetRow(e.RowHandle)
+            Dim row As Object = sender.GetRow(e.RowHandle)
 
             If cellInfo IsNot Nothing Then
                 If TallyIO IsNot Nothing AndAlso TallyIO.Ledgers IsNot Nothing AndAlso TallyIO.Ledgers.Count > 0 Then
-                    If e.Column.FieldName = "GSTIN" Then
+                    If e.Column.FieldName = "PartyReference" Then
                         Dim Error_ As String = "-"
-                        If Not GSTINValidator.IsValid(row.GSTIN, Error_) Then
-                        ElseIf Not TallyIO.Ledgers.Contains(row.GSTIN, StringComparer.OrdinalIgnoreCase) Then
-                            Error_ = "Party Doesn't Exist in Tally Ledgers!"
+                        If row.Party Is Nothing And Not TallyIO.Ledgers.Contains(row.PartyReference, StringComparer.OrdinalIgnoreCase) Then
+                            Error_ = "Unable to Find any Party Ledger Using This Reference & No Ledger Account Exist in this Name!"
+                        End If
+                        If Error_ = "-" And row.PartyReference.Length > 8 AndAlso (New System.Text.RegularExpressions.Regex("\d{2}\D{1}.*")).IsMatch(row.PartyReference) Then
+                            If Not GSTINValidator.IsValid(row.PartyReference, Error_) Then
+                                Error_ = "Invalid GSTIN!"
+                            End If
                         End If
                         If Error_ <> "-" Then
                             cellInfo.ViewInfo.ErrorIconText = Error_
@@ -861,6 +878,11 @@ finish:
     Private Sub btn_CustomRequest_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_CustomRequest.ItemClick
         Dim D As New frm_CustomRequest(TallyIO)
         D.ShowDialog()
+    End Sub
+
+    Private Sub chk_TallyOldVersion_EditValueChanged(sender As Object, e As EventArgs) Handles chk_TallyOldVersion.EditValueChanged
+        My.Settings.TallyOldVersion = chk_TallyOldVersion.EditValue
+        My.Settings.Save()
     End Sub
 #End Region
 

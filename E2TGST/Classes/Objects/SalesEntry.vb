@@ -23,7 +23,8 @@ Namespace Objects
     Public Class SalesEntry
 
 #Region "Properties/Fields"
-        Property GSTIN As String
+        Property Party As Party
+        Property PartyReference As String
         Property InvoiceDate As Date
         Property InvoiceNo As String
         Property InvoiceValue As Double
@@ -38,7 +39,8 @@ Namespace Objects
 
 #Region "Constructors"
         Sub New()
-            Me.GSTIN = ""
+            Me.Party = Nothing
+            Me.PartyReference = ""
             Me.InvoiceDate = Now
             Me.InvoiceNo = ""
             Me.InvoiceValue = 0
@@ -51,10 +53,11 @@ Namespace Objects
             Me.PlaceOfSupply = State.GetStateByCode(My.Settings.StateCode)
         End Sub
 
-        Sub New(ByVal GSTIN As String, ByVal InvoiceDate As Date, ByVal InvoiceNo As String, ByVal InvoiceValue As Double,
+        Sub New(ByVal Party As Party, ByVal PartyReference As String, ByVal InvoiceDate As Date, ByVal InvoiceNo As String, ByVal InvoiceValue As Double,
                 ByVal Rate As Integer, ByVal TaxableValue As Double, ByVal IGST As Double, ByVal CGST As Double,
                 ByVal SGST As Double, ByVal CESS As Double, ByVal PlaceOfSupply As State)
-            Me.GSTIN = GSTIN
+            Me.Party = Party
+            Me.PartyReference = PartyReference
             Me.InvoiceDate = InvoiceDate
             Me.InvoiceNo = InvoiceNo
             Me.InvoiceValue = InvoiceValue

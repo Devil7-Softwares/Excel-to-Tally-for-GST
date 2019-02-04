@@ -71,6 +71,10 @@ Namespace Objects
 
         Public Sub GetError(info As ErrorInfo) Implements IDXDataErrorInfo.GetError
         End Sub
+
+        Public Overrides Function ToString() As String
+            Return Me.Name
+        End Function
 #End Region
 
     End Class

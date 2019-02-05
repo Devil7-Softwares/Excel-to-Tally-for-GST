@@ -63,10 +63,10 @@ Public Class frm_Main
                 If entry.LedgerName.Contains(";") Then
                     Dim LedgerNames As String() = entry.LedgerName.Split(";")
                     For Each i As String In LedgerNames
-                        If Not TallyIO.Ledgers.Contains(i.Split("=")(0).Trim, StringComparer.OrdinalIgnoreCase) Then MissingLedgers.Add(i.Split("=")(0).Trim)
+                        If Not TallyIO.Ledgers.Contains(i.Split("=")(0).Trim, StringComparer.OrdinalIgnoreCase) And Not MissingLedgers.Contains(i.Split("=")(0).Trim) Then MissingLedgers.Add(i.Split("=")(0).Trim)
                     Next
                 Else
-                    If Not TallyIO.Ledgers.Contains(entry.LedgerName, StringComparer.OrdinalIgnoreCase) Then MissingLedgers.Add(entry.LedgerName)
+                    If Not TallyIO.Ledgers.Contains(entry.LedgerName, StringComparer.OrdinalIgnoreCase) And Not MissingLedgers.Contains(entry.LedgerName) Then MissingLedgers.Add(entry.LedgerName)
                 End If
             Next
         Next

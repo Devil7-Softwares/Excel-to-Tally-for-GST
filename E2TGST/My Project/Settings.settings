@@ -56,5 +56,11 @@
     <Setting Name="TallyOldVersion" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="InvoiceNoRegex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(?&lt;invoice&gt;.*)</Value>
+    </Setting>
+    <Setting Name="CombineSales" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

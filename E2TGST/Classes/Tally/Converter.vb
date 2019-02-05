@@ -115,6 +115,114 @@ Namespace Tally
             Return R
         End Function
 
+        Public Shared Function Sales2VouchersCombined(ByVal SalesEntries As List(Of Objects.SalesEntry)) As List(Of Objects.Voucher)
+            Dim R As New List(Of Objects.Voucher)
+
+            Dim Tmp As New List(Of Objects.SalesEntry)(SalesEntries)
+            Dim RegEx As New System.Text.RegularExpressions.Regex(My.Settings.InvoiceNoRegex)
+
+            Do Until Tmp.Count = 0
+                Dim TmpSalesEntries As New List(Of Objects.SalesEntry)
+                Dim Entry1 As Objects.SalesEntry = Tmp(0)
+                Tmp.RemoveAt(0)
+                TmpSalesEntries.Add(Entry1)
+
+                Dim CurrentInvoiceNo As Integer = RegEx.Match(Entry1.InvoiceNo).Groups("invoice").Value
+                Dim StartInvoiceNo As String = Entry1.InvoiceNo
+                Dim EndInvoiceNo As String = Entry1.InvoiceNo
+
+                For i As Integer = 0 To Tmp.Count - 1
+                    CurrentInvoiceNo += 1
+                    Dim Entry2 As Objects.SalesEntry = Tmp(i)
+                    Dim InvoiceNo As Integer = RegEx.Match(Entry2.InvoiceNo).Groups("invoice").Value
+
+                    If Entry1.InvoiceDate.Equals(Entry2.InvoiceDate) AndAlso Entry1.PartyReference.Trim.Equals(Entry2.PartyReference.Trim, StringComparison.OrdinalIgnoreCase) AndAlso InvoiceNo = CurrentInvoiceNo Then
+                        TmpSalesEntries.Add(Entry2)
+                        EndInvoiceNo = Entry2.InvoiceNo
+                    Else
+                        Exit For
+                    End If
+                Next
+
+                For Each i As Objects.SalesEntry In TmpSalesEntries
+                    Tmp.Remove(i)
+                Next
+
+                Dim VoucherType As String = [Enum].GetName(GetType(Enums.VoucherType), Enums.VoucherType.Sales)
+                Dim VoucherRef As String = If(TmpSalesEntries.Count > 1, String.Format("{0} to {1}", StartInvoiceNo, EndInvoiceNo), Entry1.InvoiceNo)
+                Dim Narration As String = String.Format("AS PER BILL NO{0}.: {1}", If(TmpSalesEntries.Count > 1, "s", ""), VoucherRef)
+                Dim Entries As New List(Of Objects.VoucherEntry)
+
+                For Each SalesEntry As Objects.SalesEntry In TmpSalesEntries
+                    Dim IGST As Double = Math.Round(If(My.Settings.CalculateValues, SalesEntry.TaxableValue * SalesEntry.GSTRate / 100, SalesEntry.IGST), 2)
+                    Dim CGST As Double = Math.Round(If(My.Settings.CalculateValues, SalesEntry.TaxableValue * (SalesEntry.GSTRate / 2) / 100, SalesEntry.CGST), 2)
+                    Dim SGST As Double = Math.Round(If(My.Settings.CalculateValues, SalesEntry.TaxableValue * (SalesEntry.GSTRate / 2) / 100, SalesEntry.SGST), 2)
+
+                    Dim SalesEntryLedgerName As String = If(SalesEntry.GSTRate = 0, "Sales Exempted", String.Format(My.Settings.SalesLedger, SalesEntry.GSTRate))
+                    Dim ExistingSalesEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SalesEntryLedgerName)
+                    If ExistingSalesEntry Is Nothing Then
+                        Entries.Add(New Objects.VoucherEntry(SalesEntryLedgerName, Enums.Effect.Cr, SalesEntry.TaxableValue)) ' Head - Eg. Sales A/c
+                    Else
+                        ExistingSalesEntry.Amount = Math.Round(ExistingSalesEntry.Amount + SalesEntry.TaxableValue)
+                    End If
+
+                    If SalesEntry.GSTRate > 0 Then
+                        If SalesEntry.PlaceOfSupply.Code = My.Settings.StateCode Then
+                            Dim CGSTLedger As String = String.Format(My.Settings.TaxLedger, "Output", "CGST", SalesEntry.GSTRate / 2)
+                            Dim SGSTLedger As String = String.Format(My.Settings.TaxLedger, "Output", "SGST", SalesEntry.GSTRate / 2)
+
+                            Dim ExistingCGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = CGSTLedger)
+                            Dim ExistingSGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SGSTLedger)
+                            If ExistingCGSTEntry Is Nothing Then
+                                Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Cr, Math.Round(If(My.Settings.CalculateValues, CGST, SalesEntry.CGST), 2))) 'CGST
+                            Else
+                                ExistingCGSTEntry.Amount = Math.Round(ExistingCGSTEntry.Amount + Math.Round(If(My.Settings.CalculateValues, CGST, SalesEntry.CGST), 2), 2)
+                            End If
+                            If ExistingSGSTEntry Is Nothing Then
+                                Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Cr, Math.Round(If(My.Settings.CalculateValues, SGST, SalesEntry.SGST), 2))) 'SGST
+                            Else
+                                ExistingSGSTEntry.Amount = Math.Round(ExistingSGSTEntry.Amount + Math.Round(If(My.Settings.CalculateValues, SGST, SalesEntry.SGST), 2), 2)
+                            End If
+                        Else
+                            Dim IGSTLedger As String = String.Format(My.Settings.TaxLedger, "Output", "IGST", SalesEntry.GSTRate)
+
+                            Dim ExistingIGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = IGSTLedger)
+                            If ExistingIGSTEntry Is Nothing Then
+                                Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Cr, Math.Round(If(My.Settings.CalculateValues, IGST, SalesEntry.IGST), 2))) 'IGST
+                            Else
+                                ExistingIGSTEntry.Amount = Math.Round(ExistingIGSTEntry.Amount + Math.Round(If(My.Settings.CalculateValues, IGST, SalesEntry.IGST), 2), 2)
+                            End If
+                        End If
+                    End If
+
+                    If SalesEntry.CESS > 0 Then
+                        Dim ExistingCESSEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = My.Settings.CESSLedger)
+                        If ExistingCESSEntry Is Nothing Then
+                            Entries.Add(New Objects.VoucherEntry(My.Settings.CESSLedger, Enums.Effect.Cr, Math.Round(SalesEntry.CESS, 2))) 'CESS
+                        Else
+                            ExistingCESSEntry.Amount = Math.Round(ExistingCESSEntry.Amount + Math.Round(SalesEntry.CESS, 2), 2)
+                        End If
+                    End If
+                Next
+
+                Dim TotalValue_BR As Double = 0
+                For Each i As Objects.VoucherEntry In Entries
+                    TotalValue_BR += i.Amount
+                Next
+                Dim TotalValue_AR As Double = Math.Round(TotalValue_BR)
+                Dim RoundingOff As Double = Math.Round(TotalValue_AR - TotalValue_BR, 2)
+                If RoundingOff <> 0 Then
+                    Entries.Add(New Objects.VoucherEntry(My.Settings.RoundOffLedger, If(RoundingOff > 0, Enums.Effect.Cr, Enums.Effect.Dr), RoundingOff))
+                End If
+
+                Entries.Insert(0, New Objects.VoucherEntry(If(Entry1.Party IsNot Nothing, Entry1.Party.Name, Entry1.PartyReference), Enums.Effect.Dr, TotalValue_AR)) ' Sales Party
+
+                R.Add(New Objects.Voucher(VoucherType, Entry1.InvoiceDate, VoucherRef, Narration, Entries))
+            Loop
+
+            Return R
+        End Function
+
         Public Shared Function Sales2Vouchers(ByVal SalesEntries As List(Of Objects.SalesEntry)) As List(Of Objects.Voucher)
             Dim R As New List(Of Objects.Voucher)
 

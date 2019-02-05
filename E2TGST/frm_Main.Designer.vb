@@ -110,6 +110,12 @@ Partial Class frm_Main
         Me.chk_UseInvoiceNoTag = New DevExpress.XtraBars.BarEditItem()
         Me.RepositoryItemCheckEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.btn_CustomRequest = New DevExpress.XtraBars.BarButtonItem()
+        Me.chk_TallyOldVersion = New DevExpress.XtraBars.BarEditItem()
+        Me.RepositoryItemCheckEdit4 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.chk_CombineSales = New DevExpress.XtraBars.BarEditItem()
+        Me.RepositoryItemCheckEdit5 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.txt_InvoiceNo_Regex = New DevExpress.XtraBars.BarEditItem()
+        Me.txt_InvoiceNo_Regex_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.rp_Tally = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rpg_Sync = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -153,8 +159,6 @@ Partial Class frm_Main
         Me.SaveFileDialog_XML = New System.Windows.Forms.SaveFileDialog()
         Me.ProgressPanel_Main = New DevExpress.XtraWaitForm.ProgressPanel()
         Me.PictureBox_Logo = New System.Windows.Forms.PictureBox()
-        Me.chk_TallyOldVersion = New DevExpress.XtraBars.BarEditItem()
-        Me.RepositoryItemCheckEdit4 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_CompanyName_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -168,6 +172,9 @@ Partial Class frm_Main
         CType(Me.chk_IgnoreDupParties_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txt_InvoiceNo_Regex_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gc_Parties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gv_Parties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -184,19 +191,18 @@ Partial Class frm_Main
         CType(Me.gv_BankEntries, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tp_Parties.SuspendLayout()
         CType(Me.PictureBox_Logo, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemCheckEdit4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.chk_CalcValues, Me.btn_LedgerNames, Me.txt_TallyHost, Me.txt_TallyPort, Me.btn_Sync, Me.btn_Refresh, Me.btn_XML_Tally, Me.btn_Template_Parties, Me.btn_Template_PurchaseEntries, Me.btn_Template_SalesEntries, Me.btn_About, Me.txt_StateCode, Me.btn_Template_BankEntries, Me.chk_IncludeDesc, Me.txt_BankLedgerName, Me.btn_Template_Parties_WithData, Me.chk_IgnoreDupParties, Me.chk_UseInvoice, Me.chk_UseInvoiceNoTag, Me.btn_CustomRequest, Me.chk_TallyOldVersion})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.chk_CalcValues, Me.btn_LedgerNames, Me.txt_TallyHost, Me.txt_TallyPort, Me.btn_Sync, Me.btn_Refresh, Me.btn_XML_Tally, Me.btn_Template_Parties, Me.btn_Template_PurchaseEntries, Me.btn_Template_SalesEntries, Me.btn_About, Me.txt_StateCode, Me.btn_Template_BankEntries, Me.chk_IncludeDesc, Me.txt_BankLedgerName, Me.btn_Template_Parties_WithData, Me.chk_IgnoreDupParties, Me.chk_UseInvoice, Me.chk_UseInvoiceNoTag, Me.btn_CustomRequest, Me.chk_TallyOldVersion, Me.chk_CombineSales, Me.txt_InvoiceNo_Regex})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 34
+        Me.RibbonControl.MaxItemId = 36
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_Tally, Me.rp_PurchaseEntries, Me.rp_SalesEntries, Me.rp_BankEntries, Me.rp_Parties})
         Me.RibbonControl.QuickToolbarItemLinks.Add(Me.btn_About, "ABOUT")
-        Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit, Me.chk_CalcValues_Edit, Me.txt_TallyHost_Edit, Me.txt_TallyPort_Edit, Me.txt_StateCode_Edit, Me.chk_IncludeDesc_Edit, Me.txt_BankLedgerName_Edit, Me.chk_IgnoreDupParties_Edit, Me.RepositoryItemCheckEdit1, Me.RepositoryItemCheckEdit2, Me.RepositoryItemCheckEdit3, Me.RepositoryItemCheckEdit4})
+        Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit, Me.chk_CalcValues_Edit, Me.txt_TallyHost_Edit, Me.txt_TallyPort_Edit, Me.txt_StateCode_Edit, Me.chk_IncludeDesc_Edit, Me.txt_BankLedgerName_Edit, Me.chk_IgnoreDupParties_Edit, Me.RepositoryItemCheckEdit1, Me.RepositoryItemCheckEdit2, Me.RepositoryItemCheckEdit3, Me.RepositoryItemCheckEdit4, Me.RepositoryItemCheckEdit5, Me.txt_InvoiceNo_Regex_Edit})
         Me.RibbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.[False]
         Me.RibbonControl.ShowCategoryInCaption = False
         Me.RibbonControl.ShowExpandCollapseButton = DevExpress.Utils.DefaultBoolean.[False]
@@ -509,7 +515,7 @@ Partial Class frm_Main
         Me.chk_UseInvoice.Caption = "Use Invoice Mode"
         Me.chk_UseInvoice.Edit = Me.RepositoryItemCheckEdit1
         Me.chk_UseInvoice.EditValue = False
-        Me.chk_UseInvoice.EditWidth = 10
+        Me.chk_UseInvoice.EditWidth = 33
         Me.chk_UseInvoice.Id = 25
         Me.chk_UseInvoice.Name = "chk_UseInvoice"
         ToolTipTitleItem15.Text = "Use Invoice Mode"
@@ -561,6 +567,47 @@ Partial Class frm_Main
         SuperToolTip14.Items.Add(ToolTipTitleItem17)
         SuperToolTip14.Items.Add(ToolTipItem14)
         Me.btn_CustomRequest.SuperTip = SuperToolTip14
+        '
+        'chk_TallyOldVersion
+        '
+        Me.chk_TallyOldVersion.Caption = "Tally is Old Version"
+        Me.chk_TallyOldVersion.Edit = Me.RepositoryItemCheckEdit4
+        Me.chk_TallyOldVersion.EditWidth = 36
+        Me.chk_TallyOldVersion.Id = 33
+        Me.chk_TallyOldVersion.Name = "chk_TallyOldVersion"
+        '
+        'RepositoryItemCheckEdit4
+        '
+        Me.RepositoryItemCheckEdit4.AutoHeight = False
+        Me.RepositoryItemCheckEdit4.Name = "RepositoryItemCheckEdit4"
+        '
+        'chk_CombineSales
+        '
+        Me.chk_CombineSales.Caption = "Combine Entries"
+        Me.chk_CombineSales.Edit = Me.RepositoryItemCheckEdit5
+        Me.chk_CombineSales.EditValue = False
+        Me.chk_CombineSales.Id = 34
+        Me.chk_CombineSales.Name = "chk_CombineSales"
+        '
+        'RepositoryItemCheckEdit5
+        '
+        Me.RepositoryItemCheckEdit5.AutoHeight = False
+        Me.RepositoryItemCheckEdit5.Name = "RepositoryItemCheckEdit5"
+        '
+        'txt_InvoiceNo_Regex
+        '
+        Me.txt_InvoiceNo_Regex.Caption = "Invoice No Regex   "
+        Me.txt_InvoiceNo_Regex.Edit = Me.txt_InvoiceNo_Regex_Edit
+        Me.txt_InvoiceNo_Regex.EditWidth = 150
+        Me.txt_InvoiceNo_Regex.Id = 35
+        Me.txt_InvoiceNo_Regex.Name = "txt_InvoiceNo_Regex"
+        '
+        'txt_InvoiceNo_Regex_Edit
+        '
+        Me.txt_InvoiceNo_Regex_Edit.AutoHeight = False
+        Me.txt_InvoiceNo_Regex_Edit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.txt_InvoiceNo_Regex_Edit.Name = "txt_InvoiceNo_Regex_Edit"
+        Me.txt_InvoiceNo_Regex_Edit.ReadOnly = True
         '
         'rp_Tally
         '
@@ -658,6 +705,8 @@ Partial Class frm_Main
         Me.rpg_Export_Sales.ItemLinks.Add(Me.btn_XML_File)
         Me.rpg_Export_Sales.ItemLinks.Add(Me.btn_XML_Tally)
         Me.rpg_Export_Sales.ItemLinks.Add(Me.chk_UseInvoice, True)
+        Me.rpg_Export_Sales.ItemLinks.Add(Me.chk_CombineSales)
+        Me.rpg_Export_Sales.ItemLinks.Add(Me.txt_InvoiceNo_Regex)
         Me.rpg_Export_Sales.Name = "rpg_Export_Sales"
         Me.rpg_Export_Sales.ShowCaptionButton = False
         Me.rpg_Export_Sales.Text = "Export"
@@ -940,19 +989,6 @@ Partial Class frm_Main
         Me.PictureBox_Logo.TabIndex = 5
         Me.PictureBox_Logo.TabStop = False
         '
-        'chk_TallyOldVersion
-        '
-        Me.chk_TallyOldVersion.Caption = "Tally is Old Version"
-        Me.chk_TallyOldVersion.Edit = Me.RepositoryItemCheckEdit4
-        Me.chk_TallyOldVersion.EditWidth = 36
-        Me.chk_TallyOldVersion.Id = 33
-        Me.chk_TallyOldVersion.Name = "chk_TallyOldVersion"
-        '
-        'RepositoryItemCheckEdit4
-        '
-        Me.RepositoryItemCheckEdit4.AutoHeight = False
-        Me.RepositoryItemCheckEdit4.Name = "RepositoryItemCheckEdit4"
-        '
         'frm_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -983,6 +1019,9 @@ Partial Class frm_Main
         CType(Me.chk_IgnoreDupParties_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txt_InvoiceNo_Regex_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gc_Parties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gv_Parties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -999,7 +1038,6 @@ Partial Class frm_Main
         CType(Me.gv_BankEntries, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tp_Parties.ResumeLayout(False)
         CType(Me.PictureBox_Logo, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemCheckEdit4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1087,4 +1125,8 @@ Partial Class frm_Main
     Friend WithEvents rpg_Tools As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents chk_TallyOldVersion As DevExpress.XtraBars.BarEditItem
     Friend WithEvents RepositoryItemCheckEdit4 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents chk_CombineSales As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents RepositoryItemCheckEdit5 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents txt_InvoiceNo_Regex As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents txt_InvoiceNo_Regex_Edit As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
 End Class

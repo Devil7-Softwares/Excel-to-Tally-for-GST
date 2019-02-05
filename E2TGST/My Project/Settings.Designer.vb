@@ -269,6 +269,30 @@ Namespace My
                 Me("TallyOldVersion") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("(?<invoice>.*)")>  _
+        Public Property InvoiceNoRegex() As String
+            Get
+                Return CType(Me("InvoiceNoRegex"),String)
+            End Get
+            Set
+                Me("InvoiceNoRegex") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CombineSales() As Boolean
+            Get
+                Return CType(Me("CombineSales"),Boolean)
+            End Get
+            Set
+                Me("CombineSales") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

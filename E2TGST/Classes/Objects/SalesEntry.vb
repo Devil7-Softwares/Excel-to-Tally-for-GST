@@ -19,6 +19,8 @@
 '                                                                          '
 '=========================================================================='
 
+Imports System.ComponentModel
+
 Namespace Objects
     Public Class SalesEntry
 
@@ -26,7 +28,17 @@ Namespace Objects
         Property Party As Party
         Property PartyReference As String
         Property InvoiceDate As Date
+
         Property InvoiceNo As String
+        <DisplayName("After RegEx")>
+        ReadOnly Property RegexInvoiceNo As String
+            Get
+                Dim R As Integer = -1
+                R = CInt((New System.Text.RegularExpressions.Regex(My.Settings.InvoiceNoRegex)).Match(InvoiceNo).Groups("invoice").Value)
+                Return R
+            End Get
+        End Property
+
         Property InvoiceValue As Double
         Property GSTRate As Integer
         Property TaxableValue As Double

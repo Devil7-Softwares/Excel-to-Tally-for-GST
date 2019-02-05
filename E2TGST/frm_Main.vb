@@ -54,6 +54,8 @@ Public Class frm_Main
         chk_IgnoreDupParties.EditValue = My.Settings.IgnoreDuplicateParties
         chk_UseInvoiceNoTag.EditValue = My.Settings.UseInvoiceNumberTag
         chk_TallyOldVersion.EditValue = My.Settings.TallyOldVersion
+        chk_CombineSales.EditValue = My.Settings.CombineSales
+        txt_InvoiceNo_Regex.EditValue = My.Settings.InvoiceNoRegex
     End Sub
 
     Function CheckDependencies(ByVal Vouchers As List(Of Objects.Voucher)) As Boolean
@@ -303,6 +305,16 @@ Public Class frm_Main
         Invoke(Sub()
                    btn_LoadExcel.Enabled = True
                    ProgressPanel_SalesEntries.Visible = False
+
+                   Try
+                       If My.Settings.CombineSales Then
+                           gv_SalesEntries.Columns.Item("RegexInvoiceNo").Visible = True
+                       Else
+                           gv_SalesEntries.Columns.Item("RegexInvoiceNo").Visible = False
+                       End If
+                   Catch ex As Exception
+
+                   End Try
                End Sub)
     End Function
 
@@ -407,7 +419,7 @@ Public Class frm_Main
                    ProgressPanel_SalesEntries.Caption = String.Format("Exporting Entries to {0}...", If(Filename = "", "Tally", "File"))
                    ProgressPanel_SalesEntries.Visible = True
                End Sub)
-        Dim Vouchers As List(Of Objects.Voucher) = Tally.Converter.Sales2Vouchers(gc_SalesEntries.DataSource)
+        Dim Vouchers As List(Of Objects.Voucher) = If(My.Settings.CombineSales, Tally.Converter.Sales2VouchersCombined(gc_SalesEntries.DataSource), Tally.Converter.Sales2Vouchers(gc_SalesEntries.DataSource))
         If CheckDependencies(Vouchers) Then
             Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
             Dim XML As String = XMLGen.GenerateVouchers(Vouchers)
@@ -882,6 +894,11 @@ finish:
 
     Private Sub chk_TallyOldVersion_EditValueChanged(sender As Object, e As EventArgs) Handles chk_TallyOldVersion.EditValueChanged
         My.Settings.TallyOldVersion = chk_TallyOldVersion.EditValue
+        My.Settings.Save()
+    End Sub
+
+    Private Sub chk_CombineSales_EditValueChanged(sender As Object, e As EventArgs) Handles chk_CombineSales.EditValueChanged
+        My.Settings.CombineSales = chk_CombineSales.EditValue
         My.Settings.Save()
     End Sub
 #End Region

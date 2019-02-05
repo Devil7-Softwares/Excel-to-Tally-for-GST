@@ -338,7 +338,7 @@ Namespace Tally
                 End If
                 Dim Narration As String = ""
                 If BankEntry.Ref <> "" Then
-                    Narration = "Cheque/Ref. No.: " & BankEntry.Ref
+                    Narration = $"Cheque/Ref. No.: {BankEntry.Ref}"
                 End If
                 If BankEntry.Description <> "" AndAlso My.Settings.IncludeDesc Then
                     Narration &= If(Narration = "", "", vbNewLine & vbNewLine) & BankEntry.Description

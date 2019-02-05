@@ -375,7 +375,7 @@ Public Class frm_Main
             Else
                 Dim XMLRes As String = IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.Desktop, String.Format("TallyExport_{0}.xml", Now.ToString("ddMMyyyy_hhmmss")))
                 My.Computer.FileSystem.WriteAllText(XMLRes, XML, False)
-                MsgBox("Errors on Exporting XML to Tally..! XML Respose Saved to Desktop.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                MsgBox("Errors on Exporting XML to Tally..! XML Response Saved to Desktop.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
             End If
         End If
     End Function
@@ -494,7 +494,7 @@ Public Class frm_Main
     Private Async Sub btn_XML_File_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_XML_File.ItemClick
         If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
             If gc_PurchaseEntries.DataSource Is Nothing Then
-                MsgBox("Import purchase entires from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                MsgBox("Import purchase entries from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
                 Exit Sub
             End If
             SaveFileDialog_XML.FileName = "Purchase Entries.xml"
@@ -506,13 +506,13 @@ Public Class frm_Main
             SaveFileDialog_XML.FileName = "Parties.xml"
         ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
             If gc_SalesEntries.DataSource Is Nothing Then
-                MsgBox("Import sales entires from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                MsgBox("Import sales entries from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
                 Exit Sub
             End If
             SaveFileDialog_XML.FileName = "Sales Entries.xml"
         ElseIf RibbonControl.SelectedPage Is rp_BankEntries Then
             If gc_BankEntries.DataSource Is Nothing Then
-                MsgBox("Import bank entires from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                MsgBox("Import bank entries from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
                 Exit Sub
             End If
             SaveFileDialog_XML.FileName = "Bank Entries.xml"
@@ -583,7 +583,7 @@ Public Class frm_Main
             My.Settings.Port = CInt(txt_TallyPort.EditValue)
             My.Settings.Save()
         Catch ex As Exception
-            MsgBox("Only Numric Values are Allowed.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+            MsgBox("Only Numeric Values are Allowed.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
         End Try
     End Sub
 
@@ -667,7 +667,7 @@ finish:
     Private Sub btn_XML_Tally_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_XML_Tally.ItemClick
         If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
             If gc_PurchaseEntries.DataSource Is Nothing Then
-                MsgBox("Import purchase entires from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                MsgBox("Import purchase entries from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
                 Exit Sub
             End If
         ElseIf RibbonControl.SelectedPage Is rp_Parties Then
@@ -677,12 +677,12 @@ finish:
             End If
         ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
             If gc_SalesEntries.DataSource Is Nothing Then
-                MsgBox("Import sales entires from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                MsgBox("Import sales entries from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
                 Exit Sub
             End If
         ElseIf RibbonControl.SelectedPage Is rp_BankEntries Then
             If gc_BankEntries.DataSource Is Nothing Then
-                MsgBox("Import bank entires from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+                MsgBox("Import bank entries from Excel before clicking export button", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
                 Exit Sub
             End If
         End If

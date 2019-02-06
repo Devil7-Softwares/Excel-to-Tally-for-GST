@@ -46,7 +46,7 @@ Public Class frm_LedgersFormat
 #Region "Events"
     Private Sub txt_TaxLedgers_EditValueChanged(sender As Object, e As EventArgs) Handles txt_TaxLedgers.EditValueChanged
         Try
-            txt_Preview_TaxLedger.Text = String.Format(txt_TaxLedgers.Text, "IGST", 5)
+            txt_Preview_TaxLedger.Text = String.Format(txt_TaxLedgers.Text, "Input", "IGST", 5)
         Catch ex As Exception
             txt_Preview_TaxLedger.Text = "Invalid Format!"
         End Try

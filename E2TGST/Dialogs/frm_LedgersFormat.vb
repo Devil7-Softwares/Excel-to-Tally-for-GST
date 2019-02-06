@@ -24,11 +24,13 @@ Public Class frm_LedgersFormat
 #Region "Subs"
     Sub LoadSettings()
         txt_CESSLedger.Properties.Items.AddRange(My.Settings.CESSLedgerHistory)
+        txt_DiscountLedger.Properties.Items.AddRange(My.Settings.DiscountLedgerHistory)
         txt_RoundOffLedger.Properties.Items.AddRange(My.Settings.RoundOffLedgerHistory)
         txt_TaxLedgers.Properties.Items.AddRange(My.Settings.TaxLedgerHistory)
         txt_SalesLedger.Properties.Items.AddRange(My.Settings.SalesLedgerHistory)
 
         txt_CESSLedger.Text = My.Settings.CESSLedger
+        txt_DiscountLedger.Text = My.Settings.DiscountLedger
         txt_RoundOffLedger.Text = My.Settings.RoundOffLedger
         txt_TaxLedgers.Text = My.Settings.TaxLedger
         txt_SalesLedger.Text = My.Settings.SalesLedger
@@ -38,6 +40,8 @@ Public Class frm_LedgersFormat
         My.Settings.CESSLedger = txt_CESSLedger.Text
         If Not My.Settings.CESSLedgerHistory.Contains(txt_CESSLedger.Text) Then My.Settings.CESSLedgerHistory.Add(txt_CESSLedger.Text)
 
+        My.Settings.DiscountLedger = txt_DiscountLedger.Text
+        If Not My.Settings.DiscountLedgerHistory.Contains(txt_DiscountLedger.Text) Then My.Settings.DiscountLedgerHistory.Add(txt_DiscountLedger.Text)
 
         My.Settings.RoundOffLedger = txt_RoundOffLedger.Text
         If Not My.Settings.RoundOffLedgerHistory.Contains(txt_RoundOffLedger.Text) Then My.Settings.RoundOffLedgerHistory.Add(txt_RoundOffLedger.Text)

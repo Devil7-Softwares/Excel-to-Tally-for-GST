@@ -39,15 +39,18 @@ Partial Class frm_LedgersFormat
         Me.txt_RoundOffLedger = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.txt_CESSLedger = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.txt_SalesLedger = New DevExpress.XtraEditors.ComboBoxEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.txt_DiscountLedger = New DevExpress.XtraEditors.ComboBoxEdit()
         CType(Me.txt_TaxLedgers.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_RoundOffLedger.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_CESSLedger.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_SalesLedger.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txt_DiscountLedger.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lbl_TaxLedgers
         '
-        Me.lbl_TaxLedgers.Location = New System.Drawing.Point(12, 148)
+        Me.lbl_TaxLedgers.Location = New System.Drawing.Point(12, 174)
         Me.lbl_TaxLedgers.Name = "lbl_TaxLedgers"
         Me.lbl_TaxLedgers.Size = New System.Drawing.Size(133, 13)
         Me.lbl_TaxLedgers.TabIndex = 0
@@ -55,7 +58,7 @@ Partial Class frm_LedgersFormat
         '
         'lbl_Preview_TaxLedger
         '
-        Me.lbl_Preview_TaxLedger.Location = New System.Drawing.Point(151, 171)
+        Me.lbl_Preview_TaxLedger.Location = New System.Drawing.Point(151, 197)
         Me.lbl_Preview_TaxLedger.Name = "lbl_Preview_TaxLedger"
         Me.lbl_Preview_TaxLedger.Size = New System.Drawing.Size(49, 13)
         Me.lbl_Preview_TaxLedger.TabIndex = 2
@@ -63,7 +66,7 @@ Partial Class frm_LedgersFormat
         '
         'txt_Preview_TaxLedger
         '
-        Me.txt_Preview_TaxLedger.Location = New System.Drawing.Point(206, 171)
+        Me.txt_Preview_TaxLedger.Location = New System.Drawing.Point(206, 197)
         Me.txt_Preview_TaxLedger.Name = "txt_Preview_TaxLedger"
         Me.txt_Preview_TaxLedger.Size = New System.Drawing.Size(4, 13)
         Me.txt_Preview_TaxLedger.TabIndex = 3
@@ -71,7 +74,7 @@ Partial Class frm_LedgersFormat
         '
         'lbl_Note_TaxLedger
         '
-        Me.lbl_Note_TaxLedger.Location = New System.Drawing.Point(166, 190)
+        Me.lbl_Note_TaxLedger.Location = New System.Drawing.Point(166, 216)
         Me.lbl_Note_TaxLedger.Name = "lbl_Note_TaxLedger"
         Me.lbl_Note_TaxLedger.Size = New System.Drawing.Size(187, 52)
         Me.lbl_Note_TaxLedger.TabIndex = 4
@@ -97,7 +100,7 @@ Partial Class frm_LedgersFormat
         'btn_Save
         '
         Me.btn_Save.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btn_Save.Location = New System.Drawing.Point(283, 260)
+        Me.btn_Save.Location = New System.Drawing.Point(283, 285)
         Me.btn_Save.Name = "btn_Save"
         Me.btn_Save.Size = New System.Drawing.Size(75, 23)
         Me.btn_Save.TabIndex = 7
@@ -106,7 +109,7 @@ Partial Class frm_LedgersFormat
         'btn_Cancel
         '
         Me.btn_Cancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btn_Cancel.Location = New System.Drawing.Point(12, 260)
+        Me.btn_Cancel.Location = New System.Drawing.Point(12, 285)
         Me.btn_Cancel.Name = "btn_Cancel"
         Me.btn_Cancel.Size = New System.Drawing.Size(75, 23)
         Me.btn_Cancel.TabIndex = 8
@@ -114,7 +117,7 @@ Partial Class frm_LedgersFormat
         '
         'txt_Preview_SalesLedger
         '
-        Me.txt_Preview_SalesLedger.Location = New System.Drawing.Point(206, 94)
+        Me.txt_Preview_SalesLedger.Location = New System.Drawing.Point(206, 120)
         Me.txt_Preview_SalesLedger.Name = "txt_Preview_SalesLedger"
         Me.txt_Preview_SalesLedger.Size = New System.Drawing.Size(4, 13)
         Me.txt_Preview_SalesLedger.TabIndex = 12
@@ -122,7 +125,7 @@ Partial Class frm_LedgersFormat
         '
         'lbl_Preview_SalesLedger
         '
-        Me.lbl_Preview_SalesLedger.Location = New System.Drawing.Point(151, 94)
+        Me.lbl_Preview_SalesLedger.Location = New System.Drawing.Point(151, 120)
         Me.lbl_Preview_SalesLedger.Name = "lbl_Preview_SalesLedger"
         Me.lbl_Preview_SalesLedger.Size = New System.Drawing.Size(49, 13)
         Me.lbl_Preview_SalesLedger.TabIndex = 11
@@ -130,7 +133,7 @@ Partial Class frm_LedgersFormat
         '
         'LabelControl3
         '
-        Me.LabelControl3.Location = New System.Drawing.Point(10, 71)
+        Me.LabelControl3.Location = New System.Drawing.Point(10, 97)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(135, 13)
         Me.LabelControl3.TabIndex = 9
@@ -138,7 +141,7 @@ Partial Class frm_LedgersFormat
         '
         'lbl_Note_SalesLedger
         '
-        Me.lbl_Note_SalesLedger.Location = New System.Drawing.Point(166, 113)
+        Me.lbl_Note_SalesLedger.Location = New System.Drawing.Point(166, 139)
         Me.lbl_Note_SalesLedger.Name = "lbl_Note_SalesLedger"
         Me.lbl_Note_SalesLedger.Size = New System.Drawing.Size(187, 26)
         Me.lbl_Note_SalesLedger.TabIndex = 13
@@ -146,7 +149,7 @@ Partial Class frm_LedgersFormat
         '
         'txt_TaxLedgers
         '
-        Me.txt_TaxLedgers.Location = New System.Drawing.Point(151, 145)
+        Me.txt_TaxLedgers.Location = New System.Drawing.Point(151, 171)
         Me.txt_TaxLedgers.Name = "txt_TaxLedgers"
         Me.txt_TaxLedgers.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txt_TaxLedgers.Size = New System.Drawing.Size(207, 20)
@@ -170,18 +173,35 @@ Partial Class frm_LedgersFormat
         '
         'txt_SalesLedger
         '
-        Me.txt_SalesLedger.Location = New System.Drawing.Point(151, 68)
+        Me.txt_SalesLedger.Location = New System.Drawing.Point(151, 94)
         Me.txt_SalesLedger.Name = "txt_SalesLedger"
         Me.txt_SalesLedger.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txt_SalesLedger.Size = New System.Drawing.Size(207, 20)
         Me.txt_SalesLedger.TabIndex = 17
         '
+        'LabelControl1
+        '
+        Me.LabelControl1.Location = New System.Drawing.Point(61, 71)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(84, 13)
+        Me.LabelControl1.TabIndex = 5
+        Me.LabelControl1.Text = "Discount Ledger :"
+        '
+        'txt_DiscountLedger
+        '
+        Me.txt_DiscountLedger.Location = New System.Drawing.Point(151, 68)
+        Me.txt_DiscountLedger.Name = "txt_DiscountLedger"
+        Me.txt_DiscountLedger.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txt_DiscountLedger.Size = New System.Drawing.Size(207, 20)
+        Me.txt_DiscountLedger.TabIndex = 16
+        '
         'frm_LedgersFormat
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(370, 295)
+        Me.ClientSize = New System.Drawing.Size(370, 320)
         Me.Controls.Add(Me.txt_SalesLedger)
+        Me.Controls.Add(Me.txt_DiscountLedger)
         Me.Controls.Add(Me.txt_CESSLedger)
         Me.Controls.Add(Me.txt_RoundOffLedger)
         Me.Controls.Add(Me.txt_TaxLedgers)
@@ -190,6 +210,7 @@ Partial Class frm_LedgersFormat
         Me.Controls.Add(Me.lbl_Preview_SalesLedger)
         Me.Controls.Add(Me.LabelControl3)
         Me.Controls.Add(Me.btn_Cancel)
+        Me.Controls.Add(Me.LabelControl1)
         Me.Controls.Add(Me.btn_Save)
         Me.Controls.Add(Me.lbl_CessLedger)
         Me.Controls.Add(Me.lbl_RoundOffLedger)
@@ -208,6 +229,7 @@ Partial Class frm_LedgersFormat
         CType(Me.txt_RoundOffLedger.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_CESSLedger.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_SalesLedger.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txt_DiscountLedger.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -229,4 +251,6 @@ Partial Class frm_LedgersFormat
     Friend WithEvents txt_RoundOffLedger As DevExpress.XtraEditors.ComboBoxEdit
     Friend WithEvents txt_CESSLedger As DevExpress.XtraEditors.ComboBoxEdit
     Friend WithEvents txt_SalesLedger As DevExpress.XtraEditors.ComboBoxEdit
+    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents txt_DiscountLedger As DevExpress.XtraEditors.ComboBoxEdit
 End Class

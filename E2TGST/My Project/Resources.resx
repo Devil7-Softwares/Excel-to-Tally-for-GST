@@ -121,8 +121,8 @@
   <data name="PurchaseEntries" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PurchaseEntries.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="SalesEntries" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SalesEntries.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="SalesEntriesA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SalesEntriesA.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Devil7 Softwares - Logo Original" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Devil7 Softwares - Logo Original.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -204,5 +204,8 @@
   </data>
   <data name="BankEntries" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Bank Entries.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SalesEntriesB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SalesEntriesB.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -293,6 +293,18 @@ Namespace My
                 Me("CombineSales") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Discount")>  _
+        Public Property DiscountLedger() As String
+            Get
+                Return CType(Me("DiscountLedger"),String)
+            End Get
+            Set
+                Me("DiscountLedger") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

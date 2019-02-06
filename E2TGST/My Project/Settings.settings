@@ -62,5 +62,8 @@
     <Setting Name="CombineSales" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="DiscountLedger" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Discount</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

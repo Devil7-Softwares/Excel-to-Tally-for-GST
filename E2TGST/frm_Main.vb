@@ -240,7 +240,7 @@ Public Class frm_Main
                End Sub)
     End Function
 
-    Async Function LoadSalesEntries(ByVal FileName As String) As Task
+    Async Function LoadSalesEntriesA(ByVal FileName As String) As Task
         Invoke(Sub()
                    btn_LoadExcel.Enabled = False
                    ProgressPanel_SalesEntries.Caption = "Loading Entries from Excel..."
@@ -248,7 +248,7 @@ Public Class frm_Main
                End Sub)
         Await Task.Run(Function()
                            Try
-                               Dim R As New List(Of Objects.SalesEntry)
+                               Dim R As New List(Of Objects.SalesEntryA)
                                Using stream As IO.FileStream = IO.File.Open(FileName, IO.FileMode.Open, IO.FileAccess.Read)
                                    Using reader = ExcelReaderFactory.CreateReader(stream)
                                        Dim Index As Integer = -1
@@ -285,7 +285,85 @@ Public Class frm_Main
 
                                                            End Try
                                                        End Try
-                                                       R.Add(New Objects.SalesEntry(Party, PartyRef, InvoiceDate, InvoiceNo, InvoiceValue, GSTRate, TaxableValue, IGST, CGST, SGST, CESS, If(Party Is Nothing, Objects.State.GetStateByCode(StateCode), Party.State)))
+                                                       R.Add(New Objects.SalesEntryA(Party, PartyRef, InvoiceDate, InvoiceNo, InvoiceValue, GSTRate, TaxableValue, IGST, CGST, SGST, CESS, If(Party Is Nothing, Objects.State.GetStateByCode(StateCode), Party.State)))
+                                                   End If
+                                               End If
+                                           End If
+                                       End While
+                                   End Using
+                               End Using
+                               Invoke(Sub()
+                                          gc_SalesEntries.DataSource = R
+                                          gc_SalesEntries.RefreshDataSource()
+                                      End Sub)
+                           Catch ex As Exception
+                               MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                               Return False
+                           End Try
+                           Return True
+                       End Function)
+        Invoke(Sub()
+                   btn_LoadExcel.Enabled = True
+                   ProgressPanel_SalesEntries.Visible = False
+
+                   Try
+                       If My.Settings.CombineSales Then
+                           gv_SalesEntries.Columns.Item("RegexInvoiceNo").Visible = True
+                       Else
+                           gv_SalesEntries.Columns.Item("RegexInvoiceNo").Visible = False
+                       End If
+                   Catch ex As Exception
+
+                   End Try
+               End Sub)
+    End Function
+
+    Async Function LoadSalesEntriesB(ByVal FileName As String) As Task
+        Invoke(Sub()
+                   btn_LoadExcel.Enabled = False
+                   ProgressPanel_SalesEntries.Caption = "Loading Entries from Excel..."
+                   ProgressPanel_SalesEntries.Visible = True
+               End Sub)
+        Await Task.Run(Function()
+                           Try
+                               Dim R As New List(Of Objects.SalesEntryB)
+                               Using stream As IO.FileStream = IO.File.Open(FileName, IO.FileMode.Open, IO.FileAccess.Read)
+                                   Using reader = ExcelReaderFactory.CreateReader(stream)
+                                       Dim Index As Integer = -1
+                                       While reader.Read()
+                                           If reader.CodeName = "SalesEntries" AndAlso Not reader.IsDBNull(0) Then
+                                               Index += 1
+                                               If Index > 0 Then
+                                                   Dim PartyRef As String = GetString(reader, 0)
+                                                   Dim InvoiceDate As Date = GetDate(reader, 1)
+                                                   If PartyRef <> "" Then
+                                                       Dim Party As Objects.Party = FindParty(PartyRef)
+                                                       Dim InvoiceNo As String = GetString(reader, 2)
+                                                       Dim InvoiceValue As Double = GetDouble(reader, 3)
+                                                       Dim TaxableValue_5 As Integer = GetDouble(reader, 4)
+                                                       Dim TaxableValue_12 As Double = GetDouble(reader, 5)
+                                                       Dim TaxableValue_18 As Double = GetDouble(reader, 6)
+                                                       Dim TaxableValue_28 As Double = GetDouble(reader, 7)
+                                                       Dim ExemptedValue As Double = GetDouble(reader, 8)
+                                                       Dim Discount As Double = GetDouble(reader, 9)
+                                                       Dim StateCode As Integer = My.Settings.StateCode
+                                                       Try
+                                                           Dim TmpSC_ As String = GetString(reader, 10)
+                                                           If TmpSC_.Contains("-") Then
+                                                               StateCode = CInt(TmpSC_.Split("-")(0).Trim)
+                                                           Else
+                                                               StateCode = CInt(TmpSC_)
+                                                           End If
+                                                       Catch ex1 As Exception
+                                                           Try
+                                                               If PartyRef <> "" Then
+                                                                   StateCode = CInt(PartyRef.Substring(0, 2))
+                                                               End If
+                                                           Catch ex2 As Exception
+
+                                                           End Try
+                                                       End Try
+                                                       R.Add(New Objects.SalesEntryB(Party, PartyRef, InvoiceDate, InvoiceNo, InvoiceValue, TaxableValue_5, TaxableValue_12, TaxableValue_18, TaxableValue_28, ExemptedValue, Discount, If(Party Is Nothing, Objects.State.GetStateByCode(StateCode), Party.State)))
                                                    End If
                                                End If
                                            End If
@@ -484,7 +562,7 @@ Public Class frm_Main
             ElseIf RibbonControl.SelectedPage Is rp_Parties Then
                 Await LoadParties(OpenFileDialog_Excel.FileName)
             ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
-                Await LoadSalesEntries(OpenFileDialog_Excel.FileName)
+                Await LoadSalesEntriesA(OpenFileDialog_Excel.FileName)
             ElseIf RibbonControl.SelectedPage Is rp_BankEntries Then
                 Await LoadBankEntries(OpenFileDialog_Excel.FileName)
             End If
@@ -537,6 +615,8 @@ Public Class frm_Main
 
     Private Sub RibbonControl_SelectedPageChanged(sender As Object, e As EventArgs) Handles RibbonControl.SelectedPageChanged
         PictureBox_Logo.Visible = False
+        btn_LoadExcel.ButtonStyle = BarButtonStyle.Default
+        btn_LoadExcel.DropDownControl = Nothing
         If RibbonControl.SelectedPage Is rp_Tally Then
             PictureBox_Logo.Visible = True
         ElseIf RibbonControl.SelectedPage Is rp_PurchaseEntries Then
@@ -547,6 +627,9 @@ Public Class frm_Main
         ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
             container_Tabs.SelectedTabPage = tp_SalesEntries
             chk_UseInvoice.EditValue = My.Settings.UseInvoiceSales
+
+            btn_LoadExcel.ButtonStyle = BarButtonStyle.DropDown
+            btn_LoadExcel.DropDownControl = menu_LoadExcel
         ElseIf RibbonControl.SelectedPage Is rp_BankEntries Then
             container_Tabs.SelectedTabPage = tp_BankEntries
         End If
@@ -727,7 +810,7 @@ finish:
         SaveFileDialog_Excel.FileName = "Sales Entries.xlsx"
         If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
             Try
-                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, My.Resources.SalesEntries, False)
+                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, My.Resources.SalesEntriesA, False)
                 MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
             Catch ex As Exception
                 MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
@@ -900,6 +983,26 @@ finish:
     Private Sub chk_CombineSales_EditValueChanged(sender As Object, e As EventArgs) Handles chk_CombineSales.EditValueChanged
         My.Settings.CombineSales = chk_CombineSales.EditValue
         My.Settings.Save()
+    End Sub
+
+    Private Async Sub btn_LoadExcel_TaxWise_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_LoadExcel_TaxWise.ItemClick
+        If OpenFileDialog_Excel.ShowDialog = DialogResult.OK Then
+            If RibbonControl.SelectedPage Is rp_SalesEntries Then
+                Await LoadSalesEntriesB(OpenFileDialog_Excel.FileName)
+            End If
+        End If
+    End Sub
+
+    Private Sub btn_Template_SalesEntries_TaxWise_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Template_SalesEntries_TaxWise.ItemClick
+        SaveFileDialog_Excel.FileName = "Sales Entries (Tax-Wise).xlsx"
+        If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
+            Try
+                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, My.Resources.SalesEntriesB, False)
+                MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+            Catch ex As Exception
+                MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+            End Try
+        End If
     End Sub
 #End Region
 

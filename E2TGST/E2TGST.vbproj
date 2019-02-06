@@ -111,7 +111,8 @@
     <Compile Include="Classes\Objects\PurchaseEntry.vb" />
     <Compile Include="Classes\Objects\Response.vb" />
     <Compile Include="Classes\Objects\BankEntry.vb" />
-    <Compile Include="Classes\Objects\SalesEntry.vb" />
+    <Compile Include="Classes\Objects\SalesEntryA.vb" />
+    <Compile Include="Classes\Objects\SalesEntryB.vb" />
     <Compile Include="Classes\Objects\State.vb" />
     <Compile Include="Classes\Objects\Voucher.vb" />
     <Compile Include="Classes\Objects\VoucherEntry.vb" />
@@ -208,7 +209,8 @@
     <None Include="Resources\Bank Entries.xlsx" />
     <None Include="Resources\Parties.xlsx" />
     <None Include="Resources\PurchaseEntries.xlsx" />
-    <None Include="Resources\SalesEntries.xlsx" />
+    <None Include="Resources\SalesEntriesA.xlsx" />
+    <None Include="Resources\SalesEntriesB.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Devil7 Softwares - Logo Original.png" />

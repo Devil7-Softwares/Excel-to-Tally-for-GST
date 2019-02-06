@@ -22,14 +22,20 @@
 Imports System.ComponentModel
 
 Namespace Objects
-    Public Class SalesEntry
+    Public Class SalesEntryA
 
 #Region "Properties/Fields"
         Property Party As Party
+
+        <DisplayName("Party Reference")>
         Property PartyReference As String
+
+        <DisplayName("Invoice Date")>
         Property InvoiceDate As Date
 
+        <DisplayName("Invoice Number")>
         Property InvoiceNo As String
+
         <DisplayName("After RegEx")>
         ReadOnly Property RegexInvoiceNo As String
             Get
@@ -39,13 +45,20 @@ Namespace Objects
             End Get
         End Property
 
+        <DisplayName("Invoice Value")>
         Property InvoiceValue As Double
+
+        <DisplayName("GST Rate")>
         Property GSTRate As Integer
+
+        <DisplayName("Taxable Value")>
         Property TaxableValue As Double
         Property IGST As Double
         Property CGST As Double
         Property SGST As Double
         Property CESS As Double
+
+        <DisplayName("Place Of Supply")>
         Property PlaceOfSupply As State
 #End Region
 

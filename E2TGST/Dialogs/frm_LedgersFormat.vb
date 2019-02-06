@@ -23,6 +23,12 @@ Public Class frm_LedgersFormat
 
 #Region "Subs"
     Sub LoadSettings()
+        txt_CESSLedger.Properties.Items.Clear()
+        txt_DiscountLedger.Properties.Items.Clear()
+        txt_RoundOffLedger.Properties.Items.Clear()
+        txt_TaxLedgers.Properties.Items.Clear()
+        txt_SalesLedger.Properties.Items.Clear()
+
         txt_CESSLedger.Properties.Items.AddRange(My.Settings.CESSLedgerHistory)
         txt_DiscountLedger.Properties.Items.AddRange(My.Settings.DiscountLedgerHistory)
         txt_RoundOffLedger.Properties.Items.AddRange(My.Settings.RoundOffLedgerHistory)
@@ -96,6 +102,12 @@ Public Class frm_LedgersFormat
         Catch ex As Exception
             txt_Preview_SalesLedger.Text = "Invalid Format!"
         End Try
+    End Sub
+
+    Private Sub btn_ResetDefaults_Click(sender As Object, e As EventArgs) Handles btn_ResetDefaults.Click
+        My.Settings.Reset()
+        My.Settings.Save()
+        LoadSettings()
     End Sub
 #End Region
 

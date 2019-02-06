@@ -41,6 +41,7 @@ Partial Class frm_LedgersFormat
         Me.txt_SalesLedger = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.txt_DiscountLedger = New DevExpress.XtraEditors.ComboBoxEdit()
+        Me.btn_ResetDefaults = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.txt_TaxLedgers.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_RoundOffLedger.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_CESSLedger.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -195,6 +196,15 @@ Partial Class frm_LedgersFormat
         Me.txt_DiscountLedger.Size = New System.Drawing.Size(207, 20)
         Me.txt_DiscountLedger.TabIndex = 16
         '
+        'btn_ResetDefaults
+        '
+        Me.btn_ResetDefaults.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btn_ResetDefaults.Location = New System.Drawing.Point(93, 285)
+        Me.btn_ResetDefaults.Name = "btn_ResetDefaults"
+        Me.btn_ResetDefaults.Size = New System.Drawing.Size(107, 23)
+        Me.btn_ResetDefaults.TabIndex = 8
+        Me.btn_ResetDefaults.Text = "Reset to Defaults"
+        '
         'frm_LedgersFormat
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -209,6 +219,7 @@ Partial Class frm_LedgersFormat
         Me.Controls.Add(Me.txt_Preview_SalesLedger)
         Me.Controls.Add(Me.lbl_Preview_SalesLedger)
         Me.Controls.Add(Me.LabelControl3)
+        Me.Controls.Add(Me.btn_ResetDefaults)
         Me.Controls.Add(Me.btn_Cancel)
         Me.Controls.Add(Me.LabelControl1)
         Me.Controls.Add(Me.btn_Save)
@@ -253,4 +264,5 @@ Partial Class frm_LedgersFormat
     Friend WithEvents txt_SalesLedger As DevExpress.XtraEditors.ComboBoxEdit
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents txt_DiscountLedger As DevExpress.XtraEditors.ComboBoxEdit
+    Friend WithEvents btn_ResetDefaults As DevExpress.XtraEditors.SimpleButton
 End Class

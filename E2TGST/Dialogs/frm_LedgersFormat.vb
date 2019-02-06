@@ -62,6 +62,7 @@ Public Class frm_LedgersFormat
     End Sub
 
     Private Sub btn_Save_Click(sender As Object, e As EventArgs) Handles btn_Save.Click
+        SaveSettings()
         Me.DialogResult = DialogResult.OK
         Me.Close()
     End Sub

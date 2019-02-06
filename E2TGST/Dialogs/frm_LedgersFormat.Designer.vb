@@ -24,24 +24,24 @@ Partial Class frm_LedgersFormat
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_LedgersFormat))
         Me.lbl_TaxLedgers = New DevExpress.XtraEditors.LabelControl()
-        Me.txt_TaxLedgers = New DevExpress.XtraEditors.TextEdit()
         Me.lbl_Preview_TaxLedger = New DevExpress.XtraEditors.LabelControl()
         Me.txt_Preview_TaxLedger = New DevExpress.XtraEditors.LabelControl()
         Me.lbl_Note_TaxLedger = New DevExpress.XtraEditors.LabelControl()
         Me.lbl_RoundOffLedger = New DevExpress.XtraEditors.LabelControl()
-        Me.txt_RoundOffLedger = New DevExpress.XtraEditors.TextEdit()
         Me.lbl_CessLedger = New DevExpress.XtraEditors.LabelControl()
-        Me.txt_CessLedger = New DevExpress.XtraEditors.TextEdit()
         Me.btn_Save = New DevExpress.XtraEditors.SimpleButton()
         Me.btn_Cancel = New DevExpress.XtraEditors.SimpleButton()
         Me.txt_Preview_SalesLedger = New DevExpress.XtraEditors.LabelControl()
         Me.lbl_Preview_SalesLedger = New DevExpress.XtraEditors.LabelControl()
-        Me.txt_SalesLedger = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.lbl_Note_SalesLedger = New DevExpress.XtraEditors.LabelControl()
+        Me.txt_TaxLedgers = New DevExpress.XtraEditors.ComboBoxEdit()
+        Me.txt_RoundOffLedger = New DevExpress.XtraEditors.ComboBoxEdit()
+        Me.txt_CESSLedger = New DevExpress.XtraEditors.ComboBoxEdit()
+        Me.txt_SalesLedger = New DevExpress.XtraEditors.ComboBoxEdit()
         CType(Me.txt_TaxLedgers.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_RoundOffLedger.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txt_CessLedger.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txt_CESSLedger.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_SalesLedger.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -52,15 +52,6 @@ Partial Class frm_LedgersFormat
         Me.lbl_TaxLedgers.Size = New System.Drawing.Size(133, 13)
         Me.lbl_TaxLedgers.TabIndex = 0
         Me.lbl_TaxLedgers.Text = "Tax Ledgers Name Format :"
-        '
-        'txt_TaxLedgers
-        '
-        Me.txt_TaxLedgers.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txt_TaxLedgers.Location = New System.Drawing.Point(151, 145)
-        Me.txt_TaxLedgers.Name = "txt_TaxLedgers"
-        Me.txt_TaxLedgers.Size = New System.Drawing.Size(207, 20)
-        Me.txt_TaxLedgers.TabIndex = 1
         '
         'lbl_Preview_TaxLedger
         '
@@ -95,15 +86,6 @@ Partial Class frm_LedgersFormat
         Me.lbl_RoundOffLedger.TabIndex = 5
         Me.lbl_RoundOffLedger.Text = "Rounding Off Ledger :"
         '
-        'txt_RoundOffLedger
-        '
-        Me.txt_RoundOffLedger.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txt_RoundOffLedger.Location = New System.Drawing.Point(151, 16)
-        Me.txt_RoundOffLedger.Name = "txt_RoundOffLedger"
-        Me.txt_RoundOffLedger.Size = New System.Drawing.Size(207, 20)
-        Me.txt_RoundOffLedger.TabIndex = 6
-        '
         'lbl_CessLedger
         '
         Me.lbl_CessLedger.Location = New System.Drawing.Point(77, 45)
@@ -111,15 +93,6 @@ Partial Class frm_LedgersFormat
         Me.lbl_CessLedger.Size = New System.Drawing.Size(68, 13)
         Me.lbl_CessLedger.TabIndex = 5
         Me.lbl_CessLedger.Text = "CESS Ledger :"
-        '
-        'txt_CessLedger
-        '
-        Me.txt_CessLedger.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txt_CessLedger.Location = New System.Drawing.Point(151, 42)
-        Me.txt_CessLedger.Name = "txt_CessLedger"
-        Me.txt_CessLedger.Size = New System.Drawing.Size(207, 20)
-        Me.txt_CessLedger.TabIndex = 6
         '
         'btn_Save
         '
@@ -155,15 +128,6 @@ Partial Class frm_LedgersFormat
         Me.lbl_Preview_SalesLedger.TabIndex = 11
         Me.lbl_Preview_SalesLedger.Text = "Preview :-"
         '
-        'txt_SalesLedger
-        '
-        Me.txt_SalesLedger.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txt_SalesLedger.Location = New System.Drawing.Point(151, 68)
-        Me.txt_SalesLedger.Name = "txt_SalesLedger"
-        Me.txt_SalesLedger.Size = New System.Drawing.Size(207, 20)
-        Me.txt_SalesLedger.TabIndex = 10
-        '
         'LabelControl3
         '
         Me.LabelControl3.Location = New System.Drawing.Point(10, 71)
@@ -180,37 +144,69 @@ Partial Class frm_LedgersFormat
         Me.lbl_Note_SalesLedger.TabIndex = 13
         Me.lbl_Note_SalesLedger.Text = "Note :-" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "      {0} - Tax Percentage (Without '%')"
         '
-        'frm_TaxLedgersFormat
+        'txt_TaxLedgers
+        '
+        Me.txt_TaxLedgers.Location = New System.Drawing.Point(151, 145)
+        Me.txt_TaxLedgers.Name = "txt_TaxLedgers"
+        Me.txt_TaxLedgers.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txt_TaxLedgers.Size = New System.Drawing.Size(207, 20)
+        Me.txt_TaxLedgers.TabIndex = 14
+        '
+        'txt_RoundOffLedger
+        '
+        Me.txt_RoundOffLedger.Location = New System.Drawing.Point(151, 16)
+        Me.txt_RoundOffLedger.Name = "txt_RoundOffLedger"
+        Me.txt_RoundOffLedger.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txt_RoundOffLedger.Size = New System.Drawing.Size(207, 20)
+        Me.txt_RoundOffLedger.TabIndex = 15
+        '
+        'txt_CESSLedger
+        '
+        Me.txt_CESSLedger.Location = New System.Drawing.Point(151, 42)
+        Me.txt_CESSLedger.Name = "txt_CESSLedger"
+        Me.txt_CESSLedger.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txt_CESSLedger.Size = New System.Drawing.Size(207, 20)
+        Me.txt_CESSLedger.TabIndex = 16
+        '
+        'txt_SalesLedger
+        '
+        Me.txt_SalesLedger.Location = New System.Drawing.Point(151, 68)
+        Me.txt_SalesLedger.Name = "txt_SalesLedger"
+        Me.txt_SalesLedger.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txt_SalesLedger.Size = New System.Drawing.Size(207, 20)
+        Me.txt_SalesLedger.TabIndex = 17
+        '
+        'frm_LedgersFormat
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(370, 295)
+        Me.Controls.Add(Me.txt_SalesLedger)
+        Me.Controls.Add(Me.txt_CESSLedger)
+        Me.Controls.Add(Me.txt_RoundOffLedger)
+        Me.Controls.Add(Me.txt_TaxLedgers)
         Me.Controls.Add(Me.lbl_Note_SalesLedger)
         Me.Controls.Add(Me.txt_Preview_SalesLedger)
         Me.Controls.Add(Me.lbl_Preview_SalesLedger)
-        Me.Controls.Add(Me.txt_SalesLedger)
         Me.Controls.Add(Me.LabelControl3)
         Me.Controls.Add(Me.btn_Cancel)
         Me.Controls.Add(Me.btn_Save)
-        Me.Controls.Add(Me.txt_CessLedger)
-        Me.Controls.Add(Me.txt_RoundOffLedger)
         Me.Controls.Add(Me.lbl_CessLedger)
         Me.Controls.Add(Me.lbl_RoundOffLedger)
         Me.Controls.Add(Me.lbl_Note_TaxLedger)
         Me.Controls.Add(Me.txt_Preview_TaxLedger)
         Me.Controls.Add(Me.lbl_Preview_TaxLedger)
-        Me.Controls.Add(Me.txt_TaxLedgers)
         Me.Controls.Add(Me.lbl_TaxLedgers)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frm_TaxLedgersFormat"
+        Me.Name = "frm_LedgersFormat"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Ledger Names"
         CType(Me.txt_TaxLedgers.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_RoundOffLedger.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txt_CessLedger.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txt_CESSLedger.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_SalesLedger.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -218,19 +214,19 @@ Partial Class frm_LedgersFormat
     End Sub
 
     Friend WithEvents lbl_TaxLedgers As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents txt_TaxLedgers As DevExpress.XtraEditors.TextEdit
     Friend WithEvents lbl_Preview_TaxLedger As DevExpress.XtraEditors.LabelControl
     Friend WithEvents txt_Preview_TaxLedger As DevExpress.XtraEditors.LabelControl
     Friend WithEvents lbl_Note_TaxLedger As DevExpress.XtraEditors.LabelControl
     Friend WithEvents lbl_RoundOffLedger As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents txt_RoundOffLedger As DevExpress.XtraEditors.TextEdit
     Friend WithEvents lbl_CessLedger As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents txt_CessLedger As DevExpress.XtraEditors.TextEdit
     Friend WithEvents btn_Save As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents btn_Cancel As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents txt_Preview_SalesLedger As DevExpress.XtraEditors.LabelControl
     Friend WithEvents lbl_Preview_SalesLedger As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents txt_SalesLedger As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents lbl_Note_SalesLedger As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents txt_TaxLedgers As DevExpress.XtraEditors.ComboBoxEdit
+    Friend WithEvents txt_RoundOffLedger As DevExpress.XtraEditors.ComboBoxEdit
+    Friend WithEvents txt_CESSLedger As DevExpress.XtraEditors.ComboBoxEdit
+    Friend WithEvents txt_SalesLedger As DevExpress.XtraEditors.ComboBoxEdit
 End Class

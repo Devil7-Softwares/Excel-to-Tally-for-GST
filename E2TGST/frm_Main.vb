@@ -641,7 +641,8 @@ Public Class frm_Main
     End Sub
 
     Private Sub btn_LedgerNames_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_LedgerNames.ItemClick
-        frm_LedgersFormat.ShowDialog()
+        Dim D As New frm_LedgersFormat
+        D.ShowDialog()
     End Sub
 
     Private Sub txt_TallyHost_EditValueChanged(sender As Object, e As EventArgs) Handles txt_TallyHost.EditValueChanged

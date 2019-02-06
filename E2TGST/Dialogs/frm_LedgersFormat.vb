@@ -23,22 +23,41 @@ Public Class frm_LedgersFormat
 
 #Region "Subs"
     Sub LoadSettings()
-        txt_CessLedger.Text = My.Settings.CESSLedger
+        txt_CESSLedger.Properties.Items.AddRange(My.Settings.CESSLedgerHistory)
+        txt_RoundOffLedger.Properties.Items.AddRange(My.Settings.RoundOffLedgerHistory)
+        txt_TaxLedgers.Properties.Items.AddRange(My.Settings.TaxLedgerHistory)
+        txt_SalesLedger.Properties.Items.AddRange(My.Settings.SalesLedgerHistory)
+
+        txt_CESSLedger.Text = My.Settings.CESSLedger
         txt_RoundOffLedger.Text = My.Settings.RoundOffLedger
         txt_TaxLedgers.Text = My.Settings.TaxLedger
         txt_SalesLedger.Text = My.Settings.SalesLedger
     End Sub
 
     Sub SaveSettings()
-        My.Settings.CESSLedger = txt_CessLedger.Text
+        My.Settings.CESSLedger = txt_CESSLedger.Text
+        If Not My.Settings.CESSLedgerHistory.Contains(txt_CESSLedger.Text) Then My.Settings.CESSLedgerHistory.Add(txt_CESSLedger.Text)
+
+
+        My.Settings.RoundOffLedger = txt_RoundOffLedger.Text
+        If Not My.Settings.RoundOffLedgerHistory.Contains(txt_RoundOffLedger.Text) Then My.Settings.RoundOffLedgerHistory.Add(txt_RoundOffLedger.Text)
+
         Try
-            txt_Preview_TaxLedger.Text = String.Format(txt_TaxLedgers.Text, "IGST", 5)
-            My.Settings.RoundOffLedger = txt_RoundOffLedger.Text
+            txt_Preview_TaxLedger.Text = String.Format(txt_TaxLedgers.Text, "Input", "IGST", 5)
+            My.Settings.TaxLedger = txt_TaxLedgers.Text
+            If Not My.Settings.TaxLedgerHistory.Contains(txt_TaxLedgers.Text) Then My.Settings.TaxLedgerHistory.Add(txt_TaxLedgers.Text)
         Catch ex As Exception
 
         End Try
-        My.Settings.TaxLedger = txt_TaxLedgers.Text
-        My.Settings.SalesLedger = txt_SalesLedger.Text
+
+        Try
+            txt_Preview_SalesLedger.Text = String.Format(txt_SalesLedger.Text, 5)
+            My.Settings.SalesLedger = txt_SalesLedger.Text
+            If Not My.Settings.SalesLedgerHistory.Contains(txt_SalesLedger.Text) Then My.Settings.SalesLedgerHistory.Add(txt_SalesLedger.Text)
+        Catch ex As Exception
+
+        End Try
+
         My.Settings.Save()
     End Sub
 #End Region

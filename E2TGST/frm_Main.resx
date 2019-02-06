@@ -1837,7 +1837,7 @@
         b2RkIiAvPg0KICA8L2c+DQo8L3N2Zz4L
 </value>
   </data>
-  <data name="ToolTipItem8.Text" xml:space="preserve">
+  <data name="ToolTipItem7.Text" xml:space="preserve">
     <value>Fetch/Update datas from Tally ODBC Server i.e. Selected Company Name, Ledger Names &amp; Entries
 
 &lt;i&gt;Note: Make sure you enabled Tally ODBC Server &amp; "Both Client and Server".

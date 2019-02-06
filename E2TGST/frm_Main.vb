@@ -47,7 +47,6 @@ Public Class frm_Main
         txt_TallyHost.EditValue = My.Settings.Host
         txt_TallyPort.EditValue = My.Settings.Port
         txt_TallyVersion.EditValue = My.Settings.TallyVersion
-        chk_CalcValues.EditValue = My.Settings.CalculateValues
         txt_StateCode.EditValue = My.Settings.StateCode
         txt_BankLedgerName.EditValue = My.Settings.BankLedgerName
         chk_IncludeDesc.EditValue = My.Settings.IncludeDesc
@@ -188,12 +187,9 @@ Public Class frm_Main
                                                        Dim InvoiceValue As Double = GetDouble(reader, 3)
                                                        Dim GSTRate As Integer = GetDouble(reader, 4)
                                                        Dim TaxableValue As Double = GetDouble(reader, 5)
-                                                       Dim IGST As Double = GetDouble(reader, 6)
-                                                       Dim CGST As Double = GetDouble(reader, 7)
-                                                       Dim SGST As Double = GetDouble(reader, 8)
-                                                       Dim CESS As Double = GetDouble(reader, 9)
-                                                       Dim LedgerName As String = GetString(reader, 10)
-                                                       Dim VoucherType_ As String = GetString(reader, 11)
+                                                       Dim CESS As Double = GetDouble(reader, 6)
+                                                       Dim LedgerName As String = GetString(reader, 7)
+                                                       Dim VoucherType_ As String = GetString(reader, 8)
                                                        Dim VoucherType As Enums.VoucherType = Enums.VoucherType.Purchase
                                                        If VoucherType_ = "Payment" Then
                                                            VoucherType = Enums.VoucherType.Payment
@@ -208,7 +204,7 @@ Public Class frm_Main
                                                        End If
                                                        Dim StateCode As Integer = My.Settings.StateCode
                                                        Try
-                                                           Dim TmpSC_ As String = GetString(reader, 12)
+                                                           Dim TmpSC_ As String = GetString(reader, 9)
                                                            If TmpSC_.Contains("-") Then
                                                                StateCode = CInt(TmpSC_.Split("-")(0).Trim)
                                                            Else
@@ -217,7 +213,7 @@ Public Class frm_Main
                                                        Catch ex As Exception
 
                                                        End Try
-                                                       R.Add(New Objects.PurchaseEntry(Party, PartyRef, InvoiceNo, InvoiceDate, InvoiceValue, GSTRate, TaxableValue, IGST, CGST, SGST, CESS, LedgerName, VoucherType, Objects.State.GetStateByCode(StateCode)))
+                                                       R.Add(New Objects.PurchaseEntry(Party, PartyRef, InvoiceNo, InvoiceDate, InvoiceValue, GSTRate, TaxableValue, CESS, LedgerName, VoucherType, Objects.State.GetStateByCode(StateCode)))
                                                    End If
                                                End If
                                            End If
@@ -264,13 +260,10 @@ Public Class frm_Main
                                                        Dim InvoiceValue As Double = GetDouble(reader, 3)
                                                        Dim GSTRate As Integer = GetDouble(reader, 4)
                                                        Dim TaxableValue As Double = GetDouble(reader, 5)
-                                                       Dim IGST As Double = GetDouble(reader, 6)
-                                                       Dim CGST As Double = GetDouble(reader, 7)
-                                                       Dim SGST As Double = GetDouble(reader, 8)
-                                                       Dim CESS As Double = GetDouble(reader, 9)
+                                                       Dim CESS As Double = GetDouble(reader, 6)
                                                        Dim StateCode As Integer = My.Settings.StateCode
                                                        Try
-                                                           Dim TmpSC_ As String = GetString(reader, 12)
+                                                           Dim TmpSC_ As String = GetString(reader, 7)
                                                            If TmpSC_.Contains("-") Then
                                                                StateCode = CInt(TmpSC_.Split("-")(0).Trim)
                                                            Else
@@ -285,7 +278,7 @@ Public Class frm_Main
 
                                                            End Try
                                                        End Try
-                                                       R.Add(New Objects.SalesEntryA(Party, PartyRef, InvoiceDate, InvoiceNo, InvoiceValue, GSTRate, TaxableValue, IGST, CGST, SGST, CESS, If(Party Is Nothing, Objects.State.GetStateByCode(StateCode), Party.State)))
+                                                       R.Add(New Objects.SalesEntryA(Party, PartyRef, InvoiceDate, InvoiceNo, InvoiceValue, GSTRate, TaxableValue, CESS, If(Party Is Nothing, Objects.State.GetStateByCode(StateCode), Party.State)))
                                                    End If
                                                End If
                                            End If
@@ -645,11 +638,6 @@ Public Class frm_Main
         ElseIf container_Tabs.SelectedTabPage Is tp_BankEntries Then
             RibbonControl.SelectedPage = rp_BankEntries
         End If
-    End Sub
-
-    Private Sub chk_CalcValues_EditValueChanged(sender As Object, e As EventArgs) Handles chk_CalcValues.EditValueChanged
-        My.Settings.CalculateValues = chk_CalcValues.EditValue
-        My.Settings.Save()
     End Sub
 
     Private Sub btn_LedgerNames_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_LedgerNames.ItemClick

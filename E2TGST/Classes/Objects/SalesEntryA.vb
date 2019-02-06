@@ -53,9 +53,6 @@ Namespace Objects
 
         <DisplayName("Taxable Value")>
         Property TaxableValue As Double
-        Property IGST As Double
-        Property CGST As Double
-        Property SGST As Double
         Property CESS As Double
 
         <DisplayName("Place Of Supply")>
@@ -71,16 +68,13 @@ Namespace Objects
             Me.InvoiceValue = 0
             Me.GSTRate = 0
             Me.TaxableValue = 0
-            Me.IGST = 0
-            Me.CGST = 0
-            Me.SGST = 0
             Me.CESS = 0
             Me.PlaceOfSupply = State.GetStateByCode(My.Settings.StateCode)
         End Sub
 
-        Sub New(ByVal Party As Party, ByVal PartyReference As String, ByVal InvoiceDate As Date, ByVal InvoiceNo As String, ByVal InvoiceValue As Double,
-                ByVal Rate As Integer, ByVal TaxableValue As Double, ByVal IGST As Double, ByVal CGST As Double,
-                ByVal SGST As Double, ByVal CESS As Double, ByVal PlaceOfSupply As State)
+        Sub New(ByVal Party As Party, ByVal PartyReference As String, ByVal InvoiceDate As Date,
+                ByVal InvoiceNo As String, ByVal InvoiceValue As Double, ByVal Rate As Integer,
+                ByVal TaxableValue As Double, ByVal CESS As Double, ByVal PlaceOfSupply As State)
             Me.Party = Party
             Me.PartyReference = PartyReference
             Me.InvoiceDate = InvoiceDate
@@ -88,9 +82,6 @@ Namespace Objects
             Me.InvoiceValue = InvoiceValue
             Me.GSTRate = Rate
             Me.TaxableValue = TaxableValue
-            Me.IGST = IGST
-            Me.CGST = CGST
-            Me.SGST = SGST
             Me.CESS = CESS
             Me.PlaceOfSupply = PlaceOfSupply
         End Sub

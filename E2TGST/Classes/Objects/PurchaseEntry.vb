@@ -30,9 +30,6 @@ Namespace Objects
         Property InvoiceValue As Double = 0
         Property GSTRate As Integer = 0
         Property TaxableValue As Double = 0
-        Property IGST As Double = 0
-        Property CGST As Double = 0
-        Property SGST As Double = 0
         Property CESS As Double = 0
         Property LedgerName As String
         Property VoucherType As Enums.VoucherType
@@ -48,19 +45,16 @@ Namespace Objects
             Me.InvoiceValue = 0
             Me.GSTRate = 0
             Me.TaxableValue = 0
-            Me.IGST = 0
-            Me.CGST = 0
-            Me.SGST = 0
             Me.CESS = 0
             Me.LedgerName = ""
             Me.VoucherType = Enums.VoucherType.Purchase
             Me.PlaceOfSupply = State.GetStateByCode(My.Settings.StateCode)
         End Sub
 
-        Sub New(ByVal Party As Party, ByVal PartyReference As String, ByVal InvoiceNo As String, ByVal InvoiceDate As Date, ByVal InvoiceValue As Double,
-                ByVal GSTRate As Integer, ByVal TaxableValue As Double, ByVal IGST As Double, ByVal CGST As Double,
-                ByVal SGST As Double, ByVal CESS As Double, ByVal LedgerName As String, ByVal VoucherType As Enums.VoucherType,
-                ByVal PlaceOfSupply As State)
+        Sub New(ByVal Party As Party, ByVal PartyReference As String, ByVal InvoiceNo As String,
+                ByVal InvoiceDate As Date, ByVal InvoiceValue As Double, ByVal GSTRate As Integer,
+                ByVal TaxableValue As Double, ByVal CESS As Double, ByVal LedgerName As String,
+                ByVal VoucherType As Enums.VoucherType, ByVal PlaceOfSupply As State)
             Me.Party = Party
             Me.PartyReference = PartyReference
             Me.InvoiceNo = InvoiceNo
@@ -68,9 +62,6 @@ Namespace Objects
             Me.InvoiceValue = InvoiceValue
             Me.GSTRate = GSTRate
             Me.TaxableValue = TaxableValue
-            Me.IGST = IGST
-            Me.CGST = CGST
-            Me.SGST = SGST
             Me.CESS = CESS
             Me.LedgerName = LedgerName
             Me.VoucherType = VoucherType

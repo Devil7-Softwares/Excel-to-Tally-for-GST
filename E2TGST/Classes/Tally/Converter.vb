@@ -52,9 +52,9 @@ Namespace Tally
                 Dim Entries As New List(Of Objects.VoucherEntry)
 
                 For Each PurchaseEntry As Objects.PurchaseEntry In TmpPurchaseEntries
-                    Dim IGST As Double = Math.Round(If(My.Settings.CalculateValues, PurchaseEntry.TaxableValue * PurchaseEntry.GSTRate / 100, PurchaseEntry.IGST), 2)
-                    Dim CGST As Double = Math.Round(If(My.Settings.CalculateValues, PurchaseEntry.TaxableValue * (PurchaseEntry.GSTRate / 2) / 100, PurchaseEntry.CGST), 2)
-                    Dim SGST As Double = Math.Round(If(My.Settings.CalculateValues, PurchaseEntry.TaxableValue * (PurchaseEntry.GSTRate / 2) / 100, PurchaseEntry.SGST), 2)
+                    Dim IGST As Double = Math.Round(PurchaseEntry.TaxableValue * PurchaseEntry.GSTRate / 100, 2)
+                    Dim CGST As Double = Math.Round(PurchaseEntry.TaxableValue * (PurchaseEntry.GSTRate / 2) / 100, 2)
+                    Dim SGST As Double = Math.Round(PurchaseEntry.TaxableValue * (PurchaseEntry.GSTRate / 2) / 100, 2)
 
                     Entries.Add(New Objects.VoucherEntry(PurchaseEntry.LedgerName, Enums.Effect.Dr, PurchaseEntry.TaxableValue)) ' Head - Eg. Purchase A/c or Expense A/c
 
@@ -66,23 +66,23 @@ Namespace Tally
                             Dim ExistingCGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = CGSTLedger)
                             Dim ExistingSGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SGSTLedger)
                             If ExistingCGSTEntry Is Nothing Then
-                                Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Dr, Math.Round(If(My.Settings.CalculateValues, CGST, PurchaseEntry.CGST), 2))) 'CGST
+                                Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Dr, Math.Round(CGST, 2))) 'CGST
                             Else
-                                ExistingCGSTEntry.Amount = Math.Round(ExistingCGSTEntry.Amount + Math.Round(If(My.Settings.CalculateValues, CGST, PurchaseEntry.CGST), 2), 2)
+                                ExistingCGSTEntry.Amount = Math.Round(ExistingCGSTEntry.Amount + Math.Round(CGST, 2), 2)
                             End If
                             If ExistingSGSTEntry Is Nothing Then
-                                Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Dr, Math.Round(If(My.Settings.CalculateValues, SGST, PurchaseEntry.SGST), 2))) 'SGST
+                                Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Dr, Math.Round(SGST, 2))) 'SGST
                             Else
-                                ExistingSGSTEntry.Amount = Math.Round(ExistingSGSTEntry.Amount + Math.Round(If(My.Settings.CalculateValues, SGST, PurchaseEntry.SGST), 2), 2)
+                                ExistingSGSTEntry.Amount = Math.Round(ExistingSGSTEntry.Amount + Math.Round(SGST, 2), 2)
                             End If
                         Else
                             Dim IGSTLedger As String = String.Format(My.Settings.TaxLedger, "Input", "IGST", PurchaseEntry.GSTRate)
 
                             Dim ExistingIGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = IGSTLedger)
                             If ExistingIGSTEntry Is Nothing Then
-                                Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Dr, Math.Round(If(My.Settings.CalculateValues, IGST, PurchaseEntry.IGST), 2))) 'IGST
+                                Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Dr, Math.Round(IGST, 2))) 'IGST
                             Else
-                                ExistingIGSTEntry.Amount = Math.Round(ExistingIGSTEntry.Amount + Math.Round(If(My.Settings.CalculateValues, IGST, PurchaseEntry.IGST), 2), 2)
+                                ExistingIGSTEntry.Amount = Math.Round(ExistingIGSTEntry.Amount + Math.Round(IGST, 2), 2)
                             End If
                         End If
                     End If
@@ -154,46 +154,7 @@ Namespace Tally
                 Dim Entries As New List(Of Objects.VoucherEntry)
 
                 For Each SalesEntry As Objects.SalesEntryA In TmpSalesEntries
-                    Dim IGST As Double = Math.Round(If(My.Settings.CalculateValues, SalesEntry.TaxableValue * SalesEntry.GSTRate / 100, SalesEntry.IGST), 2)
-                    Dim CGST As Double = Math.Round(If(My.Settings.CalculateValues, SalesEntry.TaxableValue * (SalesEntry.GSTRate / 2) / 100, SalesEntry.CGST), 2)
-                    Dim SGST As Double = Math.Round(If(My.Settings.CalculateValues, SalesEntry.TaxableValue * (SalesEntry.GSTRate / 2) / 100, SalesEntry.SGST), 2)
-
-                    Dim SalesEntryLedgerName As String = If(SalesEntry.GSTRate = 0, "Sales Exempted", String.Format(My.Settings.SalesLedger, SalesEntry.GSTRate))
-                    Dim ExistingSalesEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SalesEntryLedgerName)
-                    If ExistingSalesEntry Is Nothing Then
-                        Entries.Add(New Objects.VoucherEntry(SalesEntryLedgerName, Enums.Effect.Cr, SalesEntry.TaxableValue)) ' Head - Eg. Sales A/c
-                    Else
-                        ExistingSalesEntry.Amount = Math.Round(ExistingSalesEntry.Amount + SalesEntry.TaxableValue)
-                    End If
-
-                    If SalesEntry.GSTRate > 0 Then
-                        If SalesEntry.PlaceOfSupply.Code = My.Settings.StateCode Then
-                            Dim CGSTLedger As String = String.Format(My.Settings.TaxLedger, "Output", "CGST", SalesEntry.GSTRate / 2)
-                            Dim SGSTLedger As String = String.Format(My.Settings.TaxLedger, "Output", "SGST", SalesEntry.GSTRate / 2)
-
-                            Dim ExistingCGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = CGSTLedger)
-                            Dim ExistingSGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SGSTLedger)
-                            If ExistingCGSTEntry Is Nothing Then
-                                Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Cr, Math.Round(If(My.Settings.CalculateValues, CGST, SalesEntry.CGST), 2))) 'CGST
-                            Else
-                                ExistingCGSTEntry.Amount = Math.Round(ExistingCGSTEntry.Amount + Math.Round(If(My.Settings.CalculateValues, CGST, SalesEntry.CGST), 2), 2)
-                            End If
-                            If ExistingSGSTEntry Is Nothing Then
-                                Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Cr, Math.Round(If(My.Settings.CalculateValues, SGST, SalesEntry.SGST), 2))) 'SGST
-                            Else
-                                ExistingSGSTEntry.Amount = Math.Round(ExistingSGSTEntry.Amount + Math.Round(If(My.Settings.CalculateValues, SGST, SalesEntry.SGST), 2), 2)
-                            End If
-                        Else
-                            Dim IGSTLedger As String = String.Format(My.Settings.TaxLedger, "Output", "IGST", SalesEntry.GSTRate)
-
-                            Dim ExistingIGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = IGSTLedger)
-                            If ExistingIGSTEntry Is Nothing Then
-                                Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Cr, Math.Round(If(My.Settings.CalculateValues, IGST, SalesEntry.IGST), 2))) 'IGST
-                            Else
-                                ExistingIGSTEntry.Amount = Math.Round(ExistingIGSTEntry.Amount + Math.Round(If(My.Settings.CalculateValues, IGST, SalesEntry.IGST), 2), 2)
-                            End If
-                        End If
-                    End If
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue, SalesEntry.GSTRate, SalesEntry.PlaceOfSupply)
 
                     If SalesEntry.CESS > 0 Then
                         Dim ExistingCESSEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = My.Settings.CESSLedger)
@@ -251,46 +212,7 @@ Namespace Tally
                 Dim Entries As New List(Of Objects.VoucherEntry)
 
                 For Each SalesEntry As Objects.SalesEntryA In TmpSalesEntries
-                    Dim IGST As Double = Math.Round(If(My.Settings.CalculateValues, SalesEntry.TaxableValue * SalesEntry.GSTRate / 100, SalesEntry.IGST), 2)
-                    Dim CGST As Double = Math.Round(If(My.Settings.CalculateValues, SalesEntry.TaxableValue * (SalesEntry.GSTRate / 2) / 100, SalesEntry.CGST), 2)
-                    Dim SGST As Double = Math.Round(If(My.Settings.CalculateValues, SalesEntry.TaxableValue * (SalesEntry.GSTRate / 2) / 100, SalesEntry.SGST), 2)
-
-                    Dim SalesEntryLedgerName As String = If(SalesEntry.GSTRate = 0, "Sales Exempted", String.Format(My.Settings.SalesLedger, SalesEntry.GSTRate))
-                    Dim ExistingSalesEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SalesEntryLedgerName)
-                    If ExistingSalesEntry Is Nothing Then
-                        Entries.Add(New Objects.VoucherEntry(SalesEntryLedgerName, Enums.Effect.Cr, SalesEntry.TaxableValue)) ' Head - Eg. Sales A/c
-                    Else
-                        ExistingSalesEntry.Amount = Math.Round(ExistingSalesEntry.Amount + SalesEntry.TaxableValue)
-                    End If
-
-                    If SalesEntry.GSTRate > 0 Then
-                        If SalesEntry.PlaceOfSupply.Code = My.Settings.StateCode Then
-                            Dim CGSTLedger As String = String.Format(My.Settings.TaxLedger, "Output", "CGST", SalesEntry.GSTRate / 2)
-                            Dim SGSTLedger As String = String.Format(My.Settings.TaxLedger, "Output", "SGST", SalesEntry.GSTRate / 2)
-
-                            Dim ExistingCGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = CGSTLedger)
-                            Dim ExistingSGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SGSTLedger)
-                            If ExistingCGSTEntry Is Nothing Then
-                                Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Cr, Math.Round(If(My.Settings.CalculateValues, CGST, SalesEntry.CGST), 2))) 'CGST
-                            Else
-                                ExistingCGSTEntry.Amount = Math.Round(ExistingCGSTEntry.Amount + Math.Round(If(My.Settings.CalculateValues, CGST, SalesEntry.CGST), 2), 2)
-                            End If
-                            If ExistingSGSTEntry Is Nothing Then
-                                Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Cr, Math.Round(If(My.Settings.CalculateValues, SGST, SalesEntry.SGST), 2))) 'SGST
-                            Else
-                                ExistingSGSTEntry.Amount = Math.Round(ExistingSGSTEntry.Amount + Math.Round(If(My.Settings.CalculateValues, SGST, SalesEntry.SGST), 2), 2)
-                            End If
-                        Else
-                            Dim IGSTLedger As String = String.Format(My.Settings.TaxLedger, "Output", "IGST", SalesEntry.GSTRate)
-
-                            Dim ExistingIGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = IGSTLedger)
-                            If ExistingIGSTEntry Is Nothing Then
-                                Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Cr, Math.Round(If(My.Settings.CalculateValues, IGST, SalesEntry.IGST), 2))) 'IGST
-                            Else
-                                ExistingIGSTEntry.Amount = Math.Round(ExistingIGSTEntry.Amount + Math.Round(If(My.Settings.CalculateValues, IGST, SalesEntry.IGST), 2), 2)
-                            End If
-                        End If
-                    End If
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue, SalesEntry.GSTRate, SalesEntry.PlaceOfSupply)
 
                     If SalesEntry.CESS > 0 Then
                         Dim ExistingCESSEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = My.Settings.CESSLedger)
@@ -320,7 +242,7 @@ Namespace Tally
             Return R
         End Function
 
-        Private Shared Sub AddSalesEntryB(ByVal Entries As List(Of Objects.VoucherEntry), ByVal TaxableValue As Double, ByVal TaxRate As Double, ByVal PlaceOfSupply As Objects.State)
+        Private Shared Sub AddSalesEntry(ByVal Entries As List(Of Objects.VoucherEntry), ByVal TaxableValue As Double, ByVal TaxRate As Double, ByVal PlaceOfSupply As Objects.State)
             Dim IGST As Double = TaxableValue * TaxRate / 100
             Dim CGST As Double = TaxableValue * (TaxRate / 2) / 100
             Dim SGST As Double = TaxableValue * (TaxRate / 2) / 100
@@ -403,23 +325,23 @@ Namespace Tally
 
                 For Each SalesEntry As Objects.SalesEntryB In TmpSalesEntries
                     If SalesEntry.ExemptedValue > 0 Then
-                        AddSalesEntryB(Entries, SalesEntry.ExemptedValue, 0, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.ExemptedValue, 0, SalesEntry.PlaceOfSupply)
                     End If
 
                     If SalesEntry.TaxableValue_5 > 0 Then
-                        AddSalesEntryB(Entries, SalesEntry.TaxableValue_5, 5, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.TaxableValue_5, 5, SalesEntry.PlaceOfSupply)
                     End If
 
                     If SalesEntry.TaxableValue_12 > 0 Then
-                        AddSalesEntryB(Entries, SalesEntry.TaxableValue_12, 12, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.TaxableValue_12, 12, SalesEntry.PlaceOfSupply)
                     End If
 
                     If SalesEntry.TaxableValue_18 > 0 Then
-                        AddSalesEntryB(Entries, SalesEntry.TaxableValue_18, 18, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.TaxableValue_18, 18, SalesEntry.PlaceOfSupply)
                     End If
 
                     If SalesEntry.TaxableValue_28 > 0 Then
-                        AddSalesEntryB(Entries, SalesEntry.TaxableValue_28, 28, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.TaxableValue_28, 28, SalesEntry.PlaceOfSupply)
                     End If
 
                     If SalesEntry.Discount > 0 Then
@@ -479,23 +401,23 @@ Namespace Tally
 
                 For Each SalesEntry As Objects.SalesEntryB In TmpSalesEntries
                     If SalesEntry.ExemptedValue > 0 Then
-                        AddSalesEntryB(Entries, SalesEntry.ExemptedValue, 0, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.ExemptedValue, 0, SalesEntry.PlaceOfSupply)
                     End If
 
                     If SalesEntry.TaxableValue_5 > 0 Then
-                        AddSalesEntryB(Entries, SalesEntry.TaxableValue_5, 5, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.TaxableValue_5, 5, SalesEntry.PlaceOfSupply)
                     End If
 
                     If SalesEntry.TaxableValue_12 > 0 Then
-                        AddSalesEntryB(Entries, SalesEntry.TaxableValue_12, 12, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.TaxableValue_12, 12, SalesEntry.PlaceOfSupply)
                     End If
 
                     If SalesEntry.TaxableValue_18 > 0 Then
-                        AddSalesEntryB(Entries, SalesEntry.TaxableValue_18, 18, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.TaxableValue_18, 18, SalesEntry.PlaceOfSupply)
                     End If
 
                     If SalesEntry.TaxableValue_28 > 0 Then
-                        AddSalesEntryB(Entries, SalesEntry.TaxableValue_28, 28, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.TaxableValue_28, 28, SalesEntry.PlaceOfSupply)
                     End If
 
                     If SalesEntry.Discount > 0 Then

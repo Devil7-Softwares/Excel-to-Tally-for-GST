@@ -122,9 +122,14 @@ Namespace Tally
                     If Party.GSTIN <> "" Then
                         .WriteStartElement("PARTYGSTIN") 'PARTYGSTIN
                         .WriteString(Party.GSTIN)
-                        .WriteEndElement() 'PARTYGSTIN
+                        .WriteEndElement() 'PARTYGSTIN 
+                        If My.Settings.TallyOldVersion Then
+                            .WriteStartElement("SALESTAXNUMBER") 'SALESTAXNUMBER
+                            .WriteString(Party.GSTIN)
+                            .WriteEndElement() 'SALESTAXNUMBER
+                        End If
                     End If
-                    If Party.State IsNot Nothing Then
+                        If Party.State IsNot Nothing Then
                         .WriteStartElement("LEDSTATENAME") 'LEDSTATENAME
                         .WriteString(Party.State.Name)
                         .WriteEndElement() 'LEDSTATENAME
@@ -137,9 +142,6 @@ Namespace Tally
                     .WriteAttributeString("TYPE", "String")
                     .WriteStartElement("NAME") 'NAME
                     .WriteString(Party.Name)
-                    .WriteEndElement() 'NAME
-                    .WriteStartElement("NAME") 'NAME
-                    .WriteString(Party.GSTIN)
                     .WriteEndElement() 'NAME
                     .WriteEndElement() 'NAME.LIST
                     .WriteEndElement() 'LANGUAGENAME.LIST

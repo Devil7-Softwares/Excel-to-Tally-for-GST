@@ -322,6 +322,7 @@ Namespace Tally
                 Dim VoucherRef As String = If(TmpSalesEntries.Count > 1, String.Format("{0} to {1}", StartInvoiceNo, EndInvoiceNo), Entry1.InvoiceNo)
                 Dim Narration As String = String.Format("AS PER BILL NO{0}.: {1}", If(TmpSalesEntries.Count > 1, "s", ""), VoucherRef)
                 Dim Entries As New List(Of Objects.VoucherEntry)
+                Dim Discount As Double = 0
 
                 For Each SalesEntry As Objects.SalesEntryB In TmpSalesEntries
                     If SalesEntry.ExemptedValue > 0 Then
@@ -344,15 +345,10 @@ Namespace Tally
                         AddSalesEntry(Entries, SalesEntry.TaxableValue_28, 28, SalesEntry.PlaceOfSupply)
                     End If
 
-                    If SalesEntry.Discount > 0 Then
-                        Dim ExistingDiscountEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = My.Settings.DiscountLedger)
-                        If ExistingDiscountEntry Is Nothing Then
-                            Entries.Add(New Objects.VoucherEntry(My.Settings.DiscountLedger, Enums.Effect.Cr, Math.Round(SalesEntry.Discount, 2))) 'Discount
-                        Else
-                            ExistingDiscountEntry.Amount = Math.Round(ExistingDiscountEntry.Amount + Math.Round(SalesEntry.Discount, 2), 2)
-                        End If
-                    End If
+                    Discount += SalesEntry.Discount
                 Next
+
+                Entries.Add(New Objects.VoucherEntry(My.Settings.DiscountLedger, If(Discount > 0, Enums.Effect.Cr, Enums.Effect.Dr), Discount)) 'Discount
 
                 Dim TotalValue_BR As Double = 0
                 For Each i As Objects.VoucherEntry In Entries
@@ -398,6 +394,7 @@ Namespace Tally
                 Dim VoucherType As String = [Enum].GetName(GetType(Enums.VoucherType), Enums.VoucherType.Sales)
                 Dim Narration As String = String.Format("AS PER BILL NO.: {0}", Entry1.InvoiceNo)
                 Dim Entries As New List(Of Objects.VoucherEntry)
+                Dim Discount As Double = 0
 
                 For Each SalesEntry As Objects.SalesEntryB In TmpSalesEntries
                     If SalesEntry.ExemptedValue > 0 Then
@@ -420,15 +417,10 @@ Namespace Tally
                         AddSalesEntry(Entries, SalesEntry.TaxableValue_28, 28, SalesEntry.PlaceOfSupply)
                     End If
 
-                    If SalesEntry.Discount > 0 Then
-                        Dim ExistingDiscountEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = My.Settings.DiscountLedger)
-                        If ExistingDiscountEntry Is Nothing Then
-                            Entries.Add(New Objects.VoucherEntry(My.Settings.DiscountLedger, Enums.Effect.Cr, Math.Round(SalesEntry.Discount, 2))) 'Discount
-                        Else
-                            ExistingDiscountEntry.Amount = Math.Round(ExistingDiscountEntry.Amount + Math.Round(SalesEntry.Discount, 2), 2)
-                        End If
-                    End If
+                    Discount += SalesEntry.Discount
                 Next
+
+                Entries.Add(New Objects.VoucherEntry(My.Settings.DiscountLedger, If(Discount > 0, Enums.Effect.Cr, Enums.Effect.Dr), Discount)) 'Discount
 
                 Dim TotalValue_BR As Double = 0
                 For Each i As Objects.VoucherEntry In Entries

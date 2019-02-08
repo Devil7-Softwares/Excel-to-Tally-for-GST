@@ -21,10 +21,10 @@
     <ROW Property="ARPSYSTEMCOMPONENT" Value="1"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="Devil7 Softwares"/>
-    <ROW Property="ProductCode" Value="1033:{68214B0C-035C-4FBC-B54F-A29EE65F7FD2} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{4E29A428-CB24-4383-B3FE-0258547E37B4} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Excel to Tally for GST Entries"/>
-    <ROW Property="ProductVersion" Value="2.2.1" Type="32"/>
+    <ROW Property="ProductVersion" Value="3.0.0" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND;AI_SETUPEXEPATH;SETUPEXEDIR"/>
     <ROW Property="UpgradeCode" Value="{AE0C6578-36E4-43E3-A4B6-552E830B4A5C}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -43,7 +43,7 @@
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
-    <ROW Component="AI_CustomARPName" ComponentId="{34EF9D16-9803-439A-A328-32C05B54A86C}" Directory_="APPDIR" Attributes="4" KeyPath="DisplayName" Options="1"/>
+    <ROW Component="AI_CustomARPName" ComponentId="{CCABFF48-98A2-481C-B2D1-96BF7C2EF9E8}" Directory_="APPDIR" Attributes="4" KeyPath="DisplayName" Options="1"/>
     <ROW Component="AI_DisableModify" ComponentId="{DA23B37A-B397-4B89-B051-8D214FA496DC}" Directory_="APPDIR" Attributes="4" KeyPath="NoModify" Options="1"/>
     <ROW Component="AI_ExePath" ComponentId="{353A89A0-7994-4FD2-AFE2-7365033F023E}" Directory_="APPDIR" Attributes="4" KeyPath="AI_ExePath"/>
     <ROW Component="DevExpress.BonusSkins.v18.2.dll" ComponentId="{00D643B4-C443-47EF-8A6C-7D9FDA3F5512}" Directory_="APPDIR" Attributes="0" KeyPath="DevExpress.BonusSkins.v18.2.dll"/>
@@ -74,11 +74,12 @@
     <ROW Component="DevExpress.XtraTreeList.v18.2.dll" ComponentId="{A73B5562-4130-4395-8E46-2313436D31E2}" Directory_="APPDIR" Attributes="0" KeyPath="DevExpress.XtraTreeList.v18.2.dll"/>
     <ROW Component="ExcelDataReader.dll" ComponentId="{9F7BCCF2-042A-4B22-AF53-2EA79D5E9FF7}" Directory_="APPDIR" Attributes="0" KeyPath="ExcelDataReader.dll"/>
     <ROW Component="ExceltoTallyforGSTEntries.exe" ComponentId="{83B2D52E-3936-4984-B3D2-013AA3F07766}" Directory_="APPDIR" Attributes="0" KeyPath="ExceltoTallyforGSTEntries.exe"/>
+    <ROW Component="FastColoredTextBox.dll" ComponentId="{EE8C0B88-43FF-4C38-8AD1-85058ADEC385}" Directory_="APPDIR" Attributes="0" KeyPath="FastColoredTextBox.dll"/>
     <ROW Component="ProductInformation" ComponentId="{1F850D83-A857-43B3-927D-1CC6D89CB187}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
     <ROW Component="SHORTCUTDIR" ComponentId="{35D2F403-BFB0-4512-9815-5FF025B50EDF}" Directory_="SHORTCUTDIR" Attributes="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
-    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="AI_CustomARPName AI_DisableModify AI_ExePath DevExpress.BonusSkins.v18.2.dll DevExpress.Charts.v18.2.Core.dll DevExpress.CodeParser.v18.2.dll DevExpress.Data.v18.2.dll DevExpress.DataAccess.v18.2.dll DevExpress.Docs.v18.2.dll DevExpress.Images.v18.2.dll DevExpress.Office.v18.2.Core.dll DevExpress.Pdf.v18.2.Core.dll DevExpress.Pdf.v18.2.Drawing.dll DevExpress.Printing.v18.2.Core.dll DevExpress.RichEdit.v18.2.Core.dll DevExpress.RichEdit.v18.2.Export.dll DevExpress.Snap.v18.2.Core.dll DevExpress.Sparkline.v18.2.Core.dll DevExpress.Spreadsheet.v18.2.Core.dll DevExpress.Utils.v18.2.dll DevExpress.Xpo.v18.2.dll DevExpress.XtraBars.v18.2.dll DevExpress.XtraCharts.v18.2.dll DevExpress.XtraEditors.v18.2.dll DevExpress.XtraGrid.v18.2.dll DevExpress.XtraLayout.v18.2.dll DevExpress.XtraPrinting.v18.2.dll DevExpress.XtraRichEdit.v18.2.dll DevExpress.XtraTreeList.v18.2.dll ExcelDataReader.dll ExceltoTallyforGSTEntries.exe ProductInformation SHORTCUTDIR"/>
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="AI_CustomARPName AI_DisableModify AI_ExePath DevExpress.BonusSkins.v18.2.dll DevExpress.Charts.v18.2.Core.dll DevExpress.CodeParser.v18.2.dll DevExpress.Data.v18.2.dll DevExpress.DataAccess.v18.2.dll DevExpress.Docs.v18.2.dll DevExpress.Images.v18.2.dll DevExpress.Office.v18.2.Core.dll DevExpress.Pdf.v18.2.Core.dll DevExpress.Pdf.v18.2.Drawing.dll DevExpress.Printing.v18.2.Core.dll DevExpress.RichEdit.v18.2.Core.dll DevExpress.RichEdit.v18.2.Export.dll DevExpress.Snap.v18.2.Core.dll DevExpress.Sparkline.v18.2.Core.dll DevExpress.Spreadsheet.v18.2.Core.dll DevExpress.Utils.v18.2.dll DevExpress.Xpo.v18.2.dll DevExpress.XtraBars.v18.2.dll DevExpress.XtraCharts.v18.2.dll DevExpress.XtraEditors.v18.2.dll DevExpress.XtraGrid.v18.2.dll DevExpress.XtraLayout.v18.2.dll DevExpress.XtraPrinting.v18.2.dll DevExpress.XtraRichEdit.v18.2.dll DevExpress.XtraTreeList.v18.2.dll ExcelDataReader.dll ExceltoTallyforGSTEntries.exe FastColoredTextBox.dll ProductInformation SHORTCUTDIR"/>
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
@@ -107,9 +108,10 @@
     <ROW File="DevExpress.XtraLayout.v18.2.dll" Component_="DevExpress.XtraLayout.v18.2.dll" FileName="DEVEX~23.DLL|DevExpress.XtraLayout.v18.2.dll" Attributes="0" SourcePath="C:\Program Files (x86)\DevExpress 18.2\Components\Bin\Framework\DevExpress.XtraLayout.v18.2.dll" SelfReg="false" NextFile="DevExpress.XtraPrinting.v18.2.dll"/>
     <ROW File="DevExpress.XtraPrinting.v18.2.dll" Component_="DevExpress.XtraPrinting.v18.2.dll" FileName="DEVEX~24.DLL|DevExpress.XtraPrinting.v18.2.dll" Attributes="0" SourcePath="C:\Program Files (x86)\DevExpress 18.2\Components\Bin\Framework\DevExpress.XtraPrinting.v18.2.dll" SelfReg="false" NextFile="DevExpress.XtraRichEdit.v18.2.dll"/>
     <ROW File="DevExpress.XtraRichEdit.v18.2.dll" Component_="DevExpress.XtraRichEdit.v18.2.dll" FileName="DEVEX~25.DLL|DevExpress.XtraRichEdit.v18.2.dll" Attributes="0" SourcePath="C:\Program Files (x86)\DevExpress 18.2\Components\Bin\Framework\DevExpress.XtraRichEdit.v18.2.dll" SelfReg="false" NextFile="DevExpress.XtraTreeList.v18.2.dll"/>
-    <ROW File="DevExpress.XtraTreeList.v18.2.dll" Component_="DevExpress.XtraTreeList.v18.2.dll" FileName="DEVEX~26.DLL|DevExpress.XtraTreeList.v18.2.dll" Attributes="0" SourcePath="C:\Program Files (x86)\DevExpress 18.2\Components\Bin\Framework\DevExpress.XtraTreeList.v18.2.dll" SelfReg="false"/>
+    <ROW File="DevExpress.XtraTreeList.v18.2.dll" Component_="DevExpress.XtraTreeList.v18.2.dll" FileName="DEVEX~26.DLL|DevExpress.XtraTreeList.v18.2.dll" Attributes="0" SourcePath="C:\Program Files (x86)\DevExpress 18.2\Components\Bin\Framework\DevExpress.XtraTreeList.v18.2.dll" SelfReg="false" NextFile="FastColoredTextBox.dll"/>
     <ROW File="ExcelDataReader.dll" Component_="ExcelDataReader.dll" FileName="EXCELD~1.DLL|ExcelDataReader.dll" Attributes="0" SourcePath="..\E2TGST\bin\Release\ExcelDataReader.dll" SelfReg="false" NextFile="DevExpress.BonusSkins.v18.2.dll"/>
     <ROW File="ExceltoTallyforGSTEntries.exe" Component_="ExceltoTallyforGSTEntries.exe" FileName="EXCELT~1.EXE|Excel to Tally for GST Entries.exe" Attributes="0" SourcePath="..\E2TGST\bin\Release\Excel to Tally for GST Entries.exe" SelfReg="false" NextFile="ExcelDataReader.dll" DigSign="true"/>
+    <ROW File="FastColoredTextBox.dll" Component_="FastColoredTextBox.dll" FileName="FASTCO~1.DLL|FastColoredTextBox.dll" Attributes="0" SourcePath="..\dll\FastColoredTextBox.dll" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BootstrOptComponent">
     <ROW BootstrOptKey="GlobalOptions" DownloadFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\prerequisites" Options="2"/>

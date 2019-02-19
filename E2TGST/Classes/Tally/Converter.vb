@@ -247,7 +247,7 @@ Namespace Tally
             Dim CGST As Double = TaxableValue * (TaxRate / 2) / 100
             Dim SGST As Double = TaxableValue * (TaxRate / 2) / 100
 
-            Dim SalesEntryLedgerName As String = If(TaxRate = 0, "Sales Exempted", String.Format(My.Settings.SalesLedger, TaxRate))
+            Dim SalesEntryLedgerName As String = If(CustomSalesLedger = "", If(TaxRate = 0, "Sales Exempted", String.Format(My.Settings.SalesLedger, TaxRate)), CustomSalesLedger)
             Dim ExistingSalesEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SalesEntryLedgerName)
             If ExistingSalesEntry Is Nothing Then
                 Entries.Add(New Objects.VoucherEntry(SalesEntryLedgerName, Enums.Effect.Cr, TaxableValue))

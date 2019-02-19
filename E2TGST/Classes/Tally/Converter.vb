@@ -154,7 +154,7 @@ Namespace Tally
                 Dim Entries As New List(Of Objects.VoucherEntry)
 
                 For Each SalesEntry As Objects.SalesEntryA In TmpSalesEntries
-                    AddSalesEntry(Entries, SalesEntry.TaxableValue, SalesEntry.GSTRate, SalesEntry.PlaceOfSupply)
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue, SalesEntry.GSTRate, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
 
                     If SalesEntry.CESS > 0 Then
                         Dim ExistingCESSEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = My.Settings.CESSLedger)
@@ -212,7 +212,7 @@ Namespace Tally
                 Dim Entries As New List(Of Objects.VoucherEntry)
 
                 For Each SalesEntry As Objects.SalesEntryA In TmpSalesEntries
-                    AddSalesEntry(Entries, SalesEntry.TaxableValue, SalesEntry.GSTRate, SalesEntry.PlaceOfSupply)
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue, SalesEntry.GSTRate, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
 
                     If SalesEntry.CESS > 0 Then
                         Dim ExistingCESSEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = My.Settings.CESSLedger)
@@ -242,7 +242,7 @@ Namespace Tally
             Return R
         End Function
 
-        Private Shared Sub AddSalesEntry(ByVal Entries As List(Of Objects.VoucherEntry), ByVal TaxableValue As Double, ByVal TaxRate As Double, ByVal PlaceOfSupply As Objects.State)
+        Private Shared Sub AddSalesEntry(ByVal Entries As List(Of Objects.VoucherEntry), ByVal TaxableValue As Double, ByVal TaxRate As Double, ByVal PlaceOfSupply As Objects.State, ByVal CustomSalesLedger As String)
             Dim IGST As Double = TaxableValue * TaxRate / 100
             Dim CGST As Double = TaxableValue * (TaxRate / 2) / 100
             Dim SGST As Double = TaxableValue * (TaxRate / 2) / 100
@@ -326,23 +326,23 @@ Namespace Tally
 
                 For Each SalesEntry As Objects.SalesEntryB In TmpSalesEntries
                     If SalesEntry.ExemptedValue > 0 Then
-                        AddSalesEntry(Entries, SalesEntry.ExemptedValue, 0, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.ExemptedValue, 0, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                     End If
 
                     If SalesEntry.TaxableValue_5 > 0 Then
-                        AddSalesEntry(Entries, SalesEntry.TaxableValue_5, 5, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.TaxableValue_5, 5, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                     End If
 
                     If SalesEntry.TaxableValue_12 > 0 Then
-                        AddSalesEntry(Entries, SalesEntry.TaxableValue_12, 12, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.TaxableValue_12, 12, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                     End If
 
                     If SalesEntry.TaxableValue_18 > 0 Then
-                        AddSalesEntry(Entries, SalesEntry.TaxableValue_18, 18, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.TaxableValue_18, 18, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                     End If
 
                     If SalesEntry.TaxableValue_28 > 0 Then
-                        AddSalesEntry(Entries, SalesEntry.TaxableValue_28, 28, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.TaxableValue_28, 28, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                     End If
 
                     Discount += SalesEntry.Discount
@@ -398,23 +398,23 @@ Namespace Tally
 
                 For Each SalesEntry As Objects.SalesEntryB In TmpSalesEntries
                     If SalesEntry.ExemptedValue > 0 Then
-                        AddSalesEntry(Entries, SalesEntry.ExemptedValue, 0, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.ExemptedValue, 0, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                     End If
 
                     If SalesEntry.TaxableValue_5 > 0 Then
-                        AddSalesEntry(Entries, SalesEntry.TaxableValue_5, 5, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.TaxableValue_5, 5, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                     End If
 
                     If SalesEntry.TaxableValue_12 > 0 Then
-                        AddSalesEntry(Entries, SalesEntry.TaxableValue_12, 12, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.TaxableValue_12, 12, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                     End If
 
                     If SalesEntry.TaxableValue_18 > 0 Then
-                        AddSalesEntry(Entries, SalesEntry.TaxableValue_18, 18, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.TaxableValue_18, 18, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                     End If
 
                     If SalesEntry.TaxableValue_28 > 0 Then
-                        AddSalesEntry(Entries, SalesEntry.TaxableValue_28, 28, SalesEntry.PlaceOfSupply)
+                        AddSalesEntry(Entries, SalesEntry.TaxableValue_28, 28, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                     End If
 
                     Discount += SalesEntry.Discount

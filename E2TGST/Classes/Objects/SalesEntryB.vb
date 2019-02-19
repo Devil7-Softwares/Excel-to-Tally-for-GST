@@ -67,6 +67,9 @@ Namespace Objects
 
         <DisplayName("Place Of Supply")>
         Property PlaceOfSupply As State
+
+        <DisplayName("Custom Sales Ledger Name")>
+        Property CustomSalesLedger As String
 #End Region
 
 #Region "Constructors"
@@ -83,12 +86,13 @@ Namespace Objects
             Me.ExemptedValue = 0
             Me.Discount = 0
             Me.PlaceOfSupply = State.GetStateByCode(My.Settings.StateCode)
+            Me.CustomSalesLedger = ""
         End Sub
 
         Sub New(ByVal Party As Party, ByVal PartyReference As String, ByVal InvoiceDate As Date,
 ByVal InvoiceNo As String, ByVal InvoiceValue As Double, ByVal TaxableValue_5 As Double,
 ByVal TaxableValue_12 As Double, ByVal TaxableValue_18 As Double, ByVal TaxableValue_28 As Double,
-ByVal ExemptedValue As Double, ByVal Discount As Double, ByVal PlaceOfSupply As State)
+ByVal ExemptedValue As Double, ByVal Discount As Double, ByVal PlaceOfSupply As State, ByVal CustomSalesLedger As String)
             Me.Party = Party
             Me.PartyReference = PartyReference
             Me.InvoiceDate = InvoiceDate
@@ -101,6 +105,7 @@ ByVal ExemptedValue As Double, ByVal Discount As Double, ByVal PlaceOfSupply As 
             Me.ExemptedValue = ExemptedValue
             Me.Discount = Discount
             Me.PlaceOfSupply = PlaceOfSupply
+            Me.CustomSalesLedger = CustomSalesLedger
         End Sub
 #End Region
 

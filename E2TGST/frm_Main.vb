@@ -278,7 +278,8 @@ Public Class frm_Main
 
                                                            End Try
                                                        End Try
-                                                       R.Add(New Objects.SalesEntryA(Party, PartyRef, InvoiceDate, InvoiceNo, InvoiceValue, GSTRate, TaxableValue, CESS, If(Party Is Nothing, Objects.State.GetStateByCode(StateCode), Party.State)))
+                                                       Dim CustomSalesLedger As String = GetString(reader, 8)
+                                                       R.Add(New Objects.SalesEntryA(Party, PartyRef, InvoiceDate, InvoiceNo, InvoiceValue, GSTRate, TaxableValue, CESS, If(Party Is Nothing, Objects.State.GetStateByCode(StateCode), Party.State), CustomSalesLedger))
                                                    End If
                                                End If
                                            End If
@@ -356,7 +357,8 @@ Public Class frm_Main
 
                                                            End Try
                                                        End Try
-                                                       R.Add(New Objects.SalesEntryB(Party, PartyRef, InvoiceDate, InvoiceNo, InvoiceValue, TaxableValue_5, TaxableValue_12, TaxableValue_18, TaxableValue_28, ExemptedValue, Discount, If(Party Is Nothing, Objects.State.GetStateByCode(StateCode), Party.State)))
+                                                       Dim CustomSalesLedger As String = GetString(reader, 11)
+                                                       R.Add(New Objects.SalesEntryB(Party, PartyRef, InvoiceDate, InvoiceNo, InvoiceValue, TaxableValue_5, TaxableValue_12, TaxableValue_18, TaxableValue_28, ExemptedValue, Discount, If(Party Is Nothing, Objects.State.GetStateByCode(StateCode), Party.State), CustomSalesLedger))
                                                    End If
                                                End If
                                            End If

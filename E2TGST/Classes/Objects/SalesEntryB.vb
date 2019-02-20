@@ -40,7 +40,11 @@ Namespace Objects
         ReadOnly Property RegexInvoiceNo As String
             Get
                 Dim R As Integer = -1
-                R = CInt((New System.Text.RegularExpressions.Regex(My.Settings.InvoiceNoRegex)).Match(InvoiceNo).Groups("invoice").Value)
+                Try
+                    R = CInt((New System.Text.RegularExpressions.Regex(My.Settings.InvoiceNoRegex)).Match(InvoiceNo).Groups("invoice").Value)
+                Catch ex As Exception
+
+                End Try
                 Return R
             End Get
         End Property

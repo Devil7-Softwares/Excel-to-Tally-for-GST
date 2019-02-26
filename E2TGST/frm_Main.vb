@@ -777,7 +777,7 @@ finish:
         SaveFileDialog_Excel.FileName = "Parties.xlsx"
         If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
             Try
-                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, My.Resources.Parties, False)
+                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, Templates.My.Resources.Parties, False)
                 MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
             Catch ex As Exception
                 MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
@@ -789,7 +789,7 @@ finish:
         SaveFileDialog_Excel.FileName = "Purchase Entries.xlsx"
         If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
             Try
-                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, My.Resources.PurchaseEntries, False)
+                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, Templates.My.Resources.PurchaseEntries, False)
                 MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
             Catch ex As Exception
                 MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
@@ -801,7 +801,7 @@ finish:
         SaveFileDialog_Excel.FileName = "Sales Entries.xlsx"
         If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
             Try
-                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, My.Resources.SalesEntriesA, False)
+                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, Templates.My.Resources.SalesEntriesA, False)
                 MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
             Catch ex As Exception
                 MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
@@ -830,7 +830,7 @@ finish:
         SaveFileDialog_Excel.FileName = "Bank Entries.xlsx"
         If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
             Try
-                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, My.Resources.BankEntries, False)
+                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, Templates.My.Resources.BankEntries, False)
                 MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
             Catch ex As Exception
                 MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
@@ -988,7 +988,7 @@ finish:
         SaveFileDialog_Excel.FileName = "Sales Entries (Tax-Wise).xlsx"
         If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
             Try
-                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, My.Resources.SalesEntriesB, False)
+                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, Templates.My.Resources.SalesEntriesB, False)
                 MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
             Catch ex As Exception
                 MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")

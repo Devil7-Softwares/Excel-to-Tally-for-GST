@@ -118,79 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Devil7 Softwares - Logo Original" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Devil7 Softwares - Logo Original.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BankEntries" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Bank Entries.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ReportRequest" xml:space="preserve">
-    <value>&lt;ENVELOPE&gt;
-&lt;HEADER&gt;
-&lt;VERSION&gt;&lt;&lt;version&gt;&gt;&lt;/VERSION&gt;
-&lt;TALLYREQUEST&gt;Export&lt;/TALLYREQUEST&gt;
-&lt;TYPE&gt;Data&lt;/TYPE&gt;
-&lt;ID&gt;&lt;&lt;report&gt;&gt;&lt;/ID&gt;
-&lt;/HEADER&gt;
-&lt;BODY&gt;
-&lt;DESC&gt;
-&lt;STATICVARIABLES&gt;
-&lt;EXPLODEFLAG&gt;Yes&lt;/EXPLODEFLAG&gt;
-&lt;SVEXPORTFORMAT&gt;$$SysName:XML&lt;/SVEXPORTFORMAT&gt;
-&lt;/STATICVARIABLES&gt;
-&lt;/DESC&gt;
-&lt;/BODY&gt;
-&lt;/ENVELOPE&gt;</value>
+  <data name="Parties" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Parties.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="AllMastersRequest" xml:space="preserve">
-    <value>&lt;ENVELOPE&gt;
-    &lt;HEADER&gt;
-        &lt;VERSION&gt;&lt;&lt;version&gt;&gt;&lt;/VERSION&gt;
-        &lt;TALLYREQUEST&gt;Export&lt;/TALLYREQUEST&gt;
-        &lt;TYPE&gt;Collection&lt;/TYPE&gt;
-        &lt;ID&gt;All Masters&lt;/ID&gt;
-    &lt;/HEADER&gt;
-    &lt;BODY&gt;
-        &lt;DESC&gt;
-            &lt;TDL&gt;
-                &lt;TDLMESSAGE&gt;
-                    &lt;COLLECTION NAME="All Masters" ISMODIFY="No"&gt;
-                        &lt;TYPE&gt;Masters&lt;/TYPE&gt;
-                    &lt;/COLLECTION&gt;
-                &lt;/TDLMESSAGE&gt;
-            &lt;/TDL&gt;
-        &lt;/DESC&gt;
-     &lt;/BODY&gt;
-&lt;/ENVELOPE&gt;</value>
+  <data name="PurchaseEntries" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PurchaseEntries.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="CreateLedgerRequest" xml:space="preserve">
-    <value>&lt;ENVELOPE&gt;
-&lt;HEADER&gt;
-&lt;TALLYREQUEST&gt;Import Data&lt;/TALLYREQUEST&gt;
-&lt;/HEADER&gt;
-&lt;BODY&gt;
-&lt;IMPORTDATA&gt;
-&lt;REQUESTDESC&gt;
-&lt;REPORTNAME&gt;All Masters&lt;/REPORTNAME&gt;
-&lt;STATICVARIABLES&gt;
-&lt;SVCURRENTCOMPANY&gt;&lt;&lt;company&gt;&gt;&lt;/SVCURRENTCOMPANY&gt;
-&lt;/STATICVARIABLES&gt;
-&lt;/REQUESTDESC&gt;
-&lt;REQUESTDATA&gt;
-&lt;TALLYMESSAGE xmlns:UDF="TallyUDF"&gt;
-&lt;LEDGER NAME="&lt;&lt;ledger&gt;&gt;" RESERVEDNAME=""&gt;
-&lt;NAME.LIST&gt;
-&lt;NAME&gt;&lt;&lt;ledger&gt;&gt;&lt;/NAME&gt;
-&lt;/NAME.LIST&gt;
-&lt;ADDITIONALNAME&gt;&lt;&lt;ledger&gt;&gt;&lt;/ADDITIONALNAME&gt;
-&lt;PARENT&gt;&lt;&lt;group&gt;&gt;&lt;/PARENT&gt;
-&lt;ISBILLWISEON&gt;No&lt;/ISBILLWISEON&gt;
-&lt;OPENINGBALANCE&gt;&lt;&lt;balance&gt;&gt;&lt;/OPENINGBALANCE&gt;
-&lt;/LEDGER&gt;
-&lt;/TALLYMESSAGE&gt;
-&lt;/REQUESTDATA&gt;
-&lt;/IMPORTDATA&gt;
-&lt;/BODY&gt;
-&lt;/ENVELOPE&gt;</value>
+  <data name="SalesEntriesA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SalesEntriesA.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="devil7_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\devil7_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SalesEntriesB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SalesEntriesB.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

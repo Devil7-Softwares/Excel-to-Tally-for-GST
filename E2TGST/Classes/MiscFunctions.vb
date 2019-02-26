@@ -38,7 +38,7 @@ Module MiscFunctions
 #Region "Export Parties to Excel"
     Sub WriteParties2Excel(ByVal Parties As List(Of Objects.Party), ByVal Filename As String)
         Dim WB As New Workbook
-        WB.LoadDocument(My.Resources.Parties)
+        WB.LoadDocument(Templates.My.Resources.Parties)
         Dim PartiesSheet As Worksheet = WB.Worksheets("Parties")
         For i As Integer = 1 To Parties.Count
             Dim Party As Objects.Party = Parties(i - 1)

@@ -88,16 +88,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized resource of type System.Byte[].
-        '''</summary>
-        Friend ReadOnly Property BankEntries() As Byte()
-            Get
-                Dim obj As Object = ResourceManager.GetObject("BankEntries", resourceCulture)
-                Return CType(obj,Byte())
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to &lt;ENVELOPE&gt;
         '''&lt;HEADER&gt;
         '''&lt;TALLYREQUEST&gt;Import Data&lt;/TALLYREQUEST&gt;
@@ -148,26 +138,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized resource of type System.Byte[].
-        '''</summary>
-        Friend ReadOnly Property Parties() As Byte()
-            Get
-                Dim obj As Object = ResourceManager.GetObject("Parties", resourceCulture)
-                Return CType(obj,Byte())
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Byte[].
-        '''</summary>
-        Friend ReadOnly Property PurchaseEntries() As Byte()
-            Get
-                Dim obj As Object = ResourceManager.GetObject("PurchaseEntries", resourceCulture)
-                Return CType(obj,Byte())
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to &lt;ENVELOPE&gt;
         '''&lt;HEADER&gt;
         '''&lt;VERSION&gt;&lt;&lt;version&gt;&gt;&lt;/VERSION&gt;
@@ -188,26 +158,6 @@ Namespace My.Resources
         Friend ReadOnly Property ReportRequest() As String
             Get
                 Return ResourceManager.GetString("ReportRequest", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Byte[].
-        '''</summary>
-        Friend ReadOnly Property SalesEntriesA() As Byte()
-            Get
-                Dim obj As Object = ResourceManager.GetObject("SalesEntriesA", resourceCulture)
-                Return CType(obj,Byte())
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Byte[].
-        '''</summary>
-        Friend ReadOnly Property SalesEntriesB() As Byte()
-            Get
-                Dim obj As Object = ResourceManager.GetObject("SalesEntriesB", resourceCulture)
-                Return CType(obj,Byte())
             End Get
         End Property
     End Module

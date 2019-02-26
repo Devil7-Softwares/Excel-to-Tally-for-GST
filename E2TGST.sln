@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "E2TGST", "E2TGST\E2TGST.vbproj", "{FF0F10D2-973B-4800-AC77-929AADBB200A}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Templates", "Templates\Templates.vbproj", "{1B5F06FD-6479-40B4-9F40-105141AB78FE}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Templates", "Additional Libraries\Templates\Templates.vbproj", "{1B5F06FD-6479-40B4-9F40-105141AB78FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Additional Libraries", "Additional Libraries", "{BDE5C33E-4374-405E-A864-8549D338BAD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +26,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1B5F06FD-6479-40B4-9F40-105141AB78FE} = {BDE5C33E-4374-405E-A864-8549D338BAD1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {752E8C41-C3DC-4936-8DDB-58EA4D973923}

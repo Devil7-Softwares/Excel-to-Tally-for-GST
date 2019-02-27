@@ -20,10 +20,12 @@
 '=========================================================================='
 
 Public Enum VoucherType As Integer
-        Payment = 0
-        Receipt = 1
-        Purchase = 2
-        Sales = 3
-        Journal = 4
-        Contra = 5
+    Payment = 0
+    Receipt = 1
+    Purchase = 2
+    Sales = 3
+    Journal = 4
+    Contra = 5
+    DebitNote = 6
+    CreditNote = 7
 End Enum

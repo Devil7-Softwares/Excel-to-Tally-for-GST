@@ -1,5 +1,5 @@
 Partial Class frm_CustomRequest
-    Inherits XtraFormTemp
+    Inherits Utils.XtraFormTemp
 
     Private components As System.ComponentModel.IContainer = Nothing
 

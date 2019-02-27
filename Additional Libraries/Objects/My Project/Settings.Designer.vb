@@ -22,7 +22,7 @@ Namespace My
         
         Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()),MySettings)
         
-#Region "My.Settings Auto-Save Functionality"
+#Region "Utils.Settings.Load Auto-Save Functionality"
 #If _MyType = "WindowsForms" Then
     Private Shared addedHandler As Boolean
 
@@ -31,7 +31,7 @@ Namespace My
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)> _
     Private Shared Sub AutoSaveSettings(sender As Global.System.Object, e As Global.System.EventArgs)
         If My.Application.SaveMySettingsOnExit Then
-            My.Settings.Save()
+            Utils.Settings.Load.Save()
         End If
     End Sub
 #End If
@@ -53,18 +53,6 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property FirstRun() As Boolean
-            Get
-                Return CType(Me("FirstRun"),Boolean)
-            End Get
-            Set
-                Me("FirstRun") = value
-            End Set
-        End Property
     End Class
 End Namespace
 
@@ -75,10 +63,10 @@ Namespace My
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Module MySettingsProperty
         
-        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.D7.Automation.E2TGST.My.MySettings
+        <Global.System.ComponentModel.Design.HelpKeywordAttribute("Utils.Settings.Load")>  _
+        Friend ReadOnly Property Settings() As Global.D7.Automation.E2TGST.Objects.My.MySettings
             Get
-                Return Global.D7.Automation.E2TGST.My.MySettings.Default
+                Return Global.D7.Automation.E2TGST.Objects.My.MySettings.Default
             End Get
         End Property
     End Module

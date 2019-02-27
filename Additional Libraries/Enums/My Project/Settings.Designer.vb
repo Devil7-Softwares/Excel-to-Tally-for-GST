@@ -53,18 +53,6 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property FirstRun() As Boolean
-            Get
-                Return CType(Me("FirstRun"),Boolean)
-            End Get
-            Set
-                Me("FirstRun") = value
-            End Set
-        End Property
     End Class
 End Namespace
 
@@ -76,9 +64,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.D7.Automation.E2TGST.My.MySettings
+        Friend ReadOnly Property Settings() As Global.D7.Automation.E2TGST.Enums.My.MySettings
             Get
-                Return Global.D7.Automation.E2TGST.My.MySettings.Default
+                Return Global.D7.Automation.E2TGST.Enums.My.MySettings.Default
             End Get
         End Property
     End Module

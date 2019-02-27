@@ -44,17 +44,17 @@ Public Class frm_Main
 
 #Region "Subs"
     Sub LoadSettings()
-        txt_TallyHost.EditValue = My.Settings.Host
-        txt_TallyPort.EditValue = My.Settings.Port
-        txt_TallyVersion.EditValue = My.Settings.TallyVersion
-        txt_StateCode.EditValue = My.Settings.StateCode
-        txt_BankLedgerName.EditValue = My.Settings.BankLedgerName
-        chk_IncludeDesc.EditValue = My.Settings.IncludeDesc
-        chk_IgnoreDupParties.EditValue = My.Settings.IgnoreDuplicateParties
-        chk_UseInvoiceNoTag.EditValue = My.Settings.UseInvoiceNumberTag
-        chk_TallyOldVersion.EditValue = My.Settings.TallyOldVersion
-        chk_CombineSales.EditValue = My.Settings.CombineSales
-        txt_InvoiceNo_Regex.EditValue = My.Settings.InvoiceNoRegex
+        txt_TallyHost.EditValue = Utils.Settings.Load.Host
+        txt_TallyPort.EditValue = Utils.Settings.Load.Port
+        txt_TallyVersion.EditValue = Utils.Settings.Load.TallyVersion
+        txt_StateCode.EditValue = Utils.Settings.Load.StateCode
+        txt_BankLedgerName.EditValue = Utils.Settings.Load.BankLedgerName
+        chk_IncludeDesc.EditValue = Utils.Settings.Load.IncludeDesc
+        chk_IgnoreDupParties.EditValue = Utils.Settings.Load.IgnoreDuplicateParties
+        chk_UseInvoiceNoTag.EditValue = Utils.Settings.Load.UseInvoiceNumberTag
+        chk_TallyOldVersion.EditValue = Utils.Settings.Load.TallyOldVersion
+        chk_CombineSales.EditValue = Utils.Settings.Load.CombineSales
+        txt_InvoiceNo_Regex.EditValue = Utils.Settings.Load.InvoiceNoRegex
     End Sub
 
     Function CheckDependencies(ByVal Vouchers As List(Of Objects.Voucher)) As Boolean
@@ -202,7 +202,7 @@ Public Class frm_Main
                                                        ElseIf VoucherType_ = "Journal" Then
                                                            VoucherType = Enums.VoucherType.Journal
                                                        End If
-                                                       Dim StateCode As Integer = My.Settings.StateCode
+                                                       Dim StateCode As Integer = Utils.Settings.Load.StateCode
                                                        Try
                                                            Dim TmpSC_ As String = GetString(reader, 9)
                                                            If TmpSC_.Contains("-") Then
@@ -261,7 +261,7 @@ Public Class frm_Main
                                                        Dim GSTRate As Integer = GetDouble(reader, 4)
                                                        Dim TaxableValue As Double = GetDouble(reader, 5)
                                                        Dim CESS As Double = GetDouble(reader, 6)
-                                                       Dim StateCode As Integer = My.Settings.StateCode
+                                                       Dim StateCode As Integer = Utils.Settings.Load.StateCode
                                                        Try
                                                            Dim TmpSC_ As String = GetString(reader, 7)
                                                            If TmpSC_.Contains("-") Then
@@ -301,7 +301,7 @@ Public Class frm_Main
                    ProgressPanel_SalesEntries.Visible = False
 
                    Try
-                       If My.Settings.CombineSales Then
+                       If Utils.Settings.Load.CombineSales Then
                            gv_SalesEntries.Columns.Item("RegexInvoiceNo").Visible = True
                        Else
                            gv_SalesEntries.Columns.Item("RegexInvoiceNo").Visible = False
@@ -340,7 +340,7 @@ Public Class frm_Main
                                                        Dim TaxableValue_28 As Double = GetDouble(reader, 7)
                                                        Dim ExemptedValue As Double = GetDouble(reader, 8)
                                                        Dim Discount As Double = GetDouble(reader, 9)
-                                                       Dim StateCode As Integer = My.Settings.StateCode
+                                                       Dim StateCode As Integer = Utils.Settings.Load.StateCode
                                                        Try
                                                            Dim TmpSC_ As String = GetString(reader, 10)
                                                            If TmpSC_.Contains("-") Then
@@ -380,7 +380,7 @@ Public Class frm_Main
                    ProgressPanel_SalesEntries.Visible = False
 
                    Try
-                       If My.Settings.CombineSales Then
+                       If Utils.Settings.Load.CombineSales Then
                            gv_SalesEntries.Columns.Item("RegexInvoiceNo").Visible = True
                        Else
                            gv_SalesEntries.Columns.Item("RegexInvoiceNo").Visible = False
@@ -492,7 +492,7 @@ Public Class frm_Main
                    ProgressPanel_SalesEntries.Caption = String.Format("Exporting Entries to {0}...", If(Filename = "", "Tally", "File"))
                    ProgressPanel_SalesEntries.Visible = True
                End Sub)
-        Dim Vouchers As List(Of Objects.Voucher) = If(My.Settings.CombineSales, Tally.Converter.Sales2VouchersCombined(gc_SalesEntries.DataSource), Tally.Converter.Sales2Vouchers(gc_SalesEntries.DataSource))
+        Dim Vouchers As List(Of Objects.Voucher) = If(Utils.Settings.Load.CombineSales, Tally.Converter.Sales2VouchersCombined(gc_SalesEntries.DataSource), Tally.Converter.Sales2Vouchers(gc_SalesEntries.DataSource))
         If CheckDependencies(Vouchers) Then
             Dim XMLGen As New Tally.RequestXMLGenerator(txt_TallyVersion.EditValue, txt_CompanyName.EditValue)
             Dim XML As String = XMLGen.GenerateVouchers(Vouchers)
@@ -604,8 +604,8 @@ Public Class frm_Main
     End Sub
 
     Private Sub txt_TallyVersion_EditValueChanged(sender As Object, e As EventArgs) Handles txt_TallyVersion.EditValueChanged
-        My.Settings.TallyVersion = txt_TallyVersion.EditValue
-        My.Settings.Save()
+        Utils.Settings.Load.TallyVersion = txt_TallyVersion.EditValue
+        Utils.Settings.Load.Save()
     End Sub
 
     Private Sub RibbonControl_SelectedPageChanged(sender As Object, e As EventArgs) Handles RibbonControl.SelectedPageChanged
@@ -616,12 +616,12 @@ Public Class frm_Main
             PictureBox_Logo.Visible = True
         ElseIf RibbonControl.SelectedPage Is rp_PurchaseEntries Then
             container_Tabs.SelectedTabPage = tp_PurchaseEntries
-            chk_UseInvoice.EditValue = My.Settings.UseInvoicePurchase
+            chk_UseInvoice.EditValue = Utils.Settings.Load.UseInvoicePurchase
         ElseIf RibbonControl.SelectedPage Is rp_Parties Then
             container_Tabs.SelectedTabPage = tp_Parties
         ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
             container_Tabs.SelectedTabPage = tp_SalesEntries
-            chk_UseInvoice.EditValue = My.Settings.UseInvoiceSales
+            chk_UseInvoice.EditValue = Utils.Settings.Load.UseInvoiceSales
 
             btn_LoadExcel.ButtonStyle = BarButtonStyle.DropDown
             btn_LoadExcel.DropDownControl = menu_LoadExcel
@@ -648,14 +648,14 @@ Public Class frm_Main
     End Sub
 
     Private Sub txt_TallyHost_EditValueChanged(sender As Object, e As EventArgs) Handles txt_TallyHost.EditValueChanged
-        My.Settings.Host = txt_TallyHost.EditValue.ToString
-        My.Settings.Save()
+        Utils.Settings.Load.Host = txt_TallyHost.EditValue.ToString
+        Utils.Settings.Load.Save()
     End Sub
 
     Private Sub txt_TallyPort_EditValueChanged(sender As Object, e As EventArgs) Handles txt_TallyPort.EditValueChanged
         Try
-            My.Settings.Port = CInt(txt_TallyPort.EditValue)
-            My.Settings.Save()
+            Utils.Settings.Load.Port = CInt(txt_TallyPort.EditValue)
+            Utils.Settings.Load.Save()
         Catch ex As Exception
             MsgBox("Only Numeric Values are Allowed.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
         End Try
@@ -689,7 +689,7 @@ finish:
 
             If cellInfo IsNot Nothing Then
                 If TallyIO IsNot Nothing AndAlso TallyIO.Ledgers IsNot Nothing AndAlso TallyIO.Ledgers.Count > 0 AndAlso (TallyIO.Ledgers.Contains(row.GSTIN, StringComparer.OrdinalIgnoreCase) Or TallyIO.Ledgers.Contains(row.Name, StringComparer.OrdinalIgnoreCase)) Then
-                    cellInfo.ViewInfo.ErrorIconText = "Ledger Already Exists." & If(My.Settings.IgnoreDuplicateParties = True, " Will be Ignored.", "")
+                    cellInfo.ViewInfo.ErrorIconText = "Ledger Already Exists." & If(Utils.Settings.Load.IgnoreDuplicateParties = True, " Will be Ignored.", "")
                     cellInfo.ViewInfo.ShowErrorIcon = True
                 End If
             End If
@@ -709,7 +709,7 @@ finish:
                             Error_ = "Unable to Find any Party Ledger Using This Reference & No Ledger Account Exist in this Name!"
                         End If
                         If Error_ = "-" And row.PartyReference.Length > 8 AndAlso (New System.Text.RegularExpressions.Regex("\d{2}\D{1}.*")).IsMatch(row.PartyReference) Then
-                            If Not GSTINValidator.IsValid(row.PartyReference, Error_) Then
+                            If Not Utils.GSTINValidator.IsValid(row.PartyReference, Error_) Then
                                 Error_ = "Invalid GSTIN!"
                             End If
                         End If
@@ -822,8 +822,8 @@ finish:
     End Sub
 
     Private Sub txt_StateCode_EditValueChanged(sender As Object, e As EventArgs) Handles txt_StateCode.EditValueChanged
-        My.Settings.StateCode = txt_StateCode.EditValue
-        My.Settings.Save()
+        Utils.Settings.Load.StateCode = txt_StateCode.EditValue
+        Utils.Settings.Load.Save()
     End Sub
 
     Private Sub btn_Template_BankEntries_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Template_BankEntries.ItemClick
@@ -839,13 +839,13 @@ finish:
     End Sub
 
     Private Sub txt_BankLedgerName_EditValueChanged(sender As Object, e As EventArgs) Handles txt_BankLedgerName.EditValueChanged
-        My.Settings.BankLedgerName = txt_BankLedgerName.EditValue
-        My.Settings.Save()
+        Utils.Settings.Load.BankLedgerName = txt_BankLedgerName.EditValue
+        Utils.Settings.Load.Save()
     End Sub
 
     Private Sub chk_IncludeDesc_EditValueChanged(sender As Object, e As EventArgs) Handles chk_IncludeDesc.EditValueChanged
-        My.Settings.IncludeDesc = chk_IncludeDesc.EditValue
-        My.Settings.Save()
+        Utils.Settings.Load.IncludeDesc = chk_IncludeDesc.EditValue
+        Utils.Settings.Load.Save()
     End Sub
 
     Private Sub gv_BankEntries_CustomDrawCell(sender As Object, e As RowCellCustomDrawEventArgs) Handles gv_BankEntries.CustomDrawCell
@@ -896,7 +896,7 @@ finish:
             If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
                 Try
                     Await Task.Run(Sub()
-                                       MiscFunctions.WriteParties2Excel(TallyIO.Parties, SaveFileDialog_Excel.FileName)
+                                       Tally.MiscFunctions.WriteParties2Excel(TallyIO.Parties, SaveFileDialog_Excel.FileName)
                                    End Sub)
                     Invoke(Sub() MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done"))
                 Catch ex As Exception
@@ -911,8 +911,8 @@ finish:
     End Sub
 
     Private Sub chk_IgnoreDupParties_EditValueChanged(sender As Object, e As EventArgs) Handles chk_IgnoreDupParties.EditValueChanged
-        My.Settings.IgnoreDuplicateParties = chk_IgnoreDupParties.EditValue
-        My.Settings.Save()
+        Utils.Settings.Load.IgnoreDuplicateParties = chk_IgnoreDupParties.EditValue
+        Utils.Settings.Load.Save()
     End Sub
 
     Private Sub gv_PurchaseEntries_CustomRowCellEditForEditing(sender As Object, e As CustomRowCellEditEventArgs) Handles gv_PurchaseEntries.CustomRowCellEditForEditing
@@ -940,17 +940,17 @@ finish:
 
     Private Sub chk_UseInvoice_EditValueChanged(sender As Object, e As EventArgs) Handles chk_UseInvoice.EditValueChanged
         If RibbonControl.SelectedPage Is rp_PurchaseEntries Then
-            My.Settings.UseInvoicePurchase = chk_UseInvoice.EditValue
-            My.Settings.Save()
+            Utils.Settings.Load.UseInvoicePurchase = chk_UseInvoice.EditValue
+            Utils.Settings.Load.Save()
         ElseIf RibbonControl.SelectedPage Is rp_SalesEntries Then
-            My.Settings.UseInvoiceSales = chk_UseInvoice.EditValue
-            My.Settings.Save()
+            Utils.Settings.Load.UseInvoiceSales = chk_UseInvoice.EditValue
+            Utils.Settings.Load.Save()
         End If
     End Sub
 
     Private Sub chk_UseInvoiceNoTag_EditValueChanged(sender As Object, e As EventArgs) Handles chk_UseInvoiceNoTag.EditValueChanged
-        My.Settings.UseInvoiceNumberTag = chk_UseInvoiceNoTag.EditValue
-        My.Settings.Save()
+        Utils.Settings.Load.UseInvoiceNumberTag = chk_UseInvoiceNoTag.EditValue
+        Utils.Settings.Load.Save()
     End Sub
 
     Private Sub RibbonToolTipController_HyperlinkClick(sender As Object, e As HyperlinkClickEventArgs) Handles RibbonToolTipController.HyperlinkClick
@@ -967,13 +967,13 @@ finish:
     End Sub
 
     Private Sub chk_TallyOldVersion_EditValueChanged(sender As Object, e As EventArgs) Handles chk_TallyOldVersion.EditValueChanged
-        My.Settings.TallyOldVersion = chk_TallyOldVersion.EditValue
-        My.Settings.Save()
+        Utils.Settings.Load.TallyOldVersion = chk_TallyOldVersion.EditValue
+        Utils.Settings.Load.Save()
     End Sub
 
     Private Sub chk_CombineSales_EditValueChanged(sender As Object, e As EventArgs) Handles chk_CombineSales.EditValueChanged
-        My.Settings.CombineSales = chk_CombineSales.EditValue
-        My.Settings.Save()
+        Utils.Settings.Load.CombineSales = chk_CombineSales.EditValue
+        Utils.Settings.Load.Save()
     End Sub
 
     Private Async Sub btn_LoadExcel_TaxWise_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_LoadExcel_TaxWise.ItemClick

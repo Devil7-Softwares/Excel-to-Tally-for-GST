@@ -12,9 +12,9 @@
     End Enum
 
     Private Sub Splash_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        If My.Settings.Skin <> "" Then
+        If Utils.Settings.Load.Skin <> "" Then
             Try
-                Me.Theme.LookAndFeel.SkinName = My.Settings.Skin
+                Me.Theme.LookAndFeel.SkinName = Utils.Settings.Load.Skin
             Catch ex As Exception
 
             End Try

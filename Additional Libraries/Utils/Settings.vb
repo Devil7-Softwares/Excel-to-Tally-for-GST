@@ -2,6 +2,7 @@
 
 #Region "Variables"
     Private Shared SettingsFile As String = IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData, "Settings.xml")
+    Private Shared Settings As Settings = Nothing
 #End Region
 
 #Region "Properties"
@@ -46,14 +47,17 @@
     End Sub
 
     Public Shared Function Load() As Settings
-        If My.Computer.FileSystem.FileExists(SettingsFile) Then
-            Dim Xml As New Xml.Serialization.XmlSerializer(GetType(Settings))
-            Using Stream As New IO.FileStream(SettingsFile, IO.FileMode.Open)
-                Return Xml.Deserialize(Stream)
-            End Using
-        Else
-            Return New Settings
+        If Settings Is Nothing Then
+            If My.Computer.FileSystem.FileExists(SettingsFile) Then
+                Dim Xml As New Xml.Serialization.XmlSerializer(GetType(Settings))
+                Using Stream As New IO.FileStream(SettingsFile, IO.FileMode.Open)
+                    Settings = Xml.Deserialize(Stream)
+                End Using
+            Else
+                Settings = New Settings
+            End If
         End If
+        Return Settings
     End Function
 #End Region
 

@@ -21,7 +21,7 @@
 
 Public Class Converter
 
-#Region "Functions"
+#Region "Purchase Entries"
     Public Shared Function Purchase2Vouchers(ByVal PurchaseEntries As List(Of Objects.PurchaseEntry)) As List(Of Objects.Voucher)
         Dim R As New List(Of Objects.Voucher)
 
@@ -108,12 +108,66 @@ Public Class Converter
 
             Entries.Add(New Objects.VoucherEntry(If(Entry1.Party IsNot Nothing, Entry1.Party.Name, Entry1.PartyReference), Enums.Effect.Cr, TotalValue_AR)) ' Purchase Party
 
+            If Entry1.VoucherType = Enums.VoucherType.DebitNote Then
+                For Each i As Objects.VoucherEntry In Entries
+                    i.Effect = If(i.Effect = Enums.Effect.Dr, Enums.Effect.Cr, Enums.Effect.Dr)
+                Next
+            End If
+
             R.Add(New Objects.Voucher(VoucherType, Entry1.InvoiceDate, Entry1.InvoiceNo, Narration, Entries))
         Loop
 
         Return R
     End Function
+#End Region
 
+#Region "Sales Entries"
+#Region "Common"
+    Private Shared Sub AddSalesEntry(ByVal Entries As List(Of Objects.VoucherEntry), ByVal TaxableValue As Double, ByVal TaxRate As Double, ByVal PlaceOfSupply As Objects.State, ByVal CustomSalesLedger As String)
+        Dim IGST As Double = TaxableValue * TaxRate / 100
+        Dim CGST As Double = TaxableValue * (TaxRate / 2) / 100
+        Dim SGST As Double = TaxableValue * (TaxRate / 2) / 100
+
+        Dim SalesEntryLedgerName As String = If(CustomSalesLedger = "", If(TaxRate = 0, "Sales Exempted", String.Format(Utils.Settings.Load.SalesLedger, TaxRate)), CustomSalesLedger)
+        Dim ExistingSalesEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SalesEntryLedgerName)
+        If ExistingSalesEntry Is Nothing Then
+            Entries.Add(New Objects.VoucherEntry(SalesEntryLedgerName, Enums.Effect.Cr, TaxableValue))
+        Else
+            ExistingSalesEntry.Amount = Math.Round(ExistingSalesEntry.Amount + TaxableValue)
+        End If
+
+        If TaxRate > 0 Then
+            If PlaceOfSupply.Code = Utils.Settings.Load.StateCode Then
+                Dim CGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Output", "CGST", TaxRate / 2)
+                Dim SGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Output", "SGST", TaxRate / 2)
+
+                Dim ExistingCGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = CGSTLedger)
+                Dim ExistingSGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SGSTLedger)
+                If ExistingCGSTEntry Is Nothing Then
+                    Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Cr, Math.Round(CGST, 2))) 'CGST
+                Else
+                    ExistingCGSTEntry.Amount = Math.Round(ExistingCGSTEntry.Amount + Math.Round(CGST, 2), 2)
+                End If
+                If ExistingSGSTEntry Is Nothing Then
+                    Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Cr, Math.Round(SGST, 2))) 'SGST
+                Else
+                    ExistingSGSTEntry.Amount = Math.Round(ExistingSGSTEntry.Amount + Math.Round(SGST, 2), 2)
+                End If
+            Else
+                Dim IGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Output", "IGST", TaxRate)
+
+                Dim ExistingIGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = IGSTLedger)
+                If ExistingIGSTEntry Is Nothing Then
+                    Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Cr, Math.Round(IGST, 2))) 'IGST
+                Else
+                    ExistingIGSTEntry.Amount = Math.Round(ExistingIGSTEntry.Amount + Math.Round(IGST, 2), 2)
+                End If
+            End If
+        End If
+    End Sub
+#End Region
+
+#Region "Sales Entry A"
     Public Shared Function Sales2VouchersCombined(ByVal SalesEntries As List(Of Objects.SalesEntryA)) As List(Of Objects.Voucher)
         Dim R As New List(Of Objects.Voucher)
 
@@ -240,50 +294,9 @@ Public Class Converter
 
         Return R
     End Function
+#End Region
 
-    Private Shared Sub AddSalesEntry(ByVal Entries As List(Of Objects.VoucherEntry), ByVal TaxableValue As Double, ByVal TaxRate As Double, ByVal PlaceOfSupply As Objects.State, ByVal CustomSalesLedger As String)
-        Dim IGST As Double = TaxableValue * TaxRate / 100
-        Dim CGST As Double = TaxableValue * (TaxRate / 2) / 100
-        Dim SGST As Double = TaxableValue * (TaxRate / 2) / 100
-
-        Dim SalesEntryLedgerName As String = If(CustomSalesLedger = "", If(TaxRate = 0, "Sales Exempted", String.Format(Utils.Settings.Load.SalesLedger, TaxRate)), CustomSalesLedger)
-        Dim ExistingSalesEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SalesEntryLedgerName)
-        If ExistingSalesEntry Is Nothing Then
-            Entries.Add(New Objects.VoucherEntry(SalesEntryLedgerName, Enums.Effect.Cr, TaxableValue))
-        Else
-            ExistingSalesEntry.Amount = Math.Round(ExistingSalesEntry.Amount + TaxableValue)
-        End If
-
-        If TaxRate > 0 Then
-            If PlaceOfSupply.Code = Utils.Settings.Load.StateCode Then
-                Dim CGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Output", "CGST", TaxRate / 2)
-                Dim SGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Output", "SGST", TaxRate / 2)
-
-                Dim ExistingCGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = CGSTLedger)
-                Dim ExistingSGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SGSTLedger)
-                If ExistingCGSTEntry Is Nothing Then
-                    Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Cr, Math.Round(CGST, 2))) 'CGST
-                Else
-                    ExistingCGSTEntry.Amount = Math.Round(ExistingCGSTEntry.Amount + Math.Round(CGST, 2), 2)
-                End If
-                If ExistingSGSTEntry Is Nothing Then
-                    Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Cr, Math.Round(SGST, 2))) 'SGST
-                Else
-                    ExistingSGSTEntry.Amount = Math.Round(ExistingSGSTEntry.Amount + Math.Round(SGST, 2), 2)
-                End If
-            Else
-                Dim IGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Output", "IGST", TaxRate)
-
-                Dim ExistingIGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = IGSTLedger)
-                If ExistingIGSTEntry Is Nothing Then
-                    Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Cr, Math.Round(IGST, 2))) 'IGST
-                Else
-                    ExistingIGSTEntry.Amount = Math.Round(ExistingIGSTEntry.Amount + Math.Round(IGST, 2), 2)
-                End If
-            End If
-        End If
-    End Sub
-
+#Region "Sales Entry B"
     Public Shared Function Sales2VouchersCombined(ByVal SalesEntries As List(Of Objects.SalesEntryB)) As List(Of Objects.Voucher)
         Dim R As New List(Of Objects.Voucher)
 
@@ -438,7 +451,10 @@ Public Class Converter
 
         Return R
     End Function
+#End Region
+#End Region
 
+#Region "Bank Entries"
     Public Shared Function Bank2Vouchers(ByVal BankEntries As List(Of Objects.BankEntry)) As List(Of Objects.Voucher)
         Dim R As New List(Of Objects.Voucher)
 

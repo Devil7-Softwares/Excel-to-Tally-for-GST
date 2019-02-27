@@ -201,6 +201,8 @@ Public Class frm_Main
                                                            VoucherType = Enums.VoucherType.Sales
                                                        ElseIf VoucherType_ = "Journal" Then
                                                            VoucherType = Enums.VoucherType.Journal
+                                                       ElseIf VoucherType_ = "Debit Note" Then
+                                                           VoucherType = Enums.VoucherType.DebitNote
                                                        End If
                                                        Dim StateCode As Integer = Utils.Settings.Load.StateCode
                                                        Try

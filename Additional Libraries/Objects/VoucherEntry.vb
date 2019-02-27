@@ -23,7 +23,7 @@ Public Class VoucherEntry
 #Region "Properties/Fields"
     ReadOnly Property LedgerName As String
 
-    ReadOnly Property Effect As Enums.Effect
+    Property Effect As Enums.Effect
 
     Property Amount As Double
 #End Region

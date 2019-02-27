@@ -55,7 +55,7 @@ Public Class Converter
                 Dim CGST As Double = Math.Round(PurchaseEntry.TaxableValue * (PurchaseEntry.GSTRate / 2) / 100, 2)
                 Dim SGST As Double = Math.Round(PurchaseEntry.TaxableValue * (PurchaseEntry.GSTRate / 2) / 100, 2)
 
-                Entries.Add(New Objects.VoucherEntry(PurchaseEntry.LedgerName, Enums.Effect.Dr, PurchaseEntry.TaxableValue)) ' Head - Eg. Purchase A/c or Expense A/c
+                Entries.Add(New Objects.VoucherEntry(PurchaseEntry.LedgerName, Enums.Effect.Dr, Math.Round(PurchaseEntry.TaxableValue, 2))) ' Head - Eg. Purchase A/c or Expense A/c
 
                 If PurchaseEntry.GSTRate > 0 Then
                     If PurchaseEntry.PlaceOfSupply.Code = Utils.Settings.Load.StateCode Then

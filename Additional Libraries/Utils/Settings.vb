@@ -14,7 +14,7 @@
     Property IncludeDesc As Boolean = False
     Property InvoiceNoRegex As String = "(?<invoice>.*)"
     Property Port As Integer = 9000
-    Property RoundOffLedger As String = "RoundOffLedger"
+    Property RoundOffLedger As String = "Rounding Off"
     Property SalesLedger As String = "Sales @ {0}%"
     Property Skin As String = ""
     Property StateCode As Integer = 33

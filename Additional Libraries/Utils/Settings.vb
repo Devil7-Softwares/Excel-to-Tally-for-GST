@@ -1,7 +1,7 @@
 ﻿Public Class Settings
 
 #Region "Variables"
-    Private Shared SettingsFile As String
+    Private Shared SettingsFile As String = IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData, "Settings.xml")
 #End Region
 
 #Region "Properties"

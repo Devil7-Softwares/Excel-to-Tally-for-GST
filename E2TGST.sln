@@ -17,6 +17,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Tally", "Additional Librari
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Utils", "Additional Libraries\Utils\Utils.vbproj", "{12DB00A4-9893-48B3-BAE0-AEAF5817F955}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "REG", "REG\REG.vbproj", "{1447284E-811E-4486-A1AD-96C6CCCA309E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{12DB00A4-9893-48B3-BAE0-AEAF5817F955}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12DB00A4-9893-48B3-BAE0-AEAF5817F955}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12DB00A4-9893-48B3-BAE0-AEAF5817F955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1447284E-811E-4486-A1AD-96C6CCCA309E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1447284E-811E-4486-A1AD-96C6CCCA309E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1447284E-811E-4486-A1AD-96C6CCCA309E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1447284E-811E-4486-A1AD-96C6CCCA309E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

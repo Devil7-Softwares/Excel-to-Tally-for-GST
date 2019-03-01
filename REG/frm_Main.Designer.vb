@@ -22,8 +22,10 @@ Partial Class frm_Main
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_Main))
         Me.tc_Main = New DevExpress.XtraTab.XtraTabControl()
         Me.tp_SalesEntries = New DevExpress.XtraTab.XtraTabPage()
+        Me.btn_Sales_ExportExcel = New DevExpress.XtraEditors.SimpleButton()
         Me.container_Sales_Entries = New DevExpress.XtraEditors.SplitContainerControl()
         Me.gc_Sales_RandomEntries = New DevExpress.XtraGrid.GridControl()
         Me.gv_Sales_RandomEntries = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -50,7 +52,6 @@ Partial Class frm_Main
         Me.lbl_Sales_EntriesMax = New DevExpress.XtraEditors.LabelControl()
         Me.txt_Sales_EntriesMin = New DevExpress.XtraEditors.SpinEdit()
         Me.txt_Sales_EntriesMax = New DevExpress.XtraEditors.SpinEdit()
-        Me.btn_Sales_ExportExcel = New DevExpress.XtraEditors.SimpleButton()
         Me.dlg_SaveExcel = New System.Windows.Forms.SaveFileDialog()
         CType(Me.tc_Main, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tc_Main.SuspendLayout()
@@ -96,6 +97,15 @@ Partial Class frm_Main
         Me.tp_SalesEntries.Name = "tp_SalesEntries"
         Me.tp_SalesEntries.Size = New System.Drawing.Size(794, 422)
         Me.tp_SalesEntries.Text = "Sales Entries"
+        '
+        'btn_Sales_ExportExcel
+        '
+        Me.btn_Sales_ExportExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btn_Sales_ExportExcel.Location = New System.Drawing.Point(709, 392)
+        Me.btn_Sales_ExportExcel.Name = "btn_Sales_ExportExcel"
+        Me.btn_Sales_ExportExcel.Size = New System.Drawing.Size(75, 23)
+        Me.btn_Sales_ExportExcel.TabIndex = 6
+        Me.btn_Sales_ExportExcel.Text = "Export Excel"
         '
         'container_Sales_Entries
         '
@@ -392,15 +402,6 @@ Partial Class frm_Main
         Me.txt_Sales_EntriesMax.Size = New System.Drawing.Size(247, 20)
         Me.txt_Sales_EntriesMax.TabIndex = 17
         '
-        'btn_Sales_ExportExcel
-        '
-        Me.btn_Sales_ExportExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btn_Sales_ExportExcel.Location = New System.Drawing.Point(709, 392)
-        Me.btn_Sales_ExportExcel.Name = "btn_Sales_ExportExcel"
-        Me.btn_Sales_ExportExcel.Size = New System.Drawing.Size(75, 23)
-        Me.btn_Sales_ExportExcel.TabIndex = 6
-        Me.btn_Sales_ExportExcel.Text = "Export Excel"
-        '
         'dlg_SaveExcel
         '
         Me.dlg_SaveExcel.DefaultExt = "xlsx"
@@ -412,6 +413,7 @@ Partial Class frm_Main
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.tc_Main)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frm_Main"
         Me.Text = "Random Entries Generator"
         CType(Me.tc_Main, System.ComponentModel.ISupportInitialize).EndInit()

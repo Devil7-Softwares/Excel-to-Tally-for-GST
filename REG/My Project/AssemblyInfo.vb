@@ -9,10 +9,10 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("Random Entries Generator")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("REG")>
-<Assembly: AssemblyCopyright("Copyright ©  2019")>
+<Assembly: AssemblyDescription("Simple tool to generate random entries to match given total to be used with 'Excel to Tally for GST'")>
+<Assembly: AssemblyCompany("Devil7 Softwares")>
+<Assembly: AssemblyProduct("Excel to Tally for GST")>
+<Assembly: AssemblyCopyright("Copyright © Devil7 Softwares 2019")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>

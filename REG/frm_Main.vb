@@ -186,6 +186,43 @@ Public Class frm_Main
         End If
     End Sub
 #End Region
+
+#Region "Random Entries Load/Save"
+    Private Sub btn_Sales_LoadRandom_Click(sender As Object, e As EventArgs) Handles btn_Sales_LoadRandom.Click
+        If dlg_OpenXML.ShowDialog = DialogResult.OK Then
+            Try
+                Dim XMLSerializer As New Xml.Serialization.XmlSerializer(GetType(BindingList(Of Objects.RandomSalesEntry)))
+                Using Stream As New IO.FileStream(dlg_OpenXML.FileName, IO.FileMode.Open)
+                    Dim Data As BindingList(Of Objects.RandomSalesEntry) = CType(XMLSerializer.Deserialize(Stream), BindingList(Of Objects.RandomSalesEntry))
+                    Data.AllowEdit = True
+                    Data.AllowNew = True
+                    Data.AllowRemove = True
+                    gc_Sales_RandomEntries.DataSource = Data
+                    gc_Sales_RandomEntries.RefreshDataSource()
+                End Using
+                DevExpress.XtraEditors.XtraMessageBox.Show("Successfully loaded combined items to file!", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Catch ex As Exception
+                DevExpress.XtraEditors.XtraMessageBox.Show("Error on loading combined items to file!" & vbNewLine & vbNewLine & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+
+    Private Sub btn_Sales_SaveRandom_Click(sender As Object, e As EventArgs) Handles btn_Sales_SaveRandom.Click
+        If gc_Sales_RandomEntries.DataSource IsNot Nothing AndAlso gc_Sales_RandomEntries.DataSource.Count > 0 Then
+            If dlg_SaveXML.ShowDialog = DialogResult.OK Then
+                Try
+                    Dim XMLSerializer As New Xml.Serialization.XmlSerializer(GetType(BindingList(Of Objects.RandomSalesEntry)))
+                    Using Stream As New IO.FileStream(dlg_SaveXML.FileName, IO.FileMode.Create)
+                        XMLSerializer.Serialize(Stream, gc_Sales_RandomEntries.DataSource)
+                    End Using
+                    DevExpress.XtraEditors.XtraMessageBox.Show("Successfully saved combined items to file!", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Catch ex As Exception
+                    DevExpress.XtraEditors.XtraMessageBox.Show("Error on saving combined items to file!" & vbNewLine & vbNewLine & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End If
+        End If
+    End Sub
+#End Region
 #End Region
 
 #Region "Form Events"

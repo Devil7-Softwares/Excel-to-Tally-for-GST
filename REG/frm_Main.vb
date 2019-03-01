@@ -59,6 +59,34 @@ Public Class frm_Main
     End Function
 #End Region
 
+#Region "Subs"
+    Private Sub LoadSettings()
+        ' Sales
+        txt_Sales_BeginningInvoiceNumber.Value = My.Settings.Sales_BeginningInvoice
+        txt_Sales_EntriesMax.Value = My.Settings.Sales_EntriesMax
+        txt_Sales_EntriesMin.Value = My.Settings.Sales_EntriesMin
+        txt_Sales_From.DateTime = My.Settings.Sales_DateFrom
+        txt_Sales_To.DateTime = My.Settings.Sales_DateTo
+        txt_Sales_InvoiceNumberFormat.Text = My.Settings.Sales_InvoiceNumberFormat
+        txt_Sales_Rate.Value = My.Settings.Sales_RateDifference
+        txt_Sales_RoundingLimit.Value = My.Settings.Sales_Decimal
+    End Sub
+
+    Private Sub SaveSettings()
+        ' Sales
+        My.Settings.Sales_BeginningInvoice = txt_Sales_BeginningInvoiceNumber.Value
+        My.Settings.Sales_EntriesMax = txt_Sales_EntriesMax.Value
+        My.Settings.Sales_EntriesMin = txt_Sales_EntriesMin.Value
+        My.Settings.Sales_DateFrom = txt_Sales_From.DateTime
+        My.Settings.Sales_DateTo = txt_Sales_To.DateTime
+        My.Settings.Sales_InvoiceNumberFormat = txt_Sales_InvoiceNumberFormat.Text
+        My.Settings.Sales_RateDifference = txt_Sales_Rate.Value
+        My.Settings.Sales_Decimal = txt_Sales_RoundingLimit.Value
+
+        My.Settings.Save()
+    End Sub
+#End Region
+
 #Region "Progress Panel"
     Function ShowProgressPanel() As IOverlaySplashScreenHandle
         Return SplashScreenManager.ShowOverlayForm(Me)
@@ -91,7 +119,7 @@ Public Class frm_Main
             For Each DateAndCount As Objects.DateAndCount In DatesAndCounts
                 Dim InvoiceDate As Date = DateAndCount.Date
                 For i As Integer = 1 To DateAndCount.Count
-                    Dim InvoiceNumber As String = If(cb_Sales_ContinuousInvoice.Checked, "", String.Format(txt_InvoiceNumberFormat.Text, InvoiceNumberBase + Index))
+                    Dim InvoiceNumber As String = If(cb_Sales_ContinuousInvoice.Checked, "", String.Format(txt_Sales_InvoiceNumberFormat.Text, InvoiceNumberBase + Index))
                     Dim TaxableValue As Double = InvoiceValues(Index)
                     Dim TaxValue As Double = (TaxableValue * (RandomEntry.TaxRate / 100))
                     Dim InvoiceValue As Integer = TaxableValue + TaxValue
@@ -106,10 +134,10 @@ Public Class frm_Main
 
         SalesEntries.Sort(New Objects.SalesEntry.Comparer)
         If cb_Sales_ContinuousInvoice.Checked Then
-            Dim InvoiceNumberBase As Integer = txt_BeginningInvoiceNumber.Value
+            Dim InvoiceNumberBase As Integer = txt_Sales_BeginningInvoiceNumber.Value
             For i As Integer = 0 To SalesEntries.Count - 1
                 SalesEntries(i).InvoiceNumberRaw = InvoiceNumberBase + i
-                SalesEntries(i).InvoiceNumber = String.Format(txt_InvoiceNumberFormat.Text, InvoiceNumberBase + i)
+                SalesEntries(i).InvoiceNumber = String.Format(txt_Sales_InvoiceNumberFormat.Text, InvoiceNumberBase + i)
             Next
         End If
 
@@ -157,8 +185,14 @@ Public Class frm_Main
 
 #Region "Form Events"
     Private Sub frm_Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadSettings()
+
         gc_Sales_RandomEntries.DataSource = New BindingList(Of Objects.RandomSalesEntry) With {.AllowNew = True, .AllowEdit = True, .AllowRemove = True}
         gc_Sales_Entries.DataSource = New List(Of Objects.SalesEntry)
+    End Sub
+
+    Private Sub frm_Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        SaveSettings()
     End Sub
 #End Region
 

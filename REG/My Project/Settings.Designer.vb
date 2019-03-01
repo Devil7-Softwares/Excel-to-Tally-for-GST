@@ -53,6 +53,128 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Sales_DateFrom() As Date
+            Get
+                Return CType(Me("Sales_DateFrom"),Date)
+            End Get
+            Set
+                Me("Sales_DateFrom") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Sales_DateTo() As Date
+            Get
+                Return CType(Me("Sales_DateTo"),Date)
+            End Get
+            Set
+                Me("Sales_DateTo") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
+        Public Property Sales_EntriesMin() As Integer
+            Get
+                Return CType(Me("Sales_EntriesMin"),Integer)
+            End Get
+            Set
+                Me("Sales_EntriesMin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
+        Public Property Sales_EntriesMax() As Integer
+            Get
+                Return CType(Me("Sales_EntriesMax"),Integer)
+            End Get
+            Set
+                Me("Sales_EntriesMax") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("<?xml version=""1.0"" encoding=""utf-16""?>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"<ArrayOfString xmlns:xsi=""http://www.w3."& _ 
+            "org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"  <s"& _ 
+            "tring>0</string>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"  <string>1</string>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"  <string>2</string>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"  <string>3</strin"& _ 
+            "g>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"  <string>4</string>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"  <string>5</string>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"  <string>6</string>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"</ArrayOfS"& _ 
+            "tring>")>  _
+        Public Property Sales_Days() As Global.System.Collections.Specialized.StringCollection
+            Get
+                Return CType(Me("Sales_Days"),Global.System.Collections.Specialized.StringCollection)
+            End Get
+            Set
+                Me("Sales_Days") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0.5")>  _
+        Public Property Sales_RateDifference() As Double
+            Get
+                Return CType(Me("Sales_RateDifference"),Double)
+            End Get
+            Set
+                Me("Sales_RateDifference") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("2")>  _
+        Public Property Sales_Decimal() As Integer
+            Get
+                Return CType(Me("Sales_Decimal"),Integer)
+            End Get
+            Set
+                Me("Sales_Decimal") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property Sales_ContiniousInvoice() As Boolean
+            Get
+                Return CType(Me("Sales_ContiniousInvoice"),Boolean)
+            End Get
+            Set
+                Me("Sales_ContiniousInvoice") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
+        Public Property Sales_BeginningInvoice() As Integer
+            Get
+                Return CType(Me("Sales_BeginningInvoice"),Integer)
+            End Get
+            Set
+                Me("Sales_BeginningInvoice") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("{0:0000}")>  _
+        Public Property Sales_InvoiceNumberFormat() As String
+            Get
+                Return CType(Me("Sales_InvoiceNumberFormat"),String)
+            End Get
+            Set
+                Me("Sales_InvoiceNumberFormat") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

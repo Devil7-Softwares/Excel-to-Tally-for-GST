@@ -43,9 +43,9 @@ Partial Class frm_Main
         Me.txt_Sales_RoundingLimit = New DevExpress.XtraEditors.SpinEdit()
         Me.lbl_Sales_RoundingLimit = New DevExpress.XtraEditors.LabelControl()
         Me.lbl_Sales_StartInvoiceNo = New DevExpress.XtraEditors.LabelControl()
-        Me.txt_BeginningInvoiceNumber = New DevExpress.XtraEditors.SpinEdit()
+        Me.txt_Sales_BeginningInvoiceNumber = New DevExpress.XtraEditors.SpinEdit()
         Me.lbl_Sales_InvoiceNumberFormat = New DevExpress.XtraEditors.LabelControl()
-        Me.txt_InvoiceNumberFormat = New DevExpress.XtraEditors.ButtonEdit()
+        Me.txt_Sales_InvoiceNumberFormat = New DevExpress.XtraEditors.ButtonEdit()
         Me.lbl_Sales_Days = New DevExpress.XtraEditors.LabelControl()
         Me.lst_Sales_Days = New DevExpress.XtraEditors.CheckedListBoxControl()
         Me.lbl_Sales_EntriesMin = New DevExpress.XtraEditors.LabelControl()
@@ -70,8 +70,8 @@ Partial Class frm_Main
         CType(Me.txt_Sales_To.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_Sales_Rate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_Sales_RoundingLimit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txt_BeginningInvoiceNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txt_InvoiceNumberFormat.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txt_Sales_BeginningInvoiceNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txt_Sales_InvoiceNumberFormat.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.lst_Sales_Days, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_Sales_EntriesMin.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_Sales_EntriesMax.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -190,9 +190,9 @@ Partial Class frm_Main
         Me.table_Sales_Options.Controls.Add(Me.txt_Sales_RoundingLimit, 3, 1)
         Me.table_Sales_Options.Controls.Add(Me.lbl_Sales_RoundingLimit, 2, 1)
         Me.table_Sales_Options.Controls.Add(Me.lbl_Sales_StartInvoiceNo, 0, 5)
-        Me.table_Sales_Options.Controls.Add(Me.txt_BeginningInvoiceNumber, 1, 5)
+        Me.table_Sales_Options.Controls.Add(Me.txt_Sales_BeginningInvoiceNumber, 1, 5)
         Me.table_Sales_Options.Controls.Add(Me.lbl_Sales_InvoiceNumberFormat, 2, 5)
-        Me.table_Sales_Options.Controls.Add(Me.txt_InvoiceNumberFormat, 3, 5)
+        Me.table_Sales_Options.Controls.Add(Me.txt_Sales_InvoiceNumberFormat, 3, 5)
         Me.table_Sales_Options.Controls.Add(Me.lbl_Sales_Days, 0, 3)
         Me.table_Sales_Options.Controls.Add(Me.lst_Sales_Days, 1, 3)
         Me.table_Sales_Options.Controls.Add(Me.lbl_Sales_EntriesMin, 0, 2)
@@ -312,15 +312,15 @@ Partial Class frm_Main
         Me.lbl_Sales_StartInvoiceNo.TabIndex = 8
         Me.lbl_Sales_StartInvoiceNo.Text = "Beginning Invoice Number :"
         '
-        'txt_BeginningInvoiceNumber
+        'txt_Sales_BeginningInvoiceNumber
         '
-        Me.txt_BeginningInvoiceNumber.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txt_BeginningInvoiceNumber.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.txt_BeginningInvoiceNumber.Location = New System.Drawing.Point(140, 147)
-        Me.txt_BeginningInvoiceNumber.Name = "txt_BeginningInvoiceNumber"
-        Me.txt_BeginningInvoiceNumber.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.txt_BeginningInvoiceNumber.Size = New System.Drawing.Size(246, 20)
-        Me.txt_BeginningInvoiceNumber.TabIndex = 9
+        Me.txt_Sales_BeginningInvoiceNumber.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txt_Sales_BeginningInvoiceNumber.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.txt_Sales_BeginningInvoiceNumber.Location = New System.Drawing.Point(140, 147)
+        Me.txt_Sales_BeginningInvoiceNumber.Name = "txt_Sales_BeginningInvoiceNumber"
+        Me.txt_Sales_BeginningInvoiceNumber.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txt_Sales_BeginningInvoiceNumber.Size = New System.Drawing.Size(246, 20)
+        Me.txt_Sales_BeginningInvoiceNumber.TabIndex = 9
         '
         'lbl_Sales_InvoiceNumberFormat
         '
@@ -331,14 +331,14 @@ Partial Class frm_Main
         Me.lbl_Sales_InvoiceNumberFormat.TabIndex = 10
         Me.lbl_Sales_InvoiceNumberFormat.Text = "Invoice Number Format :"
         '
-        'txt_InvoiceNumberFormat
+        'txt_Sales_InvoiceNumberFormat
         '
-        Me.txt_InvoiceNumberFormat.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txt_InvoiceNumberFormat.Location = New System.Drawing.Point(526, 147)
-        Me.txt_InvoiceNumberFormat.Name = "txt_InvoiceNumberFormat"
-        Me.txt_InvoiceNumberFormat.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.txt_InvoiceNumberFormat.Size = New System.Drawing.Size(247, 20)
-        Me.txt_InvoiceNumberFormat.TabIndex = 11
+        Me.txt_Sales_InvoiceNumberFormat.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txt_Sales_InvoiceNumberFormat.Location = New System.Drawing.Point(526, 147)
+        Me.txt_Sales_InvoiceNumberFormat.Name = "txt_Sales_InvoiceNumberFormat"
+        Me.txt_Sales_InvoiceNumberFormat.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.txt_Sales_InvoiceNumberFormat.Size = New System.Drawing.Size(247, 20)
+        Me.txt_Sales_InvoiceNumberFormat.TabIndex = 11
         '
         'lbl_Sales_Days
         '
@@ -434,8 +434,8 @@ Partial Class frm_Main
         CType(Me.txt_Sales_To.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_Sales_Rate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_Sales_RoundingLimit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txt_BeginningInvoiceNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txt_InvoiceNumberFormat.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txt_Sales_BeginningInvoiceNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txt_Sales_InvoiceNumberFormat.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.lst_Sales_Days, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_Sales_EntriesMin.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_Sales_EntriesMax.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -456,12 +456,12 @@ Partial Class frm_Main
     Friend WithEvents txt_Sales_RoundingLimit As DevExpress.XtraEditors.SpinEdit
     Friend WithEvents lbl_Sales_RoundingLimit As DevExpress.XtraEditors.LabelControl
     Friend WithEvents lbl_Sales_StartInvoiceNo As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents txt_BeginningInvoiceNumber As DevExpress.XtraEditors.SpinEdit
+    Friend WithEvents txt_Sales_BeginningInvoiceNumber As DevExpress.XtraEditors.SpinEdit
     Friend WithEvents btn_Sales_Generate As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents gc_Sales_RandomEntries As DevExpress.XtraGrid.GridControl
     Friend WithEvents gv_Sales_RandomEntries As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents lbl_Sales_InvoiceNumberFormat As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents txt_InvoiceNumberFormat As DevExpress.XtraEditors.ButtonEdit
+    Friend WithEvents txt_Sales_InvoiceNumberFormat As DevExpress.XtraEditors.ButtonEdit
     Friend WithEvents lbl_Sales_Days As DevExpress.XtraEditors.LabelControl
     Friend WithEvents lst_Sales_Days As DevExpress.XtraEditors.CheckedListBoxControl
     Friend WithEvents container_Sales_Entries As DevExpress.XtraEditors.SplitContainerControl

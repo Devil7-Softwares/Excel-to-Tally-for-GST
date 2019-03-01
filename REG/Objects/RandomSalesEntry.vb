@@ -39,6 +39,9 @@ Namespace Objects
 
         <DisplayName("Starting Invoice Number")>
         Property StartingInvoiceNumber As Integer
+
+        <DisplayName("Max Invoice Value")>
+        Property MaxInvoiceValue As Double
 #End Region
 
 #Region "Constructor"
@@ -48,6 +51,7 @@ Namespace Objects
             Me.TaxRate = 0
             Me.TotalTaxableAmount = 0
             Me.StartingInvoiceNumber = 0
+            Me.MaxInvoiceValue = 0
         End Sub
 #End Region
 

@@ -25,6 +25,8 @@ Partial Class frm_Main
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_Main))
         Me.tc_Main = New DevExpress.XtraTab.XtraTabControl()
         Me.tp_SalesEntries = New DevExpress.XtraTab.XtraTabPage()
+        Me.btn_Sales_SaveRandom = New DevExpress.XtraEditors.SimpleButton()
+        Me.btn_Sales_LoadRandom = New DevExpress.XtraEditors.SimpleButton()
         Me.btn_Sales_ExportExcel = New DevExpress.XtraEditors.SimpleButton()
         Me.container_Sales_Entries = New DevExpress.XtraEditors.SplitContainerControl()
         Me.gc_Sales_RandomEntries = New DevExpress.XtraGrid.GridControl()
@@ -54,8 +56,6 @@ Partial Class frm_Main
         Me.txt_Sales_EntriesMax = New DevExpress.XtraEditors.SpinEdit()
         Me.dlg_SaveExcel = New System.Windows.Forms.SaveFileDialog()
         Me.dlg_SaveXML = New System.Windows.Forms.SaveFileDialog()
-        Me.btn_Sales_LoadRandom = New DevExpress.XtraEditors.SimpleButton()
-        Me.btn_Sales_SaveRandom = New DevExpress.XtraEditors.SimpleButton()
         Me.dlg_OpenXML = New System.Windows.Forms.OpenFileDialog()
         CType(Me.tc_Main, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tc_Main.SuspendLayout()
@@ -103,6 +103,24 @@ Partial Class frm_Main
         Me.tp_SalesEntries.Name = "tp_SalesEntries"
         Me.tp_SalesEntries.Size = New System.Drawing.Size(794, 422)
         Me.tp_SalesEntries.Text = "Sales Entries"
+        '
+        'btn_Sales_SaveRandom
+        '
+        Me.btn_Sales_SaveRandom.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btn_Sales_SaveRandom.Location = New System.Drawing.Point(132, 392)
+        Me.btn_Sales_SaveRandom.Name = "btn_Sales_SaveRandom"
+        Me.btn_Sales_SaveRandom.Size = New System.Drawing.Size(127, 23)
+        Me.btn_Sales_SaveRandom.TabIndex = 8
+        Me.btn_Sales_SaveRandom.Text = "Save Random Entries"
+        '
+        'btn_Sales_LoadRandom
+        '
+        Me.btn_Sales_LoadRandom.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btn_Sales_LoadRandom.Location = New System.Drawing.Point(11, 392)
+        Me.btn_Sales_LoadRandom.Name = "btn_Sales_LoadRandom"
+        Me.btn_Sales_LoadRandom.Size = New System.Drawing.Size(115, 23)
+        Me.btn_Sales_LoadRandom.TabIndex = 7
+        Me.btn_Sales_LoadRandom.Text = "Load Random Entries"
         '
         'btn_Sales_ExportExcel
         '
@@ -419,24 +437,6 @@ Partial Class frm_Main
         '
         Me.dlg_SaveXML.DefaultExt = "xml"
         Me.dlg_SaveXML.Filter = "eXtensible Markup Language Files (*.xml)|*.xml"
-        '
-        'btn_Sales_LoadRandom
-        '
-        Me.btn_Sales_LoadRandom.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btn_Sales_LoadRandom.Location = New System.Drawing.Point(11, 392)
-        Me.btn_Sales_LoadRandom.Name = "btn_Sales_LoadRandom"
-        Me.btn_Sales_LoadRandom.Size = New System.Drawing.Size(115, 23)
-        Me.btn_Sales_LoadRandom.TabIndex = 7
-        Me.btn_Sales_LoadRandom.Text = "Load Random Entries"
-        '
-        'btn_Sales_SaveRandom
-        '
-        Me.btn_Sales_SaveRandom.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btn_Sales_SaveRandom.Location = New System.Drawing.Point(132, 392)
-        Me.btn_Sales_SaveRandom.Name = "btn_Sales_SaveRandom"
-        Me.btn_Sales_SaveRandom.Size = New System.Drawing.Size(127, 23)
-        Me.btn_Sales_SaveRandom.TabIndex = 8
-        Me.btn_Sales_SaveRandom.Text = "Save Random Entries"
         '
         'dlg_OpenXML
         '

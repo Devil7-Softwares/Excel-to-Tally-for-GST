@@ -35,7 +35,7 @@ Public Class frm_Main
 #End Region
 
 #Region "Functions"
-    Private Function SplitValues(ByVal Value As Double, ByVal Days As Integer) As Double()
+    Private Function SplitValues(ByVal Value As Double, ByVal Days As Integer, ByVal MaxValue As Double) As Double()
         Dim AverageValue As Double = Value / Days
         Dim AveragePercent As Double = (AverageValue / Value) * 100
         Dim TolerancePercent As Integer = txt_Sales_Rate.Value * 100
@@ -54,7 +54,29 @@ Public Class frm_Main
 
         Dim ReturnValue As New List(Of Double)
         For Each RandomValue As Double In RandomValues
-            ReturnValue.Add(Math.Round((RandomValue / RandomTotal) * Value, CInt(txt_Sales_RoundingLimit.Value)))
+            Dim ActualValue As Double = Math.Round((RandomValue / RandomTotal) * Value, CInt(txt_Sales_RoundingLimit.Value))
+            If MaxValue = 0 Then
+                ReturnValue.Add(ActualValue)
+            Else
+                Dim ActualValues As New List(Of Double)({ActualValue})
+                Do Until ActualValues.Max <= MaxValue
+                    Dim TmpActualValues As New List(Of Double)
+                    Dim Limit As Integer = ActualValues.Count - 1
+                    For i As Integer = 0 To Limit
+                        Dim Val As Double = ActualValues(0)
+                        ActualValues.RemoveAt(0)
+
+                        If Val <= MaxValue Then
+                            TmpActualValues.Add(Val)
+                        Else
+                            Dim RandomRatio As Integer = (New Random).Next(40, 60)
+                            TmpActualValues.AddRange({Val * (RandomRatio / 100), Val * ((100 - RandomRatio) / 100)})
+                        End If
+                    Next
+                    ActualValues.AddRange(TmpActualValues)
+                Loop
+                ReturnValue.AddRange(ActualValues)
+            End If
         Next
         Return ReturnValue.ToArray
     End Function
@@ -90,6 +112,25 @@ Public Class frm_Main
 
         My.Settings.Save()
     End Sub
+
+    Private Sub FixExcessCount(ByVal DatesAndCounts As List(Of Objects.DateAndCount), ByVal InvoiceValues As Double())
+        Dim TotalCount As Integer = 0
+        For Each DateAndCount As Objects.DateAndCount In DatesAndCounts
+            TotalCount += DateAndCount.Count
+        Next
+
+        Dim ExcessCount As Integer = InvoiceValues.Count - TotalCount
+        Dim Index As Integer = 0
+        Do Until ExcessCount <= 0
+            DatesAndCounts(Index).Count += 1
+            ExcessCount -= 1
+            Index += 1
+
+            If Index >= DatesAndCounts.Count Then
+                Index = 0
+            End If
+        Loop
+    End Sub
 #End Region
 
 #Region "Progress Panel"
@@ -118,9 +159,11 @@ Public Class frm_Main
         Next
 
         For Each RandomEntry As Objects.RandomSalesEntry In gc_Sales_RandomEntries.DataSource
+            Dim TmpSalesEntries As New List(Of Objects.SalesEntry)
             Dim Index As Integer = 0
             Dim InvoiceNumberBase As Integer = RandomEntry.StartingInvoiceNumber
-            Dim InvoiceValues As Double() = SplitValues(RandomEntry.TotalTaxableAmount, TotalCount)
+            Dim InvoiceValues As Double() = SplitValues(RandomEntry.TotalTaxableAmount, TotalCount, RandomEntry.MaxInvoiceValue)
+            FixExcessCount(DatesAndCounts, InvoiceValues)
             For Each DateAndCount As Objects.DateAndCount In DatesAndCounts
                 Dim InvoiceDate As Date = DateAndCount.Date
                 For i As Integer = 1 To DateAndCount.Count
@@ -130,11 +173,13 @@ Public Class frm_Main
                     Dim InvoiceValue As Integer = TaxableValue + TaxValue
                     Dim CESS As Integer = 0
                     Dim PlaceOfSupply As Integer = 33
-                    SalesEntries.Add(New Objects.SalesEntry(RandomEntry.PartyLedgerName, InvoiceDate, InvoiceNumberBase + Index, InvoiceNumber, InvoiceValue, RandomEntry.TaxRate, TaxableValue, CESS, PlaceOfSupply, RandomEntry.SalesLedgerName))
+                    TmpSalesEntries.Add(New Objects.SalesEntry(RandomEntry.PartyLedgerName, InvoiceDate, InvoiceNumberBase + Index, InvoiceNumber, InvoiceValue, RandomEntry.TaxRate, TaxableValue, CESS, PlaceOfSupply, RandomEntry.SalesLedgerName))
 
                     Index += 1
                 Next
             Next
+
+            SalesEntries.AddRange(TmpSalesEntries)
         Next
 
         SalesEntries.Sort(New Objects.SalesEntry.Comparer)

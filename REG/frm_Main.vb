@@ -196,4 +196,14 @@ Public Class frm_Main
     End Sub
 #End Region
 
+#Region "Other Events"
+    Private Sub txt_Sales_EntriesMin_EditValueChanged(sender As Object, e As EventArgs) Handles txt_Sales_EntriesMin.EditValueChanged
+        txt_Sales_EntriesMax.Properties.MinValue = txt_Sales_EntriesMin.Value
+    End Sub
+
+    Private Sub cb_Sales_ContinuousInvoice_CheckedChanged(sender As Object, e As EventArgs) Handles cb_Sales_ContinuousInvoice.CheckedChanged
+        txt_Sales_BeginningInvoiceNumber.Enabled = cb_Sales_ContinuousInvoice.Checked
+    End Sub
+#End Region
+
 End Class

@@ -278,6 +278,8 @@ Partial Class frm_Main
         Me.txt_Sales_Rate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txt_Sales_Rate.Properties.DisplayFormat.FormatString = "0%"
         Me.txt_Sales_Rate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom
+        Me.txt_Sales_Rate.Properties.EditFormat.FormatString = "0%"
+        Me.txt_Sales_Rate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom
         Me.txt_Sales_Rate.Properties.MaxValue = New Decimal(New Integer() {1, 0, 0, 0})
         Me.txt_Sales_Rate.Properties.MinValue = New Decimal(New Integer() {1, 0, 0, 65536})
         Me.txt_Sales_Rate.Size = New System.Drawing.Size(246, 20)

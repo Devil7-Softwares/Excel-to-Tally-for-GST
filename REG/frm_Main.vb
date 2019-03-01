@@ -21,6 +21,7 @@
 
 Imports System.ComponentModel
 Imports DevExpress.Spreadsheet
+Imports DevExpress.XtraEditors.Controls
 Imports DevExpress.XtraSplashScreen
 
 Public Class frm_Main
@@ -56,6 +57,10 @@ Public Class frm_Main
             ReturnValue.Add(Math.Round((RandomValue / RandomTotal) * Value, CInt(txt_Sales_RoundingLimit.Value)))
         Next
         Return ReturnValue.ToArray
+    End Function
+
+    Function GetInvoiceNumber(ByVal Format As String, ByVal InvoiceNumber As Integer, ByVal InvoiceDate As Date)
+        Return String.Format(Format, InvoiceNumber, InvoiceDate.Year, CInt(InvoiceDate.ToString("yy")), InvoiceDate.Month, InvoiceDate.Day)
     End Function
 #End Region
 
@@ -119,7 +124,7 @@ Public Class frm_Main
             For Each DateAndCount As Objects.DateAndCount In DatesAndCounts
                 Dim InvoiceDate As Date = DateAndCount.Date
                 For i As Integer = 1 To DateAndCount.Count
-                    Dim InvoiceNumber As String = If(cb_Sales_ContinuousInvoice.Checked, "", String.Format(txt_Sales_InvoiceNumberFormat.Text, InvoiceNumberBase + Index))
+                    Dim InvoiceNumber As String = If(cb_Sales_ContinuousInvoice.Checked, "", GetInvoiceNumber(txt_Sales_InvoiceNumberFormat.Text, InvoiceNumberBase + Index, InvoiceDate))
                     Dim TaxableValue As Double = InvoiceValues(Index)
                     Dim TaxValue As Double = (TaxableValue * (RandomEntry.TaxRate / 100))
                     Dim InvoiceValue As Integer = TaxableValue + TaxValue
@@ -137,7 +142,7 @@ Public Class frm_Main
             Dim InvoiceNumberBase As Integer = txt_Sales_BeginningInvoiceNumber.Value
             For i As Integer = 0 To SalesEntries.Count - 1
                 SalesEntries(i).InvoiceNumberRaw = InvoiceNumberBase + i
-                SalesEntries(i).InvoiceNumber = String.Format(txt_Sales_InvoiceNumberFormat.Text, InvoiceNumberBase + i)
+                SalesEntries(i).InvoiceNumber = GetInvoiceNumber(txt_Sales_InvoiceNumberFormat.Text, InvoiceNumberBase + i, SalesEntries(i).InvoiceDate)
             Next
         End If
 
@@ -203,6 +208,16 @@ Public Class frm_Main
 
     Private Sub cb_Sales_ContinuousInvoice_CheckedChanged(sender As Object, e As EventArgs) Handles cb_Sales_ContinuousInvoice.CheckedChanged
         txt_Sales_BeginningInvoiceNumber.Enabled = cb_Sales_ContinuousInvoice.Checked
+    End Sub
+
+    Private Sub txt_Sales_InvoiceNumberFormat_ButtonClick(sender As Object, e As ButtonPressedEventArgs) Handles txt_Sales_InvoiceNumberFormat.ButtonClick
+        Dim D As New frm_InvoiceNumberFormat
+        D.InvoiceNumberFormat = txt_Sales_InvoiceNumberFormat.Text
+        If D.ShowDialog = DialogResult.OK Then
+            txt_Sales_InvoiceNumberFormat.Text = D.InvoiceNumberFormat
+            My.Settings.Sales_InvoiceNumberFormat = D.InvoiceNumberFormat
+            My.Settings.Save()
+        End If
     End Sub
 #End Region
 

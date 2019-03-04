@@ -64,7 +64,11 @@ Public Class EntriesComparer : Implements IComparer(Of Objects.VoucherEntry)
 
         If x.Effect = y.Effect Then
             ' RoundingOff Ledger Should be Placed in Last
-            Return isRounding(x, y)
+            Dim R As Integer = isRounding(x, y)
+            If R = 0 Then
+                R = x.Amount.CompareTo(y.Amount) * -1
+            End If
+            Return R
         ElseIf x.Effect < y.Effect Then
             Return 1
         ElseIf x.Effect > y.Effect Then

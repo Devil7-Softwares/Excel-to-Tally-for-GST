@@ -10,6 +10,8 @@
     Property CESSLedger As String = "CESS"
     Property CombineSales As Boolean = False
     Property DiscountLedger As String = "Discount"
+    Property BankChargesLedger As String = "Bank Charges"
+    Property CardSalesLedger As String = "Card Sales"
     Property Host As String = "localhost"
     Property IgnoreDuplicateParties As Boolean = True
     Property IncludeDesc As Boolean = False

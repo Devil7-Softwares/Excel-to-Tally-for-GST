@@ -89,9 +89,9 @@
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +110,7 @@
     <None Include="Resources\PurchaseEntries.xlsx" />
     <None Include="Resources\SalesEntriesA.xlsx" />
     <None Include="Resources\SalesEntriesB.xlsx" />
+    <None Include="Resources\SalesEntriesC.xlsx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -92,6 +92,7 @@
     <Compile Include="PurchaseEntry.vb" />
     <Compile Include="Response.vb" />
     <Compile Include="SalesEntryA.vb" />
+    <Compile Include="SalesEntryC.vb" />
     <Compile Include="SalesEntryB.vb" />
     <Compile Include="State.vb" />
     <Compile Include="Voucher.vb" />

@@ -183,11 +183,6 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Resources\Bank Entries.xlsx" />
-    <None Include="Resources\Parties.xlsx" />
-    <None Include="Resources\PurchaseEntries.xlsx" />
-    <None Include="Resources\SalesEntriesA.xlsx" />
-    <None Include="Resources\SalesEntriesB.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Devil7 Softwares - Logo Original.png" />

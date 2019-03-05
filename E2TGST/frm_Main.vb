@@ -393,6 +393,68 @@ Public Class frm_Main
                End Sub)
     End Function
 
+    Async Function LoadSalesEntriesC(ByVal FileName As String) As Task
+        Invoke(Sub()
+                   btn_LoadExcel.Enabled = False
+                   ProgressPanel_SalesEntries.Caption = "Loading Entries from Excel..."
+                   ProgressPanel_SalesEntries.Visible = True
+               End Sub)
+        Await Task.Run(Function()
+                           Try
+                               Dim R As New List(Of Objects.SalesEntryC)
+                               Using stream As IO.FileStream = IO.File.Open(FileName, IO.FileMode.Open, IO.FileAccess.Read)
+                                   Using reader = ExcelReaderFactory.CreateReader(stream)
+                                       Dim Index As Integer = -1
+                                       While reader.Read()
+                                           If reader.CodeName = "SalesEntries" AndAlso Not reader.IsDBNull(0) Then
+                                               Index += 1
+                                               If Index > 0 Then
+                                                   Dim InvoiceDate As Date = GetDate(reader, 0)
+                                                   If InvoiceDate.Year > 1 Then
+                                                       Dim InvoiceNo As String = GetString(reader, 1)
+                                                       Dim InvoiceValue As Double = GetDouble(reader, 2)
+                                                       Dim TaxableValue_5 As Integer = GetDouble(reader, 3)
+                                                       Dim TaxableValue_12 As Double = GetDouble(reader, 4)
+                                                       Dim TaxableValue_18 As Double = GetDouble(reader, 5)
+                                                       Dim TaxableValue_28 As Double = GetDouble(reader, 6)
+                                                       Dim ExemptedValue As Double = GetDouble(reader, 7)
+                                                       Dim Discount As Double = GetDouble(reader, 8)
+                                                       Dim BankCharges As Double = GetDouble(reader, 9)
+                                                       Dim StateCode As Integer = Utils.Settings.Load.StateCode
+                                                       Try
+                                                           Dim TmpSC_ As String = GetString(reader, 10)
+                                                           If TmpSC_.Contains("-") Then
+                                                               StateCode = CInt(TmpSC_.Split("-")(0).Trim)
+                                                           Else
+                                                               StateCode = CInt(TmpSC_)
+                                                           End If
+                                                       Catch ex1 As Exception
+
+                                                       End Try
+                                                       Dim CustomSalesLedger As String = GetString(reader, 11)
+                                                       R.Add(New Objects.SalesEntryC(InvoiceDate, InvoiceNo, InvoiceValue, TaxableValue_5, TaxableValue_12, TaxableValue_18, TaxableValue_28, ExemptedValue, Discount, BankCharges, Objects.State.GetStateByCode(StateCode), CustomSalesLedger))
+                                                   End If
+                                               End If
+                                           End If
+                                       End While
+                                   End Using
+                               End Using
+                               Invoke(Sub()
+                                          gc_SalesEntries.DataSource = R
+                                          gc_SalesEntries.RefreshDataSource()
+                                      End Sub)
+                           Catch ex As Exception
+                               MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                               Return False
+                           End Try
+                           Return True
+                       End Function)
+        Invoke(Sub()
+                   btn_LoadExcel.Enabled = True
+                   ProgressPanel_SalesEntries.Visible = False
+               End Sub)
+    End Function
+
     Async Function LoadBankEntries(ByVal FileName As String) As Task
         Invoke(Sub()
                    btn_LoadExcel.Enabled = False
@@ -991,6 +1053,26 @@ finish:
         If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
             Try
                 My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, Templates.My.Resources.SalesEntriesB, False)
+                MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+            Catch ex As Exception
+                MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+            End Try
+        End If
+    End Sub
+
+    Private Async Sub btn_LoadExcel_TaxWise_Card_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_LoadExcel_TaxWise_Card.ItemClick
+        If OpenFileDialog_Excel.ShowDialog = DialogResult.OK Then
+            If RibbonControl.SelectedPage Is rp_SalesEntries Then
+                Await LoadSalesEntriesC(OpenFileDialog_Excel.FileName)
+            End If
+        End If
+    End Sub
+
+    Private Sub btn_Template_SalesEntries_TaxWise_Card_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Template_SalesEntries_TaxWise_Card.ItemClick
+        SaveFileDialog_Excel.FileName = "Card Sales Entries (Tax-Wise).xlsx"
+        If SaveFileDialog_Excel.ShowDialog = DialogResult.OK Then
+            Try
+                My.Computer.FileSystem.WriteAllBytes(SaveFileDialog_Excel.FileName, Templates.My.Resources.SalesEntriesC, False)
                 MsgBox("File Successfully Saved to Selected Location.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
             Catch ex As Exception
                 MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")

@@ -131,9 +131,9 @@ Public Class Converter
         Dim SalesEntryLedgerName As String = If(CustomSalesLedger = "", If(TaxRate = 0, "Sales Exempted", String.Format(Utils.Settings.Load.SalesLedger, TaxRate)), CustomSalesLedger)
         Dim ExistingSalesEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SalesEntryLedgerName)
         If ExistingSalesEntry Is Nothing Then
-            Entries.Add(New Objects.VoucherEntry(SalesEntryLedgerName, Enums.Effect.Cr, TaxableValue))
+            Entries.Add(New Objects.VoucherEntry(SalesEntryLedgerName, Enums.Effect.Cr, Math.Round(TaxableValue, 2)))
         Else
-            ExistingSalesEntry.Amount = Math.Round(ExistingSalesEntry.Amount + TaxableValue)
+            ExistingSalesEntry.Amount = Math.Round(ExistingSalesEntry.Amount + Math.Round(TaxableValue, 2))
         End If
 
         If TaxRate > 0 Then

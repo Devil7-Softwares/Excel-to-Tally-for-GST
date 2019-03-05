@@ -452,6 +452,74 @@ Public Class Converter
         Return R
     End Function
 #End Region
+
+#Region "Sales Entry C"
+    Public Shared Function Sales2VouchersCombined(ByVal SalesEntries As List(Of Objects.SalesEntryC)) As List(Of Objects.Voucher)
+        Dim R As New List(Of Objects.Voucher)
+
+        ' Combined Entries Not Supported for SalesEntryC
+
+        Return R
+    End Function
+
+    Public Shared Function Sales2Vouchers(ByVal SalesEntries As List(Of Objects.SalesEntryC)) As List(Of Objects.Voucher)
+        Dim R As New List(Of Objects.Voucher)
+
+        Dim Tmp As New List(Of Objects.SalesEntryC)(SalesEntries)
+
+        Do Until Tmp.Count = 0
+            Dim SalesEntry As Objects.SalesEntryC = Tmp(0)
+            Tmp.RemoveAt(0)
+
+            Dim VoucherType As String = [Enum].GetName(GetType(Enums.VoucherType), Enums.VoucherType.Sales)
+            Dim Narration As String = String.Format("AS PER BILL NO.: {0}", SalesEntry.InvoiceNo)
+            Dim Entries As New List(Of Objects.VoucherEntry)
+            Dim Discount As Double = 0
+
+            If SalesEntry.ExemptedValue > 0 Then
+                AddSalesEntry(Entries, SalesEntry.ExemptedValue, 0, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+            End If
+
+            If SalesEntry.TaxableValue_5 > 0 Then
+                AddSalesEntry(Entries, SalesEntry.TaxableValue_5, 5, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+            End If
+
+            If SalesEntry.TaxableValue_12 > 0 Then
+                AddSalesEntry(Entries, SalesEntry.TaxableValue_12, 12, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+            End If
+
+            If SalesEntry.TaxableValue_18 > 0 Then
+                AddSalesEntry(Entries, SalesEntry.TaxableValue_18, 18, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+            End If
+
+            If SalesEntry.TaxableValue_28 > 0 Then
+                AddSalesEntry(Entries, SalesEntry.TaxableValue_28, 28, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+            End If
+
+            Discount += SalesEntry.Discount
+
+            Entries.Add(New Objects.VoucherEntry(Utils.Settings.Load.DiscountLedger, If(Discount > 0, Enums.Effect.Cr, Enums.Effect.Dr), Discount)) 'Discount
+
+            Dim TotalValue As Double = 0
+            For Each i As Objects.VoucherEntry In Entries
+                TotalValue += i.Amount
+            Next
+
+            Entries.Insert(0, New Objects.VoucherEntry(Utils.Settings.Load.CardSalesLedger, Enums.Effect.Dr, Math.Round(TotalValue, 2))) ' Sales Party
+
+            R.Add(New Objects.Voucher(VoucherType, SalesEntry.InvoiceDate, SalesEntry.InvoiceNo, Narration, Entries))
+
+            Dim CardSales2Bank As New List(Of Objects.VoucherEntry)
+            CardSales2Bank.Add(New Objects.VoucherEntry(Utils.Settings.Load.BankLedgerName, Enums.Effect.Dr, Math.Round(Math.Round(TotalValue, 2) - Math.Round(SalesEntry.BankCharges, 2), 2)))
+            CardSales2Bank.Add(New Objects.VoucherEntry(Utils.Settings.Load.BankChargesLedger, Enums.Effect.Dr, Math.Round(SalesEntry.BankCharges, 2)))
+            CardSales2Bank.Add(New Objects.VoucherEntry(Utils.Settings.Load.CardSalesLedger, Enums.Effect.Cr, Math.Round(TotalValue, 2)))
+
+            R.Add(New Objects.Voucher([Enum].GetName(GetType(Enums.VoucherType), Enums.VoucherType.Receipt), SalesEntry.InvoiceDate, "", "", CardSales2Bank))
+        Loop
+
+        Return R
+    End Function
+#End Region
 #End Region
 
 #Region "Bank Entries"

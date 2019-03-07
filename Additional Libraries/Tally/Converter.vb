@@ -510,7 +510,7 @@ Public Class Converter
             R.Add(New Objects.Voucher(VoucherType, SalesEntry.InvoiceDate, SalesEntry.InvoiceNo, Narration, Entries))
 
             Dim CardSales2Bank As New List(Of Objects.VoucherEntry)
-            CardSales2Bank.Add(New Objects.VoucherEntry(Utils.Settings.Load.BankLedgerName, Enums.Effect.Dr, Math.Round(Math.Round(TotalValue, 2) - Math.Round(SalesEntry.BankCharges, 2), 2)))
+            CardSales2Bank.Add(New Objects.VoucherEntry(If(SalesEntry.CustomBankLedger <> "", SalesEntry.CustomBankLedger, Utils.Settings.Load.BankLedgerName), Enums.Effect.Dr, Math.Round(Math.Round(TotalValue, 2) - Math.Round(SalesEntry.BankCharges, 2), 2)))
             CardSales2Bank.Add(New Objects.VoucherEntry(Utils.Settings.Load.BankChargesLedger, Enums.Effect.Dr, Math.Round(SalesEntry.BankCharges, 2)))
             CardSales2Bank.Add(New Objects.VoucherEntry(Utils.Settings.Load.CardSalesLedger, Enums.Effect.Cr, Math.Round(TotalValue, 2)))
 

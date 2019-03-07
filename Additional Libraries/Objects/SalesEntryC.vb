@@ -57,6 +57,9 @@ Public Class SalesEntryC
     <DisplayName("Place Of Supply")>
     Property PlaceOfSupply As State
 
+    <DisplayName("Custom Bank Ledger Name")>
+    Property CustomBankLedger As String
+
     <DisplayName("Custom Sales Ledger Name")>
     Property CustomSalesLedger As String
 #End Region
@@ -75,11 +78,15 @@ Public Class SalesEntryC
         Me.BankCharges = 0
         Me.PlaceOfSupply = State.GetStateByCode(Utils.Settings.Load.StateCode)
         Me.CustomSalesLedger = ""
+        Me.CustomBankLedger = ""
     End Sub
 
-    Sub New(ByVal InvoiceDate As Date, ByVal InvoiceNo As String, ByVal InvoiceValue As Double, ByVal TaxableValue_5 As Double,
-ByVal TaxableValue_12 As Double, ByVal TaxableValue_18 As Double, ByVal TaxableValue_28 As Double,
-ByVal ExemptedValue As Double, ByVal Discount As Double, ByVal BankCharges As Double, ByVal PlaceOfSupply As State, ByVal CustomSalesLedger As String)
+    Sub New(ByVal InvoiceDate As Date, ByVal InvoiceNo As String, ByVal InvoiceValue As Double,
+            ByVal TaxableValue_5 As Double, ByVal TaxableValue_12 As Double,
+            ByVal TaxableValue_18 As Double, ByVal TaxableValue_28 As Double,
+            ByVal ExemptedValue As Double, ByVal Discount As Double, ByVal BankCharges As Double,
+            ByVal PlaceOfSupply As State, ByVal CustomBankLedger As String,
+            ByVal CustomSalesLedger As String)
         Me.InvoiceDate = InvoiceDate
         Me.InvoiceNo = InvoiceNo
         Me.InvoiceValue = InvoiceValue
@@ -92,6 +99,7 @@ ByVal ExemptedValue As Double, ByVal Discount As Double, ByVal BankCharges As Do
         Me.BankCharges = BankCharges
         Me.PlaceOfSupply = PlaceOfSupply
         Me.CustomSalesLedger = CustomSalesLedger
+        Me.CustomBankLedger = CustomBankLedger
     End Sub
 #End Region
 

@@ -431,8 +431,9 @@ Public Class frm_Main
                                                        Catch ex1 As Exception
 
                                                        End Try
-                                                       Dim CustomSalesLedger As String = GetString(reader, 11)
-                                                       R.Add(New Objects.SalesEntryC(InvoiceDate, InvoiceNo, InvoiceValue, TaxableValue_5, TaxableValue_12, TaxableValue_18, TaxableValue_28, ExemptedValue, Discount, BankCharges, Objects.State.GetStateByCode(StateCode), CustomSalesLedger))
+                                                       Dim CustomBankLedger As String = GetString(reader, 11)
+                                                       Dim CustomSalesLedger As String = GetString(reader, 12)
+                                                       R.Add(New Objects.SalesEntryC(InvoiceDate, InvoiceNo, InvoiceValue, TaxableValue_5, TaxableValue_12, TaxableValue_18, TaxableValue_28, ExemptedValue, Discount, BankCharges, Objects.State.GetStateByCode(StateCode), CustomBankLedger, CustomSalesLedger))
                                                    End If
                                                End If
                                            End If

@@ -54,6 +54,7 @@ Public Class frm_Main
         chk_UseInvoiceNoTag.EditValue = Utils.Settings.Load.UseInvoiceNumberTag
         chk_TallyOldVersion.EditValue = Utils.Settings.Load.TallyOldVersion
         chk_CombineSales.EditValue = Utils.Settings.Load.CombineSales
+        chk_DontJoinCardSales.EditValue = Utils.Settings.Load.DontJoinCardSales
         txt_InvoiceNo_Regex.EditValue = Utils.Settings.Load.InvoiceNoRegex
     End Sub
 

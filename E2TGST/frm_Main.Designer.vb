@@ -92,6 +92,7 @@ Partial Class frm_Main
         Me.btn_Template_SalesEntries = New DevExpress.XtraBars.BarButtonItem()
         Me.menu_Template_SalesEntries = New DevExpress.XtraBars.PopupMenu(Me.components)
         Me.btn_Template_SalesEntries_TaxWise = New DevExpress.XtraBars.BarButtonItem()
+        Me.btn_Template_SalesEntries_TaxWise_Card = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_About = New DevExpress.XtraBars.BarButtonItem()
         Me.txt_StateCode = New DevExpress.XtraBars.BarEditItem()
         Me.txt_StateCode_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
@@ -160,7 +161,8 @@ Partial Class frm_Main
         Me.ProgressPanel_Main = New DevExpress.XtraWaitForm.ProgressPanel()
         Me.PictureBox_Logo = New System.Windows.Forms.PictureBox()
         Me.menu_LoadExcel = New DevExpress.XtraBars.PopupMenu(Me.components)
-        Me.btn_Template_SalesEntries_TaxWise_Card = New DevExpress.XtraBars.BarButtonItem()
+        Me.chk_DontJoinCardSales = New DevExpress.XtraBars.BarEditItem()
+        Me.RepositoryItemCheckEdit6 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_CompanyName_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -195,18 +197,19 @@ Partial Class frm_Main
         Me.tp_Parties.SuspendLayout()
         CType(Me.PictureBox_Logo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.menu_LoadExcel, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.btn_LedgerNames, Me.txt_TallyHost, Me.txt_TallyPort, Me.btn_Sync, Me.btn_Refresh, Me.btn_XML_Tally, Me.btn_Template_Parties, Me.btn_Template_PurchaseEntries, Me.btn_Template_SalesEntries, Me.btn_About, Me.txt_StateCode, Me.btn_Template_BankEntries, Me.chk_IncludeDesc, Me.txt_BankLedgerName, Me.btn_Template_Parties_WithData, Me.chk_IgnoreDupParties, Me.chk_UseInvoice, Me.chk_UseInvoiceNoTag, Me.btn_CustomRequest, Me.chk_TallyOldVersion, Me.chk_CombineSales, Me.txt_InvoiceNo_Regex, Me.btn_LoadExcel_TaxWise, Me.btn_Template_SalesEntries_TaxWise, Me.btn_LoadExcel_TaxWise_Card, Me.btn_Template_SalesEntries_TaxWise_Card})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.btn_LedgerNames, Me.txt_TallyHost, Me.txt_TallyPort, Me.btn_Sync, Me.btn_Refresh, Me.btn_XML_Tally, Me.btn_Template_Parties, Me.btn_Template_PurchaseEntries, Me.btn_Template_SalesEntries, Me.btn_About, Me.txt_StateCode, Me.btn_Template_BankEntries, Me.chk_IncludeDesc, Me.txt_BankLedgerName, Me.btn_Template_Parties_WithData, Me.chk_IgnoreDupParties, Me.chk_UseInvoice, Me.chk_UseInvoiceNoTag, Me.btn_CustomRequest, Me.chk_TallyOldVersion, Me.chk_CombineSales, Me.txt_InvoiceNo_Regex, Me.btn_LoadExcel_TaxWise, Me.btn_Template_SalesEntries_TaxWise, Me.btn_LoadExcel_TaxWise_Card, Me.btn_Template_SalesEntries_TaxWise_Card, Me.chk_DontJoinCardSales})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 40
+        Me.RibbonControl.MaxItemId = 41
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_Tally, Me.rp_PurchaseEntries, Me.rp_SalesEntries, Me.rp_BankEntries, Me.rp_Parties})
         Me.RibbonControl.QuickToolbarItemLinks.Add(Me.btn_About, "ABOUT")
-        Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit, Me.chk_CalcValues_Edit, Me.txt_TallyHost_Edit, Me.txt_TallyPort_Edit, Me.txt_StateCode_Edit, Me.chk_IncludeDesc_Edit, Me.txt_BankLedgerName_Edit, Me.chk_IgnoreDupParties_Edit, Me.RepositoryItemCheckEdit1, Me.RepositoryItemCheckEdit2, Me.RepositoryItemCheckEdit3, Me.RepositoryItemCheckEdit4, Me.RepositoryItemCheckEdit5, Me.txt_InvoiceNo_Regex_Edit})
+        Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.txt_TallyVersion_Edit, Me.txt_CompanyName_Edit, Me.chk_CalcValues_Edit, Me.txt_TallyHost_Edit, Me.txt_TallyPort_Edit, Me.txt_StateCode_Edit, Me.chk_IncludeDesc_Edit, Me.txt_BankLedgerName_Edit, Me.chk_IgnoreDupParties_Edit, Me.RepositoryItemCheckEdit1, Me.RepositoryItemCheckEdit2, Me.RepositoryItemCheckEdit3, Me.RepositoryItemCheckEdit4, Me.RepositoryItemCheckEdit5, Me.txt_InvoiceNo_Regex_Edit, Me.RepositoryItemCheckEdit6})
         Me.RibbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.[False]
         Me.RibbonControl.ShowCategoryInCaption = False
         Me.RibbonControl.ShowExpandCollapseButton = DevExpress.Utils.DefaultBoolean.[False]
@@ -433,6 +436,12 @@ Partial Class frm_Main
         Me.btn_Template_SalesEntries_TaxWise.Id = 37
         Me.btn_Template_SalesEntries_TaxWise.Name = "btn_Template_SalesEntries_TaxWise"
         '
+        'btn_Template_SalesEntries_TaxWise_Card
+        '
+        Me.btn_Template_SalesEntries_TaxWise_Card.Caption = "Sales Entries (Tax-Wise Splitup) (Card Sales)"
+        Me.btn_Template_SalesEntries_TaxWise_Card.Id = 39
+        Me.btn_Template_SalesEntries_TaxWise_Card.Name = "btn_Template_SalesEntries_TaxWise_Card"
+        '
         'btn_About
         '
         Me.btn_About.Caption = "About"
@@ -514,7 +523,7 @@ Partial Class frm_Main
         Me.chk_UseInvoice.Caption = "Use Invoice Mode"
         Me.chk_UseInvoice.Edit = Me.RepositoryItemCheckEdit1
         Me.chk_UseInvoice.EditValue = False
-        Me.chk_UseInvoice.EditWidth = 33
+        Me.chk_UseInvoice.EditWidth = 82
         Me.chk_UseInvoice.Id = 25
         Me.chk_UseInvoice.Name = "chk_UseInvoice"
         ToolTipTitleItem15.Text = "Use Invoice Mode"
@@ -585,6 +594,7 @@ Partial Class frm_Main
         Me.chk_CombineSales.Caption = "Combine Entries"
         Me.chk_CombineSales.Edit = Me.RepositoryItemCheckEdit5
         Me.chk_CombineSales.EditValue = False
+        Me.chk_CombineSales.EditWidth = 98
         Me.chk_CombineSales.Id = 34
         Me.chk_CombineSales.Name = "chk_CombineSales"
         '
@@ -718,6 +728,7 @@ Partial Class frm_Main
         Me.rpg_Export_Sales.ItemLinks.Add(Me.btn_XML_Tally)
         Me.rpg_Export_Sales.ItemLinks.Add(Me.chk_UseInvoice, True)
         Me.rpg_Export_Sales.ItemLinks.Add(Me.chk_CombineSales)
+        Me.rpg_Export_Sales.ItemLinks.Add(Me.chk_DontJoinCardSales)
         Me.rpg_Export_Sales.ItemLinks.Add(Me.txt_InvoiceNo_Regex)
         Me.rpg_Export_Sales.Name = "rpg_Export_Sales"
         Me.rpg_Export_Sales.ShowCaptionButton = False
@@ -1013,11 +1024,18 @@ Partial Class frm_Main
         Me.menu_LoadExcel.Name = "menu_LoadExcel"
         Me.menu_LoadExcel.Ribbon = Me.RibbonControl
         '
-        'btn_Template_SalesEntries_TaxWise_Card
+        'chk_DontJoinCardSales
         '
-        Me.btn_Template_SalesEntries_TaxWise_Card.Caption = "Sales Entries (Tax-Wise Splitup) (Card Sales)"
-        Me.btn_Template_SalesEntries_TaxWise_Card.Id = 39
-        Me.btn_Template_SalesEntries_TaxWise_Card.Name = "btn_Template_SalesEntries_TaxWise_Card"
+        Me.chk_DontJoinCardSales.Caption = "Don't Join Card Sales"
+        Me.chk_DontJoinCardSales.Edit = Me.RepositoryItemCheckEdit6
+        Me.chk_DontJoinCardSales.EditValue = False
+        Me.chk_DontJoinCardSales.Id = 40
+        Me.chk_DontJoinCardSales.Name = "chk_DontJoinCardSales"
+        '
+        'RepositoryItemCheckEdit6
+        '
+        Me.RepositoryItemCheckEdit6.AutoHeight = False
+        Me.RepositoryItemCheckEdit6.Name = "RepositoryItemCheckEdit6"
         '
         'frm_Main
         '
@@ -1070,6 +1088,7 @@ Partial Class frm_Main
         Me.tp_Parties.ResumeLayout(False)
         CType(Me.PictureBox_Logo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.menu_LoadExcel, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1166,4 +1185,6 @@ Partial Class frm_Main
     Friend WithEvents menu_Template_SalesEntries As DevExpress.XtraBars.PopupMenu
     Friend WithEvents btn_LoadExcel_TaxWise_Card As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents btn_Template_SalesEntries_TaxWise_Card As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents chk_DontJoinCardSales As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents RepositoryItemCheckEdit6 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
 End Class

@@ -468,35 +468,43 @@ Public Class Converter
         Dim Tmp As New List(Of Objects.SalesEntryC)(SalesEntries)
 
         Do Until Tmp.Count = 0
-            Dim SalesEntry As Objects.SalesEntryC = Tmp(0)
+            Dim Entry1 As Objects.SalesEntryC = Tmp(0)
             Tmp.RemoveAt(0)
 
             Dim VoucherType As String = [Enum].GetName(GetType(Enums.VoucherType), Enums.VoucherType.Sales)
-            Dim Narration As String = String.Format("AS PER BILL NO.: {0}", SalesEntry.InvoiceNo)
+            Dim Narration As String = String.Format("AS PER BILL NO.: {0}", Entry1.InvoiceNo)
             Dim Entries As New List(Of Objects.VoucherEntry)
             Dim Discount As Double = 0
 
-            If SalesEntry.ExemptedValue > 0 Then
-                AddSalesEntry(Entries, SalesEntry.ExemptedValue, 0, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
-            End If
+            Dim TmpSalesEntries As New List(Of Objects.SalesEntryC)
+            If Not Utils.Settings.Load.DontJoinCardSales Then TmpSalesEntries.AddRange(Tmp.FindAll(Function(c) c.InvoiceDate = Entry1.InvoiceDate And c.InvoiceNo = Entry1.InvoiceNo And c.InvoiceValue = Entry1.InvoiceValue))
+            TmpSalesEntries.Add(Entry1)
 
-            If SalesEntry.TaxableValue_5 > 0 Then
-                AddSalesEntry(Entries, SalesEntry.TaxableValue_5, 5, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
-            End If
+            For Each SalesEntry As Objects.SalesEntryC In TmpSalesEntries
+                Tmp.Remove(SalesEntry)
 
-            If SalesEntry.TaxableValue_12 > 0 Then
-                AddSalesEntry(Entries, SalesEntry.TaxableValue_12, 12, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
-            End If
+                If SalesEntry.ExemptedValue > 0 Then
+                    AddSalesEntry(Entries, SalesEntry.ExemptedValue, 0, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                End If
 
-            If SalesEntry.TaxableValue_18 > 0 Then
-                AddSalesEntry(Entries, SalesEntry.TaxableValue_18, 18, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
-            End If
+                If SalesEntry.TaxableValue_5 > 0 Then
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue_5, 5, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                End If
 
-            If SalesEntry.TaxableValue_28 > 0 Then
-                AddSalesEntry(Entries, SalesEntry.TaxableValue_28, 28, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
-            End If
+                If SalesEntry.TaxableValue_12 > 0 Then
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue_12, 12, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                End If
 
-            Discount += SalesEntry.Discount
+                If SalesEntry.TaxableValue_18 > 0 Then
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue_18, 18, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                End If
+
+                If SalesEntry.TaxableValue_28 > 0 Then
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue_28, 28, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                End If
+
+                Discount += SalesEntry.Discount
+            Next
 
             Entries.Add(New Objects.VoucherEntry(Utils.Settings.Load.DiscountLedger, If(Discount > 0, Enums.Effect.Cr, Enums.Effect.Dr), Discount)) 'Discount
 
@@ -507,14 +515,14 @@ Public Class Converter
 
             Entries.Insert(0, New Objects.VoucherEntry(Utils.Settings.Load.CardSalesLedger, Enums.Effect.Dr, Math.Round(TotalValue, 2))) ' Sales Party
 
-            R.Add(New Objects.Voucher(VoucherType, SalesEntry.InvoiceDate, SalesEntry.InvoiceNo, Narration, Entries))
+            R.Add(New Objects.Voucher(VoucherType, Entry1.InvoiceDate, "", Narration, Entries))
 
             Dim CardSales2Bank As New List(Of Objects.VoucherEntry)
-            CardSales2Bank.Add(New Objects.VoucherEntry(If(SalesEntry.CustomBankLedger <> "", SalesEntry.CustomBankLedger, Utils.Settings.Load.BankLedgerName), Enums.Effect.Dr, Math.Round(Math.Round(TotalValue, 2) - Math.Round(SalesEntry.BankCharges, 2), 2)))
-            CardSales2Bank.Add(New Objects.VoucherEntry(Utils.Settings.Load.BankChargesLedger, Enums.Effect.Dr, Math.Round(SalesEntry.BankCharges, 2)))
+            CardSales2Bank.Add(New Objects.VoucherEntry(If(Entry1.CustomBankLedger <> "", Entry1.CustomBankLedger, Utils.Settings.Load.BankLedgerName), Enums.Effect.Dr, Math.Round(Math.Round(TotalValue, 2) - Math.Round(Entry1.BankCharges, 2), 2)))
+            CardSales2Bank.Add(New Objects.VoucherEntry(Utils.Settings.Load.BankChargesLedger, Enums.Effect.Dr, Math.Round(Entry1.BankCharges, 2)))
             CardSales2Bank.Add(New Objects.VoucherEntry(Utils.Settings.Load.CardSalesLedger, Enums.Effect.Cr, Math.Round(TotalValue, 2)))
 
-            R.Add(New Objects.Voucher([Enum].GetName(GetType(Enums.VoucherType), Enums.VoucherType.Receipt), SalesEntry.InvoiceDate, "", "", CardSales2Bank))
+            R.Add(New Objects.Voucher([Enum].GetName(GetType(Enums.VoucherType), Enums.VoucherType.Receipt), Entry1.InvoiceDate, "", "", CardSales2Bank))
         Loop
 
         Return R

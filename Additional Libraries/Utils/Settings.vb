@@ -9,6 +9,7 @@
     Property BankLedgerName As String = "Bank A/c"
     Property CESSLedger As String = "CESS"
     Property CombineSales As Boolean = False
+    Property DontJoinCardSales As Boolean = False
     Property DiscountLedger As String = "Discount"
     Property BankChargesLedger As String = "Bank Charges"
     Property CardSalesLedger As String = "Card Sales"

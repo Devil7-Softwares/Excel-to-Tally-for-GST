@@ -28,18 +28,36 @@ Public Class frm_LedgersFormat
         txt_RoundOffLedger.Properties.Items.Clear()
         txt_TaxLedgers.Properties.Items.Clear()
         txt_SalesLedger.Properties.Items.Clear()
+        txt_CardSalesLedger.Properties.Items.Clear()
+        txt_BankChargesLedger.Properties.Items.Clear()
+        txt_BankLedger.Properties.Items.Clear()
+        txt_Narration.Properties.Items.Clear()
 
         txt_CESSLedger.Properties.Items.AddRange(Utils.Settings.Load.CESSLedgerHistory)
         txt_DiscountLedger.Properties.Items.AddRange(Utils.Settings.Load.DiscountLedgerHistory)
         txt_RoundOffLedger.Properties.Items.AddRange(Utils.Settings.Load.RoundOffLedgerHistory)
         txt_TaxLedgers.Properties.Items.AddRange(Utils.Settings.Load.TaxLedgerHistory)
         txt_SalesLedger.Properties.Items.AddRange(Utils.Settings.Load.SalesLedgerHistory)
+        txt_CardSalesLedger.Properties.Items.AddRange(Utils.Settings.Load.CardSalesLedgerHistory)
+        txt_BankChargesLedger.Properties.Items.AddRange(Utils.Settings.Load.BankChargesLedgerHistory)
+        txt_BankLedger.Properties.Items.AddRange(Utils.Settings.Load.BankLedgerHistory)
+        txt_Narration.Properties.Items.AddRange(Utils.Settings.Load.NarrationHistory)
 
         txt_CESSLedger.Text = Utils.Settings.Load.CESSLedger
         txt_DiscountLedger.Text = Utils.Settings.Load.DiscountLedger
         txt_RoundOffLedger.Text = Utils.Settings.Load.RoundOffLedger
         txt_TaxLedgers.Text = Utils.Settings.Load.TaxLedger
         txt_SalesLedger.Text = Utils.Settings.Load.SalesLedger
+        txt_CardSalesLedger.Text = Utils.Settings.Load.CardSalesLedger
+        txt_BankChargesLedger.Text = Utils.Settings.Load.BankChargesLedger
+        txt_BankLedger.Text = Utils.Settings.Load.BankLedgerName
+        txt_Narration.Text = Utils.Settings.Load.Narration
+
+        txt_TaxRate_0.Value = Utils.Settings.Load.TaxWiseExemptedRate
+        txt_TaxRate_5.Value = Utils.Settings.Load.TaxWiseFiveRate
+        txt_TaxRate_12.Value = Utils.Settings.Load.TaxWiseTwelveRate
+        txt_TaxRate_18.Value = Utils.Settings.Load.TaxWiseEighteenRate
+        txt_TaxRate_28.Value = Utils.Settings.Load.TaxWiseTwentyEightRate
     End Sub
 
     Sub SaveSettings()
@@ -67,6 +85,24 @@ Public Class frm_LedgersFormat
         Catch ex As Exception
 
         End Try
+
+        Utils.Settings.Load.CardSalesLedger = txt_CardSalesLedger.Text
+        If Not Utils.Settings.Load.CardSalesLedgerHistory.Contains(txt_CardSalesLedger.Text) Then Utils.Settings.Load.CardSalesLedgerHistory.Add(txt_CardSalesLedger.Text)
+
+        Utils.Settings.Load.BankChargesLedger = txt_BankChargesLedger.Text
+        If Not Utils.Settings.Load.BankChargesLedgerHistory.Contains(txt_BankChargesLedger.Text) Then Utils.Settings.Load.BankChargesLedgerHistory.Add(txt_BankChargesLedger.Text)
+
+        Utils.Settings.Load.BankLedgerName = txt_BankLedger.Text
+        If Not Utils.Settings.Load.BankLedgerHistory.Contains(txt_BankLedger.Text) Then Utils.Settings.Load.BankLedgerHistory.Add(txt_BankLedger.Text)
+
+        Utils.Settings.Load.Narration = txt_Narration.Text
+        If Not Utils.Settings.Load.NarrationHistory.Contains(txt_Narration.Text) Then Utils.Settings.Load.NarrationHistory.Add(txt_Narration.Text)
+
+        Utils.Settings.Load.TaxWiseExemptedRate = txt_TaxRate_0.Value
+        Utils.Settings.Load.TaxWiseFiveRate = txt_TaxRate_5.Value
+        Utils.Settings.Load.TaxWiseTwelveRate = txt_TaxRate_12.Value
+        Utils.Settings.Load.TaxWiseEighteenRate = txt_TaxRate_18.Value
+        Utils.Settings.Load.TaxWiseTwentyEightRate = txt_TaxRate_28.Value
 
         Utils.Settings.Load.Save()
     End Sub

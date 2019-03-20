@@ -47,7 +47,7 @@ Public Class Converter
             End If
 
             Dim VoucherType As String = [Enum].GetName(GetType(Enums.VoucherType), Entry1.VoucherType)
-            Dim Narration As String = String.Format("AS PER BILL NO.: {0}", Entry1.InvoiceNo)
+            Dim Narration As String = String.Format(Utils.Settings.Load.Narration, Entry1.InvoiceNo)
             Dim Entries As New List(Of Objects.VoucherEntry)
 
             For Each PurchaseEntry As Objects.PurchaseEntry In TmpPurchaseEntries
@@ -261,7 +261,7 @@ Public Class Converter
             End If
 
             Dim VoucherType As String = [Enum].GetName(GetType(Enums.VoucherType), Enums.VoucherType.Sales)
-            Dim Narration As String = String.Format("AS PER BILL NO.: {0}", Entry1.InvoiceNo)
+            Dim Narration As String = String.Format(Utils.Settings.Load.Narration, Entry1.InvoiceNo)
             Dim Entries As New List(Of Objects.VoucherEntry)
 
             For Each SalesEntry As Objects.SalesEntryA In TmpSalesEntries
@@ -404,7 +404,7 @@ Public Class Converter
             End If
 
             Dim VoucherType As String = [Enum].GetName(GetType(Enums.VoucherType), Enums.VoucherType.Sales)
-            Dim Narration As String = String.Format("AS PER BILL NO.: {0}", Entry1.InvoiceNo)
+            Dim Narration As String = String.Format(Utils.Settings.Load.Narration, Entry1.InvoiceNo)
             Dim Entries As New List(Of Objects.VoucherEntry)
             Dim Discount As Double = 0
 
@@ -472,7 +472,7 @@ Public Class Converter
             Tmp.RemoveAt(0)
 
             Dim VoucherType As String = [Enum].GetName(GetType(Enums.VoucherType), Enums.VoucherType.Sales)
-            Dim Narration As String = String.Format("AS PER BILL NO.: {0}", Entry1.InvoiceNo)
+            Dim Narration As String = String.Format(Utils.Settings.Load.Narration, Entry1.InvoiceNo)
             Dim Entries As New List(Of Objects.VoucherEntry)
             Dim Discount As Double = 0
 

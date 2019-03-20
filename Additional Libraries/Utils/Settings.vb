@@ -28,6 +28,7 @@
     Property UseInvoiceNumberTag As Boolean = False
     Property UseInvoicePurchase As Boolean = False
     Property UseInvoiceSales As Boolean = False
+    Property Narration As String = "AS PER BILL NO.: {0}"
 
     Property TaxLedgerHistory As New List(Of String)({"{0} {1} @ {2}%"})
     Property SalesLedgerHistory As New List(Of String)({"Sales @ {0}%"})

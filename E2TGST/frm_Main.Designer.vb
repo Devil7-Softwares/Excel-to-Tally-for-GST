@@ -77,7 +77,7 @@ Partial Class frm_Main
         Me.txt_TallyVersion_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.txt_CompanyName = New DevExpress.XtraBars.BarEditItem()
         Me.txt_CompanyName_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
-        Me.btn_LedgerNames = New DevExpress.XtraBars.BarButtonItem()
+        Me.btn_Settings = New DevExpress.XtraBars.BarButtonItem()
         Me.txt_TallyHost = New DevExpress.XtraBars.BarEditItem()
         Me.txt_TallyHost_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.txt_TallyPort = New DevExpress.XtraBars.BarEditItem()
@@ -116,6 +116,8 @@ Partial Class frm_Main
         Me.txt_InvoiceNo_Regex_Edit = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.btn_LoadExcel_TaxWise = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_LoadExcel_TaxWise_Card = New DevExpress.XtraBars.BarButtonItem()
+        Me.chk_DontJoinCardSales = New DevExpress.XtraBars.BarEditItem()
+        Me.RepositoryItemCheckEdit6 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.rp_Tally = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rpg_Sync = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -161,8 +163,6 @@ Partial Class frm_Main
         Me.ProgressPanel_Main = New DevExpress.XtraWaitForm.ProgressPanel()
         Me.PictureBox_Logo = New System.Windows.Forms.PictureBox()
         Me.menu_LoadExcel = New DevExpress.XtraBars.PopupMenu(Me.components)
-        Me.chk_DontJoinCardSales = New DevExpress.XtraBars.BarEditItem()
-        Me.RepositoryItemCheckEdit6 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_TallyVersion_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_CompanyName_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -179,6 +179,7 @@ Partial Class frm_Main
         CType(Me.RepositoryItemCheckEdit4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_InvoiceNo_Regex_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chk_CalcValues_Edit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gc_Parties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -197,13 +198,12 @@ Partial Class frm_Main
         Me.tp_Parties.SuspendLayout()
         CType(Me.PictureBox_Logo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.menu_LoadExcel, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemCheckEdit6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.btn_LedgerNames, Me.txt_TallyHost, Me.txt_TallyPort, Me.btn_Sync, Me.btn_Refresh, Me.btn_XML_Tally, Me.btn_Template_Parties, Me.btn_Template_PurchaseEntries, Me.btn_Template_SalesEntries, Me.btn_About, Me.txt_StateCode, Me.btn_Template_BankEntries, Me.chk_IncludeDesc, Me.txt_BankLedgerName, Me.btn_Template_Parties_WithData, Me.chk_IgnoreDupParties, Me.chk_UseInvoice, Me.chk_UseInvoiceNoTag, Me.btn_CustomRequest, Me.chk_TallyOldVersion, Me.chk_CombineSales, Me.txt_InvoiceNo_Regex, Me.btn_LoadExcel_TaxWise, Me.btn_Template_SalesEntries_TaxWise, Me.btn_LoadExcel_TaxWise_Card, Me.btn_Template_SalesEntries_TaxWise_Card, Me.chk_DontJoinCardSales})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_LoadExcel, Me.btn_XML_File, Me.txt_TallyVersion, Me.txt_CompanyName, Me.btn_Settings, Me.txt_TallyHost, Me.txt_TallyPort, Me.btn_Sync, Me.btn_Refresh, Me.btn_XML_Tally, Me.btn_Template_Parties, Me.btn_Template_PurchaseEntries, Me.btn_Template_SalesEntries, Me.btn_About, Me.txt_StateCode, Me.btn_Template_BankEntries, Me.chk_IncludeDesc, Me.txt_BankLedgerName, Me.btn_Template_Parties_WithData, Me.chk_IgnoreDupParties, Me.chk_UseInvoice, Me.chk_UseInvoiceNoTag, Me.btn_CustomRequest, Me.chk_TallyOldVersion, Me.chk_CombineSales, Me.txt_InvoiceNo_Regex, Me.btn_LoadExcel_TaxWise, Me.btn_Template_SalesEntries_TaxWise, Me.btn_LoadExcel_TaxWise_Card, Me.btn_Template_SalesEntries_TaxWise_Card, Me.chk_DontJoinCardSales})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
         Me.RibbonControl.MaxItemId = 41
         Me.RibbonControl.Name = "RibbonControl"
@@ -277,18 +277,18 @@ Partial Class frm_Main
         Me.txt_CompanyName_Edit.AutoHeight = False
         Me.txt_CompanyName_Edit.Name = "txt_CompanyName_Edit"
         '
-        'btn_LedgerNames
+        'btn_Settings
         '
-        Me.btn_LedgerNames.Caption = "Edit Ledger Names"
-        Me.btn_LedgerNames.Id = 8
-        Me.btn_LedgerNames.ImageOptions.SvgImage = CType(resources.GetObject("btn_LedgerNames.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
-        Me.btn_LedgerNames.Name = "btn_LedgerNames"
+        Me.btn_Settings.Caption = "Settings"
+        Me.btn_Settings.Id = 8
+        Me.btn_Settings.ImageOptions.SvgImage = CType(resources.GetObject("btn_LedgerNames.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btn_Settings.Name = "btn_Settings"
         ToolTipTitleItem4.Text = "Edit Ledger Names"
         ToolTipItem4.LeftIndent = 6
         ToolTipItem4.Text = "Edit default / auto generated ledger names"
         SuperToolTip4.Items.Add(ToolTipTitleItem4)
         SuperToolTip4.Items.Add(ToolTipItem4)
-        Me.btn_LedgerNames.SuperTip = SuperToolTip4
+        Me.btn_Settings.SuperTip = SuperToolTip4
         '
         'txt_TallyHost
         '
@@ -632,6 +632,19 @@ Partial Class frm_Main
         Me.btn_LoadExcel_TaxWise_Card.ImageOptions.SvgImage = CType(resources.GetObject("btn_LoadExcel_TaxWise_Card.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.btn_LoadExcel_TaxWise_Card.Name = "btn_LoadExcel_TaxWise_Card"
         '
+        'chk_DontJoinCardSales
+        '
+        Me.chk_DontJoinCardSales.Caption = "Don't Join Card Sales"
+        Me.chk_DontJoinCardSales.Edit = Me.RepositoryItemCheckEdit6
+        Me.chk_DontJoinCardSales.EditValue = False
+        Me.chk_DontJoinCardSales.Id = 40
+        Me.chk_DontJoinCardSales.Name = "chk_DontJoinCardSales"
+        '
+        'RepositoryItemCheckEdit6
+        '
+        Me.RepositoryItemCheckEdit6.AutoHeight = False
+        Me.RepositoryItemCheckEdit6.Name = "RepositoryItemCheckEdit6"
+        '
         'rp_Tally
         '
         Me.rp_Tally.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup2, Me.rpg_Sync, Me.rpg_Templates, Me.rpg_Tools})
@@ -678,7 +691,7 @@ Partial Class frm_Main
         'rpg_Tools
         '
         Me.rpg_Tools.ItemLinks.Add(Me.btn_CustomRequest)
-        Me.rpg_Tools.ItemLinks.Add(Me.btn_LedgerNames)
+        Me.rpg_Tools.ItemLinks.Add(Me.btn_Settings)
         Me.rpg_Tools.Name = "rpg_Tools"
         Me.rpg_Tools.ShowCaptionButton = False
         Me.rpg_Tools.Text = "Tools"
@@ -1024,19 +1037,6 @@ Partial Class frm_Main
         Me.menu_LoadExcel.Name = "menu_LoadExcel"
         Me.menu_LoadExcel.Ribbon = Me.RibbonControl
         '
-        'chk_DontJoinCardSales
-        '
-        Me.chk_DontJoinCardSales.Caption = "Don't Join Card Sales"
-        Me.chk_DontJoinCardSales.Edit = Me.RepositoryItemCheckEdit6
-        Me.chk_DontJoinCardSales.EditValue = False
-        Me.chk_DontJoinCardSales.Id = 40
-        Me.chk_DontJoinCardSales.Name = "chk_DontJoinCardSales"
-        '
-        'RepositoryItemCheckEdit6
-        '
-        Me.RepositoryItemCheckEdit6.AutoHeight = False
-        Me.RepositoryItemCheckEdit6.Name = "RepositoryItemCheckEdit6"
-        '
         'frm_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1070,6 +1070,7 @@ Partial Class frm_Main
         CType(Me.RepositoryItemCheckEdit4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_InvoiceNo_Regex_Edit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chk_CalcValues_Edit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gc_Parties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1088,7 +1089,6 @@ Partial Class frm_Main
         Me.tp_Parties.ResumeLayout(False)
         CType(Me.PictureBox_Logo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.menu_LoadExcel, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemCheckEdit6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1123,7 +1123,7 @@ Partial Class frm_Main
     Friend WithEvents gv_PurchaseEntries As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents rpg_Export_Purchase As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents chk_CalcValues_Edit As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
-    Friend WithEvents btn_LedgerNames As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents btn_Settings As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents rpg_Sync As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents txt_TallyHost As DevExpress.XtraBars.BarEditItem
     Friend WithEvents txt_TallyHost_Edit As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit

@@ -19,7 +19,7 @@
 '                                                                          '
 '=========================================================================='
 
-Public Class frm_LedgersFormat
+Public Class frm_Settings
 
 #Region "Subs"
     Sub LoadSettings()

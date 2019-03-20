@@ -708,8 +708,8 @@ Public Class frm_Main
         End If
     End Sub
 
-    Private Sub btn_LedgerNames_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_LedgerNames.ItemClick
-        Dim D As New frm_LedgersFormat
+    Private Sub btn_Settings_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Settings.ItemClick
+        Dim D As New frm_Settings
         D.ShowDialog()
     End Sub
 

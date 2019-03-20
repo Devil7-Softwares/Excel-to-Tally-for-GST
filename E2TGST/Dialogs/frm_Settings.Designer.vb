@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frm_LedgersFormat
+Partial Class frm_Settings
     Inherits Utils.XtraFormTemp
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class frm_LedgersFormat
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_LedgersFormat))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_Settings))
         Me.lbl_TaxLedgers = New DevExpress.XtraEditors.LabelControl()
         Me.lbl_Preview_TaxLedger = New DevExpress.XtraEditors.LabelControl()
         Me.txt_Preview_TaxLedger = New DevExpress.XtraEditors.LabelControl()

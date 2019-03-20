@@ -35,11 +35,15 @@
     Property TaxWiseEighteenRate As Double = 18
     Property TaxWiseTwentyEightRate As Double = 28
 
+    Property BankLedgerHistory As New List(Of String)({"Bank A/c"})
+    Property BankChargesLedgerHistory As New List(Of String)({"Bank Charges"})
     Property TaxLedgerHistory As New List(Of String)({"{0} {1} @ {2}%"})
     Property SalesLedgerHistory As New List(Of String)({"Sales @ {0}%"})
+    Property CardSalesLedgerHistory As New List(Of String)({"Card Sales"})
     Property RoundOffLedgerHistory As New List(Of String)({"Rounding Off"})
     Property CESSLedgerHistory As New List(Of String)({"CESS"})
     Property DiscountLedgerHistory As New List(Of String)({"Discount"})
+    Property NarrationHistory As New List(Of String)({"AS PER BILL NO.: {0}"})
 #End Region
 
 #Region "Subs"

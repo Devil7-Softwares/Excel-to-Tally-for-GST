@@ -338,23 +338,23 @@ Public Class Converter
 
             For Each SalesEntry As Objects.SalesEntryB In TmpSalesEntries
                 If SalesEntry.ExemptedValue > 0 Then
-                    AddSalesEntry(Entries, SalesEntry.ExemptedValue, 0, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                    AddSalesEntry(Entries, SalesEntry.ExemptedValue, Utils.Settings.Load.TaxWiseExemptedRate, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                 End If
 
                 If SalesEntry.TaxableValue_5 > 0 Then
-                    AddSalesEntry(Entries, SalesEntry.TaxableValue_5, 5, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue_5, Utils.Settings.Load.TaxWiseFiveRate, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                 End If
 
                 If SalesEntry.TaxableValue_12 > 0 Then
-                    AddSalesEntry(Entries, SalesEntry.TaxableValue_12, 12, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue_12, Utils.Settings.Load.TaxWiseTwelveRate, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                 End If
 
                 If SalesEntry.TaxableValue_18 > 0 Then
-                    AddSalesEntry(Entries, SalesEntry.TaxableValue_18, 18, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue_18, Utils.Settings.Load.TaxWiseEighteenRate, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                 End If
 
                 If SalesEntry.TaxableValue_28 > 0 Then
-                    AddSalesEntry(Entries, SalesEntry.TaxableValue_28, 28, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue_28, Utils.Settings.Load.TaxWiseTwentyEightRate, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                 End If
 
                 Discount += SalesEntry.Discount
@@ -410,23 +410,23 @@ Public Class Converter
 
             For Each SalesEntry As Objects.SalesEntryB In TmpSalesEntries
                 If SalesEntry.ExemptedValue > 0 Then
-                    AddSalesEntry(Entries, SalesEntry.ExemptedValue, 0, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                    AddSalesEntry(Entries, SalesEntry.ExemptedValue, Utils.Settings.Load.TaxWiseExemptedRate, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                 End If
 
                 If SalesEntry.TaxableValue_5 > 0 Then
-                    AddSalesEntry(Entries, SalesEntry.TaxableValue_5, 5, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue_5, Utils.Settings.Load.TaxWiseFiveRate, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                 End If
 
                 If SalesEntry.TaxableValue_12 > 0 Then
-                    AddSalesEntry(Entries, SalesEntry.TaxableValue_12, 12, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue_12, Utils.Settings.Load.TaxWiseTwelveRate, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                 End If
 
                 If SalesEntry.TaxableValue_18 > 0 Then
-                    AddSalesEntry(Entries, SalesEntry.TaxableValue_18, 18, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue_18, Utils.Settings.Load.TaxWiseEighteenRate, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                 End If
 
                 If SalesEntry.TaxableValue_28 > 0 Then
-                    AddSalesEntry(Entries, SalesEntry.TaxableValue_28, 28, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue_28, Utils.Settings.Load.TaxWiseTwentyEightRate, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                 End If
 
                 Discount += SalesEntry.Discount
@@ -484,23 +484,23 @@ Public Class Converter
                 Tmp.Remove(SalesEntry)
 
                 If SalesEntry.ExemptedValue > 0 Then
-                    AddSalesEntry(Entries, SalesEntry.ExemptedValue, 0, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                    AddSalesEntry(Entries, SalesEntry.ExemptedValue, Utils.Settings.Load.TaxWiseExemptedRate, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                 End If
 
                 If SalesEntry.TaxableValue_5 > 0 Then
-                    AddSalesEntry(Entries, SalesEntry.TaxableValue_5, 5, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue_5, Utils.Settings.Load.TaxWiseFiveRate, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                 End If
 
                 If SalesEntry.TaxableValue_12 > 0 Then
-                    AddSalesEntry(Entries, SalesEntry.TaxableValue_12, 12, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue_12, Utils.Settings.Load.TaxWiseTwelveRate, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                 End If
 
                 If SalesEntry.TaxableValue_18 > 0 Then
-                    AddSalesEntry(Entries, SalesEntry.TaxableValue_18, 18, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue_18, Utils.Settings.Load.TaxWiseEighteenRate, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                 End If
 
                 If SalesEntry.TaxableValue_28 > 0 Then
-                    AddSalesEntry(Entries, SalesEntry.TaxableValue_28, 28, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
+                    AddSalesEntry(Entries, SalesEntry.TaxableValue_28, Utils.Settings.Load.TaxWiseTwentyEightRate, SalesEntry.PlaceOfSupply, SalesEntry.CustomSalesLedger)
                 End If
 
                 Discount += SalesEntry.Discount

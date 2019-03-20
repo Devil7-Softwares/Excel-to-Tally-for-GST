@@ -29,6 +29,11 @@
     Property UseInvoicePurchase As Boolean = False
     Property UseInvoiceSales As Boolean = False
     Property Narration As String = "AS PER BILL NO.: {0}"
+    Property TaxWiseExemptedRate As Double = 0
+    Property TaxWiseFiveRate As Double = 5
+    Property TaxWiseTwelveRate As Double = 12
+    Property TaxWiseEighteenRate As Double = 18
+    Property TaxWiseTwentyEightRate As Double = 28
 
     Property TaxLedgerHistory As New List(Of String)({"{0} {1} @ {2}%"})
     Property SalesLedgerHistory As New List(Of String)({"Sales @ {0}%"})

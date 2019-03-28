@@ -153,9 +153,11 @@ Public Class frm_Main
         Dim TotalCount As Integer = 0
         For i As Integer = 0 To (txt_Sales_To.DateTime - txt_Sales_From.DateTime).Days
             Dim [Date] As Date = txt_Sales_From.DateTime.AddDays(i)
-            Dim Count As Integer = RandomCount.Next(txt_Sales_EntriesMin.Value, txt_Sales_EntriesMax.Value)
-            If lst_Sales_Days.Items([Date].DayOfWeek).CheckState = CheckState.Checked Then DatesAndCounts.Add(New Objects.DateAndCount([Date], Count))
-            TotalCount += Count
+            If lst_Sales_Days.Items([Date].DayOfWeek).CheckState = CheckState.Checked Then
+                Dim Count As Integer = RandomCount.Next(txt_Sales_EntriesMin.Value, txt_Sales_EntriesMax.Value)
+                DatesAndCounts.Add(New Objects.DateAndCount([Date], Count))
+                TotalCount += Count
+            End If
         Next
 
         For Each RandomEntry As Objects.RandomSalesEntry In gc_Sales_RandomEntries.DataSource

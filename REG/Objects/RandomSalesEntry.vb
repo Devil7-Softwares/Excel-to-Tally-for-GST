@@ -32,7 +32,7 @@ Namespace Objects
         Property SalesLedgerName As String
 
         <DisplayName("Tax Rate")>
-        Property TaxRate As Integer
+        Property TaxRate As Double
 
         <DisplayName("Total Taxable Amount")>
         Property TotalTaxableAmount As Double

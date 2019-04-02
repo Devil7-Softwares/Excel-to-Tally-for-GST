@@ -58,30 +58,41 @@ Public Class Converter
                 Entries.Add(New Objects.VoucherEntry(PurchaseEntry.LedgerName, Enums.Effect.Dr, Math.Round(PurchaseEntry.TaxableValue, 2))) ' Head - Eg. Purchase A/c or Expense A/c
 
                 If PurchaseEntry.GSTRate > 0 Then
-                    If PurchaseEntry.PlaceOfSupply.Code = Utils.Settings.Load.StateCode Then
-                        Dim CGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Input", "CGST", PurchaseEntry.GSTRate / 2)
-                        Dim SGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Input", "SGST", PurchaseEntry.GSTRate / 2)
+                    If Utils.Settings.Load.TaxType = 0 Then 'GST
+                        If PurchaseEntry.PlaceOfSupply.Code = Utils.Settings.Load.StateCode Then
+                            Dim CGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Input", "CGST", PurchaseEntry.GSTRate / 2)
+                            Dim SGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Input", "SGST", PurchaseEntry.GSTRate / 2)
 
-                        Dim ExistingCGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = CGSTLedger)
-                        Dim ExistingSGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SGSTLedger)
-                        If ExistingCGSTEntry Is Nothing Then
-                            Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Dr, Math.Round(CGST, 2))) 'CGST
+                            Dim ExistingCGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = CGSTLedger)
+                            Dim ExistingSGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SGSTLedger)
+                            If ExistingCGSTEntry Is Nothing Then
+                                Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Dr, Math.Round(CGST, 2))) 'CGST
+                            Else
+                                ExistingCGSTEntry.Amount = Math.Round(ExistingCGSTEntry.Amount + Math.Round(CGST, 2), 2)
+                            End If
+                            If ExistingSGSTEntry Is Nothing Then
+                                Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Dr, Math.Round(SGST, 2))) 'SGST
+                            Else
+                                ExistingSGSTEntry.Amount = Math.Round(ExistingSGSTEntry.Amount + Math.Round(SGST, 2), 2)
+                            End If
                         Else
-                            ExistingCGSTEntry.Amount = Math.Round(ExistingCGSTEntry.Amount + Math.Round(CGST, 2), 2)
-                        End If
-                        If ExistingSGSTEntry Is Nothing Then
-                            Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Dr, Math.Round(SGST, 2))) 'SGST
-                        Else
-                            ExistingSGSTEntry.Amount = Math.Round(ExistingSGSTEntry.Amount + Math.Round(SGST, 2), 2)
-                        End If
-                    Else
-                        Dim IGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Input", "IGST", PurchaseEntry.GSTRate)
+                            Dim IGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Input", "IGST", PurchaseEntry.GSTRate)
 
-                        Dim ExistingIGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = IGSTLedger)
-                        If ExistingIGSTEntry Is Nothing Then
-                            Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Dr, Math.Round(IGST, 2))) 'IGST
+                            Dim ExistingIGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = IGSTLedger)
+                            If ExistingIGSTEntry Is Nothing Then
+                                Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Dr, Math.Round(IGST, 2))) 'IGST
+                            Else
+                                ExistingIGSTEntry.Amount = Math.Round(ExistingIGSTEntry.Amount + Math.Round(IGST, 2), 2)
+                            End If
+                        End If
+                    Else 'VAT
+                        Dim VATLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "", "VAT", PurchaseEntry.GSTRate)
+
+                        Dim ExistingVATEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = VATLedger)
+                        If ExistingVATEntry Is Nothing Then
+                            Entries.Add(New Objects.VoucherEntry(VATLedger, Enums.Effect.Dr, Math.Round(IGST, 2))) 'VAT
                         Else
-                            ExistingIGSTEntry.Amount = Math.Round(ExistingIGSTEntry.Amount + Math.Round(IGST, 2), 2)
+                            ExistingVATEntry.Amount = Math.Round(ExistingVATEntry.Amount + Math.Round(IGST, 2), 2)
                         End If
                     End If
                 End If
@@ -137,30 +148,41 @@ Public Class Converter
         End If
 
         If TaxRate > 0 Then
-            If PlaceOfSupply.Code = Utils.Settings.Load.StateCode Then
-                Dim CGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Output", "CGST", TaxRate / 2)
-                Dim SGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Output", "SGST", TaxRate / 2)
+            If Utils.Settings.Load.TaxType = 0 Then 'GST
+                If PlaceOfSupply.Code = Utils.Settings.Load.StateCode Then
+                    Dim CGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Output", "CGST", TaxRate / 2)
+                    Dim SGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Output", "SGST", TaxRate / 2)
 
-                Dim ExistingCGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = CGSTLedger)
-                Dim ExistingSGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SGSTLedger)
-                If ExistingCGSTEntry Is Nothing Then
-                    Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Cr, Math.Round(CGST, 2))) 'CGST
+                    Dim ExistingCGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = CGSTLedger)
+                    Dim ExistingSGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = SGSTLedger)
+                    If ExistingCGSTEntry Is Nothing Then
+                        Entries.Add(New Objects.VoucherEntry(CGSTLedger, Enums.Effect.Cr, Math.Round(CGST, 2))) 'CGST
+                    Else
+                        ExistingCGSTEntry.Amount = Math.Round(ExistingCGSTEntry.Amount + Math.Round(CGST, 2), 2)
+                    End If
+                    If ExistingSGSTEntry Is Nothing Then
+                        Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Cr, Math.Round(SGST, 2))) 'SGST
+                    Else
+                        ExistingSGSTEntry.Amount = Math.Round(ExistingSGSTEntry.Amount + Math.Round(SGST, 2), 2)
+                    End If
                 Else
-                    ExistingCGSTEntry.Amount = Math.Round(ExistingCGSTEntry.Amount + Math.Round(CGST, 2), 2)
-                End If
-                If ExistingSGSTEntry Is Nothing Then
-                    Entries.Add(New Objects.VoucherEntry(SGSTLedger, Enums.Effect.Cr, Math.Round(SGST, 2))) 'SGST
-                Else
-                    ExistingSGSTEntry.Amount = Math.Round(ExistingSGSTEntry.Amount + Math.Round(SGST, 2), 2)
-                End If
-            Else
-                Dim IGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Output", "IGST", TaxRate)
+                    Dim IGSTLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Output", "IGST", TaxRate)
 
-                Dim ExistingIGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = IGSTLedger)
-                If ExistingIGSTEntry Is Nothing Then
-                    Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Cr, Math.Round(IGST, 2))) 'IGST
+                    Dim ExistingIGSTEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = IGSTLedger)
+                    If ExistingIGSTEntry Is Nothing Then
+                        Entries.Add(New Objects.VoucherEntry(IGSTLedger, Enums.Effect.Cr, Math.Round(IGST, 2))) 'IGST
+                    Else
+                        ExistingIGSTEntry.Amount = Math.Round(ExistingIGSTEntry.Amount + Math.Round(IGST, 2), 2)
+                    End If
+                End If
+            Else 'VAT
+                Dim VATLedger As String = String.Format(Utils.Settings.Load.TaxLedger, "Output", "VAT", TaxRate)
+
+                Dim ExistingVATEntry As Objects.VoucherEntry = Entries.Find(Function(c) c.LedgerName = VATLedger)
+                If ExistingVATEntry Is Nothing Then
+                    Entries.Add(New Objects.VoucherEntry(VATLedger, Enums.Effect.Cr, Math.Round(IGST, 2))) 'VAT
                 Else
-                    ExistingIGSTEntry.Amount = Math.Round(ExistingIGSTEntry.Amount + Math.Round(IGST, 2), 2)
+                    ExistingVATEntry.Amount = Math.Round(ExistingVATEntry.Amount + Math.Round(IGST, 2), 2)
                 End If
             End If
         End If

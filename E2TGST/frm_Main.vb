@@ -56,6 +56,7 @@ Public Class frm_Main
         chk_CombineSales.EditValue = Utils.Settings.Load.CombineSales
         chk_DontJoinCardSales.EditValue = Utils.Settings.Load.DontJoinCardSales
         txt_InvoiceNo_Regex.EditValue = Utils.Settings.Load.InvoiceNoRegex
+        txt_TaxType.EditValue = If(Utils.Settings.Load.TaxType, "GST", "VAT")
     End Sub
 
     Function CheckDependencies(ByVal Vouchers As List(Of Objects.Voucher)) As Boolean
@@ -1080,6 +1081,11 @@ finish:
                 MsgBox("Unable to Save File :" & vbNewLine & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
             End Try
         End If
+    End Sub
+
+    Private Sub txt_TaxType_EditValueChanged(sender As Object, e As EventArgs) Handles txt_TaxType.EditValueChanged
+        Utils.Settings.Load.TaxType = txt_TaxType.EditValue
+        Utils.Settings.Load.Save()
     End Sub
 #End Region
 

@@ -34,6 +34,7 @@
     Property TaxWiseTwelveRate As Double = 12
     Property TaxWiseEighteenRate As Double = 18
     Property TaxWiseTwentyEightRate As Double = 28
+    Property TaxType As Integer = 0
 
     Property BankLedgerHistory As New List(Of String)({"Bank A/c"})
     Property BankChargesLedgerHistory As New List(Of String)({"Bank Charges"})

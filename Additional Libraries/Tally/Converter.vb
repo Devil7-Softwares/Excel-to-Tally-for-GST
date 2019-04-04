@@ -47,7 +47,7 @@ Public Class Converter
             End If
 
             Dim VoucherType As String = [Enum].GetName(GetType(Enums.VoucherType), Entry1.VoucherType)
-            Dim Narration As String = String.Format(Utils.Settings.Load.Narration, Entry1.InvoiceNo)
+            Dim Narration As String = String.Format("{1}{0}{0}{2}", vbNewLine, String.Format(Utils.Settings.Load.Narration, Entry1.InvoiceNo), Entry1.CustomNarration).Trim.Replace(";", vbNewLine)
             Dim Entries As New List(Of Objects.VoucherEntry)
 
             For Each PurchaseEntry As Objects.PurchaseEntry In TmpPurchaseEntries

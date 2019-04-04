@@ -22,50 +22,53 @@
 Public Class PurchaseEntry
 
 #Region "Properties/Fields"
-        Property Party As Party
-        Property PartyReference As String
-        Property InvoiceNo As String
-        Property InvoiceDate As Date = Now
-        Property InvoiceValue As Double = 0
-        Property GSTRate as Double = 0
-        Property TaxableValue As Double = 0
-        Property CESS As Double = 0
-        Property LedgerName As String
-        Property VoucherType As Enums.VoucherType
-        Property PlaceOfSupply As State
+    Property Party As Party
+    Property PartyReference As String
+    Property InvoiceNo As String
+    Property InvoiceDate As Date = Now
+    Property InvoiceValue As Double = 0
+    Property GSTRate As Double = 0
+    Property TaxableValue As Double = 0
+    Property CESS As Double = 0
+    Property LedgerName As String
+    Property VoucherType As Enums.VoucherType
+    Property PlaceOfSupply As State
+    Property CustomNarration As String
 #End Region
 
 #Region "Constructors"
-        Sub New()
-            Me.Party = Nothing
-            Me.PartyReference = ""
-            Me.InvoiceNo = ""
-            Me.InvoiceDate = Now
-            Me.InvoiceValue = 0
-            Me.GSTRate = 0
-            Me.TaxableValue = 0
-            Me.CESS = 0
-            Me.LedgerName = ""
-            Me.VoucherType = Enums.VoucherType.Purchase
-            Me.PlaceOfSupply = State.GetStateByCode(Utils.Settings.Load.StateCode)
-        End Sub
+    Sub New()
+        Me.Party = Nothing
+        Me.PartyReference = ""
+        Me.InvoiceNo = ""
+        Me.InvoiceDate = Now
+        Me.InvoiceValue = 0
+        Me.GSTRate = 0
+        Me.TaxableValue = 0
+        Me.CESS = 0
+        Me.LedgerName = ""
+        Me.VoucherType = Enums.VoucherType.Purchase
+        Me.PlaceOfSupply = State.GetStateByCode(Utils.Settings.Load.StateCode)
+        Me.CustomNarration = ""
+    End Sub
 
-        Sub New(ByVal Party As Party, ByVal PartyReference As String, ByVal InvoiceNo As String,
-                ByVal InvoiceDate As Date, ByVal InvoiceValue As Double, ByVal GSTRate as Double,
+    Sub New(ByVal Party As Party, ByVal PartyReference As String, ByVal InvoiceNo As String,
+                ByVal InvoiceDate As Date, ByVal InvoiceValue As Double, ByVal GSTRate As Double,
                 ByVal TaxableValue As Double, ByVal CESS As Double, ByVal LedgerName As String,
-                ByVal VoucherType As Enums.VoucherType, ByVal PlaceOfSupply As State)
-            Me.Party = Party
-            Me.PartyReference = PartyReference
-            Me.InvoiceNo = InvoiceNo
-            Me.InvoiceDate = InvoiceDate
-            Me.InvoiceValue = InvoiceValue
-            Me.GSTRate = GSTRate
-            Me.TaxableValue = TaxableValue
-            Me.CESS = CESS
-            Me.LedgerName = LedgerName
-            Me.VoucherType = VoucherType
-            Me.PlaceOfSupply = PlaceOfSupply
-        End Sub
+                ByVal VoucherType As Enums.VoucherType, ByVal PlaceOfSupply As State, ByVal CustomNarration As String)
+        Me.Party = Party
+        Me.PartyReference = PartyReference
+        Me.InvoiceNo = InvoiceNo
+        Me.InvoiceDate = InvoiceDate
+        Me.InvoiceValue = InvoiceValue
+        Me.GSTRate = GSTRate
+        Me.TaxableValue = TaxableValue
+        Me.CESS = CESS
+        Me.LedgerName = LedgerName
+        Me.VoucherType = VoucherType
+        Me.PlaceOfSupply = PlaceOfSupply
+        Me.CustomNarration = CustomNarration
+    End Sub
 #End Region
 
 End Class

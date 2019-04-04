@@ -27,7 +27,7 @@ Public Class PurchaseEntry
         Property InvoiceNo As String
         Property InvoiceDate As Date = Now
         Property InvoiceValue As Double = 0
-        Property GSTRate As Integer = 0
+        Property GSTRate as Double = 0
         Property TaxableValue As Double = 0
         Property CESS As Double = 0
         Property LedgerName As String
@@ -51,7 +51,7 @@ Public Class PurchaseEntry
         End Sub
 
         Sub New(ByVal Party As Party, ByVal PartyReference As String, ByVal InvoiceNo As String,
-                ByVal InvoiceDate As Date, ByVal InvoiceValue As Double, ByVal GSTRate As Integer,
+                ByVal InvoiceDate As Date, ByVal InvoiceValue As Double, ByVal GSTRate as Double,
                 ByVal TaxableValue As Double, ByVal CESS As Double, ByVal LedgerName As String,
                 ByVal VoucherType As Enums.VoucherType, ByVal PlaceOfSupply As State)
             Me.Party = Party

@@ -30,7 +30,7 @@ Namespace Objects
         Property InvoiceNumberRaw As Integer
         Property InvoiceNumber As String
         Property InvoiceValue As Double
-        Property TaxRate As Integer
+        Property TaxRate As Double
         Property TaxableValue As Double
         Property CESS As String
         Property PlaceOfSupply As Integer
@@ -38,7 +38,7 @@ Namespace Objects
 #End Region
 
 #Region "Constructor"
-        Sub New(ByVal PartyLedgerName As String, ByVal InvoiceDate As String, ByVal InvoiceNumberRaw As Integer, ByVal InvoiceNumber As String, ByVal InvoiceValue As Double, ByVal TaxRate As Integer, ByVal TaxableValue As Double, ByVal CESS As String, ByVal PlaceOfSupply As Integer, ByVal SalesLedgerName As String)
+        Sub New(ByVal PartyLedgerName As String, ByVal InvoiceDate As String, ByVal InvoiceNumberRaw As Integer, ByVal InvoiceNumber As String, ByVal InvoiceValue As Double, ByVal TaxRate As Double, ByVal TaxableValue As Double, ByVal CESS As String, ByVal PlaceOfSupply As Integer, ByVal SalesLedgerName As String)
             Me.PartyLedgerName = PartyLedgerName
             Me.InvoiceDate = InvoiceDate
             Me.InvoiceNumberRaw = InvoiceNumberRaw

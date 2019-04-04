@@ -52,7 +52,7 @@ Public Class SalesEntryA
     Property InvoiceValue As Double
 
     <DisplayName("GST Rate")>
-    Property GSTRate As Integer
+    Property GSTRate As Double
 
     <DisplayName("Taxable Value")>
     Property TaxableValue As Double
@@ -79,20 +79,20 @@ Public Class SalesEntryA
         Me.CustomSalesLedger = ""
         End Sub
 
-        Sub New(ByVal Party As Party, ByVal PartyReference As String, ByVal InvoiceDate As Date,
-                ByVal InvoiceNo As String, ByVal InvoiceValue As Double, ByVal Rate As Integer,
+    Sub New(ByVal Party As Party, ByVal PartyReference As String, ByVal InvoiceDate As Date,
+                ByVal InvoiceNo As String, ByVal InvoiceValue As Double, ByVal Rate As Double,
                 ByVal TaxableValue As Double, ByVal CESS As Double, ByVal PlaceOfSupply As State, ByVal CustomSalesLedger As String)
-            Me.Party = Party
-            Me.PartyReference = PartyReference
-            Me.InvoiceDate = InvoiceDate
-            Me.InvoiceNo = InvoiceNo
-            Me.InvoiceValue = InvoiceValue
-            Me.GSTRate = Rate
-            Me.TaxableValue = TaxableValue
-            Me.CESS = CESS
-            Me.PlaceOfSupply = PlaceOfSupply
-            Me.CustomSalesLedger = CustomSalesLedger
-        End Sub
+        Me.Party = Party
+        Me.PartyReference = PartyReference
+        Me.InvoiceDate = InvoiceDate
+        Me.InvoiceNo = InvoiceNo
+        Me.InvoiceValue = InvoiceValue
+        Me.GSTRate = Rate
+        Me.TaxableValue = TaxableValue
+        Me.CESS = CESS
+        Me.PlaceOfSupply = PlaceOfSupply
+        Me.CustomSalesLedger = CustomSalesLedger
+    End Sub
 #End Region
 
 End Class

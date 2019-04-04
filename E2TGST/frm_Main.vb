@@ -187,7 +187,7 @@ Public Class frm_Main
                                                        Dim InvoiceNo As String = GetString(reader, 1)
                                                        Dim InvoiceDate As Date = GetDate(reader, 2)
                                                        Dim InvoiceValue As Double = GetDouble(reader, 3)
-                                                       Dim GSTRate As Integer = GetDouble(reader, 4)
+                                                       Dim GSTRate As Double = GetDouble(reader, 4)
                                                        Dim TaxableValue As Double = GetDouble(reader, 5)
                                                        Dim CESS As Double = GetDouble(reader, 6)
                                                        Dim LedgerName As String = GetString(reader, 7)
@@ -262,7 +262,7 @@ Public Class frm_Main
                                                        Dim Party As Objects.Party = FindParty(PartyRef)
                                                        Dim InvoiceNo As String = GetString(reader, 2)
                                                        Dim InvoiceValue As Double = GetDouble(reader, 3)
-                                                       Dim GSTRate As Integer = GetDouble(reader, 4)
+                                                       Dim GSTRate As Double = GetDouble(reader, 4)
                                                        Dim TaxableValue As Double = GetDouble(reader, 5)
                                                        Dim CESS As Double = GetDouble(reader, 6)
                                                        Dim StateCode As Integer = Utils.Settings.Load.StateCode

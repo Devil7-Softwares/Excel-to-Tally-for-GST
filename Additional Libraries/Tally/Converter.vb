@@ -21,6 +21,10 @@
 
 Public Class Converter
 
+#Region "Constants"
+    Private Const TallyNewLine As String = "&#13;&#10;"
+#End Region
+
 #Region "Purchase Entries"
     Public Shared Function Purchase2Vouchers(ByVal PurchaseEntries As List(Of Objects.PurchaseEntry)) As List(Of Objects.Voucher)
         Dim R As New List(Of Objects.Voucher)
@@ -47,7 +51,7 @@ Public Class Converter
             End If
 
             Dim VoucherType As String = [Enum].GetName(GetType(Enums.VoucherType), Entry1.VoucherType)
-            Dim Narration As String = String.Format("{1}{0}{0}{2}", vbNewLine, String.Format(Utils.Settings.Load.Narration, Entry1.InvoiceNo), Entry1.CustomNarration).Trim.Replace(";", vbNewLine)
+            Dim Narration As String = String.Format("{1}{0}{0}{2}", TallyNewLine, String.Format(Utils.Settings.Load.Narration, Entry1.InvoiceNo), Entry1.CustomNarration.Replace(";", TallyNewLine)).Trim
             Dim Entries As New List(Of Objects.VoucherEntry)
 
             For Each PurchaseEntry As Objects.PurchaseEntry In TmpPurchaseEntries

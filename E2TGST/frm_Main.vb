@@ -217,7 +217,8 @@ Public Class frm_Main
                                                        Catch ex As Exception
 
                                                        End Try
-                                                       R.Add(New Objects.PurchaseEntry(Party, PartyRef, InvoiceNo, InvoiceDate, InvoiceValue, GSTRate, TaxableValue, CESS, LedgerName, VoucherType, Objects.State.GetStateByCode(StateCode)))
+                                                       Dim CustomNarration As String = GetString(reader, 10)
+                                                       R.Add(New Objects.PurchaseEntry(Party, PartyRef, InvoiceNo, InvoiceDate, InvoiceValue, GSTRate, TaxableValue, CESS, LedgerName, VoucherType, Objects.State.GetStateByCode(StateCode), CustomNarration))
                                                    End If
                                                End If
                                            End If

@@ -138,6 +138,31 @@ Public Class frm_Main
             End If
         Loop
     End Sub
+
+    Private Sub FixDifference(ByVal TotalTaxableValue As Double, ByVal RandomEntry As Objects.RandomSalesEntry, ByVal SalesEntries As List(Of Objects.SalesEntry))
+        Dim Difference As Double = RandomEntry.TotalTaxableAmount - TotalTaxableValue
+        If Difference > 0 Then
+            Dim SmallestEntry As Objects.SalesEntry = Nothing
+            For Each Entry As Objects.SalesEntry In SalesEntries
+                If SmallestEntry Is Nothing OrElse SmallestEntry.TaxableValue > Entry.TaxableValue Then
+                    SmallestEntry = Entry
+                End If
+            Next
+            SmallestEntry.TaxableValue += Difference
+            Dim TaxValue As Double = (SmallestEntry.TaxableValue * (RandomEntry.TaxRate / 100))
+            SmallestEntry.InvoiceValue = SmallestEntry.TaxableValue + TaxValue
+        ElseIf Difference < 0 Then
+            Dim BiggestEntry As Objects.SalesEntry = Nothing
+            For Each Entry As Objects.SalesEntry In SalesEntries
+                If BiggestEntry Is Nothing OrElse BiggestEntry.TaxableValue < Entry.TaxableValue Then
+                    BiggestEntry = Entry
+                End If
+            Next
+            BiggestEntry.TaxableValue += Difference
+            Dim TaxValue As Double = (BiggestEntry.TaxableValue * (RandomEntry.TaxRate / 100))
+            BiggestEntry.InvoiceValue = BiggestEntry.TaxableValue + TaxValue
+        End If
+    End Sub
 #End Region
 
 #Region "Progress Panel"
@@ -168,6 +193,8 @@ Public Class frm_Main
         Next
 
         For Each RandomEntry As Objects.RandomSalesEntry In gc_Sales_RandomEntries.DataSource
+            Dim TotalTaxableValueTmp As Double = 0
+
             Dim TmpSalesEntries As New List(Of Objects.SalesEntry)
             Dim Index As Integer = 0
             Dim InvoiceNumberBase As Integer = RandomEntry.StartingInvoiceNumber
@@ -184,10 +211,12 @@ Public Class frm_Main
                     Dim PlaceOfSupply As Integer = 33
                     TmpSalesEntries.Add(New Objects.SalesEntry(RandomEntry.PartyLedgerName, InvoiceDate, InvoiceNumberBase + Index, InvoiceNumber, InvoiceValue, RandomEntry.TaxRate, TaxableValue, CESS, PlaceOfSupply, RandomEntry.SalesLedgerName))
 
+                    TotalTaxableValueTmp += TaxableValue
                     Index += 1
                 Next
             Next
 
+            FixDifference(TotalTaxableValueTmp, RandomEntry, TmpSalesEntries)
             SalesEntries.AddRange(TmpSalesEntries)
         Next
 
@@ -199,6 +228,16 @@ Public Class frm_Main
                 SalesEntries(i).InvoiceNumber = GetInvoiceNumber(txt_Sales_InvoiceNumberFormat.Text, InvoiceNumberBase + i, SalesEntries(i).InvoiceDate)
             Next
         End If
+
+        Dim TotalTaxableValue As Double = 0
+        Dim TotalInvoiceValue As Double = 0
+        For Each Entry As Objects.SalesEntry In SalesEntries
+            TotalTaxableValue += Entry.TaxableValue
+            TotalInvoiceValue += Entry.InvoiceValue
+        Next
+        txt_TotalInvoices_Count.Text = SalesEntries.Count
+        txt_TotalInvoices_InvoiceSum.Text = TotalInvoiceValue
+        txt_TotalInvoices_TaxableSum.Text = TotalTaxableValue
 
         gc_Sales_Entries.DataSource = SalesEntries
         container_Sales_Entries.PanelVisibility = DevExpress.XtraEditors.SplitPanelVisibility.Both

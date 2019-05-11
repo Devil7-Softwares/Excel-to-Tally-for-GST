@@ -54,11 +54,18 @@ Partial Class frm_Main
         Me.lbl_Sales_EntriesMax = New DevExpress.XtraEditors.LabelControl()
         Me.txt_Sales_EntriesMin = New DevExpress.XtraEditors.SpinEdit()
         Me.txt_Sales_EntriesMax = New DevExpress.XtraEditors.SpinEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.rg_MultipicationOf = New DevExpress.XtraEditors.RadioGroup()
         Me.dlg_SaveExcel = New System.Windows.Forms.SaveFileDialog()
         Me.dlg_SaveXML = New System.Windows.Forms.SaveFileDialog()
         Me.dlg_OpenXML = New System.Windows.Forms.OpenFileDialog()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.rg_MultipicationOf = New DevExpress.XtraEditors.RadioGroup()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.lbl_TotalInvoices_Count = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.txt_TotalInvoices_Count = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lbl_TotalInvoices_InvoiceSum = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.txt_TotalInvoices_InvoiceSum = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lbl_TotalInvoices_TaxableSum = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.txt_TotalInvoices_TaxableSum = New System.Windows.Forms.ToolStripStatusLabel()
         CType(Me.tc_Main, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tc_Main.SuspendLayout()
         Me.tp_SalesEntries.SuspendLayout()
@@ -82,6 +89,7 @@ Partial Class frm_Main
         CType(Me.txt_Sales_EntriesMin.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_Sales_EntriesMax.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rg_MultipicationOf.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'tc_Main
@@ -146,6 +154,7 @@ Partial Class frm_Main
         Me.container_Sales_Entries.Panel1.Controls.Add(Me.gc_Sales_RandomEntries)
         Me.container_Sales_Entries.Panel1.Text = "Panel1"
         Me.container_Sales_Entries.Panel2.Controls.Add(Me.gc_Sales_Entries)
+        Me.container_Sales_Entries.Panel2.Controls.Add(Me.StatusStrip1)
         Me.container_Sales_Entries.Panel2.Text = "Panel2"
         Me.container_Sales_Entries.PanelVisibility = DevExpress.XtraEditors.SplitPanelVisibility.Panel1
         Me.container_Sales_Entries.Size = New System.Drawing.Size(773, 154)
@@ -434,21 +443,6 @@ Partial Class frm_Main
         Me.txt_Sales_EntriesMax.Size = New System.Drawing.Size(247, 20)
         Me.txt_Sales_EntriesMax.TabIndex = 17
         '
-        'dlg_SaveExcel
-        '
-        Me.dlg_SaveExcel.DefaultExt = "xlsx"
-        Me.dlg_SaveExcel.Filter = "Excel 2007 Workbooks (*.xlsx)|*.xlsx"
-        '
-        'dlg_SaveXML
-        '
-        Me.dlg_SaveXML.DefaultExt = "xml"
-        Me.dlg_SaveXML.Filter = "eXtensible Markup Language Files (*.xml)|*.xml"
-        '
-        'dlg_OpenXML
-        '
-        Me.dlg_OpenXML.DefaultExt = "xml"
-        Me.dlg_OpenXML.Filter = "eXtensible Markup Language Files (*.xml)|*.xml"
-        '
         'LabelControl1
         '
         Me.LabelControl1.Dock = System.Windows.Forms.DockStyle.Right
@@ -468,6 +462,66 @@ Partial Class frm_Main
         Me.rg_MultipicationOf.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem(1, "One's"), New DevExpress.XtraEditors.Controls.RadioGroupItem(10, "Tenth's"), New DevExpress.XtraEditors.Controls.RadioGroupItem(100, "Hundred's")})
         Me.rg_MultipicationOf.Size = New System.Drawing.Size(633, 29)
         Me.rg_MultipicationOf.TabIndex = 19
+        '
+        'dlg_SaveExcel
+        '
+        Me.dlg_SaveExcel.DefaultExt = "xlsx"
+        Me.dlg_SaveExcel.Filter = "Excel 2007 Workbooks (*.xlsx)|*.xlsx"
+        '
+        'dlg_SaveXML
+        '
+        Me.dlg_SaveXML.DefaultExt = "xml"
+        Me.dlg_SaveXML.Filter = "eXtensible Markup Language Files (*.xml)|*.xml"
+        '
+        'dlg_OpenXML
+        '
+        Me.dlg_OpenXML.DefaultExt = "xml"
+        Me.dlg_OpenXML.Filter = "eXtensible Markup Language Files (*.xml)|*.xml"
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lbl_TotalInvoices_Count, Me.txt_TotalInvoices_Count, Me.lbl_TotalInvoices_InvoiceSum, Me.txt_TotalInvoices_InvoiceSum, Me.lbl_TotalInvoices_TaxableSum, Me.txt_TotalInvoices_TaxableSum})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, -22)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(0, 22)
+        Me.StatusStrip1.TabIndex = 5
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'lbl_TotalInvoices_Count
+        '
+        Me.lbl_TotalInvoices_Count.Name = "lbl_TotalInvoices_Count"
+        Me.lbl_TotalInvoices_Count.Size = New System.Drawing.Size(119, 17)
+        Me.lbl_TotalInvoices_Count.Text = "Total No of Invoices :"
+        '
+        'txt_TotalInvoices_Count
+        '
+        Me.txt_TotalInvoices_Count.Name = "txt_TotalInvoices_Count"
+        Me.txt_TotalInvoices_Count.Size = New System.Drawing.Size(13, 17)
+        Me.txt_TotalInvoices_Count.Text = "0"
+        '
+        'lbl_TotalInvoices_InvoiceSum
+        '
+        Me.lbl_TotalInvoices_InvoiceSum.Name = "lbl_TotalInvoices_InvoiceSum"
+        Me.lbl_TotalInvoices_InvoiceSum.Size = New System.Drawing.Size(113, 17)
+        Me.lbl_TotalInvoices_InvoiceSum.Text = "Total Invoice Value :"
+        '
+        'txt_TotalInvoices_InvoiceSum
+        '
+        Me.txt_TotalInvoices_InvoiceSum.Name = "txt_TotalInvoices_InvoiceSum"
+        Me.txt_TotalInvoices_InvoiceSum.Size = New System.Drawing.Size(13, 17)
+        Me.txt_TotalInvoices_InvoiceSum.Text = "0"
+        '
+        'lbl_TotalInvoices_TaxableSum
+        '
+        Me.lbl_TotalInvoices_TaxableSum.Name = "lbl_TotalInvoices_TaxableSum"
+        Me.lbl_TotalInvoices_TaxableSum.Size = New System.Drawing.Size(115, 17)
+        Me.lbl_TotalInvoices_TaxableSum.Text = "Total Taxable Value :"
+        '
+        'txt_TotalInvoices_TaxableSum
+        '
+        Me.txt_TotalInvoices_TaxableSum.Name = "txt_TotalInvoices_TaxableSum"
+        Me.txt_TotalInvoices_TaxableSum.Size = New System.Drawing.Size(13, 17)
+        Me.txt_TotalInvoices_TaxableSum.Text = "0"
         '
         'frm_Main
         '
@@ -502,6 +556,8 @@ Partial Class frm_Main
         CType(Me.txt_Sales_EntriesMin.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_Sales_EntriesMax.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.rg_MultipicationOf.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -542,4 +598,11 @@ Partial Class frm_Main
     Friend WithEvents dlg_OpenXML As OpenFileDialog
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents rg_MultipicationOf As DevExpress.XtraEditors.RadioGroup
+    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents lbl_TotalInvoices_Count As ToolStripStatusLabel
+    Friend WithEvents txt_TotalInvoices_Count As ToolStripStatusLabel
+    Friend WithEvents lbl_TotalInvoices_InvoiceSum As ToolStripStatusLabel
+    Friend WithEvents txt_TotalInvoices_InvoiceSum As ToolStripStatusLabel
+    Friend WithEvents lbl_TotalInvoices_TaxableSum As ToolStripStatusLabel
+    Friend WithEvents txt_TotalInvoices_TaxableSum As ToolStripStatusLabel
 End Class

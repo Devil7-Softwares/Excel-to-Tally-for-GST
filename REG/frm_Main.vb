@@ -78,6 +78,13 @@ Public Class frm_Main
                 ReturnValue.AddRange(ActualValues)
             End If
         Next
+
+        If CInt(rg_MultipicationOf.EditValue) <> 1 Then
+            For i As Integer = 0 To ReturnValue.Count - 1
+                ReturnValue(i) = Math.Round(ReturnValue(i), 0)
+            Next
+        End If
+
         Return ReturnValue.ToArray
     End Function
 
@@ -164,13 +171,13 @@ Public Class frm_Main
             Dim TmpSalesEntries As New List(Of Objects.SalesEntry)
             Dim Index As Integer = 0
             Dim InvoiceNumberBase As Integer = RandomEntry.StartingInvoiceNumber
-            Dim InvoiceValues As Double() = SplitValues(RandomEntry.TotalTaxableAmount, TotalCount, RandomEntry.MaxInvoiceValue)
+            Dim InvoiceValues As Double() = SplitValues((RandomEntry.TotalTaxableAmount / CInt(rg_MultipicationOf.EditValue)), TotalCount, RandomEntry.MaxInvoiceValue)
             FixExcessCount(DatesAndCounts, InvoiceValues)
             For Each DateAndCount As Objects.DateAndCount In DatesAndCounts
                 Dim InvoiceDate As Date = DateAndCount.Date
                 For i As Integer = 1 To DateAndCount.Count
                     Dim InvoiceNumber As String = If(cb_Sales_ContinuousInvoice.Checked, "", GetInvoiceNumber(txt_Sales_InvoiceNumberFormat.Text, InvoiceNumberBase + Index, InvoiceDate))
-                    Dim TaxableValue As Double = InvoiceValues(Index)
+                    Dim TaxableValue As Double = InvoiceValues(Index) * CInt(rg_MultipicationOf.EditValue)
                     Dim TaxValue As Double = (TaxableValue * (RandomEntry.TaxRate / 100))
                     Dim InvoiceValue As Integer = TaxableValue + TaxValue
                     Dim CESS As Integer = 0

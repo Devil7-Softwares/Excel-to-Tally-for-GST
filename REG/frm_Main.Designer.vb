@@ -57,6 +57,8 @@ Partial Class frm_Main
         Me.dlg_SaveExcel = New System.Windows.Forms.SaveFileDialog()
         Me.dlg_SaveXML = New System.Windows.Forms.SaveFileDialog()
         Me.dlg_OpenXML = New System.Windows.Forms.OpenFileDialog()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.rg_MultipicationOf = New DevExpress.XtraEditors.RadioGroup()
         CType(Me.tc_Main, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tc_Main.SuspendLayout()
         Me.tp_SalesEntries.SuspendLayout()
@@ -79,6 +81,7 @@ Partial Class frm_Main
         CType(Me.lst_Sales_Days, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_Sales_EntriesMin.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_Sales_EntriesMax.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.rg_MultipicationOf.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tc_Main
@@ -138,14 +141,14 @@ Partial Class frm_Main
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.container_Sales_Entries.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.None
         Me.container_Sales_Entries.Horizontal = False
-        Me.container_Sales_Entries.Location = New System.Drawing.Point(11, 185)
+        Me.container_Sales_Entries.Location = New System.Drawing.Point(11, 232)
         Me.container_Sales_Entries.Name = "container_Sales_Entries"
         Me.container_Sales_Entries.Panel1.Controls.Add(Me.gc_Sales_RandomEntries)
         Me.container_Sales_Entries.Panel1.Text = "Panel1"
         Me.container_Sales_Entries.Panel2.Controls.Add(Me.gc_Sales_Entries)
         Me.container_Sales_Entries.Panel2.Text = "Panel2"
         Me.container_Sales_Entries.PanelVisibility = DevExpress.XtraEditors.SplitPanelVisibility.Panel1
-        Me.container_Sales_Entries.Size = New System.Drawing.Size(773, 201)
+        Me.container_Sales_Entries.Size = New System.Drawing.Size(773, 154)
         Me.container_Sales_Entries.SplitterPosition = 101
         Me.container_Sales_Entries.TabIndex = 5
         '
@@ -155,7 +158,7 @@ Partial Class frm_Main
         Me.gc_Sales_RandomEntries.Location = New System.Drawing.Point(0, 0)
         Me.gc_Sales_RandomEntries.MainView = Me.gv_Sales_RandomEntries
         Me.gc_Sales_RandomEntries.Name = "gc_Sales_RandomEntries"
-        Me.gc_Sales_RandomEntries.Size = New System.Drawing.Size(773, 201)
+        Me.gc_Sales_RandomEntries.Size = New System.Drawing.Size(773, 154)
         Me.gc_Sales_RandomEntries.TabIndex = 2
         Me.gc_Sales_RandomEntries.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gv_Sales_RandomEntries})
         '
@@ -205,7 +208,7 @@ Partial Class frm_Main
         Me.table_Sales_Options.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.table_Sales_Options.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.table_Sales_Options.Controls.Add(Me.lbl_Sales_From, 0, 0)
-        Me.table_Sales_Options.Controls.Add(Me.cb_Sales_ContinuousInvoice, 1, 4)
+        Me.table_Sales_Options.Controls.Add(Me.cb_Sales_ContinuousInvoice, 1, 5)
         Me.table_Sales_Options.Controls.Add(Me.txt_Sales_From, 1, 0)
         Me.table_Sales_Options.Controls.Add(Me.txt_Sales_To, 3, 0)
         Me.table_Sales_Options.Controls.Add(Me.lbl_Sales_To, 2, 0)
@@ -213,26 +216,29 @@ Partial Class frm_Main
         Me.table_Sales_Options.Controls.Add(Me.txt_Sales_Rate, 1, 1)
         Me.table_Sales_Options.Controls.Add(Me.txt_Sales_RoundingLimit, 3, 1)
         Me.table_Sales_Options.Controls.Add(Me.lbl_Sales_RoundingLimit, 2, 1)
-        Me.table_Sales_Options.Controls.Add(Me.lbl_Sales_StartInvoiceNo, 0, 5)
-        Me.table_Sales_Options.Controls.Add(Me.txt_Sales_BeginningInvoiceNumber, 1, 5)
-        Me.table_Sales_Options.Controls.Add(Me.lbl_Sales_InvoiceNumberFormat, 2, 5)
-        Me.table_Sales_Options.Controls.Add(Me.txt_Sales_InvoiceNumberFormat, 3, 5)
+        Me.table_Sales_Options.Controls.Add(Me.lbl_Sales_StartInvoiceNo, 0, 6)
+        Me.table_Sales_Options.Controls.Add(Me.txt_Sales_BeginningInvoiceNumber, 1, 6)
+        Me.table_Sales_Options.Controls.Add(Me.lbl_Sales_InvoiceNumberFormat, 2, 6)
+        Me.table_Sales_Options.Controls.Add(Me.txt_Sales_InvoiceNumberFormat, 3, 6)
         Me.table_Sales_Options.Controls.Add(Me.lbl_Sales_Days, 0, 3)
         Me.table_Sales_Options.Controls.Add(Me.lst_Sales_Days, 1, 3)
         Me.table_Sales_Options.Controls.Add(Me.lbl_Sales_EntriesMin, 0, 2)
         Me.table_Sales_Options.Controls.Add(Me.lbl_Sales_EntriesMax, 2, 2)
         Me.table_Sales_Options.Controls.Add(Me.txt_Sales_EntriesMin, 1, 2)
         Me.table_Sales_Options.Controls.Add(Me.txt_Sales_EntriesMax, 3, 2)
+        Me.table_Sales_Options.Controls.Add(Me.LabelControl1, 0, 4)
+        Me.table_Sales_Options.Controls.Add(Me.rg_MultipicationOf, 1, 4)
         Me.table_Sales_Options.Location = New System.Drawing.Point(11, 9)
         Me.table_Sales_Options.Name = "table_Sales_Options"
-        Me.table_Sales_Options.RowCount = 6
+        Me.table_Sales_Options.RowCount = 7
         Me.table_Sales_Options.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.table_Sales_Options.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.table_Sales_Options.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.table_Sales_Options.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.table_Sales_Options.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
+        Me.table_Sales_Options.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35.0!))
+        Me.table_Sales_Options.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50.0!))
         Me.table_Sales_Options.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.table_Sales_Options.Size = New System.Drawing.Size(776, 170)
+        Me.table_Sales_Options.Size = New System.Drawing.Size(776, 217)
         Me.table_Sales_Options.TabIndex = 1
         '
         'lbl_Sales_From
@@ -247,7 +253,7 @@ Partial Class frm_Main
         'cb_Sales_ContinuousInvoice
         '
         Me.cb_Sales_ContinuousInvoice.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.cb_Sales_ContinuousInvoice.Location = New System.Drawing.Point(140, 122)
+        Me.cb_Sales_ContinuousInvoice.Location = New System.Drawing.Point(140, 167)
         Me.cb_Sales_ContinuousInvoice.Name = "cb_Sales_ContinuousInvoice"
         Me.cb_Sales_ContinuousInvoice.Properties.Caption = "Continuous Invoice Number for All Entries"
         Me.cb_Sales_ContinuousInvoice.Size = New System.Drawing.Size(246, 19)
@@ -332,7 +338,7 @@ Partial Class frm_Main
         'lbl_Sales_StartInvoiceNo
         '
         Me.lbl_Sales_StartInvoiceNo.Dock = System.Windows.Forms.DockStyle.Right
-        Me.lbl_Sales_StartInvoiceNo.Location = New System.Drawing.Point(3, 147)
+        Me.lbl_Sales_StartInvoiceNo.Location = New System.Drawing.Point(3, 192)
         Me.lbl_Sales_StartInvoiceNo.Name = "lbl_Sales_StartInvoiceNo"
         Me.lbl_Sales_StartInvoiceNo.Size = New System.Drawing.Size(131, 13)
         Me.lbl_Sales_StartInvoiceNo.TabIndex = 8
@@ -342,7 +348,7 @@ Partial Class frm_Main
         '
         Me.txt_Sales_BeginningInvoiceNumber.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txt_Sales_BeginningInvoiceNumber.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.txt_Sales_BeginningInvoiceNumber.Location = New System.Drawing.Point(140, 147)
+        Me.txt_Sales_BeginningInvoiceNumber.Location = New System.Drawing.Point(140, 192)
         Me.txt_Sales_BeginningInvoiceNumber.Name = "txt_Sales_BeginningInvoiceNumber"
         Me.txt_Sales_BeginningInvoiceNumber.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txt_Sales_BeginningInvoiceNumber.Size = New System.Drawing.Size(246, 20)
@@ -351,7 +357,7 @@ Partial Class frm_Main
         'lbl_Sales_InvoiceNumberFormat
         '
         Me.lbl_Sales_InvoiceNumberFormat.Dock = System.Windows.Forms.DockStyle.Right
-        Me.lbl_Sales_InvoiceNumberFormat.Location = New System.Drawing.Point(401, 147)
+        Me.lbl_Sales_InvoiceNumberFormat.Location = New System.Drawing.Point(401, 192)
         Me.lbl_Sales_InvoiceNumberFormat.Name = "lbl_Sales_InvoiceNumberFormat"
         Me.lbl_Sales_InvoiceNumberFormat.Size = New System.Drawing.Size(119, 13)
         Me.lbl_Sales_InvoiceNumberFormat.TabIndex = 10
@@ -360,7 +366,7 @@ Partial Class frm_Main
         'txt_Sales_InvoiceNumberFormat
         '
         Me.txt_Sales_InvoiceNumberFormat.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txt_Sales_InvoiceNumberFormat.Location = New System.Drawing.Point(526, 147)
+        Me.txt_Sales_InvoiceNumberFormat.Location = New System.Drawing.Point(526, 192)
         Me.txt_Sales_InvoiceNumberFormat.Name = "txt_Sales_InvoiceNumberFormat"
         Me.txt_Sales_InvoiceNumberFormat.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.txt_Sales_InvoiceNumberFormat.Size = New System.Drawing.Size(247, 20)
@@ -443,6 +449,26 @@ Partial Class frm_Main
         Me.dlg_OpenXML.DefaultExt = "xml"
         Me.dlg_OpenXML.Filter = "eXtensible Markup Language Files (*.xml)|*.xml"
         '
+        'LabelControl1
+        '
+        Me.LabelControl1.Dock = System.Windows.Forms.DockStyle.Right
+        Me.LabelControl1.Location = New System.Drawing.Point(55, 107)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(79, 13)
+        Me.LabelControl1.TabIndex = 18
+        Me.LabelControl1.Text = "Multipication of :"
+        '
+        'rg_MultipicationOf
+        '
+        Me.table_Sales_Options.SetColumnSpan(Me.rg_MultipicationOf, 3)
+        Me.rg_MultipicationOf.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.rg_MultipicationOf.EditValue = 1
+        Me.rg_MultipicationOf.Location = New System.Drawing.Point(140, 107)
+        Me.rg_MultipicationOf.Name = "rg_MultipicationOf"
+        Me.rg_MultipicationOf.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem(1, "One's"), New DevExpress.XtraEditors.Controls.RadioGroupItem(10, "Tenth's"), New DevExpress.XtraEditors.Controls.RadioGroupItem(100, "Hundred's")})
+        Me.rg_MultipicationOf.Size = New System.Drawing.Size(633, 29)
+        Me.rg_MultipicationOf.TabIndex = 19
+        '
         'frm_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -475,6 +501,7 @@ Partial Class frm_Main
         CType(Me.lst_Sales_Days, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_Sales_EntriesMin.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_Sales_EntriesMax.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.rg_MultipicationOf.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -513,4 +540,6 @@ Partial Class frm_Main
     Friend WithEvents btn_Sales_SaveRandom As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents btn_Sales_LoadRandom As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents dlg_OpenXML As OpenFileDialog
+    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents rg_MultipicationOf As DevExpress.XtraEditors.RadioGroup
 End Class
